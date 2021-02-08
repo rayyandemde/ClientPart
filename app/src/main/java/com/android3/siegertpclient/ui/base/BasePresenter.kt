@@ -2,9 +2,15 @@ package com.android3.siegertpclient.base
 
 import androidx.annotation.StringRes
 
-interface BasePresenter<V : BaseView> {
+open class BasePresenter<V : BaseView> {
 
-    fun onAttach(view: V)
+    var view: V? = null
 
-    fun onDetach()
+    fun onAttach(view: V) {
+        this.view = view
+    }
+
+    fun onDetach() {
+        view = null
+    }
 }
