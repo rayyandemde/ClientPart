@@ -1,7 +1,7 @@
 package com.android3.siegertpclient.data.tournament
 
 import androidx.room.ColumnInfo
-import  androidx.room.Entity
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 //This class is not yet complete
