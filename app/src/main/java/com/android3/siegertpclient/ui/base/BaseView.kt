@@ -10,5 +10,5 @@ interface BaseView {
 
     fun showError(errorMessage: String)
 
-    fun showError(@StringRes errorId : Int)
+    fun showError(@StringRes errorId: Int)
 }
