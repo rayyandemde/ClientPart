@@ -2,13 +2,9 @@ package com.android3.siegertpclient.base
 
 import androidx.annotation.StringRes
 
-interface BaseView {
+interface BasePresenter<V : BaseView> {
 
-    fun showProgress()
+    fun onAttach(view: V)
 
-    fun hideProgress()
-
-    fun showError(errorMessage: String)
-
-    fun showError(@StringRes errorId : Int)
+    fun onDetach()
 }
