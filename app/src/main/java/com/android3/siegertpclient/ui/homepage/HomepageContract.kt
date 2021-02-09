@@ -1,7 +1,5 @@
 import com.android3.siegertpclient.base.BaseView
 
-import com.android3.siegertpclient.data.tournament.Tournament
-
 interface HomepageContract {
 
     interface IHomepageView : BaseView {
