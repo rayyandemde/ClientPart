@@ -1,4 +1,4 @@
-package com.android3.siegertpclient.data.game.gameSource.gameLocal
+package com.android3.siegertpclient.data.game
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

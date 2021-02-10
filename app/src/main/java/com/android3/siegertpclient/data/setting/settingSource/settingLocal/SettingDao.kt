@@ -1,6 +1,7 @@
 package com.android3.siegertpclient.data.setting.settingSource.settingLocal
 
 import androidx.room.*
+import com.android3.siegertpclient.data.setting.Setting
 
 @Dao
 interface SettingDao {

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.android3.siegertpclient.data.invitation.Invitation
 
 @Database(entities = [Invitation::class], version = 1, exportSchema = false)
 abstract class InvitationDatabase : RoomDatabase() {
@@ -14,13 +15,13 @@ abstract class InvitationDatabase : RoomDatabase() {
         @Synchronized
         fun getDatabase(context: Context): InvitationDatabase? {
             if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(
+                Room.databaseBuilder(
                     context.applicationContext,
                     InvitationDatabase::class.java,
                     "invitation_database"
                 )
                     .allowMainThreadQueries()
-                    .build()
+                    .build().also { INSTANCE = it }
             }
             return INSTANCE
         }

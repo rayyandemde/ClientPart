@@ -14,7 +14,7 @@ interface HomepageContract {
 
         fun showJoinTeamFragment()
 
-        fun showSearchResult(tournaments: List<Tournament>)
+        //fun showSearchResult(tournaments: List<Tournament>)
     }
 
     interface IHomepagePresenter {

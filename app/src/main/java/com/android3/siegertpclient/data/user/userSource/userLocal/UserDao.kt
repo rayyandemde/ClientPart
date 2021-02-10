@@ -1,7 +1,11 @@
 package com.android3.siegertpclient.data.user.userSource.userLocal
 
 import androidx.room.*
-import com.android3.siegertpclient.data.team.teamSource.teamLocal.Member
+import com.android3.siegertpclient.data.user.NotificationList
+import com.android3.siegertpclient.data.user.TeamList
+import com.android3.siegertpclient.data.user.TournamentList
+import com.android3.siegertpclient.data.user.User
+
 
 @Dao
 interface UserDao {
@@ -27,12 +31,12 @@ interface UserDao {
     fun findUserById(Email: String?): User?
 
     @Query("SELECT team_list FROM User WHERE id = :id")
-    fun getAllTeams(id: Int): List<TeamOfUser?>?
+    fun getAllTeams(id: Int): TeamList
 
     @Query("SELECT tournament_list FROM User WHERE id = :id")
-    fun getAllTournaments(id: Int): List<TournamentOfUser?>?
+    fun getAllTournaments(id: Int): TournamentList
 
 
     @Query("SELECT notification_list FROM User WHERE id = :id")
-    fun getAllNotifications(id: Int): List<NotificationOfUser?>?
+    fun getAllNotifications(id: Int): NotificationList
 }

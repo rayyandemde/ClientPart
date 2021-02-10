@@ -1,7 +1,7 @@
 package com.android3.siegertpclient.data.game.gameSource.gameLocal
 
 import androidx.room.*
-import com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal.Tournament
+import com.android3.siegertpclient.data.game.Game
 
 @Dao
 interface GameDao {
@@ -18,8 +18,8 @@ interface GameDao {
     fun deleteAllGames()
 
     @get:Query("SELECT * FROM Game ORDER BY gameId DESC")
-    val allGames: List<Tournament?>?
+    val allGames: List<Game?>?
 
     @Query("SELECT * FROM Game WHERE gameId = :id")
-    fun findGameById(id: Int): Tournament?
+    fun findGameById(id: Int): Game?
 }

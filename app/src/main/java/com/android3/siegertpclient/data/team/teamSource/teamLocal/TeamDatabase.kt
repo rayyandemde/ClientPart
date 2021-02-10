@@ -1,11 +1,10 @@
 package com.android3.siegertpclient.data.team.teamSource.teamLocal
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 
 @Database(entities = [Team::class], version = 1, exportSchema = false)
+@TypeConverters(MemberConverter::class)
 abstract class TeamDatabase : RoomDatabase() {
     abstract val teamDao: TeamDao?
 

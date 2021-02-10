@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.android3.siegertpclient.data.setting.Setting
 
 @Database(entities = [Setting::class], version = 1, exportSchema = false)
 abstract class SettingDatabase : RoomDatabase() {

@@ -1,6 +1,8 @@
 package com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal
 
 import androidx.room.*
+import com.android3.siegertpclient.data.tournament.ParticipantList
+import com.android3.siegertpclient.data.tournament.Tournament
 
 @Dao
 interface TournamentDao {
@@ -35,5 +37,5 @@ interface TournamentDao {
     fun getTournamentsBvyKeyword(keyword: String?): List<Tournament?>?
 
     @Query("SELECT participant_list FROM Tournament WHERE tournamentId = :id")
-    fun findParticipant(id: Int): List<Participant?>?
+    fun findParticipant(id: Int): ParticipantList
 }

@@ -1,4 +1,4 @@
-package com.android3.siegertpclient.data.invitation.invitationSource.invitationLocal
+package com.android3.siegertpclient.data.invitation
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

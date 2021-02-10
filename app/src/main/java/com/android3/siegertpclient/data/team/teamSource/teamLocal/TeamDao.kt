@@ -26,5 +26,5 @@ interface TeamDao {
     fun findTeamById(id: Int): Team?
 
     @Query("SELECT member_list FROM Team WHERE teamId = :id")
-    fun findMember(id: Int): List<Member?>?
+    fun findMember(id: Int): MemberList?
 }
