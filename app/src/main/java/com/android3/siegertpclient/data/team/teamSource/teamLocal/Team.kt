@@ -1,8 +1,9 @@
 package com.android3.siegertpclient.data.team.teamSource.teamLocal
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal.GameList
+import com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal.ParticipantConverter
+import com.android3.siegertpclient.data.user.userSource.userLocal.RoomConverter
 
 @Entity
 data class Team(
@@ -10,8 +11,45 @@ data class Team(
     var teamId: Int,
     @ColumnInfo(name = "team_name") var teamName: String,
     @ColumnInfo(name = "password") var password: String,
-    @ColumnInfo(name = "member_list") var memberList: List<String>,
 
+    @TypeConverters(MemberConverter::class)
+    @ColumnInfo(name = "member_list") var memberList: MemberList?,
+
+    )
+
+
+data class MemberList(
+    val memberList: ArrayList<String> = ArrayList()
 )
+class MemberConverter {
+    @TypeConverter
+    fun toMemberList(value: String?): MemberList {
+        if (value == null || value.isEmpty()) {
+            return MemberList()
+        }
 
-data class Member(  @ColumnInfo(name = "member_list") var memberList : List<String>,)
+        val list: List<String> = value.split(",")
+        val stringList = ArrayList<String>()
+        for (item in list) {
+            if (!item.isEmpty()) {
+                stringList.add(item.toString())
+            }
+        }
+        return MemberList(stringList)
+    }
+
+    @TypeConverter
+    fun toString(memberList: MemberList?): String {
+
+        var string = ""
+
+        if (memberList == null) {
+            return string
+        }
+
+        memberList.memberList.forEach {
+            string += "$it,"
+        }
+        return string
+    }
+}

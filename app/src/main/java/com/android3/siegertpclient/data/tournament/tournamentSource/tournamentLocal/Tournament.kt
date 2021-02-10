@@ -1,7 +1,5 @@
 package com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal
-import androidx.room.ColumnInfo
-import  androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 
 @Entity
@@ -17,9 +15,82 @@ data class Tournament(
     @ColumnInfo(name = "registration_deadline") var registrationDeadline: String,
     @ColumnInfo(name = "start_time") var startTime: String,
     @ColumnInfo(name = "end_time") var endTime: String,
-    @ColumnInfo(name = "participant_list") var participantList: List<String>,
-    @ColumnInfo(name = "game_list") var gameList: List<String>
+
+    @TypeConverters(ParticipantConverter::class)
+    @ColumnInfo(name = "participant_list") var participantList: ParticipantList?,
+
+    @TypeConverters(ParticipantConverter::class)
+    @ColumnInfo(name = "game_list") var gameList: GameList?,
+
 )
 
+data class GameList(
+    val gameList: ArrayList<String> = ArrayList()
+)
 
-data class Participant(  @ColumnInfo(name = "participant_list") var participantList: List<String>,)
+data class ParticipantList(
+    val participantList: ArrayList<String> = ArrayList()
+)
+class ParticipantConverter {
+    @TypeConverter
+    fun toParticipantList(value: String?): ParticipantList {
+        if (value == null || value.isEmpty()) {
+            return ParticipantList()
+        }
+
+        val list: List<String> = value.split(",")
+        val stringList = ArrayList<String>()
+        for (item in list) {
+            if (!item.isEmpty()) {
+                stringList.add(item.toString())
+            }
+        }
+        return ParticipantList(stringList)
+    }
+    @TypeConverter
+    fun toString(participantList: ParticipantList?): String {
+
+        var string = ""
+
+        if (participantList == null) {
+            return string
+        }
+
+        participantList.participantList.forEach {
+            string += "$it,"
+        }
+        return string
+    }
+    @TypeConverter
+    fun toGameList(value: String?): GameList {
+        if (value == null || value.isEmpty()) {
+            return GameList()
+        }
+
+        val list: List<String> = value.split(",")
+        val stringList = ArrayList<String>()
+        for (item in list) {
+            if (!item.isEmpty()) {
+                stringList.add(item.toString())
+            }
+        }
+        return GameList(stringList)
+    }
+    @TypeConverter
+    fun toString(gameList: GameList?): String {
+
+        var string = ""
+
+        if (gameList == null) {
+            return string
+        }
+
+        gameList.gameList.forEach {
+            string += "$it,"
+        }
+        return string
+    }
+
+}
+
+

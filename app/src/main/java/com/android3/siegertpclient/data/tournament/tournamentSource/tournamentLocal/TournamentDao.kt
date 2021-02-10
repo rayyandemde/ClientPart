@@ -35,5 +35,5 @@ interface TournamentDao {
     fun getTournamentsBvyKeyword(keyword: String?): List<Tournament?>?
 
     @Query("SELECT participant_list FROM Tournament WHERE tournamentId = :id")
-    fun findParticipant(id: Int): List<Participant?>?
+    fun findParticipant(id: Int): ParticipantList
 }

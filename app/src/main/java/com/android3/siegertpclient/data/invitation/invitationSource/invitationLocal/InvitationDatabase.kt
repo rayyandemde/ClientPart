@@ -14,13 +14,13 @@ abstract class InvitationDatabase : RoomDatabase() {
         @Synchronized
         fun getDatabase(context: Context): InvitationDatabase? {
             if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(
+                Room.databaseBuilder(
                     context.applicationContext,
                     InvitationDatabase::class.java,
                     "invitation_database"
                 )
                     .allowMainThreadQueries()
-                    .build()
+                    .build().also { INSTANCE = it }
             }
             return INSTANCE
         }
