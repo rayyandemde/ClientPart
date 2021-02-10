@@ -1,7 +1,7 @@
 package com.android3.siegertpclient.data.game.gameSource.gameLocal
 
 import androidx.room.*
-import com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal.Tournament
+import com.android3.siegertpclient.data.game.Game
 
 @Dao
 interface GameDao {

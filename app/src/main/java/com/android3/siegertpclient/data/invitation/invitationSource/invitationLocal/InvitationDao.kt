@@ -1,6 +1,7 @@
 package com.android3.siegertpclient.data.invitation.invitationSource.invitationLocal
 
 import androidx.room.*
+import com.android3.siegertpclient.data.invitation.Invitation
 
 @Dao
 interface InvitationDao {

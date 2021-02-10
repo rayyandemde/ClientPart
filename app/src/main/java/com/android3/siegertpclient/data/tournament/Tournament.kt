@@ -1,4 +1,4 @@
-package com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal
+package com.android3.siegertpclient.data.tournament
 import androidx.room.*
 
 
@@ -22,7 +22,7 @@ data class Tournament(
     @TypeConverters(ParticipantConverter::class)
     @ColumnInfo(name = "game_list") var gameList: GameList?,
 
-)
+    )
 
 data class GameList(
     val gameList: ArrayList<String> = ArrayList()

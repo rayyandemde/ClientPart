@@ -1,11 +1,6 @@
-package com.android3.siegertpclient.data.user.userSource.userLocal
+package com.android3.siegertpclient.data.user
 
-import android.app.Notification
 import androidx.room.*
-import com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal.GameList
-import com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal.ParticipantConverter
-import com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal.ParticipantList
-import com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal.Tournament
 
 @Entity
 class User(
@@ -69,7 +64,7 @@ class RoomConverter {
         return string
     }
     @TypeConverter
-    fun toNotificationList(value: String?):NotificationList {
+    fun toNotificationList(value: String?): NotificationList {
         if (value == null || value.isEmpty()) {
             return NotificationList()
         }

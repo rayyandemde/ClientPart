@@ -1,9 +1,6 @@
 package com.android3.siegertpclient.data.team.teamSource.teamLocal
 
 import androidx.room.*
-import com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal.GameList
-import com.android3.siegertpclient.data.tournament.tournamentSource.tournamentLocal.ParticipantConverter
-import com.android3.siegertpclient.data.user.userSource.userLocal.RoomConverter
 
 @Entity
 data class Team(

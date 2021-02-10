@@ -1,6 +1,10 @@
 package com.android3.siegertpclient.data.user.userSource.userLocal
 
 import androidx.room.*
+import com.android3.siegertpclient.data.user.NotificationList
+import com.android3.siegertpclient.data.user.TeamList
+import com.android3.siegertpclient.data.user.TournamentList
+import com.android3.siegertpclient.data.user.User
 
 
 @Dao

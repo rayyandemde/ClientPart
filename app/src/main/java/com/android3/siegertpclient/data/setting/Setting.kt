@@ -1,4 +1,4 @@
-package com.android3.siegertpclient.data.setting.settingSource.settingLocal
+package com.android3.siegertpclient.data.setting
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
