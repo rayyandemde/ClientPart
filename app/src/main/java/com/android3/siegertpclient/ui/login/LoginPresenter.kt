@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.ui.login
 
-import com.android3.siegertpclient.base.BasePresenter
+import com.android3.siegertpclient.ui.base.BasePresenter
 
 class LoginPresenter : BasePresenter<LoginContract.ILoginView>(), LoginContract.ILoginPresenter{
     override fun onLoginBtnClicked(username: String, password: String) {

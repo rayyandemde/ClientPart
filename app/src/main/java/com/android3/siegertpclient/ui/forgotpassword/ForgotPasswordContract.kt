@@ -1,4 +1,4 @@
-import com.android3.siegertpclient.base.BaseView
+import com.android3.siegertpclient.ui.base.BaseView
 
 interface ForgotPasswordContract {
 

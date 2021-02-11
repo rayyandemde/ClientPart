@@ -1,4 +1,5 @@
-import com.android3.siegertpclient.base.BaseView
+import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.ui.base.BaseView
 
 interface HomepageContract {
 
@@ -14,7 +15,7 @@ interface HomepageContract {
 
         fun showJoinTeamFragment()
 
-        //fun showSearchResult(tournaments: List<Tournament>)
+        fun showSearchResult(tournaments: List<Tournament>)
     }
 
     interface IHomepagePresenter {
