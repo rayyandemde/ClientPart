@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.ui.register
 
-import com.android3.siegertpclient.base.BaseActivity
+import com.android3.siegertpclient.ui.base.BaseActivity
 
 class RegisterActivity : BaseActivity() {
     override fun showProgress() {

@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.ui.forgotpassword
 
-import com.android3.siegertpclient.base.BaseActivity
+import com.android3.siegertpclient.ui.base.BaseActivity
 
 class ForgotPasswordActivity : BaseActivity() {
     override fun showProgress() {

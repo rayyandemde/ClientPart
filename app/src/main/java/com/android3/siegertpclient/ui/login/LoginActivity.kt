@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.ui.login
 
-import com.android3.siegertpclient.base.BaseActivity
+import com.android3.siegertpclient.ui.base.BaseActivity
 
 class LoginActivity : BaseActivity() {
     override fun showProgress() {

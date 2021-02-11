@@ -1,4 +1,4 @@
-package com.android3.siegertpclient.base
+package com.android3.siegertpclient.ui.base
 
 import androidx.annotation.StringRes
 

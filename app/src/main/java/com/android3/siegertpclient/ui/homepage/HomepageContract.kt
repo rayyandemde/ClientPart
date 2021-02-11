@@ -1,6 +1,6 @@
-import com.android3.siegertpclient.base.BaseView
 
 import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.ui.base.BaseView
 
 interface HomepageContract {
 

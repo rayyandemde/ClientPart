@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.ui.homepage
 
-import com.android3.siegertpclient.base.BasePresenter
+import com.android3.siegertpclient.ui.base.BasePresenter
 
 class HomepagePresenter : BasePresenter<HomepageContract.IHomepageView>(), HomepageContract.IHomepagePresenter{
     override fun onMailBtnClicked() {

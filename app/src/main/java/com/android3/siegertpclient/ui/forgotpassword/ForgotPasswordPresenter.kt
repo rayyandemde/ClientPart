@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.ui.forgotpassword
 
-import com.android3.siegertpclient.base.BasePresenter
+import com.android3.siegertpclient.ui.base.BasePresenter
 
 class ForgotPasswordPresenter : BasePresenter<ForgotPasswordContract.IForgotPasswordView>(), ForgotPasswordContract.IForgotPasswordPresenter{
     override fun onBackBtnClicked() {
