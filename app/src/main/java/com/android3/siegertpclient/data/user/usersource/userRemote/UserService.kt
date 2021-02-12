@@ -9,7 +9,7 @@ import retrofit2.Response
 import retrofit2.http.*
 
 
-interface userService {
+interface UserService {
 
     @POST("users")
     fun createNewUser(user: User) : Boolean
@@ -18,7 +18,7 @@ interface userService {
     fun getUserByUsername(@Path("username") username: String) : Response<User>
 
     @GET("users")
-    fun getUserById (@Query("id") id : Int) : Response<User>
+    fun getUserById (@Query("id") id : String) : Response<User>
 
     @GET("users/{username}/tournaments")
     fun getUsersTournaments (@Path("username") username: String) : Response<Tournament>
