@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote
 
-class invitationResponse() {
+class InvitationResponse() {
 
     /*
     var invitations = mutableListOf<Invitation>()

@@ -30,7 +30,7 @@ interface UserService {
     fun getUserInvitations(@Path("username") username: String) : Response<Invitation>
 
     @PUT("users/{username}")
-    fun updateUserDetails(@Path("username") username: String)
+    fun updateUserDetails(@Path("username") oldUsername: String,@Body newUsername : String, @Body forename : String, @Body surname : String)
 
     @POST("users/{username}/invitations/{id}")
     fun handleInvitationAcceptation(@Path("username") username: String, @Path("id") id: Int)

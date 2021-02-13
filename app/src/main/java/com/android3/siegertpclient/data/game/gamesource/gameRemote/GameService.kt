@@ -1,5 +1,5 @@
 package com.android3.siegertpclient.data.game.gamesource.gameRemote
 
-class gameService {
+class GameService {
     //TODO Implement
 }

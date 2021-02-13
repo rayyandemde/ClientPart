@@ -4,10 +4,8 @@ import com.android3.siegertpclient.data.user.NotificationList
 import com.android3.siegertpclient.data.user.TeamList
 import com.android3.siegertpclient.data.user.TournamentList
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.data.user.usersource.userRemote.UserService
-import com.android3.siegertpclient.data.user.usersource.userRemote.userRemoteDataSource
 
-class userRepo : IUserDataSource {
+class UserRepo : IUserDataSource {
 
     //var userRemote : userRemoteDataSource = userRemoteDataSource(userService = UserService)
     //var userLocal

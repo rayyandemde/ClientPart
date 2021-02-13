@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote
 
-class invitationRemoteDataSource {
+class InvitationRemoteDataSource {
 /*
     fun createInvitation(invitation : Invitation) {
 
