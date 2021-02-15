@@ -4,8 +4,8 @@ import androidx.room.*
 
 @Entity
 class User(
-    @PrimaryKey(autoGenerate = true)
-            var id : Int,
+    @PrimaryKey
+            var id : String,
 
     @field:ColumnInfo(name = "user_name") var userName: String,
     @field:ColumnInfo(name = "vorname") var vorName: String,

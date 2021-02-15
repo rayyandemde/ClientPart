@@ -5,25 +5,27 @@ import com.android3.siegertpclient.data.user.NotificationList
 import com.android3.siegertpclient.data.user.TeamList
 import com.android3.siegertpclient.data.user.TournamentList
 import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.data.user.usersource.userLocal.UserDao
+import com.android3.siegertpclient.data.user.usersource.userLocal.UserLocalDataSource
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import com.android3.siegertpclient.utils.RestClient
 
-
-class UserRepo : IUserDataSource {
+class UserRepo(override val userDao: UserDao?) : IUserDataSource {
 
     private val restClient = RestClient()
     private val userService = restClient.getUserService()
 
     var userRemote = UserRemoteDataSource(userService)
-    //var userLocal
+    var userLocal = UserLocalDataSource(userDao)
 
     fun createNewUser(username: String, eMail: String, firstName: String, surname: String, password: String) : User {
         val notificationList = NotificationList()
         val teamList = TeamList()
         val tournamentList = TournamentList()
-        val userId = 1
+        val userId = userLocal.getId()
         //Todo implement getting new notification team and tournament list and correct id
         val newUser = User(userId, username, firstName, surname, eMail, password, notificationList, teamList, tournamentList)
+        userLocal.saveUser(newUser)
         return userRemote.createNewUser(newUser)
     }
 
@@ -55,5 +57,10 @@ class UserRepo : IUserDataSource {
     fun handleInvitationAcceptation(username: String, invitationID : String) {
         userRemote.handleInvitationAcceptation(username, invitationID)
     }
+    fun check(firstName: String,surname: String,password: String,eMail: String){
+        userLocal.check(firstName,surname,password,eMail)
+    }
+
+
 
 }

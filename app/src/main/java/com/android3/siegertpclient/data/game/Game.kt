@@ -6,9 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Game(
-    @PrimaryKey(autoGenerate = true)
-    var gameId: Int,
+    @PrimaryKey
+    var gameId: String,
     @ColumnInfo(name = "time") var time: String,
+    @ColumnInfo(name = "typeOfGame") var typeOfGame: String,
     @ColumnInfo(name = "firstParticipantId") var firstParticipantId: String,
     @ColumnInfo(name = "secondParticipantId") var secondParticipantId: String,
     @ColumnInfo(name = "firstParticipantResult") var firstParticipantResult: String,
