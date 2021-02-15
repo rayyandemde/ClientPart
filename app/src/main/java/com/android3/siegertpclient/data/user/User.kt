@@ -19,7 +19,7 @@ class User(
     @field:ColumnInfo(name = "tournament_list") var tournamentList: TournamentList
 ) {
     @PrimaryKey(autoGenerate = true)
-    var id = 0
+    var id = String
 
 }
 

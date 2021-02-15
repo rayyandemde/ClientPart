@@ -21,7 +21,7 @@ interface UserDao {
     @Query("DELETE From User")
     fun deleteAllUsers()
 
-    @get:Query("SELECT * FROM User ORDer by id desc")
+    @get:Query("SELECT * FROM User")
     val allUsers: List<User?>?
 
     @Query("SELECT * FROM User WHERE id = :id")

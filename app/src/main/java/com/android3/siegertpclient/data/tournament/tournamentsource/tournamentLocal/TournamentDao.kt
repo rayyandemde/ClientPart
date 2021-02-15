@@ -18,7 +18,7 @@ interface TournamentDao {
     @Query("DELETE FROM Tournament")
     fun deleteAllTournaments()
 
-    @get:Query("SELECT * FROM Tournament ORDER BY tournamentId DESC")
+    @get:Query("SELECT * FROM Tournament")
     val allTournaments: List<Tournament?>?
 
     @Query("SELECT * FROM Tournament WHERE tournament_name = :name")

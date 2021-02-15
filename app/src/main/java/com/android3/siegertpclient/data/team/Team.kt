@@ -5,7 +5,7 @@ import androidx.room.*
 @Entity
 data class Team(
     @PrimaryKey(autoGenerate = true)
-    var teamId: Int,
+    var teamId: String,
     @ColumnInfo(name = "team_name") var teamName: String,
     @ColumnInfo(name = "password") var password: String,
 
