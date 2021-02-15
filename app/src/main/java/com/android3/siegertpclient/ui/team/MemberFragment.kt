@@ -5,6 +5,8 @@ import com.android3.siegertpclient.data.user.User
 
 class MemberFragment : Fragment() {
 
+    private val teamPresenter: TeamPresenter = TeamPresenter()
+
     fun showMember(users: List<User>) {
         TODO("Not yet implemented")
     }

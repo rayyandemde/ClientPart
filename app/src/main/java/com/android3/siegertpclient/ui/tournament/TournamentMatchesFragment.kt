@@ -5,6 +5,8 @@ import com.android3.siegertpclient.data.game.Game
 
 class TournamentMatchesFragment : Fragment() {
 
+    private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
+
     fun showGames(games: List<Game>) {
         TODO("Not yet implemented")
     }

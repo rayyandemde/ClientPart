@@ -3,6 +3,9 @@ package com.android3.siegertpclient.ui.forgotpassword
 import com.android3.siegertpclient.ui.base.BaseActivity
 
 class ForgotPasswordActivity : BaseActivity() {
+
+    private val forgotPasswordPresenter: ForgotPasswordPresenter = ForgotPasswordPresenter()
+
     override fun showProgress() {
         TODO("Not yet implemented")
     }
