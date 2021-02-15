@@ -44,7 +44,7 @@ class UserRepo : IUserDataSource {
         return userRemote.getUsersTeams(username)
     }
 
-    fun getUsersInvitations (username: String) : Invitation {
+    fun getUsersInvitations (username: String) : Array<Invitation> {
         return userRemote.getUsersInvitations(username)
     }
 

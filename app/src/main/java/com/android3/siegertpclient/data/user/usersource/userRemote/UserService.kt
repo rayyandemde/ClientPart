@@ -26,7 +26,7 @@ interface UserService {
     fun getUserTeams(@Path("username") username: String) : Response<TeamList>
 
     @GET("users/{username}/invitations")
-    fun getUserInvitations(@Path("username") username: String) : Response<Invitation>
+    fun getUserInvitations(@Path("username") username: String) : Response<Array<Invitation>>
 
     @PUT("users/{username}")
     fun updateUserDetails(@Path("username") oldUsername: String,@Body newUsername : String, @Body forename : String, @Body surname : String)

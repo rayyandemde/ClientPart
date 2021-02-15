@@ -43,7 +43,7 @@ class UserRemoteDataSource (private val userService : UserService) {
         return response.body()
     }
 
-    fun getUsersInvitations (username: String) : Invitation {
+    fun getUsersInvitations (username: String) : Array<Invitation> {
         val response = userService.getUserInvitations(username)
         return response.body()
     }

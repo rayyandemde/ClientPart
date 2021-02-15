@@ -21,7 +21,7 @@ interface TeamService {
     fun deleteTeam(@Path("teamName") teamName: String)
 
     @GET("teams/{teamName}/members")
-    fun getTeamMembers(@Path("teamName") teamName: String) : Response<User>//TODo fix because you get multiple Users
+    fun getTeamMembers(@Path("teamName") teamName: String) : Response<Array<User>>
 
     @DELETE("teams/{teamName}/members/{id}")
     fun kickTeamMember(@Path("teamName") teamName: String, @Path("id") memberId : String)
