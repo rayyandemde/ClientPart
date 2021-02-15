@@ -2,7 +2,6 @@ package com.android3.siegertpclient.data.invitation.invitationsource
 
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationRemoteDataSource
-import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import com.android3.siegertpclient.utils.RestClient
 
 class InvitationRepo {

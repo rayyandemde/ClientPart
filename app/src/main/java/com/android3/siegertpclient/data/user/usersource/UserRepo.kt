@@ -21,8 +21,9 @@ class UserRepo : IUserDataSource {
         val notificationList = NotificationList()
         val teamList = TeamList()
         val tournamentList = TournamentList()
-        //Todo implement getting new notification team and tournament list
-        val newUser = User(username, firstName, surname, eMail, password, notificationList, teamList, tournamentList)
+        val userId = 1
+        //Todo implement getting new notification team and tournament list and correct id
+        val newUser = User(userId, username, firstName, surname, eMail, password, notificationList, teamList, tournamentList)
         return userRemote.createNewUser(newUser)
     }
 
