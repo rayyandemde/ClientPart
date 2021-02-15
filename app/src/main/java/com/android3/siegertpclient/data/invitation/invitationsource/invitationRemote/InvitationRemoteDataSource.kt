@@ -1,12 +1,11 @@
 package com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote
 
-class InvitationRemoteDataSource {
-/*
-    fun createInvitation(invitation : Invitation) {
+import com.android3.siegertpclient.data.invitation.Invitation
 
-    }*/
+class InvitationRemoteDataSource (private val invitationService : InvitationService) {
 
-    fun acceptInvitation(userId : String, invitationId : String) {
-
+    fun createInvitation(invitation : Invitation) : Invitation{
+        val response = invitationService.createInvitation(invitation)
+        return  response.body()
     }
 }
