@@ -1,8 +1,9 @@
 package com.android3.siegertpclient.utils
 
+import com.android3.siegertpclient.data.user.usersource.userRemote.UserService
 import retrofit2.Retrofit
 
-class retrofit {
+class RestClient {
 
     private val retrofit : Retrofit
 
@@ -12,5 +13,10 @@ class retrofit {
             .build()
         //Todo Include baseURL
     }
+
+    fun getUserService(): UserService {
+        return retrofit.create(UserService::class.java)
+    }
+
 
 }
