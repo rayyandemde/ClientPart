@@ -2,7 +2,7 @@ import com.android3.siegertpclient.ui.base.BaseView
 
 interface SettingContract {
 
-    interface IInvitationView : BaseView {
+    interface ISettingView : BaseView {
 
         fun navigateToUserProfileActivity()
 
@@ -11,7 +11,7 @@ interface SettingContract {
         fun navigateToLoginActivity()
     }
 
-    interface IInvitationPresenter {
+    interface ISettingPresenter {
 
         fun onBackBtnClicked()
 

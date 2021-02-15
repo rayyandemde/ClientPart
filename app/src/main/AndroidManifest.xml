@@ -14,16 +14,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SiegerTPClient">
-        <activity android:name=".ui.login.LoginActivity">
+        <activity android:name=".ui.homepage.HomepageActivity"></activity>
+        <activity android:name=".ui.splash.SplashActivity">
+            android:theme="@style/Splash"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.register.RegisterActivity" />
         <activity android:name=".ui.forgotpassword.ForgotPasswordActivity" />
-        <activity android:name=".ui.homepage.HomepageActivity" />
+        <activity android:name=".ui.userprofile.UserProfileActivity" />
+        <activity android:name=".ui.tournament.TournamentActivity" />
+        <activity android:name=".ui.createtournament.CreateTournamentActivity" />
+        <activity android:name=".ui.createteam.CreateTeamActivity" />
+        <activity android:name=".ui.setting.SettingActivity" />
+        <activity android:name=".ui.team.TeamActivity" />
+        <activity android:name=".ui.invitation.InvitationActivity" />
     </application>
 
 </manifest>

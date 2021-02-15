@@ -2,8 +2,9 @@ package com.android3.siegertpclient.ui.tournament
 
 import com.android3.siegertpclient.data.game.Game
 import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.ui.base.BasePresenter
 
-class TournamentPresenter {
+class TournamentPresenter : BasePresenter<TournamentContract.ITournamentView>(), TournamentContract.ITeamPresenter {
 
     fun onJoinBtnClicked() {
         TODO("Not yet implemented")
@@ -50,6 +51,42 @@ class TournamentPresenter {
  //   }
 
     fun getGameList() : List<Game> {
+        TODO("Not yet implemented")
+    }
+
+    override fun checkIfAdmin(userId: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun checkAlreadyJoined(uerId: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onBackBtnClicked() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onTournamentDetailsTabClicked() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onParticipantListTabClicked() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onScheduleTabClicked() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onStageSliderClicked() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onMatchesSliderClicked() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onTournamentUpdatesTabClicked() {
         TODO("Not yet implemented")
     }
 

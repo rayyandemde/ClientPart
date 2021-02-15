@@ -2,7 +2,9 @@ package com.android3.siegertpclient.ui.userprofile
 
 import androidx.fragment.app.Fragment
 
-class MyTeamsView : Fragment() {
+class MyTeamsFragment : Fragment() {
+
+    private val userProfilePresenter: UserProfilePresenter = UserProfilePresenter()
 
     fun showTeams() {
         TODO("Not yet implemented")

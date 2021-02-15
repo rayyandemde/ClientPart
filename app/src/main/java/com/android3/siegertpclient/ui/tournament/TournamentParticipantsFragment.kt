@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment
 
 class TournamentParticipantsFragment : Fragment() {
 
+    private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
+
 //    fun showParticipantList(participants: List<Participant>) {
 //        TODO("Not yet implemented")
 //    }
