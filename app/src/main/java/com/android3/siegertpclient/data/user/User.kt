@@ -4,6 +4,9 @@ import androidx.room.*
 
 @Entity
 class User(
+    @PrimaryKey(autoGenerate = true)
+            var id : Int,
+
     @field:ColumnInfo(name = "user_name") var userName: String,
     @field:ColumnInfo(name = "vorname") var vorName: String,
     @field:ColumnInfo(name = "surname") var surName: String,
@@ -18,8 +21,6 @@ class User(
     @TypeConverters(RoomConverter::class)
     @field:ColumnInfo(name = "tournament_list") var tournamentList: TournamentList
 ) {
-    @PrimaryKey(autoGenerate = true)
-    var id = 0
 
 }
 

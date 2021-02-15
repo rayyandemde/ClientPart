@@ -10,7 +10,7 @@ data class Tournament(
     @PrimaryKey(autoGenerate = true)
     var tournamentId: Int,
     @ColumnInfo(name = "participant_form") var participantForm: String,
-    @ColumnInfo(name = "admin_id") var adminId: Int,
+    @ColumnInfo(name = "admin_id") var adminId:Int,
     @ColumnInfo(name = "tournament_name") var tournamentName: String,
     @ColumnInfo(name = "tournament_types") var tournamentTypes: String,
     @ColumnInfo(name = "type_of_game") var TypeOfGame: String,

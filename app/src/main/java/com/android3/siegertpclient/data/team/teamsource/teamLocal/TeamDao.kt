@@ -16,7 +16,7 @@ interface TeamDao {
     @Query("DELETE FROM Team")
     fun deleteAllTeam()
 
-    @get:Query("SELECT * FROM Team ORDER BY teamId DESC")
+    @get:Query("SELECT * FROM Team")
     val allTeams: List<Team?>?
 
     @Query("SELECT * FROM Team WHERE team_name = :name")
