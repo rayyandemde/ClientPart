@@ -18,7 +18,7 @@ class SplashActivity : BaseActivity() {
         Handler().postDelayed({
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-        }, 5000)
+        }, 1000)
     }
 
     override fun showProgress() {
