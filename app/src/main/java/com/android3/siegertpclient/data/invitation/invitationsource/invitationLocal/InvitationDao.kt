@@ -17,7 +17,7 @@ interface InvitationDao {
     @Query("DELETE FROM Invitation")
     fun deleteAllInvitations()
 
-    @get:Query("SELECT * FROM Invitation ORDER BY invitationId DESC")
+    @get:Query("SELECT * FROM Invitation")
     val allInvitations: List<Invitation?>?
 
     @Query("SELECT * FROM Invitation WHERE sender_name = :name")
