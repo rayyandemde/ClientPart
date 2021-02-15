@@ -1,4 +1,4 @@
-package com.android3.siegertpclient.data.team.teamSource.teamLocal
+package com.android3.siegertpclient.data.team.teamsource.teamLocal
 
 import androidx.room.*
 
