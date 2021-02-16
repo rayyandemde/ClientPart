@@ -9,25 +9,25 @@ import retrofit2.http.*
 interface TeamService {
 
     @POST("teams")
-    fun createNewTeam(@Body team : Team)
+    fun createNewTeam(@Body adminId : String, name : String, password : String, @Header("currentUserId") ownUserId: String)
 
     @GET("teams/{teamName}")
-    fun getTeamByName(@Path("teamName") teamName : String) : Response<Team>
+    fun getTeamByName(@Path("teamName") teamName : String, @Header("currentUserId") ownUserId: String) : Response<Team>
 
     @GET("teams")
-    fun getTeamById(@Query("id") teamId : String) : Response<Team>
+    fun getTeamById(@Query("id") teamId : String, @Header("currentUserId") ownUserId: String) : Response<Team>
 
     @DELETE("teams/{teamName}")
-    fun deleteTeam(@Path("teamName") teamName: String)
+    fun deleteTeam(@Path("teamName") teamName: String, @Header("currentUserId") ownUserId: String)
 
     @GET("teams/{teamName}/members")
-    fun getTeamMembers(@Path("teamName") teamName: String) : Response<Array<User>>
+    fun getTeamMembers(@Path("teamName") teamName: String, @Header("currentUserId") ownUserId: String) : Response<Array<User>>
 
     @DELETE("teams/{teamName}/members/{id}")
-    fun kickTeamMember(@Path("teamName") teamName: String, @Path("id") memberId : String)
+    fun kickTeamMember(@Path("teamName") teamName: String, @Path("id") memberId : String, @Header("currentUserId") ownUserId: String)
 
     @POST("teams/{teamName}")
-    fun handleMembership(@Path("teamName") teamName: String)
+    fun handleMembership(@Path("teamName") teamName: String, @Header("currentUserId") ownUserId: String)
     //TODO add body
 
 }

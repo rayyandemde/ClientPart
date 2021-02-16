@@ -18,11 +18,13 @@ class UserRepo(override val userDao: UserDao?) : IUserDataSource {
     var userRemote = UserRemoteDataSource(userService)
     var userLocal = UserLocalDataSource(userDao)
 
+    private val ownUserId = "1"//TODO change for a method of UerLocalDataSource
+
     fun createNewUser(username: String, eMail: String, firstName: String, surname: String, password: String) : User {
         val notificationList = NotificationList()
         val teamList = TeamList()
         val tournamentList = TournamentList()
-        val userId = userLocal.getId()
+        val userId = userLocal.id
         //Todo implement getting new notification team and tournament list and correct id
         val newUser = User(userId, username, firstName, surname, eMail, password, notificationList, teamList, tournamentList)
         userLocal.saveUser(newUser)
@@ -30,37 +32,36 @@ class UserRepo(override val userDao: UserDao?) : IUserDataSource {
     }
 
     fun getUserById (userId : String) : User {
-        return userRemote.getUserById(userId)
+        return userRemote.getUserById(userId, ownUserId)
     }
 
     fun getUserByUsername (username : String) : User {
-        return userRemote.getUserByUsername(username)
+        return userRemote.getUserByUsername(username, ownUserId)
     }
 
     fun getUsersTournaments (username: String) : TournamentList {
-        val user = getUserByUsername(username)
-        return userRemote.getUsersTournaments(username)
+        //ownUserId = userLocal.getOwnUserId()
+        return userRemote.getUsersTournaments(username, ownUserId)
     }
 
     fun getUserTeams (username: String) : TeamList {
-        return userRemote.getUsersTeams(username)
+        return userRemote.getUsersTeams(username, ownUserId)
     }
 
     fun getUsersInvitations (username: String) : Array<Invitation> {
-        return userRemote.getUsersInvitations(username)
+        return userRemote.getUsersInvitations(username, ownUserId)
     }
 
     fun updateUserDetail (oldUsername : String, newUsername : String, firstName: String, surname: String) {
-        userRemote.updateUserDetail(oldUsername, newUsername, firstName, surname)
+        userRemote.updateUserDetail(oldUsername, newUsername, firstName, surname, ownUserId)
     }
 
     fun handleInvitationAcceptation(username: String, invitationID : String) {
-        userRemote.handleInvitationAcceptation(username, invitationID)
+        userRemote.handleInvitationAcceptation(username, invitationID, ownUserId)
     }
-    fun check(firstName: String,surname: String,password: String,eMail: String){
-        userLocal.check(firstName,surname,password,eMail)
+    fun check(firstName: String,surname: String,password: String,eMail: String) : Boolean {
+        return userLocal.check(firstName,surname,password,eMail)
     }
-
 
 
 }

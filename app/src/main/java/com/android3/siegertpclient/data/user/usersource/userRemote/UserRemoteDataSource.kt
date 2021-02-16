@@ -4,8 +4,6 @@ import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.user.TeamList
 import com.android3.siegertpclient.data.user.TournamentList
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.data.user.usersource.IUserDataSource
-import javax.inject.Inject
 
 class UserRemoteDataSource (private val userService : UserService) {
 
@@ -15,8 +13,8 @@ class UserRemoteDataSource (private val userService : UserService) {
         return response.body()
     }
 
-    fun getUserById (userId : String) : User {
-        val response = userService.getUserById(userId)
+    fun getUserById (userId : String, ownUserId : String) : User {
+        val response = userService.getUserById(userId, ownUserId)
         if (response.isSuccessful) {
              //val user = response.body()
             //TOdo implement error code
@@ -24,8 +22,8 @@ class UserRemoteDataSource (private val userService : UserService) {
         return response.body()
     }
 
-    fun getUserByUsername (username : String) : User {
-        val response = userService.getUserByUsername(username)
+    fun getUserByUsername (username : String, ownUserId : String) : User {
+        val response = userService.getUserByUsername(username, ownUserId)
         if (response.isSuccessful) {
             //val user = response.body()
             //TOdo implement error code
@@ -33,27 +31,27 @@ class UserRemoteDataSource (private val userService : UserService) {
         return response.body()
     }
 
-    fun getUsersTournaments (username: String) : TournamentList {
-        val response = userService.getUsersTournaments(username)
+    fun getUsersTournaments (username: String, ownUserId : String) : TournamentList {
+        val response = userService.getUsersTournaments(username, ownUserId)
         return response.body()
     }
 
-    fun getUsersTeams (username: String) : TeamList {
-        val response = userService.getUserTeams(username)
+    fun getUsersTeams (username: String, ownUserId : String) : TeamList {
+        val response = userService.getUserTeams(username, ownUserId)
         return response.body()
     }
 
-    fun getUsersInvitations (username: String) : Array<Invitation> {
-        val response = userService.getUserInvitations(username)
+    fun getUsersInvitations (username: String, ownUserId : String) : Array<Invitation> {
+        val response = userService.getUserInvitations(username, ownUserId)
         return response.body()
     }
 
-    fun updateUserDetail (oldUsername: String, newUsername : String, forname : String, surname : String) {
-        val response = userService.updateUserDetails(oldUsername,newUsername,forname,surname)
+    fun updateUserDetail (oldUsername: String, newUsername : String, forename : String, surname : String, ownUserId : String) {
+        val response = userService.updateUserDetails(oldUsername,newUsername,forename,surname, ownUserId)
     }
 
-    fun handleInvitationAcceptation (username: String,invitationId : String) {
-        val response = userService.handleInvitationAcceptation(username, invitationId)
+    fun handleInvitationAcceptation (username: String,invitationId : String, ownUserId : String) {
+        val response = userService.handleInvitationAcceptation(username, invitationId, ownUserId)
     }
 
 }
