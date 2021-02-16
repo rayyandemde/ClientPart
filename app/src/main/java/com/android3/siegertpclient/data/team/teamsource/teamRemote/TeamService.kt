@@ -9,7 +9,7 @@ import retrofit2.http.*
 interface TeamService {
 
     @POST("teams")
-    fun createNewTeam(@Body adminId : String, name : String, password : String, @Header("currentUserId") ownUserId: String)
+    fun createNewTeam(@Body adminId : String, name : String, password : String, @Header("currentUserId") ownUserId: String) : Response<Team>
 
     @GET("teams/{teamName}")
     fun getTeamByName(@Path("teamName") teamName : String, @Header("currentUserId") ownUserId: String) : Response<Team>
@@ -27,7 +27,7 @@ interface TeamService {
     fun kickTeamMember(@Path("teamName") teamName: String, @Path("id") memberId : String, @Header("currentUserId") ownUserId: String)
 
     @POST("teams/{teamName}")
-    fun handleMembership(@Path("teamName") teamName: String, @Header("currentUserId") ownUserId: String)
-    //TODO add body
+    fun handleMembership(@Path("teamName") teamName: String, @Body activity : String, password: String, @Header("currentUserId") ownUserId: String)
+    //TODO toggle password only on join activity
 
 }
