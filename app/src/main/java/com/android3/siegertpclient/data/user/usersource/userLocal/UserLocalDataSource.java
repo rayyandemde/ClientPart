@@ -4,6 +4,7 @@ import com.android3.siegertpclient.data.user.User;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -29,6 +30,7 @@ public class UserLocalDataSource {
         userDao.insertUsers(newUser);
     }
 
+    //public ArrayList<String> getOwnUserId()
     @NotNull
     public String getId() {
 
