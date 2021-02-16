@@ -14,10 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SiegerTPClient">
-        <activity android:name=".ui.homepage.HomepageActivity"></activity>
-        <activity android:name=".ui.splash.SplashActivity"
-            android:theme="@style/Splash"
-            android:noHistory="true">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/tournament" />
+
+        <activity android:name=".ui.homepage.HomepageActivity" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:noHistory="true"
+            android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
