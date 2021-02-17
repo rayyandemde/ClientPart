@@ -10,13 +10,13 @@ import com.android3.siegertpclient.data.user.usersource.userLocal.UserLocalDataS
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import com.android3.siegertpclient.utils.RestClient
 
-class UserRepo(override val userDao: UserDao?) : IUserDataSource {
+class UserRepo() : IUserDataSource {
 
     private val restClient = RestClient()
     private val userService = restClient.getUserService()
 
     var userRemote = UserRemoteDataSource(userService)
-    var userLocal = UserLocalDataSource(userDao)
+    var userLocal = UserLocalDataSource()
 
     private val ownUserId = "1"//TODO change for a method of UerLocalDataSource
 
@@ -24,7 +24,7 @@ class UserRepo(override val userDao: UserDao?) : IUserDataSource {
         val notificationList = NotificationList()
         val teamList = TeamList()
         val tournamentList = TournamentList()
-        val userId = userLocal.id
+        val userId = "asd";
         //Todo implement getting new notification team and tournament list and correct id
         val newUser = User(userId, username, firstName, surname, eMail, password, notificationList, teamList, tournamentList)
         userLocal.saveUser(newUser)
