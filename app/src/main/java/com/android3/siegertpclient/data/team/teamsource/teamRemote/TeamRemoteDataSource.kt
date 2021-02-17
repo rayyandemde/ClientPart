@@ -1,6 +1,8 @@
 package com.android3.siegertpclient.data.team.teamsource.teamRemote
 
+import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import retrofit2.Response
 import retrofit2.http.*
@@ -19,6 +21,16 @@ class TeamRemoteDataSource (private val teamService: TeamService) {
 
     fun getTeamById(teamId : String, ownUserId: String) : Team {
         val response = teamService.getTeamById(teamId, ownUserId)
+        return response.body()
+    }
+
+    fun getTeamTournaments(teamName: String,ownUserId: String) : Array<Tournament> {
+        val response = teamService.getTeamTournaments(teamName, ownUserId)
+        return response.body()
+    }
+
+    fun getTeamInvitations(teamName: String, ownUserId: String) : Array<Invitation> {
+        val response = teamService.getTeamInvitations(teamName, ownUserId)
         return response.body()
     }
 

@@ -11,8 +11,13 @@ class InvitationRepo (private val ownUserId : String) {
 
     var invitationRemote = InvitationRemoteDataSource(invitationService)
 
-    fun createInvitation(invitationId : String, senderName : String, recipientName : String, tournamentId : String) {
-        val newInvitation = Invitation(invitationId, senderName, recipientName, tournamentId)
-        invitationService.createInvitation(newInvitation, ownUserId)
+    fun createInvitation(senderId : String, recipientId : String, tournamentId : String,
+                         participantForm : String) : Invitation {
+        val newInvitation = invitationRemote.createInvitation(senderId, recipientId, tournamentId, participantForm, ownUserId)
+        return newInvitation
+    }
+
+    fun handleInvitationAcceptation(username: String, invitationID : String, accept : Boolean) {
+        invitationRemote.handleInvitationAcceptation(username, invitationID, accept, ownUserId)
     }
 }

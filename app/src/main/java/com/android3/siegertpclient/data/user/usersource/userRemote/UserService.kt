@@ -38,8 +38,4 @@ interface UserService {
                           @Body newUsername : String, @Body forename : String,
                           @Body surname : String, @Header("currentUserId") ownUserId: String)
 
-    @POST("users/{username}/invitations/{id}")
-    fun handleInvitationAcceptation(@Path("username") username: String,
-                                    @Path("id") invitationId: String, @Header("currentUserId") ownUserId: String)
-
 }
