@@ -1,10 +1,20 @@
 package com.android3.siegertpclient.ui.forgotpassword
 
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
 
 class ForgotPasswordActivity : BaseActivity() {
 
     private val forgotPasswordPresenter: ForgotPasswordPresenter = ForgotPasswordPresenter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_forgotpassword)
+
+    }
 
     override fun showProgress() {
         TODO("Not yet implemented")

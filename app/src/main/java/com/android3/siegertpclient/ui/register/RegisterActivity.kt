@@ -7,7 +7,6 @@ import android.widget.TextView
 import android.widget.Toast
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
-import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 
 class RegisterActivity : BaseActivity() {
@@ -35,7 +34,6 @@ class RegisterActivity : BaseActivity() {
     }
 
     private fun signUpBtnPressed() {
-        Toast.makeText(baseContext, "Your account has been created please login", Toast.LENGTH_LONG).show()
         openLoginActivity()
     }
 
