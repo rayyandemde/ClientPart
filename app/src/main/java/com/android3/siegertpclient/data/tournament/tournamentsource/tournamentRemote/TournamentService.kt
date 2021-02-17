@@ -3,8 +3,11 @@ package com.android3.siegertpclient.data.tournament.tournamentsource.tournamentR
 import com.android3.siegertpclient.data.game.Game
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.utils.ParticipantFormUtil
+import com.android3.siegertpclient.utils.TournamentTypesUtil
 import retrofit2.Response
 import retrofit2.http.*
+import java.util.*
 
 interface TournamentService {
 
@@ -24,16 +27,19 @@ interface TournamentService {
     fun getTournamentParticipants(@Path("tournamentName") tournamentName : String,
                                   @Header("currentUserId") ownUserId: String) : Response<Array<User>>
 
-    @PUT("tournaments/{tournamentName}")//TODO add body
+    @PUT("tournaments/{tournamentName}")
     fun updateTournamentDetailById(@Path("tournamentName") tournamentName : String,
+                                   @Body participantForm: ParticipantFormUtil, adminId : String,
+                                   tournamentTypes: TournamentTypesUtil, typeOfGame : String, location : String,
+                                   registrationDeadline : Date, startTime : Date, endTime : Date,
                                    @Header("currentUserId") ownUserId: String) : Response<Tournament>
 
     @DELETE("tournaments/{tournamentName}")
     fun deleteTournament(@Path("tournamentName") tournamentName : String,
                          @Header("currentUserId") ownUserId: String) : Response<Boolean>
 
-    @POST("tournaments/{tournamentName}")//TODO add body
-    fun handleParticipation(@Path("tournamentName") tournamentName : String,
+    @POST("tournaments/{tournamentName}")
+    fun handleParticipation(@Path("tournamentName") tournamentName : String, @Body participate : Map<String, Boolean>,
                             @Header("currentUserId") ownUserId: String) : Response<Boolean>
 
     @GET("tournaments/{tournamentName}/games")

@@ -1,8 +1,9 @@
 package com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote
 
 import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.invitation.invitationsource.IInvitationDataSource
 
-class InvitationRemoteDataSource (private val invitationService : InvitationService) {
+class InvitationRemoteDataSource (private val invitationService : InvitationService) : IInvitationDataSource {
 
     fun createInvitation(senderId : String, recipientId : String, tournamentId : String,
                          participantForm : String, ownUserId : String) : Invitation {
@@ -10,8 +11,10 @@ class InvitationRemoteDataSource (private val invitationService : InvitationServ
         return  response.body()
     }
 
-    fun handleInvitationAcceptation (username: String, invitationId : String, accept : Boolean, ownUserId : String) {
-        val response = invitationService.handleInvitationAcceptation(username, invitationId, accept, ownUserId)
+    fun handleInvitationAcceptation (username: String, invitationId : String, acceptB : Boolean, ownUserId : String) {
+        val map = hashMapOf<String, Boolean>()
+        map["access"] = acceptB
+        val response = invitationService.handleInvitationAcceptation(username, invitationId, map, ownUserId)
     }
 
 }
