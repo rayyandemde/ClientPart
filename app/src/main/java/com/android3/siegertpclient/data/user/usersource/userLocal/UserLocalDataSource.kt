@@ -21,6 +21,4 @@ class UserLocalDataSource {
         userDao!!.insertUsers(newUser)
     }
 
-    val ownUserId: List<String>
-        get() = userDao!!.getAllUser()
 }

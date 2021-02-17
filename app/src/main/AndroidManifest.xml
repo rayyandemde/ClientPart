@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SiegerTPClient">
 
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/tournament" />
 
         <activity android:name=".ui.homepage.HomepageActivity"></activity>
         <activity android:name=".ui.splash.SplashActivity"
