@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -108,7 +108,7 @@
         app:layout_constraintVertical_bias="0.899" />
 
     <TextView
-        android:id="@+id/registerClickable"
+        android:id="@+id/loginClickable"
         android:layout_width="96dp"
         android:layout_height="20dp"
         android:layout_marginStart="16dp"
