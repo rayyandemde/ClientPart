@@ -133,7 +133,7 @@
         app:layout_constraintVertical_bias="0.899" />
 
     <TextView
-        android:id="@+id/registerClickable"
+        android:id="@+id/loginClickable"
         android:layout_width="49dp"
         android:layout_height="17dp"
         android:layout_marginStart="16dp"
