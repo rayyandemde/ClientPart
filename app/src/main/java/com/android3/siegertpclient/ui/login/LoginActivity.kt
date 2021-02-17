@@ -17,33 +17,37 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val registerTv: TextView = findViewById(R.id.loginClickable) as TextView
-        registerTv.setOnClickListener {
-            openRegisterActivity()
-        }
-        val loginBtn: Button = findViewById(R.id.signUpBtn) as Button
+
+        val loginBtn: Button = findViewById(R.id.loginBtn)
         loginBtn.setOnClickListener{
             openHomepageActivity()
         }
-        val fogotPasswordTv: TextView = findViewById(R.id.forgotPassword) as TextView
+
+        val registerTv: TextView = findViewById(R.id.registerClickable)
         registerTv.setOnClickListener {
-            openForgotPasswordActivity()
+            openRegisterActivity()
         }
-    }
 
-    private fun openForgotPasswordActivity() {
-        val intent = Intent(this, ForgotPasswordActivity::class.java)
-        startActivity(intent)
-    }
+        val letsGoRegister: TextView = findViewById(R.id.letsgoRegister)
+        letsGoRegister.setOnClickListener {
+            openRegisterActivity()
+        }
 
-    private fun openHomepageActivity() {
-        val intent = Intent(this, HomepageActivity::class.java)
-        startActivity(intent)
     }
 
     private fun openRegisterActivity() {
-        val intent = Intent(this, RegisterActivity::class.java)
-        startActivity(intent)
+        val rIntent = Intent(this, RegisterActivity::class.java)
+        startActivity(rIntent)
+    }
+
+    private fun openForgotPasswordActivity() {
+        val fpIntent = Intent(this, ForgotPasswordActivity::class.java)
+        startActivity(fpIntent)
+    }
+
+    private fun openHomepageActivity() {
+        val hIntent = Intent(this, HomepageActivity::class.java)
+        startActivity(hIntent)
     }
 
     override fun navigateToHomepageActivity() {
