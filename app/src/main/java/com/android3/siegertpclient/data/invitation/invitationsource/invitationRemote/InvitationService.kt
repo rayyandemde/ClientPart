@@ -1,11 +1,9 @@
 package com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote
 
 import com.android3.siegertpclient.data.invitation.Invitation
+import okhttp3.RequestBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface InvitationService {
 
@@ -15,7 +13,7 @@ interface InvitationService {
 
     @POST("invitations/{id}")
     fun handleInvitationAcceptation(@Path("username") username: String,
-                                    @Path("id") invitationId: String, @Body accept : Boolean,//TODO add name for boolean
+                                    @Path("id") invitationId: String, @Body accept : Map<String, Boolean>,
                                     @Header("currentUserId") ownUserId: String)
 
 }

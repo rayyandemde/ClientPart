@@ -10,8 +10,10 @@ class InvitationRemoteDataSource (private val invitationService : InvitationServ
         return  response.body()
     }
 
-    fun handleInvitationAcceptation (username: String, invitationId : String, accept : Boolean, ownUserId : String) {
-        val response = invitationService.handleInvitationAcceptation(username, invitationId, accept, ownUserId)
+    fun handleInvitationAcceptation (username: String, invitationId : String, acceptB : Boolean, ownUserId : String) {
+        val map = hashMapOf<String, Boolean>()
+        map["access"] = acceptB
+        val response = invitationService.handleInvitationAcceptation(username, invitationId, map, ownUserId)
     }
 
 }
