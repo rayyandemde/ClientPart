@@ -14,24 +14,32 @@ interface UserService {
     fun createNewUser(user: User) : Response<User>
 
     @GET("users/{username}")
-    fun getUserByUsername(@Path("username") username: String, @Header("currentUserId") ownUserId: String) : Response<User>
+    fun getUserByUsername(@Path("username") username: String,
+                          @Header("currentUserId") ownUserId: String) : Response<User>
 
     @GET("users")
-    fun getUserById (@Query("id") id : String, @Header("currentUserId") ownUserId: String) : Response<User>
+    fun getUserById (@Query("id") id : String,
+                     @Header("currentUserId") ownUserId: String) : Response<User>
 
     @GET("users/{username}/tournaments")
-    fun getUsersTournaments (@Path("username") username: String, @Header("currentUserId") ownUserId: String) : Response<TournamentList>
+    fun getUsersTournaments (@Path("username") username: String,
+                             @Header("currentUserId") ownUserId: String) : Response<TournamentList>
 
     @GET("users/{username}/teams")
-    fun getUserTeams(@Path("username") username: String, @Header("currentUserId") ownUserId: String) : Response<TeamList>
+    fun getUserTeams(@Path("username") username: String,
+                     @Header("currentUserId") ownUserId: String) : Response<TeamList>
 
     @GET("users/{username}/invitations")
-    fun getUserInvitations(@Path("username") username: String, @Header("currentUserId") ownUserId: String) : Response<Array<Invitation>>
+    fun getUserInvitations(@Path("username") username: String,
+                           @Header("currentUserId") ownUserId: String) : Response<Array<Invitation>>
 
     @PUT("users/{username}")
-    fun updateUserDetails(@Path("username") oldUsername: String,@Body newUsername : String, @Body forename : String, @Body surname : String, @Header("currentUserId") ownUserId: String)
+    fun updateUserDetails(@Path("username") oldUsername: String,
+                          @Body newUsername : String, @Body forename : String,
+                          @Body surname : String, @Header("currentUserId") ownUserId: String)
 
     @POST("users/{username}/invitations/{id}")
-    fun handleInvitationAcceptation(@Path("username") username: String, @Path("id") invitationId: String, @Header("currentUserId") ownUserId: String)
+    fun handleInvitationAcceptation(@Path("username") username: String,
+                                    @Path("id") invitationId: String, @Header("currentUserId") ownUserId: String)
 
 }
