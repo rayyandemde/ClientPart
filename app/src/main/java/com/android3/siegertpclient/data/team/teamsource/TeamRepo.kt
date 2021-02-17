@@ -1,7 +1,9 @@
 package com.android3.siegertpclient.data.team.teamsource
 
+import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
 import com.android3.siegertpclient.data.team.teamsource.teamRemote.TeamRemoteDataSource
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.RestClient
 
@@ -22,6 +24,14 @@ class TeamRepo : ITeamDataSource {
 
     fun getTeamById(teamId : String, ownUserId: String) : Team {
         return teamRemote.getTeamById(teamId, ownUserId)
+    }
+
+    fun getTeamTournaments(teamName: String,ownUserId: String) : Array<Tournament> {
+        return teamRemote.getTeamTournaments(teamName, ownUserId)
+    }
+
+    fun getTeamInvitations(teamName: String, ownUserId: String) : Array<Invitation> {
+        return teamRemote.getTeamInvitations(teamName, ownUserId)
     }
 
     fun deleteTeam(teamName: String, ownUserId: String) {

@@ -56,9 +56,6 @@ class UserRepo() : IUserDataSource {
         userRemote.updateUserDetail(oldUsername, newUsername, firstName, surname, ownUserId)
     }
 
-    fun handleInvitationAcceptation(username: String, invitationID : String) {
-        userRemote.handleInvitationAcceptation(username, invitationID, ownUserId)
-    }
     fun check(firstName: String,surname: String,password: String,eMail: String) : Boolean {
         return userLocal.check(firstName,surname,password,eMail)
     }

@@ -50,8 +50,4 @@ class UserRemoteDataSource (private val userService : UserService) {
         val response = userService.updateUserDetails(oldUsername,newUsername,forename,surname, ownUserId)
     }
 
-    fun handleInvitationAcceptation (username: String,invitationId : String, ownUserId : String) {
-        val response = userService.handleInvitationAcceptation(username, invitationId, ownUserId)
-    }
-
 }
