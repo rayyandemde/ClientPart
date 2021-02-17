@@ -7,7 +7,7 @@ class ForgotPasswordPresenter : BasePresenter<ForgotPasswordContract.IForgotPass
         TODO("Not yet implemented")
     }
 
-    override fun onSendBtnClicked() {
+    override fun onSendBtnClicked(email : String) {
         TODO("Not yet implemented")
     }
 

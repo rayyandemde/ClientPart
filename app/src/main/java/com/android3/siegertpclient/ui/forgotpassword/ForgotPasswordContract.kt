@@ -11,6 +11,6 @@ interface ForgotPasswordContract {
 
         fun onBackBtnClicked()
 
-        fun onSendBtnClicked()
+        fun onSendBtnClicked(email : String)
     }
 }
