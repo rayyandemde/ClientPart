@@ -12,6 +12,6 @@ class LoginPresenter : BasePresenter<LoginContract.ILoginView>(), LoginContract.
     }
 
     override fun onRegisterTextClicked() {
-        TODO("Not yet implemented")
+        view?.navigateToRegisterActivity()
     }
 }

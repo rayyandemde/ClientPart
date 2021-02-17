@@ -25,14 +25,25 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
 
         val registerTv: TextView = findViewById(R.id.registerClickable)
         registerTv.setOnClickListener {
-            openRegisterActivity()
+            loginPresenter.onRegisterTextClicked()
+//            openRegisterActivity()
         }
 
         val letsGoRegister: TextView = findViewById(R.id.letsgoRegister)
         letsGoRegister.setOnClickListener {
-            openRegisterActivity()
+            openForgotPasswordActivity()
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loginPresenter.onAttach(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        loginPresenter.onDetach()
     }
 
     private fun openRegisterActivity() {
@@ -59,7 +70,8 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
     }
 
     override fun navigateToRegisterActivity() {
-        TODO("Not yet implemented")
+        val fpIntent2 = Intent(this, RegisterActivity::class.java)
+        startActivity(fpIntent2)
     }
 
     override fun showProgress() {
