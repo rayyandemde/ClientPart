@@ -19,6 +19,6 @@ interface ResultDao {
     fun deleteAllResults()
 
     @get:Query("SELECT * FROM Result")
-    val allResults: List<Game?>?
+    val allResults: List<Result?>?
 
 }
