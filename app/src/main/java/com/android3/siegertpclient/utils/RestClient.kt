@@ -1,6 +1,9 @@
 package com.android3.siegertpclient.utils
 
+import com.android3.siegertpclient.data.game.gamesource.gameRemote.GameService
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationService
+import com.android3.siegertpclient.data.team.teamsource.teamRemote.TeamService
+import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote.TournamentService
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserService
 import retrofit2.Retrofit
 
@@ -21,6 +24,18 @@ class RestClient {
 
     fun getInvitationService(): InvitationService {
         return retrofit.create(InvitationService::class.java)
+    }
+
+    fun getTeamService() : TeamService {
+        return retrofit.create(TeamService::class.java)
+    }
+
+    fun getGameService() : GameService {
+        return retrofit.create(GameService::class.java)
+    }
+
+    fun getTournamentService() : TournamentService {
+        return retrofit.create(TournamentService::class.java)
     }
 
 

@@ -17,7 +17,7 @@ interface GameDao {
     @Query("DELETE FROM Game")
     fun deleteAllGames()
 
-    @get:Query("SELECT * FROM Game ORDER BY gameId DESC")
+    @get:Query("SELECT * FROM Game")
     val allGames: List<Game?>?
 
     @Query("SELECT * FROM Game WHERE gameId = :id")
