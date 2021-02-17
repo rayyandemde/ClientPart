@@ -1,8 +1,9 @@
 package com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote
 
 import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.invitation.invitationsource.IInvitationDataSource
 
-class InvitationRemoteDataSource (private val invitationService : InvitationService) {
+class InvitationRemoteDataSource (private val invitationService : InvitationService) : IInvitationDataSource {
 
     fun createInvitation(senderId : String, recipientId : String, tournamentId : String,
                          participantForm : String, ownUserId : String) : Invitation {

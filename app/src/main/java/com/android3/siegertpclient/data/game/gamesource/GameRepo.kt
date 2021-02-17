@@ -15,8 +15,8 @@ class GameRepo : IGameDataSource {
         return gameRemote.getGameById(tournamentName, gameId, token)
     }
 
-    fun updateGameById(tournamentName : String, gameId : String, game : Game, token : String) : Game {
-        return gameRemote.updateGameById(tournamentName, gameId, game, token)
+    fun updateGameById(tournamentName : String, gameId : String, firstWins : Boolean, secondWins : Boolean, draws : Boolean, token : String) : Game {
+        return gameRemote.updateGameById(tournamentName, gameId, firstWins, secondWins, draws, token)
     }
 
     fun deleteGame(tournamentName : String, gameId : String, token : String) {
