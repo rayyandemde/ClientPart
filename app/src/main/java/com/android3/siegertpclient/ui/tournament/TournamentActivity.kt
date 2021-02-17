@@ -1,8 +1,15 @@
 package com.android3.siegertpclient.ui.tournament
 
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.TextView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
+
 
 class TournamentActivity : BaseActivity() {
 

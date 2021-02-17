@@ -4,8 +4,9 @@ import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.user.TeamList
 import com.android3.siegertpclient.data.user.TournamentList
 import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.data.user.usersource.IUserDataSource
 
-class UserRemoteDataSource (private val userService : UserService) {
+class UserRemoteDataSource (private val userService : UserService) : IUserDataSource {
 
 
     fun createNewUser (user: User) : User {
@@ -48,10 +49,6 @@ class UserRemoteDataSource (private val userService : UserService) {
 
     fun updateUserDetail (oldUsername: String, newUsername : String, forename : String, surname : String, ownUserId : String) {
         val response = userService.updateUserDetails(oldUsername,newUsername,forename,surname, ownUserId)
-    }
-
-    fun handleInvitationAcceptation (username: String,invitationId : String, ownUserId : String) {
-        val response = userService.handleInvitationAcceptation(username, invitationId, ownUserId)
     }
 
 }

@@ -1,7 +1,9 @@
 package com.android3.siegertpclient.data.team.teamsource
 
+import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
 import com.android3.siegertpclient.data.team.teamsource.teamRemote.TeamRemoteDataSource
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.RestClient
 
@@ -12,31 +14,39 @@ class TeamRepo : ITeamDataSource {
 
     var teamRemote = TeamRemoteDataSource(teamService)
 
-    fun createNewTeam(adminId : String, name : String, password : String, ownUserId: String) : Team {
-        return teamRemote.createNewTeam(adminId, name, password, ownUserId)
+    fun createNewTeam(adminId : String, name : String, password : String, token: String) : Team {
+        return teamRemote.createNewTeam(adminId, name, password, token)
     }
 
-    fun getTeamByName(teamName : String, ownUserId: String) : Team {
-        return teamRemote.getTeamByName(teamName, ownUserId)
+    fun getTeamByName(teamName : String, token: String) : Team {
+        return teamRemote.getTeamByName(teamName, token)
     }
 
-    fun getTeamById(teamId : String, ownUserId: String) : Team {
-        return teamRemote.getTeamById(teamId, ownUserId)
+    fun getTeamById(teamId : String, token: String) : Team {
+        return teamRemote.getTeamById(teamId, token)
     }
 
-    fun deleteTeam(teamName: String, ownUserId: String) {
-        teamRemote.deleteTeam(teamName, ownUserId)
+    fun getTeamTournaments(teamName: String,token: String) : Array<Tournament> {
+        return teamRemote.getTeamTournaments(teamName, token)
     }
 
-    fun getTeamMembers(teamName: String, ownUserId: String) : Array<User> {
-        return teamRemote.getTeamMembers(teamName, ownUserId)
+    fun getTeamInvitations(teamName: String, token: String) : Array<Invitation> {
+        return teamRemote.getTeamInvitations(teamName, token)
     }
 
-    fun kickTeamMember(teamName: String, memberId : String, ownUserId: String) {
-        teamRemote.kickTeamMember(teamName, memberId, ownUserId)
+    fun deleteTeam(teamName: String, token: String) {
+        teamRemote.deleteTeam(teamName, token)
     }
 
-    fun handleMembership(teamName: String, activity : String, password: String, ownUserId: String) {
-        teamRemote.handleMembership(teamName, activity, password, ownUserId)
+    fun getTeamMembers(teamName: String, token: String) : Array<User> {
+        return teamRemote.getTeamMembers(teamName, token)
+    }
+
+    fun kickTeamMember(teamName: String, memberId : String, token: String) {
+        teamRemote.kickTeamMember(teamName, memberId, token)
+    }
+
+    fun handleMembership(teamName: String, activity : String, password: String, token: String) {
+        teamRemote.handleMembership(teamName, activity, password, token)
     }
 }

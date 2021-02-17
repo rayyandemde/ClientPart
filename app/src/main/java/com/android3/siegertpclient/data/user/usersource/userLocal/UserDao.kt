@@ -30,6 +30,9 @@ interface UserDao {
     @Query("SELECT * FROM User where email = :Email")
     fun findUserById(Email: String?): User?
 
+    @Query("SELECT id FROM User")
+    fun getAllUser(): List<String>
+
     @Query("SELECT team_list FROM User WHERE id = :id")
     fun getAllTeams(id: Int): TeamList
 
