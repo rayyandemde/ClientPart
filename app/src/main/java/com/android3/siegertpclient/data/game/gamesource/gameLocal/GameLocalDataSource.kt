@@ -8,6 +8,6 @@ class GameLocalDataSource(val gameDao: GameDao) {
     }
 
     fun check(): Boolean {
-        return false
+        return true
     }
 }
