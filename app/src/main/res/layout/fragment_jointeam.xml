@@ -9,37 +9,37 @@
     tools:context=".ui.homepage.JoinTeamFragment">
 
     <EditText
-        android:id="@+id/dummyUserId"
+        android:id="@+id/dummyUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="dummyId"
+        android:hint="dummyUsername"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/dummyName"
+        android:id="@+id/dummySurname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:hint="name"
+        android:hint="dummySurname"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dummyUserId" />
+        app:layout_constraintTop_toBottomOf="@+id/dummyUsername" />
 
     <EditText
-        android:id="@+id/dummyPassword"
+        android:id="@+id/dummyForename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="password"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dummyName" />
+        app:layout_constraintTop_toBottomOf="@+id/dummySurname" />
 
     <EditText
-        android:id="@+id/dummyToken"
+        android:id="@+id/dummyId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="token"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dummyPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/dummyForename" />
 
     <Button
         android:id="@+id/dummyCreateButton"
@@ -47,14 +47,14 @@
         android:layout_height="wrap_content"
         android:text="Create Dummy User"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dummyAdminId"
+        app:layout_constraintStart_toEndOf="@+id/dummyUsername"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/giveMeTheTeam"
+        android:id="@+id/giveMeTheUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Give Me The Team"
+        android:text="Give Me The User"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dummyCreateButton" />
 
@@ -73,12 +73,12 @@
         app:layout_constraintVertical_bias="0.733" />
 
     <TextView
-        android:id="@+id/thisIsTheTestTeam"
+        android:id="@+id/thisIsTheTestUser"
         android:layout_width="271dp"
         android:layout_height="169dp"
         android:text="This is the Test Team"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/giveMeTheTeam" />
+        app:layout_constraintTop_toBottomOf="@+id/giveMeTheUser" />
 
     <TextView
         android:id="@+id/textView5"
