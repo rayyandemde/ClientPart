@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_tournament_info"
+        android:icon="@drawable/create_tournament_icon"
+        android:title="Info" />
+
+    <item
+        android:id="@+id/navigation_participants"
+        android:icon="@drawable/create_team_icon"
+        android:title="Participants" />
+
+    <item
+        android:id="@+id/navigation_schedule"
+        android:icon="@drawable/schedule_icon"
+        android:title="Schedule" />
+
+    <item
+        android:id="@+id/navigation_match_info"
+        android:icon="@drawable/match_info_icon"
+        android:title="Match Info" />
+
+    <item
+        android:id="@+id/navigation_changelogs"
+        android:icon="@drawable/changelogs_icon"
+        android:title="ChangeLogs" />
+
+
+
+</menu>

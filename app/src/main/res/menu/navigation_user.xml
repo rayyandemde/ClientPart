@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_my_tournament"
+        android:icon="@drawable/create_tournament_icon"
+        android:title="My Tournament" />
+
+    <item
+        android:id="@+id/navigation_my_team"
+        android:icon="@drawable/create_team_icon"
+        android:title="My Team" />
+
+</menu>

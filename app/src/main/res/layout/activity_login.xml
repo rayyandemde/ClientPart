@@ -54,12 +54,14 @@
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <TextView
-        android:id="@+id/letsgoRegister"
+        android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="please go to register"
+        android:layout_marginTop="28dp"
+        android:text="Forgot Password"
         android:textColor="#FF0000"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -76,7 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/letsgoRegister"
+        app:layout_constraintTop_toBottomOf="@+id/forgotPassword"
         app:layout_constraintVertical_bias="0.132" />
 
     <TextView
@@ -92,30 +94,29 @@
         app:layout_constraintVertical_bias="0.711" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Doesn't have an account yet?"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
-        app:layout_constraintVertical_bias="0.899" />
-
-    <TextView
         android:id="@+id/registerClickable"
         android:layout_width="96dp"
         android:layout_height="20dp"
         android:layout_marginStart="16dp"
-        android:textColor="#FF0000"
         android:text="Register"
+        android:textColor="#FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956" />
+        app:layout_constraintVertical_bias="0.892" />
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Doesn't have an account yet?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        app:layout_constraintVertical_bias="0.72" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

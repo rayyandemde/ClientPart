@@ -29,7 +29,7 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
 //            openRegisterActivity()
         }
 
-        val letsGoRegister: TextView = findViewById(R.id.letsgoRegister)
+        val letsGoRegister: TextView = findViewById(R.id.forgotPassword)
         letsGoRegister.setOnClickListener {
             openForgotPasswordActivity()
         }
