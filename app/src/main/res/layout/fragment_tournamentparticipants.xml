@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context=".ui.homepage.FeedFragment">
+    tools:context=".ui.tournament.TournamentParticipantsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/participants_recycler"

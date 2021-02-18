@@ -16,7 +16,4 @@ class TeamInvitationFragment : Fragment() {
         return inflater!!.inflate(R.layout.fragment_feed, container, false)
     }
 
-    fun showMember(users: List<User>) {
-        TODO("Not yet implemented")
-    }
 }
