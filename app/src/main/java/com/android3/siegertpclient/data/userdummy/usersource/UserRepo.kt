@@ -1,5 +1,6 @@
 package com.android3.siegertpclient.data.userdummy.usersource
 
+import com.android3.siegertpclient.data.Token.Token
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserService
 import com.android3.siegertpclient.data.userdummy.NotificationList
@@ -11,9 +12,11 @@ import com.android3.siegertpclient.data.userdummy.usersource.userLocal.UserLocal
 import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserRemoteDataSource
 import com.android3.siegertpclient.utils.OnlineChecker
 import com.android3.siegertpclient.utils.RestClient
+import com.android3.siegertpclient.utils.TokenUtil
+import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Retrofit
 
-class UserRepo() : IUserDataSource {
+class UserRepo() {
 
     private val restClient = RestClient()
 
@@ -24,49 +27,52 @@ class UserRepo() : IUserDataSource {
     }
 
     private val userService = getUserService()
-    private val oc = OnlineChecker()
+    private lateinit var auth : FirebaseAuth
 
     var userRemote = UserRemoteDataSource(userService)
     var userLocal = UserLocalDataSource()
 
-    fun createNewUser(username: String, firstName: String, surname: String, createdNewUserId : String) : User {
-        //creating new empty Lists for new User
-        val notificationList = NotificationList()
-        val teamList = TeamList()
-        val tournamentList = TournamentList()
-        val newUser = User(createdNewUserId, username, firstName, surname, notificationList, teamList, tournamentList)
-        //userLocal.saveUser(newUser)
-        return userRemote.createNewUser(username, surname, firstName, createdNewUserId)
+    fun register(email : String,
+                 password : String,
+                 username: String,
+                 firstName: String,
+                 surname: String) : User {
+        auth = FirebaseAuth.getInstance()
+        auth.createUserWithEmailAndPassword(email, password)
+        val user = userRemote.createNewUser(username, surname, firstName, auth.currentUser?.uid.toString())
+        userLocal.saveUser(user)
+        return user
     }
 
-    fun getUserById (userId : String, token : String) : User {
-
-        return userRemote.getUserById(userId, token)
+    fun login(email : String, password : String) : User {
+        auth = FirebaseAuth.getInstance()
+        auth.signInWithEmailAndPassword(email, password)
+        val user = userRemote.getUserById(auth.currentUser?.uid.toString())
+        userLocal.saveUser(user)
+        return user
     }
 
-    fun getUserByUsername (username : String, token : String) : User {
-        return userRemote.getUserByUsername(username, token)
+    fun getUserById (userId : String) : User {
+        return userRemote.getUserById(userId)
     }
 
-    fun getUsersTournaments (username: String, token : String) : TournamentList {
-        return userRemote.getUsersTournaments(username, token)
+    fun getUserByUsername (username : String) : User {
+        return userRemote.getUserByUsername(username)
     }
 
-    fun getUserTeams (username: String, token : String) : TeamList {
-        return userRemote.getUsersTeams(username, token)
+    fun getUsersTournaments (username: String) : TournamentList {
+        return userRemote.getUsersTournaments(username)
     }
 
-    fun getUsersInvitations (username: String, token : String) : Array<Invitation> {
-        return userRemote.getUsersInvitations(username, token)
+    fun getUserTeams (username: String) : TeamList {
+        return userRemote.getUsersTeams(username)
     }
 
-    fun updateUserDetail (oldUsername : String, newUsername : String, firstName: String, surname: String, token : String) {
-        userRemote.updateUserDetail(oldUsername, newUsername, firstName, surname, token)
+    fun getUsersInvitations (username: String) : Array<Invitation> {
+        return userRemote.getUsersInvitations(username)
     }
 
-    fun check(firstName: String,surname: String,password: String,eMail: String) : Boolean {
-        return userLocal.check(firstName,surname,password,eMail)
+    fun updateUserDetail (oldUsername : String, newUsername : String, firstName: String, surname: String) {
+        userRemote.updateUserDetail(oldUsername, newUsername, firstName, surname)
     }
-
-
 }
