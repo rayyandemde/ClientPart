@@ -6,7 +6,7 @@ import com.android3.siegertpclient.data.userdummy.TournamentList
 import com.android3.siegertpclient.data.userdummy.User
 import com.android3.siegertpclient.utils.TokenUtil
 
-class UserRemoteDataSource (private val userService : UserService) {
+class UserRemoteDataSourceDummy (private val userService : UserServiceDummy) {
 
     fun createNewUser (username: String, surname: String, firstName: String, userId : String) : User {
         val user = hashMapOf<String, String>()

@@ -1,12 +1,12 @@
 package com.android3.siegertpclient.ui.register
 
 import android.util.Patterns
-import com.android3.siegertpclient.data.userdummy.usersource.UserRepo
+import com.android3.siegertpclient.data.userdummy.usersource.UserRepoDummy
 import com.android3.siegertpclient.ui.base.BasePresenter
 
 class RegisterPresenter : BasePresenter<RegisterContract.IRegisterView>(), RegisterContract.IRegisterPresenter{
 
-    private var userRepo = UserRepo()
+    private var userRepo = UserRepoDummy()
 
     override fun onRegisterBtnClicked(
         email: String,

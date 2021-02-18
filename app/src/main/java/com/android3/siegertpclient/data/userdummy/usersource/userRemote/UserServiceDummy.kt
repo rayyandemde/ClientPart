@@ -10,7 +10,7 @@ import retrofit2.http.*
 import java.util.*
 
 
-interface UserService {
+interface UserServiceDummy {
 
     @POST("users")
     fun createNewUser(@Body user : Map<String, String>,
