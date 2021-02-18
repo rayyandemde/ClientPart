@@ -27,7 +27,7 @@ class UserRepo() : IUserDataSource {
         val newUser = User(createdNewUserId, username, firstName, surname, eMail, password,
             notificationList, teamList, tournamentList)
         userLocal.saveUser(newUser)
-        return userRemote.createNewUser(newUser)
+        return userRemote.createNewUser(username, surname, firstName, createdNewUserId)
     }
 
     fun getUserById (userId : String, token : String) : User {

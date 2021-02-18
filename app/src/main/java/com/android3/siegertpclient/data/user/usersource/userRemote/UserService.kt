@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface UserService {
 
     @POST("users")
-    fun createNewUser(user: User) : Response<User>
+    fun createNewUser(@Body username: String, surname: String, firstName: String, userId : String) : Response<User>
 
     @GET("users/{username}")
     fun getUserByUsername(@Path("username") username: String,

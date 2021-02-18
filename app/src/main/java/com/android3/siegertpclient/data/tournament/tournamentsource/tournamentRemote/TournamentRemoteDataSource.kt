@@ -6,8 +6,6 @@ import com.android3.siegertpclient.data.tournament.tournamentsource.ITournamentD
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.ParticipantFormUtil
 import com.android3.siegertpclient.utils.TournamentTypesUtil
-import retrofit2.Response
-import retrofit2.http.*
 import java.util.*
 
 class TournamentRemoteDataSource (private val tournamentService: TournamentService) : ITournamentDataSource {
