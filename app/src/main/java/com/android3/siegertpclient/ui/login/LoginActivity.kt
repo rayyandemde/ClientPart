@@ -30,7 +30,8 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
 
         val loginBtn: Button = findViewById(R.id.loginBtn)
         loginBtn.setOnClickListener{
-            loginPresenter.onLoginBtnClicked(emailTxt.text.toString(), passwordTxt.text.toString())
+            //loginPresenter.onLoginBtnClicked(emailTxt.text.toString(), passwordTxt.text.toString())
+            loginPresenter.onLoginBtnClickedDummy()
         }
 
         val forgotPasswordTv: TextView = findViewById(R.id.forgotPassword)
