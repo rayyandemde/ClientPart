@@ -5,12 +5,14 @@ interface ForgotPasswordContract {
     interface IForgotPasswordView : BaseView {
 
         fun showErrorOnEmail(message: String)
+
+        fun showSuccess(message: String)
     }
 
     interface IForgotPasswordPresenter {
 
         fun onBackBtnClicked()
 
-        fun onSendBtnClicked()
+        fun onSendBtnClicked(email : String)
     }
 }

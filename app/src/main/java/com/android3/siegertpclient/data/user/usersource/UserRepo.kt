@@ -5,7 +5,6 @@ import com.android3.siegertpclient.data.user.NotificationList
 import com.android3.siegertpclient.data.user.TeamList
 import com.android3.siegertpclient.data.user.TournamentList
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.data.user.usersource.userLocal.UserDao
 import com.android3.siegertpclient.data.user.usersource.userLocal.UserLocalDataSource
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import com.android3.siegertpclient.utils.RestClient
@@ -26,8 +25,12 @@ class UserRepo() : IUserDataSource {
         val tournamentList = TournamentList()
         val newUser = User(createdNewUserId, username, firstName, surname, eMail, password,
             notificationList, teamList, tournamentList)
-        userLocal.saveUser(newUser)
+        saveUserLocally(newUser)
         return userRemote.createNewUser(username, surname, firstName, createdNewUserId)
+    }
+
+    fun saveUserLocally(user : User) {
+        userLocal.saveUser(user)
     }
 
     fun getUserById (userId : String, token : String) : User {
@@ -57,6 +60,5 @@ class UserRepo() : IUserDataSource {
     fun check(firstName: String,surname: String,password: String,eMail: String) : Boolean {
         return userLocal.check(firstName,surname,password,eMail)
     }
-
 
 }
