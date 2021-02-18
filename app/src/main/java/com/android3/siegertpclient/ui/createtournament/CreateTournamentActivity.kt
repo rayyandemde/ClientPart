@@ -1,15 +1,16 @@
 package com.android3.siegertpclient.ui.createtournament
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordPresenter
+import com.android3.siegertpclient.ui.homepage.HomepageActivity
+import com.android3.siegertpclient.ui.login.LoginActivity
+import com.android3.siegertpclient.ui.register.RegisterActivity
 
-class CreateTournamentActivity : BaseActivity() {
+class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreateTournamentView{
 
     private val createTournamentPresenter: CreateTournamentPresenter = CreateTournamentPresenter()
 
@@ -61,13 +62,48 @@ class CreateTournamentActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        CreateTournamentPresenter.onAttach(this)
+        createTournamentPresenter.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        CreateTournamentPresenter.onDetach()
+        createTournamentPresenter.onDetach()
     }
+
+    override fun navigateToHomepageActivity() {
+        val fpIntent2 = Intent(this, HomepageActivity::class.java)
+        startActivity(fpIntent2)
+    }
+
+    override fun navigateToLoginActivity() {
+        val fpIntent2 = Intent(this, LoginActivity::class.java)
+        startActivity(fpIntent2)
+    }
+
+    override fun showErrorOnTournamentName(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showErrorOnLocation(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showErrorOnTime(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showErrorOnMaxPlayers(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showErrorOnRegistrationTime(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showErrorOnPrize(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    }
+
     override fun showProgress() {
         TODO("Not yet implemented")
     }
@@ -77,10 +113,10 @@ class CreateTournamentActivity : BaseActivity() {
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
     }
 
     override fun showError(errorId: Int) {
-        TODO("Not yet implemented")
+        Toast.makeText(applicationContext, errorId, Toast.LENGTH_LONG).show()
     }
 }

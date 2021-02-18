@@ -12,7 +12,7 @@ import com.android3.siegertpclient.ui.login.LoginPresenter
 import com.android3.siegertpclient.ui.register.RegisterActivity
 
 
-class TournamentActivity : BaseActivity() {
+class TournamentActivity : BaseActivity(),TournamentContract.ITournamentView{
 
     private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
 
@@ -22,43 +22,16 @@ class TournamentActivity : BaseActivity() {
     }
     override fun onResume() {
         super.onResume()
-        TournamentPresenter.onAttach(this)
+        tournamentPresenter.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        TournamentPresenter.onDetach()
+        tournamentPresenter.onDetach()
     }
 
 
 
-        val loginBtn: Button = findViewById(R.id.loginBtn)
-        loginBtn.setOnClickListener{
-            openHomepageActivity()
-        }
-
-        val registerTv: TextView = findViewById(R.id.registerClickable)
-        registerTv.setOnClickListener {
-            loginPresenter.onRegisterTextClicked()
-//            openRegisterActivity()
-        }
-
-        val letsGoRegister: TextView = findViewById(R.id.forgotPassword)
-        letsGoRegister.setOnClickListener {
-            openForgotPasswordActivity()
-        }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        loginPresenter.onAttach(this)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        loginPresenter.onDetach()
-    }
 
     private fun openRegisterActivity() {
         val rIntent = Intent(this, RegisterActivity::class.java)
@@ -69,6 +42,31 @@ class TournamentActivity : BaseActivity() {
         val fpIntent = Intent(this, ForgotPasswordActivity::class.java)
         startActivity(fpIntent)
     }
+
+    override fun showTournamentDetailsFragment() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showTournamentParticipantsFragment() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showTournamentScheduleFragment() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showResultFragment() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showTournamentUpdatesFragment() {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToHomepageActivity() {
+        TODO("Not yet implemented")
+    }
+
     override fun showProgress() {
         TODO("Not yet implemented")
     }

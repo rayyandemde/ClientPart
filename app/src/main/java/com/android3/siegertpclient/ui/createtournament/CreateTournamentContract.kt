@@ -6,7 +6,7 @@ interface CreateTournamentContract {
 
         fun navigateToHomepageActivity()
 
-        fun navigateToTournamentActivity()
+        fun navigateToLoginActivity()
 
         fun showErrorOnTournamentName(message: String)
 
@@ -26,6 +26,6 @@ interface CreateTournamentContract {
         fun onBackBtnClicked()
 
         fun onCreateBtnClicked()
-        abstract fun onSendBtnClicked(toString: String)
+
     }
 }

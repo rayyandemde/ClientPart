@@ -21,4 +21,14 @@ class UserLocalDataSource {
         userDao!!.insertUsers(newUser)
     }
 
+    fun getUser(){
+        userDao!!.allUsers
+    }
+    fun deleteUser(){
+        userDao!!.deleteAllUsers()
+    }
+    fun updateUser(user:User){
+        userDao!!.updateUsers(user)
+    }
+
 }
