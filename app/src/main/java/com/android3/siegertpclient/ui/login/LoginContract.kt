@@ -13,7 +13,7 @@ interface LoginContract {
 
     interface ILoginPresenter {
 
-        fun onLoginBtnClicked(username: String, password: String)
+        fun onLoginBtnClicked(email: String, password: String)
 
         fun onForgotPasswordTextClicked()
 
