@@ -24,7 +24,7 @@ class LoginPresenter : BasePresenter<LoginContract.ILoginView>(), LoginContract.
     }
 
     override fun onForgotPasswordTextClicked() {
-        TODO("Not yet implemented")
+        view?.navigateToForgotPasswordActivity()
     }
 
     override fun onRegisterTextClicked() {
