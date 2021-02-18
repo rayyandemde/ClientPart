@@ -122,28 +122,28 @@
         app:layout_constraintTop_toBottomOf="@+id/retypePassword" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="Already have an account yet?"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpBtn"
-        app:layout_constraintVertical_bias="0.899" />
-
-    <TextView
         android:id="@+id/loginClickable"
         android:layout_width="49dp"
         android:layout_height="17dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:textColor="#FF0000"
+        android:layout_marginBottom="44dp"
         android:text="Login"
+        android:textColor="#FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Already have an account yet?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpBtn"
+        app:layout_constraintVertical_bias="0.64" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
