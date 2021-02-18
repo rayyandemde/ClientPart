@@ -9,7 +9,7 @@
     tools:context=".ui.userprofile.MyTeamsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_tournament_recycler"
+        android:id="@+id/my_teams_recycler"
         android:layout_width="match_parent"
         android:layout_height="597dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />

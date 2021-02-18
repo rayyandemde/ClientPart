@@ -11,26 +11,26 @@ import retrofit2.http.*
 interface UserService {
 
     @POST("users")
-    fun createNewUser(@Body username: String, surname: String, firstName: String, userId : String) : Response<User>
+    suspend fun createNewUser(@Body username: String, surname: String, firstName: String, userId : String) : Response<User>
 
     @GET("users/{username}")
-    fun getUserByUsername(@Path("username") username: String,
+    suspend fun getUserByUsername(@Path("username") username: String,
                           @Header("currentUserId") ownUserId: String) : Response<User>
 
     @GET("users")
-    fun getUserById (@Query("id") id : String,
+    suspend fun getUserById (@Query("id") id : String,
                      @Header("currentUserId") ownUserId: String) : Response<User>
 
     @GET("users/{username}/tournaments")
-    fun getUsersTournaments (@Path("username") username: String,
+    suspend fun getUsersTournaments (@Path("username") username: String,
                              @Header("currentUserId") ownUserId: String) : Response<TournamentList>
 
     @GET("users/{username}/teams")
-    fun getUserTeams(@Path("username") username: String,
+    suspend fun getUserTeams(@Path("username") username: String,
                      @Header("currentUserId") ownUserId: String) : Response<TeamList>
 
     @GET("users/{username}/invitations")
-    fun getUserInvitations(@Path("username") username: String,
+    suspend fun getUserInvitations(@Path("username") username: String,
                            @Header("currentUserId") ownUserId: String) : Response<Array<Invitation>>
 
     @PUT("users/{username}")

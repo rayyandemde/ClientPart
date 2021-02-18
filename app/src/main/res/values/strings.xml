@@ -11,4 +11,14 @@
     <string name="login_failed">"Login failed"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="Tournamenttypes_array">
+        <item>Open</item>
+        <item>Private</item>
+    </string-array>
+
+    <string-array name="Participanttypes_array">
+        <item>Single</item>
+        <item>Team</item>
+    </string-array>
 </resources>

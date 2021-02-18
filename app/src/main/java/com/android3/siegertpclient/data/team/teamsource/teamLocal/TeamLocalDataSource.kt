@@ -1,5 +1,6 @@
 package com.android3.siegertpclient.data.team.teamsource.teamLocal
 
+import com.android3.siegertpclient.data.tournament.Tournament
 import java.util.regex.Pattern
 
 class TeamLocalDataSource(val teamDao: TeamDao) {
@@ -10,7 +11,16 @@ class TeamLocalDataSource(val teamDao: TeamDao) {
         } else false
     }
 
-    fun saveUser(newteam: Team) {
+    fun saveTeam(newteam: Team) {
         teamDao.insertTeam(newteam)
+    }
+    fun getUser(){
+        teamDao!!.allTeams
+    }
+    fun deleteUser(){
+        teamDao!!.deleteAllTeam()
+    }
+    fun updateUser(team :Team){
+        teamDao!!.updateTeam(team)
     }
 }
