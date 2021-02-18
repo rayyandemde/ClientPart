@@ -1,35 +1,30 @@
 package com.android3.siegertpclient.data.userdummy.usersource
 
-import com.android3.siegertpclient.data.Token.Token
 import com.android3.siegertpclient.data.invitation.Invitation
-import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserService
-import com.android3.siegertpclient.data.userdummy.NotificationList
+import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserServiceDummy
 import com.android3.siegertpclient.data.userdummy.TeamList
 import com.android3.siegertpclient.data.userdummy.TournamentList
 import com.android3.siegertpclient.data.userdummy.User
-import com.android3.siegertpclient.data.userdummy.usersource.userLocal.UserDao
 import com.android3.siegertpclient.data.userdummy.usersource.userLocal.UserLocalDataSource
-import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserRemoteDataSource
-import com.android3.siegertpclient.utils.OnlineChecker
+import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserRemoteDataSourceDummy
 import com.android3.siegertpclient.utils.RestClient
-import com.android3.siegertpclient.utils.TokenUtil
 import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Retrofit
 
-class UserRepo() {
+class UserRepoDummy() {
 
     private val restClient = RestClient()
 
     private val retrofit = Retrofit.Builder().baseUrl("https://our.server.com/").build()
 
-    fun getUserService(): UserService {
-        return retrofit.create(UserService::class.java)
+    fun getUserService(): UserServiceDummy {
+        return retrofit.create(UserServiceDummy::class.java)
     }
 
     private val userService = getUserService()
     private lateinit var auth : FirebaseAuth
 
-    var userRemote = UserRemoteDataSource(userService)
+    var userRemote = UserRemoteDataSourceDummy(userService)
     var userLocal = UserLocalDataSource()
 
     fun register(email : String,

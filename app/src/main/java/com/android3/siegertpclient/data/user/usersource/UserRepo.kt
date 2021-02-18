@@ -8,58 +8,60 @@ import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.data.user.usersource.userLocal.UserLocalDataSource
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import com.android3.siegertpclient.utils.RestClient
+import com.google.firebase.auth.FirebaseAuth
 import kotlin.coroutines.Continuation
 
 class UserRepo() : IUserDataSource {
 
     private val restClient = RestClient()
     private val userService = restClient.getUserService()
+    private lateinit var auth : FirebaseAuth
 
     var userRemote = UserRemoteDataSource(userService)
     var userLocal = UserLocalDataSource()
 
-    suspend fun createNewUser(username: String, eMail: String, firstName: String, surname: String,
-                              password: String, createdNewUserId : String) : User {
-        //creating new empty Lists for new User
-        val notificationList = NotificationList()
-        val teamList = TeamList()
-        val tournamentList = TournamentList()
-        val newUser = User(createdNewUserId, username, firstName, surname, eMail, password,
-            notificationList, teamList, tournamentList)
-        saveUserLocally(newUser)
-        return userRemote.createNewUser(username, surname, firstName, createdNewUserId)
-    }
-
-    fun saveUserLocally(user : User) {
+    fun register(email : String,
+                 password : String,
+                 username: String,
+                 firstName: String,
+                 surname: String) : User {
+        auth = FirebaseAuth.getInstance()
+        auth.createUserWithEmailAndPassword(email, password)
+        val user = userRemote.createNewUser(username, surname, firstName, auth.currentUser?.uid.toString())
         userLocal.saveUser(user)
+        return user
     }
 
-    suspend fun getUserById (userId : String, token : String) : User {
-        return userRemote.getUserById(userId, token)
+    fun login(email : String, password : String) : User {
+        auth = FirebaseAuth.getInstance()
+        auth.signInWithEmailAndPassword(email, password)
+        val user = userRemote.getUserById(auth.currentUser?.uid.toString())
+        userLocal.saveUser(user)
+        return user
     }
 
-    suspend fun getUserByUsername (username : String, token : String) : User {
-        return userRemote.getUserByUsername(username, token)
+    fun getUserById (userId : String) : User {
+        return userRemote.getUserById(userId)
     }
 
-    suspend fun getUsersTournaments (username: String, token : String) : TournamentList {
-        return userRemote.getUsersTournaments(username, token)
+    fun getUserByUsername (username : String) : User {
+        return userRemote.getUserByUsername(username)
     }
 
-    suspend fun getUserTeams (username: String, token : String) : TeamList {
-        return userRemote.getUsersTeams(username, token)
+    fun getUsersTournaments (username: String) : TournamentList {
+        return userRemote.getUsersTournaments(username)
     }
 
-    suspend fun getUsersInvitations (username: String, token : String) : Array<Invitation> {
-        return userRemote.getUsersInvitations(username, token)
+    fun getUserTeams (username: String) : TeamList {
+        return userRemote.getUsersTeams(username)
     }
 
-    fun updateUserDetail (oldUsername : String, newUsername : String, firstName: String, surname: String, token : String) {
-        userRemote.updateUserDetail(oldUsername, newUsername, firstName, surname, token)
+    fun getUsersInvitations (username: String) : Array<Invitation> {
+        return userRemote.getUsersInvitations(username)
     }
 
-    fun check(firstName: String,surname: String,password: String,eMail: String) : Boolean {
-        return userLocal.check(firstName,surname,password,eMail)
+    fun updateUserDetail (oldUsername : String, newUsername : String, firstName: String, surname: String) : User {
+        return userRemote.updateUserDetail(oldUsername, newUsername, firstName, surname)
     }
 
 }
