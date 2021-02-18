@@ -25,15 +25,15 @@ interface UserService {
 
     @GET("users/{username}/tournaments")
     fun getUsersTournaments (@Path("username") username: String,
-                             @Header("Authorization") token : String) : Response<TournamentList>
+                             @Header("Authorization") token : String) : Call<TournamentList>
 
     @GET("users/{username}/teams")
     fun getUserTeams(@Path("username") username: String,
-                     @Header("Authorization") token : String) : Response<TeamList>
+                     @Header("Authorization") token : String) : Call<TeamList>
 
     @GET("users/{username}/invitations")
     fun getUserInvitations(@Path("username") username: String,
-                           @Header("Authorization") token : String) : Response<Array<Invitation>>
+                           @Header("Authorization") token : String) : Call<Array<Invitation>>
 
     @PUT("users/{username}")
     fun updateUserDetails(@Path("username") oldUsername: String,

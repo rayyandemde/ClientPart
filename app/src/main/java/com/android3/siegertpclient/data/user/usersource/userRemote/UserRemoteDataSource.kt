@@ -52,17 +52,32 @@ class UserRemoteDataSource (private val userService : UserService) {
     }
 
     fun getUsersTournaments (username: String) : TournamentList {
-        val response = userService.getUsersTournaments(username, TokenUtil.getBearerToken())
+        val userCall = userService.getUsersTournaments(username, TokenUtil.getBearerToken())
+        val response = userCall.execute()
+        if (!response.isSuccessful) {
+
+            //TOdo implement error code
+        }
         return response.body()
     }
 
     fun getUsersTeams (username: String) : TeamList {
-        val response = userService.getUserTeams(username, TokenUtil.getBearerToken())
+        val userCall = userService.getUserTeams(username, TokenUtil.getBearerToken())
+        val response = userCall.execute()
+        if (!response.isSuccessful) {
+
+            //TOdo implement error code
+        }
         return response.body()
     }
 
     fun getUsersInvitations (username: String) : Array<Invitation> {
-        val response = userService.getUserInvitations(username, TokenUtil.getBearerToken())
+        val userCall = userService.getUserInvitations(username, TokenUtil.getBearerToken())
+        val response = userCall.execute()
+        if (!response.isSuccessful) {
+
+            //TOdo implement error code
+        }
         return response.body()
     }
 
