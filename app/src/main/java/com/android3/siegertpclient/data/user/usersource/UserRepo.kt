@@ -10,50 +10,48 @@ import com.android3.siegertpclient.data.user.usersource.userLocal.UserLocalDataS
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import com.android3.siegertpclient.utils.RestClient
 
-class UserRepo(override val userDao: UserDao?) : IUserDataSource {
+class UserRepo() : IUserDataSource {
 
     private val restClient = RestClient()
     private val userService = restClient.getUserService()
 
     var userRemote = UserRemoteDataSource(userService)
-    var userLocal = UserLocalDataSource(userDao)
+    var userLocal = UserLocalDataSource()
 
-    private val ownUserId = "1"//TODO change for a method of UerLocalDataSource
-
-    fun createNewUser(username: String, eMail: String, firstName: String, surname: String, password: String) : User {
+    fun createNewUser(username: String, eMail: String, firstName: String, surname: String,
+                      password: String, createdNewUserId : String) : User {
+        //creating new empty Lists for new User
         val notificationList = NotificationList()
         val teamList = TeamList()
         val tournamentList = TournamentList()
-        val userId = userLocal.id
-        //Todo implement getting new notification team and tournament list and correct id
-        val newUser = User(userId, username, firstName, surname, eMail, password, notificationList, teamList, tournamentList)
+        val newUser = User(createdNewUserId, username, firstName, surname, eMail, password,
+            notificationList, teamList, tournamentList)
         userLocal.saveUser(newUser)
-        return userRemote.createNewUser(newUser)
+        return userRemote.createNewUser(username, surname, firstName, createdNewUserId)
     }
 
-    fun getUserById (userId : String) : User {
-        return userRemote.getUserById(userId, ownUserId)
+    fun getUserById (userId : String, token : String) : User {
+        return userRemote.getUserById(userId, token)
     }
 
-    fun getUserByUsername (username : String) : User {
-        return userRemote.getUserByUsername(username, ownUserId)
+    fun getUserByUsername (username : String, token : String) : User {
+        return userRemote.getUserByUsername(username, token)
     }
 
-    fun getUsersTournaments (username: String) : TournamentList {
-        //ownUserId = userLocal.getOwnUserId()
-        return userRemote.getUsersTournaments(username, ownUserId)
+    fun getUsersTournaments (username: String, token : String) : TournamentList {
+        return userRemote.getUsersTournaments(username, token)
     }
 
-    fun getUserTeams (username: String) : TeamList {
-        return userRemote.getUsersTeams(username, ownUserId)
+    fun getUserTeams (username: String, token : String) : TeamList {
+        return userRemote.getUsersTeams(username, token)
     }
 
-    fun getUsersInvitations (username: String) : Array<Invitation> {
-        return userRemote.getUsersInvitations(username, ownUserId)
+    fun getUsersInvitations (username: String, token : String) : Array<Invitation> {
+        return userRemote.getUsersInvitations(username, token)
     }
 
-    fun updateUserDetail (oldUsername : String, newUsername : String, firstName: String, surname: String) {
-        userRemote.updateUserDetail(oldUsername, newUsername, firstName, surname, ownUserId)
+    fun updateUserDetail (oldUsername : String, newUsername : String, firstName: String, surname: String, token : String) {
+        userRemote.updateUserDetail(oldUsername, newUsername, firstName, surname, token)
     }
 
     fun check(firstName: String,surname: String,password: String,eMail: String) : Boolean {

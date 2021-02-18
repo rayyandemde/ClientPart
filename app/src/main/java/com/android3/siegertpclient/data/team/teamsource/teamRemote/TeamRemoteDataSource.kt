@@ -1,13 +1,14 @@
 package com.android3.siegertpclient.data.team.teamsource.teamRemote
 
 import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.team.teamsource.ITeamDataSource
 import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import retrofit2.Response
 import retrofit2.http.*
 
-class TeamRemoteDataSource (private val teamService: TeamService) {
+class TeamRemoteDataSource (private val teamService: TeamService) : ITeamDataSource {
 
     fun createNewTeam(adminId : String, name : String, password : String, ownUserId: String) : Team {
         val response = teamService.createNewTeam(adminId, name, password, ownUserId)

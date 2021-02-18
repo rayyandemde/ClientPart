@@ -9,6 +9,7 @@ data class Game(
     @PrimaryKey
     var gameId: String,
     @ColumnInfo(name = "time") var time: String,
+    @ColumnInfo(name = "result") var result: String,
     @ColumnInfo(name = "typeOfGame") var typeOfGame: String,
     @ColumnInfo(name = "firstParticipantId") var firstParticipantId: String,
     @ColumnInfo(name = "secondParticipantId") var secondParticipantId: String,

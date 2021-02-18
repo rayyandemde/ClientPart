@@ -17,33 +17,48 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val registerTv: TextView = findViewById(R.id.loginClickable) as TextView
-        registerTv.setOnClickListener {
-            openRegisterActivity()
-        }
-        val loginBtn: Button = findViewById(R.id.signUpBtn) as Button
+
+        val loginBtn: Button = findViewById(R.id.loginBtn)
         loginBtn.setOnClickListener{
             openHomepageActivity()
         }
-        val fogotPasswordTv: TextView = findViewById(R.id.forgotPassword) as TextView
+
+        val registerTv: TextView = findViewById(R.id.registerClickable)
         registerTv.setOnClickListener {
+            loginPresenter.onRegisterTextClicked()
+//            openRegisterActivity()
+        }
+
+        val letsGoRegister: TextView = findViewById(R.id.letsgoRegister)
+        letsGoRegister.setOnClickListener {
             openForgotPasswordActivity()
         }
+
     }
 
-    private fun openForgotPasswordActivity() {
-        val intent = Intent(this, ForgotPasswordActivity::class.java)
-        startActivity(intent)
+    override fun onResume() {
+        super.onResume()
+        loginPresenter.onAttach(this)
     }
 
-    private fun openHomepageActivity() {
-        val intent = Intent(this, HomepageActivity::class.java)
-        startActivity(intent)
+    override fun onDestroy() {
+        super.onDestroy()
+        loginPresenter.onDetach()
     }
 
     private fun openRegisterActivity() {
-        val intent = Intent(this, RegisterActivity::class.java)
-        startActivity(intent)
+        val rIntent = Intent(this, RegisterActivity::class.java)
+        startActivity(rIntent)
+    }
+
+    private fun openForgotPasswordActivity() {
+        val fpIntent = Intent(this, ForgotPasswordActivity::class.java)
+        startActivity(fpIntent)
+    }
+
+    private fun openHomepageActivity() {
+        val hIntent = Intent(this, HomepageActivity::class.java)
+        startActivity(hIntent)
     }
 
     override fun navigateToHomepageActivity() {
@@ -55,7 +70,8 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
     }
 
     override fun navigateToRegisterActivity() {
-        TODO("Not yet implemented")
+        val fpIntent2 = Intent(this, RegisterActivity::class.java)
+        startActivity(fpIntent2)
     }
 
     override fun showProgress() {

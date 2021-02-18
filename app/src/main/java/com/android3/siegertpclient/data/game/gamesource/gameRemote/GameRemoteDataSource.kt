@@ -9,8 +9,9 @@ class GameRemoteDataSource (private val gameService: GameService) {
         return response.body()
     }
 
-    fun updateGameById(tournamentName : String, gameId : String, game : Game, ownUserId : String) : Game {
-        val response = gameService.updateGameById(tournamentName, gameId, game, ownUserId)
+    fun updateGameById(tournamentName : String, gameId : String, firstWins : Boolean,
+                       secondWins : Boolean, draws : Boolean, ownUserId : String) : Game {
+        val response = gameService.updateGameById(tournamentName, gameId, firstWins, secondWins, draws, ownUserId)
         return response.body()
     }
 
