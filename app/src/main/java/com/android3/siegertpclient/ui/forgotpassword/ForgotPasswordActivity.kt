@@ -6,7 +6,7 @@ import android.widget.TextView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
 
-class ForgotPasswordActivity : BaseActivity() {
+class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPasswordView {
 
     private val forgotPasswordPresenter: ForgotPasswordPresenter = ForgotPasswordPresenter()
 
@@ -14,6 +14,14 @@ class ForgotPasswordActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgotpassword)
 
+    }
+
+    override fun showErrorOnEmail(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showSuccess(message: String) {
+        TODO("Not yet implemented")
     }
 
     override fun showProgress() {
