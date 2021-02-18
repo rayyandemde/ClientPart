@@ -17,6 +17,10 @@ class UserRemoteDataSource (private val userService : UserService) {
         user["userId"] = userId
         val userCall = userService.createNewUser(user, TokenUtil.getBearerToken())
         val response = userCall.execute()
+        if (!response.isSuccessful) {
+
+            //TOdo implement error code
+        }
         val uResp =  response.body()
         return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
             uResp.teamList, uResp.tournamentList)
@@ -24,21 +28,27 @@ class UserRemoteDataSource (private val userService : UserService) {
     }
 
     fun getUserById (userId : String) : User {
-        val response = userService.getUserById(userId, TokenUtil.getBearerToken())
-        if (response.isSuccessful) {
-            //val user = response.body()
+        val userCall = userService.getUserById(userId, TokenUtil.getBearerToken())
+        val response = userCall.execute()
+        if (!response.isSuccessful) {
+
             //TOdo implement error code
         }
-        return response.body()
+        val uResp =  response.body()
+        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
+            uResp.teamList, uResp.tournamentList)
     }
 
     fun getUserByUsername (username : String) : User {
-        val response = userService.getUserByUsername(username, TokenUtil.getBearerToken())
-        if (response.isSuccessful) {
-            //val user = response.body()
+        val userCall = userService.getUserByUsername(username, TokenUtil.getBearerToken())
+        val response = userCall.execute()
+        if (!response.isSuccessful) {
+
             //TOdo implement error code
         }
-        return response.body()
+        val uResp =  response.body()
+        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
+            uResp.teamList, uResp.tournamentList)
     }
 
     fun getUsersTournaments (username: String) : TournamentList {

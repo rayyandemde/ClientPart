@@ -17,11 +17,11 @@ interface UserService {
 
     @GET("users/{username}")
     fun getUserByUsername(@Path("username") username: String,
-                          @Header("Authorization") token : String) : Response<User>
+                          @Header("Authorization") token : String) : Call<UserResponse>
 
     @GET("users")
     fun getUserById (@Query("id") id : String,
-                     @Header("Authorization") token : String) : Response<User>
+                     @Header("Authorization") token : String) : Call<UserResponse>
 
     @GET("users/{username}/tournaments")
     fun getUsersTournaments (@Path("username") username: String,

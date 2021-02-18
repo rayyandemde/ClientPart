@@ -9,7 +9,7 @@ class TokenUtil {
             val auth = FirebaseAuth.getInstance()
             val user = auth.currentUser
             user?.getIdToken(true)?.addOnSuccessListener { it ->
-                token = it.token.toString()
+                token += it.token.toString()
             }
             return token
         }
