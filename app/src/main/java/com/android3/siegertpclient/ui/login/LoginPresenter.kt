@@ -21,6 +21,7 @@ class LoginPresenter : BasePresenter<LoginContract.ILoginView>(), LoginContract.
                     view?.showError("Login failed, check your email and password")
                 }
             }
+        view
     }
 
     override fun onForgotPasswordTextClicked() {
