@@ -11,10 +11,15 @@ interface HomepageContract {
 
         fun navigateToCreateTournamentActivity()
 
+        fun navigateToCreateTeamActivity()
+
+        //Will not be Implemented
         fun showFeedFragment()
 
+        //Will not be implemenetd
         fun showJoinTeamFragment()
 
+        //Open tournament feature will not be implemented
         fun showSearchResult(tournaments: List<Tournament>)
     }
 
@@ -22,12 +27,14 @@ interface HomepageContract {
 
         fun onMailBtnClicked()
 
+        //Will not be implemented
         fun onHomeBtnClicked()
 
         fun onCreateTournamentBtnClicked()
 
         fun onCreateTeamBtnClicked()
 
+        //Will not be implemented
         fun onJoinTeamBtnClicked()
 
         fun onUserBtnClicked()

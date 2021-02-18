@@ -34,12 +34,21 @@
         app:layout_constraintTop_toBottomOf="@+id/dummySurname" />
 
     <EditText
-        android:id="@+id/dummyId"
+        android:id="@+id/dummyPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="dummyId"
+        android:hint="dummyPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dummyForename" />
+
+
+    <EditText
+        android:id="@+id/dummyEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="dummyEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dummyPass" />
 
     <Button
         android:id="@+id/dummyCreateButton"

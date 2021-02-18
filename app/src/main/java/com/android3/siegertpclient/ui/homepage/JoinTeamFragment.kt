@@ -16,9 +16,10 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
     private val homepagePresenter: HomepagePresenter = HomepagePresenter()
 
     var dummyUsername: EditText? = null
+    var dummyEmail: EditText? = null
     var dummySurname: EditText? = null
     var dummyForename: EditText? = null
-    var dummyUserId: EditText? = null
+    var dummyPassword: EditText? = null
     var dummyCreateBtn: Button? = null
     var dummyGetBtn: Button? = null
     var dummyInfoTv: TextView? = null
@@ -27,19 +28,21 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
 
         var view = inflater!!.inflate(R.layout.fragment_jointeam, container, false)
 
+        dummyEmail = view.findViewById<EditText>(R.id.dummyEmail)
         dummyUsername = view.findViewById<EditText>(R.id.dummyUsername)
         dummySurname = view.findViewById<EditText>(R.id.dummySurname)
         dummyForename = view.findViewById<EditText>(R.id.dummyForename)
-        dummyUserId = view.findViewById<EditText>(R.id.dummyId)
+        dummyPassword = view.findViewById<EditText>(R.id.dummyPass)
         dummyCreateBtn = view.findViewById<Button>(R.id.dummyCreateButton)
         dummyGetBtn = view.findViewById<Button>(R.id.giveMeTheUser)
         dummyInfoTv = view.findViewById<TextView>(R.id.thisIsTheTestUser)
 
         dummyCreateBtn?.setOnClickListener{
-            homepagePresenter.createDummyAccount(dummyUsername?.getText().toString(),
-                dummySurname?.getText().toString(),
+            homepagePresenter.createDummyAccount(dummyEmail?.getText().toString(),
+                dummyPassword?.getText().toString(),
+                dummyUsername?.getText().toString(),
                 dummyForename?.getText().toString(),
-                dummyUserId?.getText().toString())
+                dummySurname?.getText().toString())
         }
 
         return view
@@ -68,6 +71,10 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
     }
 
     override fun navigateToCreateTournamentActivity() {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToCreateTeamActivity() {
         TODO("Not yet implemented")
     }
 
