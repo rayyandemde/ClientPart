@@ -8,6 +8,7 @@ class CreateTournamentPresenter : BasePresenter<CreateTournamentContract.ICreate
     }
 
     override fun onCreateBtnClicked() {
-        TODO("Not yet implemented")
+
+
     }
 }

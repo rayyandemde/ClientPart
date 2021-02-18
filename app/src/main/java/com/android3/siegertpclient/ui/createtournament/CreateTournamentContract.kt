@@ -26,5 +26,6 @@ interface CreateTournamentContract {
         fun onBackBtnClicked()
 
         fun onCreateBtnClicked()
+        abstract fun onSendBtnClicked(toString: String)
     }
 }
