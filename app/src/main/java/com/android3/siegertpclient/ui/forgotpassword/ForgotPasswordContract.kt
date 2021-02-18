@@ -7,6 +7,8 @@ interface ForgotPasswordContract {
         fun showErrorOnEmail(message: String)
 
         fun showSuccess(message: String)
+
+        fun navigateToHomepageActivity()
     }
 
     interface IForgotPasswordPresenter {
