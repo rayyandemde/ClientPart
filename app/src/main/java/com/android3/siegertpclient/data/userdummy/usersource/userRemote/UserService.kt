@@ -7,36 +7,38 @@ import com.android3.siegertpclient.data.userdummy.User
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
+import java.util.*
 
 
 interface UserService {
 
     @POST("users")
-    fun createNewUser(@Body username: String, surname: String, firstName: String, userId : String) : Response<User>
+    fun createNewUser(@Body user : Map<String, String>,
+                        @Header("Authorization") token : String) : Response<User>
 
     @GET("users/{username}")
     fun getUserByUsername(@Path("username") username: String,
-                          @Header("currentUserId") ownUserId: String) : Response<User>
+                          @Header("Authorization") token : String) : Response<User>
 
     @GET("users")
     fun getUserById (@Query("id") id : String,
-                     @Header("currentUserId") ownUserId: String) : Response<User>
+                     @Header("Authorization") token : String) : Response<User>
 
     @GET("users/{username}/tournaments")
     fun getUsersTournaments (@Path("username") username: String,
-                             @Header("currentUserId") ownUserId: String) : Response<TournamentList>
+                             @Header("Authorization") token : String) : Response<TournamentList>
 
     @GET("users/{username}/teams")
     fun getUserTeams(@Path("username") username: String,
-                     @Header("currentUserId") ownUserId: String) : Response<TeamList>
+                     @Header("Authorization") token : String) : Response<TeamList>
 
     @GET("users/{username}/invitations")
     fun getUserInvitations(@Path("username") username: String,
-                           @Header("currentUserId") ownUserId: String) : Response<Array<Invitation>>
+                           @Header("Authorization") token : String) : Response<Array<Invitation>>
 
     @PUT("users/{username}")
     fun updateUserDetails(@Path("username") oldUsername: String,
                           @Body newUsername : String, @Body forename : String,
-                          @Body surname : String, @Header("currentUserId") ownUserId: String)
+                          @Body surname : String, @Header("Authorization") token : String)
 
 }
