@@ -3,7 +3,9 @@ package com.android3.siegertpclient.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
@@ -18,20 +20,22 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val loginBtn: Button = findViewById(R.id.loginBtn)
-        loginBtn.setOnClickListener{
-            openHomepageActivity()
-        }
+        val emailTxt : EditText = findViewById(R.id.email)
+        val passwordTxt: EditText = findViewById(R.id.password)
 
         val registerTv: TextView = findViewById(R.id.registerClickable)
         registerTv.setOnClickListener {
             loginPresenter.onRegisterTextClicked()
-//            openRegisterActivity()
         }
 
-        val letsGoRegister: TextView = findViewById(R.id.forgotPassword)
-        letsGoRegister.setOnClickListener {
-            openForgotPasswordActivity()
+        val loginBtn: Button = findViewById(R.id.loginBtn)
+        loginBtn.setOnClickListener{
+            loginPresenter.onLoginBtnClicked(emailTxt.text.toString(), passwordTxt.text.toString())
+        }
+
+        val forgotPasswordTv: TextView = findViewById(R.id.forgotPassword)
+        forgotPasswordTv.setOnClickListener {
+            loginPresenter.onForgotPasswordTextClicked()
         }
     }
 
@@ -45,27 +49,14 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         loginPresenter.onDetach()
     }
 
-    private fun openRegisterActivity() {
-        val rIntent = Intent(this, RegisterActivity::class.java)
-        startActivity(rIntent)
-    }
-
-    private fun openForgotPasswordActivity() {
-        val fpIntent = Intent(this, ForgotPasswordActivity::class.java)
-        startActivity(fpIntent)
-    }
-
-    private fun openHomepageActivity() {
+    override fun navigateToHomepageActivity() {
         val hIntent = Intent(this, HomepageActivity::class.java)
         startActivity(hIntent)
     }
 
-    override fun navigateToHomepageActivity() {
-        TODO("Not yet implemented")
-    }
-
     override fun navigateToForgotPasswordActivity() {
-        TODO("Not yet implemented")
+        val fpIntent = Intent(this, ForgotPasswordActivity::class.java)
+        startActivity(fpIntent)
     }
 
     override fun navigateToRegisterActivity() {
@@ -82,7 +73,7 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
     }
 
     override fun showError(errorId: Int) {

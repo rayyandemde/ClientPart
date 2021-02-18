@@ -1,13 +1,12 @@
-package com.android3.siegertpclient.data.user.usersource.userRemote
+package com.android3.siegertpclient.data.userdummy.usersource.userRemote
 
 import com.android3.siegertpclient.data.invitation.Invitation
-import com.android3.siegertpclient.data.user.TeamList
-import com.android3.siegertpclient.data.user.TournamentList
-import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserServiceDummy
+import com.android3.siegertpclient.data.userdummy.TeamList
+import com.android3.siegertpclient.data.userdummy.TournamentList
+import com.android3.siegertpclient.data.userdummy.User
 import com.android3.siegertpclient.utils.TokenUtil
 
-class UserRemoteDataSource (private val userService : UserService) {
+class UserRemoteDataSourceDummy (private val userService : UserServiceDummy) {
 
     fun createNewUser (username: String, surname: String, firstName: String, userId : String) : User {
         val user = hashMapOf<String, String>()
@@ -15,18 +14,14 @@ class UserRemoteDataSource (private val userService : UserService) {
         user["forename"] = firstName
         user["username"] = username
         user["userId"] = userId
-        val userCall = userService.createNewUser(user, TokenUtil.getBearerToken())
-        val response = userCall.execute()
-        val uResp =  response.body()
-        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
-            uResp.teamList, uResp.tournamentList)
-
+        val response = userService.createNewUser(user, TokenUtil.getBearerToken())
+        return response.body()
     }
 
     fun getUserById (userId : String) : User {
         val response = userService.getUserById(userId, TokenUtil.getBearerToken())
         if (response.isSuccessful) {
-            //val user = response.body()
+             //val user = response.body()
             //TOdo implement error code
         }
         return response.body()
@@ -56,13 +51,13 @@ class UserRemoteDataSource (private val userService : UserService) {
         return response.body()
     }
 
-    fun updateUserDetail (oldUsername: String, newUsername : String, forename : String, surname : String) : User {
-        val userCall = userService.updateUserDetails(oldUsername,newUsername,forename,surname,
+    fun updateUserDetail (
+        oldUsername: String,
+        newUsername : String,
+        forename : String,
+        surname : String) {
+        val response = userService.updateUserDetails(oldUsername,newUsername,forename,surname,
             TokenUtil.getBearerToken())
-        val response = userCall.execute()
-        val uResp =  response.body()
-        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
-            uResp.teamList, uResp.tournamentList)
     }
 
 }

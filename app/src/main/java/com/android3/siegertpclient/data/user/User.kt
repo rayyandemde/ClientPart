@@ -5,13 +5,11 @@ import androidx.room.*
 @Entity
 class User(
     @PrimaryKey
-            var id : String,
+    var id : String,
 
     @field:ColumnInfo(name = "user_name") var userName: String,
     @field:ColumnInfo(name = "vorname") var vorName: String,
     @field:ColumnInfo(name = "surname") var surName: String,
-    @field:ColumnInfo(name = "email") var Email: String,
-    @field:ColumnInfo(name = "password") var password: String,
     @TypeConverters(RoomConverter::class)
     @field:ColumnInfo(name = "notification_list") var notificationList: NotificationList,
 
@@ -88,7 +86,7 @@ class RoomConverter {
             return string
         }
 
-       notificationList.notificationList.forEach {
+        notificationList.notificationList.forEach {
             string += "$it,"
         }
         return string
