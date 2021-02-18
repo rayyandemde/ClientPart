@@ -19,6 +19,15 @@ class TournamentActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
     }
+    override fun onResume() {
+        super.onResume()
+        TournamentPresenter.onAttach(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        TournamentPresenter.onDetach()
+    }
 
     override fun showProgress() {
         TODO("Not yet implemented")
