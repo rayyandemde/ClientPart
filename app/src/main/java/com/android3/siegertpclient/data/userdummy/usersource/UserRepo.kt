@@ -9,6 +9,7 @@ import com.android3.siegertpclient.data.userdummy.User
 import com.android3.siegertpclient.data.userdummy.usersource.userLocal.UserDao
 import com.android3.siegertpclient.data.userdummy.usersource.userLocal.UserLocalDataSource
 import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserRemoteDataSource
+import com.android3.siegertpclient.utils.OnlineChecker
 import com.android3.siegertpclient.utils.RestClient
 import retrofit2.Retrofit
 
