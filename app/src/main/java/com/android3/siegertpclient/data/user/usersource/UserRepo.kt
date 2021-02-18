@@ -8,6 +8,7 @@ import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.data.user.usersource.userLocal.UserLocalDataSource
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import com.android3.siegertpclient.utils.RestClient
+import kotlin.coroutines.Continuation
 
 class UserRepo() : IUserDataSource {
 
@@ -17,8 +18,8 @@ class UserRepo() : IUserDataSource {
     var userRemote = UserRemoteDataSource(userService)
     var userLocal = UserLocalDataSource()
 
-    fun createNewUser(username: String, eMail: String, firstName: String, surname: String,
-                      password: String, createdNewUserId : String) : User {
+    suspend fun createNewUser(username: String, eMail: String, firstName: String, surname: String,
+                              password: String, createdNewUserId : String) : User {
         //creating new empty Lists for new User
         val notificationList = NotificationList()
         val teamList = TeamList()
@@ -33,23 +34,23 @@ class UserRepo() : IUserDataSource {
         userLocal.saveUser(user)
     }
 
-    fun getUserById (userId : String, token : String) : User {
+    suspend fun getUserById (userId : String, token : String) : User {
         return userRemote.getUserById(userId, token)
     }
 
-    fun getUserByUsername (username : String, token : String) : User {
+    suspend fun getUserByUsername (username : String, token : String) : User {
         return userRemote.getUserByUsername(username, token)
     }
 
-    fun getUsersTournaments (username: String, token : String) : TournamentList {
+    suspend fun getUsersTournaments (username: String, token : String) : TournamentList {
         return userRemote.getUsersTournaments(username, token)
     }
 
-    fun getUserTeams (username: String, token : String) : TeamList {
+    suspend fun getUserTeams (username: String, token : String) : TeamList {
         return userRemote.getUsersTeams(username, token)
     }
 
-    fun getUsersInvitations (username: String, token : String) : Array<Invitation> {
+    suspend fun getUsersInvitations (username: String, token : String) : Array<Invitation> {
         return userRemote.getUsersInvitations(username, token)
     }
 
