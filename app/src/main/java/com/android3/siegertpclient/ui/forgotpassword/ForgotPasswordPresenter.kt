@@ -20,6 +20,8 @@ class ForgotPasswordPresenter : BasePresenter<ForgotPasswordContract.IForgotPass
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     view?.showSuccess("Email for changing password sent.")
+                } else {
+                    view?.showErrorOnEmail("No such email exists.")
                 }
             }
     }
