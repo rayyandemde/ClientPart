@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
+import com.android3.siegertpclient.utils.OnlineChecker
 
 class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPasswordView {
 
