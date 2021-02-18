@@ -33,7 +33,6 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         letsGoRegister.setOnClickListener {
             openForgotPasswordActivity()
         }
-
     }
 
     override fun onResume() {

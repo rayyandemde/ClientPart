@@ -1,12 +1,18 @@
 package com.android3.siegertpclient.ui.homepage
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BaseActivity
+import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
+import com.android3.siegertpclient.ui.invitation.InvitationActivity
+import com.android3.siegertpclient.ui.register.RegisterActivity
+import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomepageActivity : BaseActivity() {
+class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
 
     private val homepagePresenter: HomepagePresenter = HomepagePresenter()
 
@@ -25,7 +31,11 @@ class HomepageActivity : BaseActivity() {
 
         when(item.itemId){
             R.id.navigation_feed -> transaction.replace(R.id.fragment_container, feedFragment)
+            R.id.navigation_createtournament -> homepagePresenter.onCreateTournamentBtnClicked()
+            R.id.navigation_createteam -> homepagePresenter.onCreateTeamBtnClicked()
             R.id.navigation_jointeam -> transaction.replace(R.id.fragment_container, joinTeamFragment)
+            R.id.navigation_userprofile -> homepagePresenter.onUserBtnClicked()
+
         }
 
         transaction.commit()
@@ -44,6 +54,49 @@ class HomepageActivity : BaseActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragment_container, feedFragment)
         transaction.commit()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        homepagePresenter.onAttach(this)
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        homepagePresenter.onDetach()
+    }
+
+    override fun navigateToInvitationActivity() {
+        val invIntent = Intent(this, InvitationActivity::class.java)
+        startActivity(invIntent)
+    }
+
+    override fun navigateToUserActivity() {
+        val upIntent = Intent(this, UserProfileActivity::class.java)
+        startActivity(upIntent)
+    }
+
+    override fun navigateToCreateTournamentActivity() {
+        val cTournamentIntent = Intent(this, CreateTeamActivity::class.java)
+        startActivity(cTournamentIntent)
+    }
+
+    override fun navigateToCreateTeamActivity() {
+        val cTeamIntent = Intent(this, CreateTeamActivity::class.java)
+        startActivity(cTeamIntent)
+    }
+
+    override fun showFeedFragment() {
+        //Will not be implemented
+    }
+
+    override fun showJoinTeamFragment() {
+        //Will not be implemented
+    }
+
+    override fun showSearchResult(tournaments: List<Tournament>) {
+        //Open tournament feature will not be implemented
     }
 
     override fun showProgress() {

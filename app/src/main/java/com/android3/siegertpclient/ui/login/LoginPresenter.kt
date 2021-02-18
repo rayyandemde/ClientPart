@@ -1,11 +1,12 @@
 package com.android3.siegertpclient.ui.login
 
 import LoginContract
+import android.content.Context
 import com.android3.siegertpclient.ui.base.BasePresenter
 import com.google.firebase.auth.FirebaseAuth
 
 
-class LoginPresenter : BasePresenter<LoginContract.ILoginView>(), LoginContract.ILoginPresenter{
+class LoginPresenter() : BasePresenter<LoginContract.ILoginView>(), LoginContract.ILoginPresenter{
     private lateinit var auth: FirebaseAuth
     override fun onLoginBtnClicked(email: String, password: String) {
         auth = FirebaseAuth.getInstance()

@@ -71,6 +71,10 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
         TODO("Not yet implemented")
     }
 
+    override fun navigateToCreateTeamActivity() {
+        TODO("Not yet implemented")
+    }
+
     override fun showFeedFragment() {
         TODO("Not yet implemented")
     }
