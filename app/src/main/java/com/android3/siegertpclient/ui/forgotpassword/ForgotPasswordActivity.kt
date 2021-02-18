@@ -2,7 +2,9 @@ package com.android3.siegertpclient.ui.forgotpassword
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
 
@@ -14,14 +16,30 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPas
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgotpassword)
 
+        val emailEt: EditText = findViewById(R.id.email)
+
+        val signUpBtn: Button = findViewById(R.id.buttonSend)
+        signUpBtn.setOnClickListener{
+            forgotPasswordPresenter.onSendBtnClicked(emailEt.getText().toString())
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        forgotPasswordPresenter.onAttach(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        forgotPasswordPresenter.onDetach()
     }
 
     override fun showErrorOnEmail(message: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
     override fun showSuccess(message: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
     override fun showProgress() {
