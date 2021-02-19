@@ -19,9 +19,9 @@ class TournamentRemoteDataSource (private val tournamentService: TournamentServi
         val pList = participantConverter.toParticipantList(tResp.participantList)
         val gList = participantConverter.toGameList(tResp.gameList)
         return TournamentData(tResp.tournamentId, tResp.tournamentDetail.participantForm, tResp.tournamentDetail.adminId,
-        tResp.tournamentDetail.tournamentTypes, tResp.tournamentDetail.typeOfGame, tResp.tournamentDetail.location,
-        tResp.tournamentDetail.registrationDeadline, tResp.tournamentDetail.startTime, tResp.tournamentDetail.endTime,
-        tResp.tournamentName, tResp.maxParticipantNumber, tResp.type, tResp.currentState, pList, gList)
+            tResp.tournamentDetail.tournamentTypes, tResp.tournamentDetail.typeOfGame, tResp.tournamentDetail.location,
+            tResp.tournamentDetail.registrationDeadline, tResp.tournamentDetail.startTime, tResp.tournamentDetail.endTime,
+            tResp.tournamentName, tResp.maxParticipantNumber, tResp.type, tResp.currentState, pList, gList)
     }
     private fun convertToLeague(response: Map<String, Any?>):TournamentLeague{
         val tournamentId: String = response.get("tournamentId").toString()
