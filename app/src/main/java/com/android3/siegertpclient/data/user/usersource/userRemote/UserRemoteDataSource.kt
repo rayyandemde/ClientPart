@@ -6,8 +6,11 @@ import com.android3.siegertpclient.data.user.TournamentList
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserServiceDummy
 import com.android3.siegertpclient.utils.TokenUtil
+import kotlin.RuntimeException
 
 class UserRemoteDataSource (private val userService : UserService) {
+
+    private val runtimeError = "Response of Server was not successful"
 
     fun createNewUser (username: String, surname: String, firstName: String, userId : String) : User {
         val user = hashMapOf<String, String>()
@@ -16,7 +19,13 @@ class UserRemoteDataSource (private val userService : UserService) {
         user["username"] = username
         user["userId"] = userId
         val userCall = userService.createNewUser(user, TokenUtil.getBearerToken())
+        if (userCall.isCanceled) {
+            throw RuntimeException(runtimeError)
+        }
         val response = userCall.execute()
+        if (!response.isSuccessful) {
+            throw RuntimeException(runtimeError)
+        }
         val uResp =  response.body()
         return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
             uResp.teamList, uResp.tournamentList)
@@ -24,35 +33,51 @@ class UserRemoteDataSource (private val userService : UserService) {
     }
 
     fun getUserById (userId : String) : User {
-        val response = userService.getUserById(userId, TokenUtil.getBearerToken())
-        if (response.isSuccessful) {
-            //val user = response.body()
-            //TOdo implement error code
+        val userCall = userService.getUserById(userId, TokenUtil.getBearerToken())
+        val response = userCall.execute()
+        if (!response.isSuccessful) {
+            throw RuntimeException(runtimeError)
         }
-        return response.body()
+        val uResp =  response.body()
+        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
+            uResp.teamList, uResp.tournamentList)
     }
 
     fun getUserByUsername (username : String) : User {
-        val response = userService.getUserByUsername(username, TokenUtil.getBearerToken())
-        if (response.isSuccessful) {
-            //val user = response.body()
-            //TOdo implement error code
+        val userCall = userService.getUserByUsername(username, TokenUtil.getBearerToken())
+        val response = userCall.execute()
+        if (!response.isSuccessful) {
+            throw RuntimeException(runtimeError)
         }
-        return response.body()
+        val uResp =  response.body()
+        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
+            uResp.teamList, uResp.tournamentList)
     }
 
     fun getUsersTournaments (username: String) : TournamentList {
-        val response = userService.getUsersTournaments(username, TokenUtil.getBearerToken())
+        val userCall = userService.getUsersTournaments(username, TokenUtil.getBearerToken())
+        val response = userCall.execute()
+        if (!response.isSuccessful) {
+            throw RuntimeException(runtimeError)
+        }
         return response.body()
     }
 
     fun getUsersTeams (username: String) : TeamList {
-        val response = userService.getUserTeams(username, TokenUtil.getBearerToken())
+        val userCall = userService.getUserTeams(username, TokenUtil.getBearerToken())
+        val response = userCall.execute()
+        if (!response.isSuccessful) {
+            throw RuntimeException(runtimeError)
+        }
         return response.body()
     }
 
     fun getUsersInvitations (username: String) : Array<Invitation> {
-        val response = userService.getUserInvitations(username, TokenUtil.getBearerToken())
+        val userCall = userService.getUserInvitations(username, TokenUtil.getBearerToken())
+        val response = userCall.execute()
+        if (!response.isSuccessful) {
+            throw RuntimeException(runtimeError)
+        }
         return response.body()
     }
 
@@ -61,6 +86,9 @@ class UserRemoteDataSource (private val userService : UserService) {
             TokenUtil.getBearerToken())
         val response = userCall.execute()
         val uResp =  response.body()
+        if (!response.isSuccessful) {
+            throw RuntimeException(runtimeError)
+        }
         return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
             uResp.teamList, uResp.tournamentList)
     }

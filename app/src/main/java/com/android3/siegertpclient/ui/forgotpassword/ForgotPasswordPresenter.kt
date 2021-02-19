@@ -8,7 +8,7 @@ class ForgotPasswordPresenter : BasePresenter<ForgotPasswordContract.IForgotPass
     private lateinit var auth: FirebaseAuth
 
     override fun onBackBtnClicked() {
-        view?.navigateToLoginActivity()
+        view?.navigateToHomepageActivity()
     }
 
     override fun onSendBtnClicked(email : String) {

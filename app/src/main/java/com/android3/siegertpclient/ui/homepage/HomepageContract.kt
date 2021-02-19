@@ -21,6 +21,10 @@ interface HomepageContract {
 
         //Open tournament feature will not be implemented
         fun showSearchResult(tournaments: List<Tournament>)
+        fun goToTournamentScreen() {
+            TODO("Not yet implemented")
+        }
+
     }
 
     interface IHomepagePresenter {

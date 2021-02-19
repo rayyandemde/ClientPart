@@ -50,4 +50,8 @@ class HomepagePresenter() : BasePresenter<HomepageContract.IHomepageView>(), Hom
                            surname: String) {
         userRepo.register(email,password, username,firstName, surname)
     }
+
+    fun goToTournament() {
+       view?.goToTournamentScreen()
+    }
 }

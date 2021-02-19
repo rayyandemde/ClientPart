@@ -5,11 +5,11 @@ import com.google.firebase.auth.FirebaseAuth
 class TokenUtil {
     companion object {
         fun getBearerToken(): String {
-            lateinit var token : String
+            var token = "Bearer "
             val auth = FirebaseAuth.getInstance()
             val user = auth.currentUser
             user?.getIdToken(true)?.addOnSuccessListener { it ->
-                token = "Bearer " + it.token.toString()
+                token += it.token.toString()
             }
             return token
         }

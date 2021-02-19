@@ -7,11 +7,11 @@ import com.android3.siegertpclient.ui.base.BasePresenter
 class TournamentPresenter : BasePresenter<TournamentContract.ITournamentView>(), TournamentContract.ITeamPresenter {
 
     fun onJoinBtnClicked() {
-        TODO("Not yet implemented")
+
     }
 
     fun onKickParticipantBtnClicked() {
-        TODO("Not yet implemented")
+
     }
 
     fun onAddParticipantBtnClicked() {
@@ -50,8 +50,8 @@ class TournamentPresenter : BasePresenter<TournamentContract.ITournamentView>(),
  //       TODO("Not yet implemented")
  //   }
 
-    fun getGameList() : List<Game> {
-        TODO("Not yet implemented")
+    fun getGameList() {
+
     }
 
     override fun checkIfAdmin(userId: String) {
@@ -63,19 +63,19 @@ class TournamentPresenter : BasePresenter<TournamentContract.ITournamentView>(),
     }
 
     override fun onBackBtnClicked() {
-        TODO("Not yet implemented")
+        view?.navigateToHomepageActivity()
     }
 
     override fun onTournamentDetailsTabClicked() {
-        TODO("Not yet implemented")
+       view?.showTournamentDetailsFragment()
     }
 
     override fun onParticipantListTabClicked() {
-        TODO("Not yet implemented")
+        view?.showTournamentParticipantsFragment()
     }
 
     override fun onScheduleTabClicked() {
-        TODO("Not yet implemented")
+        view?.showTournamentScheduleFragment()
     }
 
     override fun onStageSliderClicked() {
@@ -83,7 +83,7 @@ class TournamentPresenter : BasePresenter<TournamentContract.ITournamentView>(),
     }
 
     override fun onMatchesSliderClicked() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onTournamentUpdatesTabClicked() {

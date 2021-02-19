@@ -10,7 +10,6 @@ import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
-import com.android3.siegertpclient.utils.OnlineChecker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPasswordView {
@@ -52,9 +51,15 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPas
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
+
     override fun navigateToLoginActivity() {
         val lIntent = Intent(this, LoginActivity::class.java)
         startActivity(lIntent)
+    }
+
+    override fun navigateToHomepageActivity() {
+        val fpIntent2 = Intent(this, HomepageActivity::class.java)
+        startActivity(fpIntent2)
     }
 
     override fun showProgress() {
