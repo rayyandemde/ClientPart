@@ -9,10 +9,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RestClient {
+    private var baseUrl = "https://sieger-teamthree.herokuapp.com/"
 
     fun getUserService(): UserService {
         val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl("https://sieger-kit.herokuapp.com/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit.create(UserService::class.java)
@@ -20,7 +21,7 @@ class RestClient {
 
     fun getInvitationService(): InvitationService {
         val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl("https://sieger-kit.herokuapp.com/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit.create(InvitationService::class.java)
@@ -28,7 +29,7 @@ class RestClient {
 
     fun getTeamService() : TeamService {
         val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl("https://sieger-kit.herokuapp.com/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit.create(TeamService::class.java)
@@ -36,7 +37,7 @@ class RestClient {
 
     fun getGameService() : GameService {
         val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl("https://sieger-kit.herokuapp.com/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit.create(GameService::class.java)
@@ -44,7 +45,7 @@ class RestClient {
 
     fun getTournamentService() : TournamentService {
         val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl("https://sieger-kit.herokuapp.com/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit.create(TournamentService::class.java)
