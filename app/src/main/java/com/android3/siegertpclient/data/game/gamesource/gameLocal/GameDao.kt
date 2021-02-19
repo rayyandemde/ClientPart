@@ -3,6 +3,9 @@ package com.android3.siegertpclient.data.game.gamesource.gameLocal
 import androidx.room.*
 import com.android3.siegertpclient.data.game.Game
 
+/**
+ * Class to store every function of the database.
+ */
 @Dao
 interface GameDao {
     @Insert

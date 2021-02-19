@@ -2,6 +2,9 @@ package com.android3.siegertpclient.data.team.teamsource.teamLocal
 
 import androidx.room.*
 
+/**
+ * the team Entity of the room database.
+ */
 @Entity
 data class Team(
     @PrimaryKey

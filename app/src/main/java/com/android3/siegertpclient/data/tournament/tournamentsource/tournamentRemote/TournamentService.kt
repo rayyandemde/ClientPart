@@ -19,7 +19,7 @@ interface TournamentService {
 
     @GET("tournaments")
     fun getTournamentById(@Query("id") tourneyId : String,
-                          @Header("currentUserId") ownUserId: String) : Call<Map<String, Any?>>
+                          @Header("currentUserId") ownUserId: String) : Call<TournamentResponse>
 
     @GET("tournaments/{tournamentName}")
     fun getTournamentByName(@Path("tournamentName") tournamentName : String,

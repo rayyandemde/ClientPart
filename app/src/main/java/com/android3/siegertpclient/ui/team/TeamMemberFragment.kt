@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ class TeamMemberFragment : Fragment() , TeamContract.ITeamView {
 
     var teamMemberRecycler: RecyclerView? = null
 
+    var addBt : Button?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         var view = inflater!!.inflate(R.layout.fragment_team_member, container, false)
@@ -26,6 +28,12 @@ class TeamMemberFragment : Fragment() , TeamContract.ITeamView {
         teamMemberRecycler!!.layoutManager = LinearLayoutManager(context)
         teamMemberRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
 
+        addBt = view.findViewById(R.id.addBt)
+        /**
+        addBt.setOnClickListener(
+            teamPresenter.
+        )
+        **/
         return view
     }
 

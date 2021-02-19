@@ -4,6 +4,9 @@ import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationRemoteDataSource
 import com.android3.siegertpclient.utils.RestClient
 
+/**
+ * Invitation repository that calls the remote and local data source.
+ */
 class InvitationRepo () {
 
     private val restClient = RestClient()

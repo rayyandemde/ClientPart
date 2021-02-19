@@ -1,6 +1,5 @@
 package com.android3.siegertpclient.data.user.usersource
 
-import android.util.Log
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
 import com.android3.siegertpclient.data.tournament.Tournament
@@ -21,11 +20,9 @@ class UserRepo() {
                  password : String,
                  username: String,
                  firstName: String,
-                 surname: String) : User? {
+                 surname: String) : User {
         auth = FirebaseAuth.getInstance()
-        auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener { it ->
-            print(it.user)
-        }
+        auth.createUserWithEmailAndPassword(email, password)
         return userRemote.createNewUser(username, surname, firstName, auth.currentUser?.uid.toString())
     }
 
