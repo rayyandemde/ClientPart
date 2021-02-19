@@ -98,7 +98,8 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
     }
 
     override fun navigateToHomepageActivity() {
-        //Will not be implemented
+        val hIntent = Intent(this, HomepageActivity::class.java)
+        startActivity(hIntent)
     }
 
     override fun navigateToLoginActivity() {
