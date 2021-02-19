@@ -5,7 +5,7 @@ import com.android3.siegertpclient.utils.TournamentTypesUtil
 import java.util.*
 
 
- data class TournamentDetail(
+  class TournamentDetail (
      val participantForm: ParticipantFormUtil,
      val adminId: String,
      val tournamentTypes: TournamentTypesUtil,

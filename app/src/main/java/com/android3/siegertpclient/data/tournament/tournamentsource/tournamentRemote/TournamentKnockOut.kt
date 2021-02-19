@@ -4,27 +4,19 @@ import com.android3.siegertpclient.data.game.Game
 import com.android3.siegertpclient.utils.TournamentState
 import com.google.gson.annotations.SerializedName
 
- class TournamentKnockOut(
-    @SerializedName("tournamentId")
-    val tournamentId : String,
-    @SerializedName("tournamentDetail")
-    val tournamentDetail : TournamentDetail,
-    @SerializedName("gameList")
-    val gameList : List<String>,
-    @SerializedName("participantList")
-    val participantList : List<String>,
-    @SerializedName("tournamentName")
-    val tournamentName : String,
-    @SerializedName("maxParticipantNumber")
-    val maxParticipantNumber : Int,
-    @SerializedName("type")
-    val type : String,
-    @SerializedName("currentState")
-    val currentState : TournamentState,
-    @SerializedName("open")
-    val open : Boolean,
-    @SerializedName("currentGames")
-    val currentGames:List<Game>,
-    @SerializedName("koMapping")
+ class TournamentKnockOut constructor(tournamentId: String,tournamentDetail: TournamentDetail,
+                                      gameList: List<String>,participantList: List<String>,
+                                      tournamentName: String,maxParticipantNumber: Int,
+                                      type: String,currentState: TournamentState,
+                                      open: Boolean, currentGames:List<Game>,koMapping: KnockOutMapping)
+    : Tournament(tournamentId,tournamentDetail,gameList,participantList,
+    tournamentName,maxParticipantNumber,currentState) {
+
+    val currentGames: List<Game>
     val koMapping: KnockOutMapping
-)
+
+    init {
+       this.currentGames =currentGames
+       this.koMapping = koMapping
+    }
+ }
