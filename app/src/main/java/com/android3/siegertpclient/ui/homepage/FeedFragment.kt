@@ -25,7 +25,7 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
-        var view = inflater!!.inflate(R.layout.fragment_feed, container, false)
+        var view = inflater.inflate(R.layout.fragment_feed, container, false)
 
         feedRecycler = view.findViewById<RecyclerView>(R.id.feed_recycler)
 

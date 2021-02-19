@@ -1,5 +1,6 @@
 package com.android3.siegertpclient.ui.forgotpassword
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -7,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
+import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.utils.OnlineChecker
 
 class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPasswordView {
@@ -41,6 +43,11 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPas
 
     override fun showSuccess(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun navigateToHomepageActivity() {
+        val fpIntent2 = Intent(this, HomepageActivity::class.java)
+        startActivity(fpIntent2)
     }
 
     override fun showProgress() {
