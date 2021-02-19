@@ -10,7 +10,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/team_invitation_recycler"
-        android:layout_width="415dp"
+        android:layout_width="match_parent"
         android:layout_height="612dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="56dp"

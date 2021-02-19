@@ -1,4 +1,4 @@
-package com.android3.siegertpclient.ui.homepage
+package com.android3.siegertpclient.ui.tournament
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

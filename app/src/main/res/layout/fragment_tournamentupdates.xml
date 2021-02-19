@@ -15,34 +15,23 @@
     <TextView
         android:layout_width="211dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:text="The tournaments organisator will leaves you a message here"
+        android:layout_marginTop="280dp"
+        android:text="Warning! You can't revert this!"
+        android:gravity="center"
+        android:textColor="#FF0000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/updateLogs"
-        android:layout_width="336dp"
-        android:layout_height="331dp"
-        android:layout_marginBottom="212dp"
-        android:background="@drawable/edittext_white"
-        android:text="    Organisator Message"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="248dp"
         android:background="#FF0000"
         android:text="  Cancel Tournament  "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateLogs"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

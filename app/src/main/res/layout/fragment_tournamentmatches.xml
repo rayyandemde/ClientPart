@@ -10,7 +10,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tournament_matches_recycler"
-        android:layout_width="504dp"
+        android:layout_width="match_parent"
         android:layout_height="369dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="56dp"
