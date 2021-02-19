@@ -7,6 +7,7 @@ import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
+import com.android3.siegertpclient.ui.createtournament.CreateTournamentActivity
 import com.android3.siegertpclient.ui.invitation.InvitationActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
 import com.android3.siegertpclient.ui.tournament.TournamentActivity
@@ -32,8 +33,8 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
 
         when(item.itemId){
             R.id.navigation_feed -> transaction.replace(R.id.fragment_container, feedFragment)
-            //R.id.navigation_createtournament -> homepagePresenter.onCreateTournamentBtnClicked()
-            R.id.navigation_createtournament -> homepagePresenter.goToTournament()
+            R.id.navigation_createtournament -> homepagePresenter.onCreateTournamentBtnClicked()
+            //R.id.navigation_createtournament -> homepagePresenter.goToTournament()
             R.id.navigation_createteam -> homepagePresenter.onCreateTeamBtnClicked()
             R.id.navigation_jointeam -> transaction.replace(R.id.fragment_container, joinTeamFragment)
             R.id.navigation_userprofile -> homepagePresenter.onUserBtnClicked()
@@ -80,7 +81,7 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
     }
 
     override fun navigateToCreateTournamentActivity() {
-        val cTournamentIntent = Intent(this, CreateTeamActivity::class.java)
+        val cTournamentIntent = Intent(this, CreateTournamentActivity::class.java)
         startActivity(cTournamentIntent)
     }
 

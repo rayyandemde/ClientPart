@@ -29,20 +29,20 @@
             app:layout_constraintGuide_begin="176dp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/teamPasswrodCreate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="152dp"
+            android:layout_marginTop="28dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Passwort"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline11" />
+            app:layout_constraintTop_toBottomOf="@+id/teamNameCreate" />
 
         <EditText
-            android:id="@+id/teamName"
+            android:id="@+id/teamNameCreate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="152dp"
@@ -68,18 +68,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/buttoncreate"
+            android:id="@+id/createTeamBtn"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="236dp"
             android:text="Create"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.529"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3"
-            app:layout_constraintVertical_bias="0.329" />
+            app:layout_constraintTop_toBottomOf="@+id/teamPasswrodCreate"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

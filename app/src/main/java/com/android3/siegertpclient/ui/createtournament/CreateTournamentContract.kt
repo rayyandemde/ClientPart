@@ -8,6 +8,8 @@ interface CreateTournamentContract {
 
         fun navigateToLoginActivity()
 
+        fun navigateToTournamentActivity()
+
         fun showErrorOnTournamentName(message: String)
 
         fun showErrorOnLocation(message: String)
