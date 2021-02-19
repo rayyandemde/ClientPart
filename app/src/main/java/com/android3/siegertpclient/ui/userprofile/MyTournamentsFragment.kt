@@ -6,17 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.android3.siegertpclient.R
-import com.android3.siegertpclient.data.user.NotificationList
-import com.android3.siegertpclient.data.user.TeamList
-import com.android3.siegertpclient.data.user.TournamentList
-import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.data.user.usersource.userLocal.UserDao
-import com.android3.siegertpclient.data.user.usersource.userLocal.UserDao_Impl
-import com.android3.siegertpclient.data.user.usersource.userLocal.UserLocalDataSource
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.setting.SettingActivity
 
@@ -26,27 +17,10 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
 
     var settingBtn: Button? = null
     var homeBtn: Button? = null
-    var userInfo: TextView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         var view = inflater!!.inflate(R.layout.fragment_mytournaments, container, false)
-
-        //Test User Object
-        //val userTest = userProfilePresenter.getDummyUser()
-        //val userLocal = UserLocalDataSource()
-        //val users = userLocal.getUser()
-        //val currentUser = users?.get(0)
-
-        val dummyList = arrayListOf<String>("dummyL1", "dummyL2")
-        val tournamentLists = TournamentList(dummyList)
-        val notifications = NotificationList(dummyList)
-        val teamList = TeamList(dummyList)
-        var user = User("dummyId", "dummyUsername", "name", "aaa", notifications, teamList, tournamentLists)
-
-        userInfo = view.findViewById(R.id.userNameNFullname)
-        val userInfoString = "@" + user?.userName + " : " + user?.vorName + user?.surName
-        userInfo?.setText(userInfoString)
 
         settingBtn = view.findViewById(R.id.settingsButton)
         settingBtn?.setOnClickListener{
@@ -59,10 +33,6 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
         }
 
         return view
-    }
-
-    private fun getCurrentUserUNandFN() {
-        TODO("Not yet implemented")
     }
 
     override fun onResume() {
