@@ -12,8 +12,9 @@ import java.util.*
 
 interface TournamentService {
 
-    @POST("tournaments")//TODO change body
-    fun createNewTournament(@Body tournament : Tournament,
+    @POST("tournaments")
+    fun createNewTournament(@Body tournamentForm : String, tournamentSize : String, tournamentName: String,
+                            tournamentDetail: TournamentDetail,
                             @Header("currentUserId") ownUserId: String) : Call<Tournament>
 
     @GET("tournaments")
