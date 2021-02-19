@@ -7,7 +7,9 @@ import com.android3.siegertpclient.data.tournament.TournamentData
 import com.android3.siegertpclient.data.tournament.tournamentsource.ITournamentDataSource
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.ParticipantFormUtil
+import com.android3.siegertpclient.utils.TournamentState
 import com.android3.siegertpclient.utils.TournamentTypesUtil
+import java.net.CacheResponse
 import java.util.*
 
 class TournamentRemoteDataSource (private val tournamentService: TournamentService) : ITournamentDataSource {
@@ -20,6 +22,14 @@ class TournamentRemoteDataSource (private val tournamentService: TournamentServi
         tResp.tournamentDetail.tournamentTypes, tResp.tournamentDetail.typeOfGame, tResp.tournamentDetail.location,
         tResp.tournamentDetail.registrationDeadline, tResp.tournamentDetail.startTime, tResp.tournamentDetail.endTime,
         tResp.tournamentName, tResp.maxParticipantNumber, tResp.type, tResp.currentState, pList, gList)
+    }
+    private fun convertToLeague(response: Map<String, Any?>):TournamentLeague{
+        val tournamentId: String = response.get("tournamentId").toString()
+        val detail : Map<String, Any> = (Map<String, Any>)response.get("tournamentId")
+        val tournamentDetail:TournamentDetail = TournamentDetail(response.get("tournamentId"))
+        return TournamentLeague(tournamentId,(TournamentDetail())response["tournamentDetail"],response["gameList"],
+            response["participantList"],response["tournamentName"],response["type"],response["currentState"],
+            response["open"],response["leagueTable"] )
     }
 
     fun createNewTournament(tournamentForm : String, tournamentSize : String, tournamentName: String,
@@ -40,6 +50,9 @@ class TournamentRemoteDataSource (private val tournamentService: TournamentServi
         if (!response.isSuccessful) {
 
             //TOdo implement error code
+        }
+        if(response.body()["type"]?.equals("League") == true){
+
         }
         return convertTRespToTournament(response.body())
     }
