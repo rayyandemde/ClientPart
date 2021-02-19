@@ -22,7 +22,9 @@ class UserRepo() {
                  firstName: String,
                  surname: String) : User {
         auth = FirebaseAuth.getInstance()
-        auth.createUserWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener { it ->
+            print(it.user)
+        }
         return userRemote.createNewUser(username, surname, firstName, auth.currentUser?.uid.toString())
     }
 
