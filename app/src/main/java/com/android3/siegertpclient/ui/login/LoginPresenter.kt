@@ -2,11 +2,11 @@ package com.android3.siegertpclient.ui.login
 
 import LoginContract
 import android.content.Context
-import com.android3.siegertpclient.data.userdummy.usersource.UserRepoDummy
+import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
 
-class LoginPresenter(var context: Context) : BasePresenter<LoginContract.ILoginView>(), LoginContract.ILoginPresenter{
-    private var userRepo = UserRepoDummy(context)
+class LoginPresenter() : BasePresenter<LoginContract.ILoginView>(), LoginContract.ILoginPresenter{
+    private var userRepo = UserRepo()
 
     override fun onLoginBtnClicked(email: String, password: String) {
         val user = userRepo.login(email, password)

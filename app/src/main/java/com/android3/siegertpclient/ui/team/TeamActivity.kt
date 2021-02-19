@@ -72,6 +72,10 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
         //Will not be implemented
     }
 
+    override fun navigateToHomepageActivity() {
+        TODO("Not yet implemented")
+    }
+
     override fun showProgress() {
         TODO("Not yet implemented")
     }
