@@ -1,22 +1,15 @@
 package com.android3.siegertpclient.data.user.usersource.userRemote
 
 import com.android3.siegertpclient.data.invitation.Invitation
-import com.android3.siegertpclient.data.user.TeamList
-import com.android3.siegertpclient.data.user.TournamentList
+import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserServiceDummy
 import com.android3.siegertpclient.utils.TokenUtil
-import retrofit2.Response
 import kotlin.RuntimeException
 
 class UserRemoteDataSource (private val userService : UserService) {
 
     private val runtimeError = "Response of Server was not successful"
-
-    private fun convertURespToUser (uResp : UserResponse) : User {
-        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
-            uResp.teamList, uResp.tournamentList)
-    }
 
     fun createNewUser (username: String, surname: String, firstName: String, userId : String) : User {
         val user = hashMapOf<String, String>()
@@ -24,21 +17,13 @@ class UserRemoteDataSource (private val userService : UserService) {
         user["forename"] = firstName
         user["username"] = username
         user["userId"] = userId
+
         val userCall = userService.createNewUser(user, TokenUtil.getBearerToken())
         if (userCall.isCanceled) {
             throw RuntimeException(runtimeError)
         }
-        var response : Response<UserResponse>? = null
-        Thread(Runnable {
-            response = userCall.execute()
-        }).start()
-//        val response = userCall.execute()
-        if (!response?.isSuccessful!!) {
-            throw RuntimeException(runtimeError)
-        }
-        val uResp = response?.body()
-        return convertURespToUser(uResp!!)
-
+        val response = userCall.execute()
+        return response.body()
     }
 
     fun getUserById (userId : String) : User {
@@ -47,8 +32,7 @@ class UserRemoteDataSource (private val userService : UserService) {
         if (!response.isSuccessful) {
             throw RuntimeException(runtimeError)
         }
-        val uResp =  response.body()
-        return convertURespToUser(uResp)
+        return response.body()
     }
 
     fun getUserByUsername (username : String) : User {
@@ -57,11 +41,10 @@ class UserRemoteDataSource (private val userService : UserService) {
         if (!response.isSuccessful) {
             throw RuntimeException(runtimeError)
         }
-        val uResp =  response.body()
-        return convertURespToUser(uResp)
+        return response.body()
     }
 
-    fun getUsersTournaments (username: String) : TournamentList {
+    fun getUsersTournaments (username: String) : List<Tournament> {
         val userCall = userService.getUsersTournaments(username, TokenUtil.getBearerToken())
         val response = userCall.execute()
         if (!response.isSuccessful) {
@@ -70,7 +53,7 @@ class UserRemoteDataSource (private val userService : UserService) {
         return response.body()
     }
 
-    fun getUsersTeams (username: String) : TeamList {
+    fun getUsersTeams (username: String) : List<Team> {
         val userCall = userService.getUserTeams(username, TokenUtil.getBearerToken())
         val response = userCall.execute()
         if (!response.isSuccessful) {
@@ -79,7 +62,7 @@ class UserRemoteDataSource (private val userService : UserService) {
         return response.body()
     }
 
-    fun getUsersInvitations (username: String) : Array<Invitation> {
+    fun getUsersInvitations (username: String) : List<Invitation> {
         val userCall = userService.getUserInvitations(username, TokenUtil.getBearerToken())
         val response = userCall.execute()
         if (!response.isSuccessful) {
@@ -96,7 +79,7 @@ class UserRemoteDataSource (private val userService : UserService) {
         if (!response.isSuccessful) {
             throw RuntimeException(runtimeError)
         }
-        return convertURespToUser(uResp)
+        return uResp
     }
 
 }

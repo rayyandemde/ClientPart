@@ -15,17 +15,6 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
 
     private val homepagePresenter: HomepagePresenter = HomepagePresenter()
 
-    //dummyTest
-    var dummyUsername: EditText? = null
-    var dummyEmail: EditText? = null
-    var dummySurname: EditText? = null
-    var dummyForename: EditText? = null
-    var dummyPassword: EditText? = null
-    var dummyCreateBtn: Button? = null
-    var dummyGetBtn: Button? = null
-    var dummyInfoTv: TextView? = null
-
-    //realImplementation
     var teamNameEt: EditText? = null
     var teamPassword: EditText? = null
     var joinTeamBtn: Button? = null
@@ -34,26 +23,6 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
 
         var view = inflater!!.inflate(R.layout.fragment_jointeam, container, false)
 
-        //Dummy implementation
-        dummyEmail = view.findViewById<EditText>(R.id.dummyEmail)
-        dummyUsername = view.findViewById<EditText>(R.id.dummyUsername)
-        dummySurname = view.findViewById<EditText>(R.id.dummySurname)
-        dummyForename = view.findViewById<EditText>(R.id.dummyForename)
-        dummyPassword = view.findViewById<EditText>(R.id.dummyPass)
-        dummyCreateBtn = view.findViewById<Button>(R.id.dummyCreateButton)
-        dummyGetBtn = view.findViewById<Button>(R.id.giveMeTheUser)
-        dummyInfoTv = view.findViewById<TextView>(R.id.thisIsTheTestUser)
-
-        dummyCreateBtn?.setOnClickListener{
-            homepagePresenter.createDummyAccount(dummyEmail?.getText().toString(),
-                dummyPassword?.getText().toString(),
-                dummyUsername?.getText().toString(),
-                dummyForename?.getText().toString(),
-                dummySurname?.getText().toString())
-        }
-        ////
-
-        //Real implementation
         teamNameEt = view.findViewById<EditText>(R.id.teamName)
         teamPassword = view.findViewById<EditText>(R.id.teamPassword)
         joinTeamBtn = view.findViewById<Button>(R.id.joinTeamBtn)

@@ -14,13 +14,11 @@ import com.android3.siegertpclient.ui.register.RegisterActivity
 
 class LoginActivity : BaseActivity(), LoginContract.ILoginView {
 
-    lateinit var loginPresenter: LoginPresenter
+    private val loginPresenter: LoginPresenter = LoginPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        loginPresenter = LoginPresenter(this)
 
         val emailTxt : EditText = findViewById(R.id.email)
         val passwordTxt: EditText = findViewById(R.id.password)
