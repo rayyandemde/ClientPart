@@ -42,5 +42,7 @@ interface HomepageContract {
         fun onTournamentOverviewClicked()
 
         fun loadTournamentOverviews()
+
+        fun onInvitationBtnClicked()
     }
 }

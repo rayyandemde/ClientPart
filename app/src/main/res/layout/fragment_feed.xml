@@ -18,6 +18,7 @@
             android:layout_height="48dp">
 
             <TextView
+                android:id="@+id/currentFullname"
                 android:layout_width="350dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
@@ -25,12 +26,13 @@
                 android:text="    Welcome User"
                 android:textSize="16sp" />
 
-            <ImageView
+            <Button
+                android:id="@+id/invitationBtn"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="8dp"
-                android:src="@drawable/notification_icon"
+                android:background="@drawable/notification_icon"
                 app:tint="#ffffff" />
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>

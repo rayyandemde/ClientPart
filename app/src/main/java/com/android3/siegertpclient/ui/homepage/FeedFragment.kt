@@ -1,17 +1,20 @@
 package com.android3.siegertpclient.ui.homepage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.databinding.FragmentFeedBinding
+import com.android3.siegertpclient.ui.invitation.InvitationActivity
 
 class FeedFragment : Fragment(), HomepageContract.IHomepageView {
 /*
@@ -20,6 +23,7 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView {
     */
 
     var feedRecycler: RecyclerView? = null
+    var invitationBtn: Button? = null
 
     private val homepagePresenter: HomepagePresenter = HomepagePresenter()
 
@@ -32,6 +36,12 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView {
         feedRecycler!!.layoutManager = LinearLayoutManager(context)
         feedRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
 
+        invitationBtn = view.findViewById(R.id.invitationBtn)
+        invitationBtn?.setOnClickListener{
+            //loginPresenter.onLoginBtnClicked(emailTxt.text.toString(), passwordTxt.text.toString())
+            homepagePresenter.onInvitationBtnClicked()
+        }
+
     /*
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
        binding.feedRecycler.layoutManager = LinearLayoutManager(context)
@@ -42,8 +52,14 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        homepagePresenter.onAttach(this)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        homepagePresenter.onDetach()
 //        _binding = null
     }
 
@@ -52,7 +68,8 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView {
     }
 
     override fun navigateToInvitationActivity() {
-        //Not implemented here
+        val invIntent = Intent(activity, InvitationActivity::class.java)
+        startActivity(invIntent)
     }
 
     override fun navigateToUserActivity() {

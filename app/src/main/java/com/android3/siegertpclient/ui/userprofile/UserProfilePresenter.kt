@@ -4,19 +4,19 @@ import com.android3.siegertpclient.ui.base.BasePresenter
 
 class UserProfilePresenter : BasePresenter<UserProfileContract.IUserProfileView>(), UserProfileContract.IUserProfilePresenter{
     override fun onSettingBtnClicked() {
-        TODO("Not yet implemented")
+        view?.navigateToSettingActivity()
     }
 
     override fun onHomeBtnClicked() {
-        TODO("Not yet implemented")
+        view?.navigateToHomepageActivity()
     }
 
     override fun onMyTournamentBtnClicked() {
-        TODO("Not yet implemented")
+        //Will not be Implemented
     }
 
     override fun onMyTeamsBtnClicked() {
-        TODO("Not yet implemented")
+        //Will not be Implemented
     }
 
     override fun getTournaments() {

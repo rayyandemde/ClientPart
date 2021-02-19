@@ -25,20 +25,22 @@
                 android:text="    \@Username : Fullname"
                 android:textSize="16sp" />
 
-            <ImageView
+            <Button
+                android:id="@+id/settingsButton"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="8dp"
-                android:src="@drawable/setting_icon"
+                android:background="@drawable/setting_icon"
                 app:tint="#ffffff" />
 
-            <ImageView
+            <Button
+                android:id="@+id/homeButton"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="8dp"
-                android:src="@drawable/home_icon"
+                android:background="@drawable/home_icon"
                 app:tint="#ffffff" />
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>

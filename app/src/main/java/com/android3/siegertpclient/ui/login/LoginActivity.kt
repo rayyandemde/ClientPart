@@ -31,6 +31,7 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         val loginBtn: Button = findViewById(R.id.loginBtn)
         loginBtn.setOnClickListener{
             //loginPresenter.onLoginBtnClicked(emailTxt.text.toString(), passwordTxt.text.toString())
+            //This is only test method
             loginPresenter.onLoginBtnClickedDummy()
         }
 

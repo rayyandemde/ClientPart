@@ -4,7 +4,7 @@ import com.android3.siegertpclient.ui.base.BasePresenter
 
 class SettingPresenter : BasePresenter<SettingContract.ISettingView>(), SettingContract.ISettingPresenter{
     override fun onBackBtnClicked() {
-        TODO("Not yet implemented")
+        view?.navigateToUserProfileActivity()
     }
 
     override fun onSaveBtnClicked() {
@@ -12,7 +12,7 @@ class SettingPresenter : BasePresenter<SettingContract.ISettingView>(), SettingC
     }
 
     override fun onLogoutBtnClicked() {
-        TODO("Not yet implemented")
+        view?.navigateToLoginActivity()
     }
 
 }

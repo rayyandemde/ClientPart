@@ -7,6 +7,7 @@ import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
+import com.android3.siegertpclient.ui.createtournament.CreateTournamentActivity
 import com.android3.siegertpclient.ui.invitation.InvitationActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
@@ -78,7 +79,7 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
     }
 
     override fun navigateToCreateTournamentActivity() {
-        val cTournamentIntent = Intent(this, CreateTeamActivity::class.java)
+        val cTournamentIntent = Intent(this, CreateTournamentActivity::class.java)
         startActivity(cTournamentIntent)
     }
 

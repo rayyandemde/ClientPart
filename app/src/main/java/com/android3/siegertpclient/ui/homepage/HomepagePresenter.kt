@@ -39,6 +39,10 @@ class HomepagePresenter() : BasePresenter<HomepageContract.IHomepageView>(), Hom
         TODO("Not yet implemented")
     }
 
+    override fun onInvitationBtnClicked() {
+        view?.navigateToInvitationActivity()
+    }
+
     fun createDummyAccount(email : String,
                            password : String,
                            username: String,

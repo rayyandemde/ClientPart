@@ -54,7 +54,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
             TournamenttypeSpinner.adapter = adapter
         }
 
-        val createBtn: Button = findViewById(R.id.buttoncreate)
+        val createBtn: Button = findViewById(R.id.buttonCreateTournament)
         createBtn.setOnClickListener{
             createTournamentPresenter.onCreateBtnClicked()
         }
