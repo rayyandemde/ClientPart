@@ -12,6 +12,11 @@ class UserRemoteDataSource (private val userService : UserService) {
 
     private val runtimeError = "Response of Server was not successful"
 
+    private fun convertURespToUser (uResp : UserResponse) : User {
+        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
+            uResp.teamList, uResp.tournamentList)
+    }
+
     fun createNewUser (username: String, surname: String, firstName: String, userId : String) : User {
         val user = hashMapOf<String, String>()
         user["surname"] = surname
@@ -27,8 +32,7 @@ class UserRemoteDataSource (private val userService : UserService) {
             throw RuntimeException(runtimeError)
         }
         val uResp =  response.body()
-        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
-            uResp.teamList, uResp.tournamentList)
+        return convertURespToUser(uResp)
 
     }
 
@@ -39,8 +43,7 @@ class UserRemoteDataSource (private val userService : UserService) {
             throw RuntimeException(runtimeError)
         }
         val uResp =  response.body()
-        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
-            uResp.teamList, uResp.tournamentList)
+        return convertURespToUser(uResp)
     }
 
     fun getUserByUsername (username : String) : User {
@@ -50,8 +53,7 @@ class UserRemoteDataSource (private val userService : UserService) {
             throw RuntimeException(runtimeError)
         }
         val uResp =  response.body()
-        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
-            uResp.teamList, uResp.tournamentList)
+        return convertURespToUser(uResp)
     }
 
     fun getUsersTournaments (username: String) : TournamentList {
@@ -89,8 +91,7 @@ class UserRemoteDataSource (private val userService : UserService) {
         if (!response.isSuccessful) {
             throw RuntimeException(runtimeError)
         }
-        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
-            uResp.teamList, uResp.tournamentList)
+        return convertURespToUser(uResp)
     }
 
 }
