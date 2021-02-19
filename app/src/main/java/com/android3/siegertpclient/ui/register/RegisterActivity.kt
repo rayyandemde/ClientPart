@@ -19,7 +19,7 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        registerPresenter = RegisterPresenter(this)
+        registerPresenter = RegisterPresenter()
 
         val username : EditText = findViewById(R.id.username)
         val forename : EditText = findViewById(R.id.firstName)

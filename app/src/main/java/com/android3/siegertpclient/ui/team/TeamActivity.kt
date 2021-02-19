@@ -46,7 +46,7 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragment_container, teamTournamentsFragment)
+        transaction.add(R.id.fragment_container, teamMemberFragment)
         transaction.commit()
     }
 

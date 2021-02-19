@@ -14,9 +14,16 @@ class MyTeamsFragment : Fragment() {
 
     private val userProfilePresenter: UserProfilePresenter = UserProfilePresenter()
 
+    var myTeamsRecycler: RecyclerView? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         var view = inflater!!.inflate(R.layout.fragment_myteams, container, false)
+
+        myTeamsRecycler = view.findViewById<RecyclerView>(R.id.my_teams_recycler)
+
+        myTeamsRecycler!!.layoutManager = LinearLayoutManager(context)
+        myTeamsRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
 
         return view
     }
