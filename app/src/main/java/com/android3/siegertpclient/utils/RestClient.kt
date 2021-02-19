@@ -12,7 +12,7 @@ class RestClient {
 
     fun getUserService(): UserService {
         val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl("https://our.server.com/")
+            .baseUrl("https://sieger-kit.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         //Todo Include baseURL
@@ -21,7 +21,7 @@ class RestClient {
 
     fun getInvitationService(): InvitationService {
         val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl("https://our.server.com/")
+            .baseUrl("https://sieger-kit.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         //Todo Include baseURL
@@ -30,7 +30,7 @@ class RestClient {
 
     fun getTeamService() : TeamService {
         val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl("https://our.server.com/")
+            .baseUrl("https://sieger-kit.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         //Todo Include baseURL
@@ -39,7 +39,7 @@ class RestClient {
 
     fun getGameService() : GameService {
         val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl("https://our.server.com/")
+            .baseUrl("https://sieger-kit.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         //Todo Include baseURL
@@ -48,7 +48,7 @@ class RestClient {
 
     fun getTournamentService() : TournamentService {
         val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl("https://our.server.com/")
+            .baseUrl("https://sieger-kit.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         //Todo Include baseURL

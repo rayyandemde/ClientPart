@@ -10,9 +10,10 @@ import java.util.*
 
 class TournamentRemoteDataSource (private val tournamentService: TournamentService) : ITournamentDataSource {
 
-    //TODO change param
-    fun createNewTournament(tournament : Tournament, ownUserId: String) : Tournament {
-        val userCall = tournamentService.createNewTournament(tournament, ownUserId)
+    fun createNewTournament(tournamentForm : String, tournamentSize : String, tournamentName: String,
+                            tournamentDetail: TournamentDetail, ownUserId: String) : Tournament {
+        val userCall = tournamentService.createNewTournament(tournamentForm, tournamentSize,
+            tournamentName, tournamentDetail, ownUserId)
         val response = userCall.execute()
         if (!response.isSuccessful) {
 
