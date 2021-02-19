@@ -9,7 +9,7 @@ class InvitationPresenter : BasePresenter<InvitationContract.IInvitationView>(),
     }
 
     override fun onBackBtnClicked() {
-        TODO("Not yet implemented")
+        view?.navigateToHomepageActivity()
     }
 
     override fun onAcceptBtnClicked(tournament: Tournament) {

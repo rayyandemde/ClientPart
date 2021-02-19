@@ -58,8 +58,7 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPas
     }
 
     override fun navigateToHomepageActivity() {
-        val fpIntent2 = Intent(this, HomepageActivity::class.java)
-        startActivity(fpIntent2)
+        //Will not be implemented
     }
 
     override fun showProgress() {

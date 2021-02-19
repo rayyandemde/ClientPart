@@ -18,31 +18,6 @@ class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
 
     private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
 
-
-    override fun onResume() {
-        super.onResume()
-        tournamentPresenter.onAttach(this)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        tournamentPresenter.onDetach()
-    }
-
-
-
-
-    private fun openRegisterActivity() {
-        val rIntent = Intent(this, RegisterActivity::class.java)
-        startActivity(rIntent)
-    }
-
-    private fun openForgotPasswordActivity() {
-        val fpIntent = Intent(this, ForgotPasswordActivity::class.java)
-        startActivity(fpIntent)
-    }
-
-
     private val tournamentMatchesFragment:TournamentMatchesFragment
 
     private  val tournamentParticipantsFragment : TournamentParticipantsFragment
@@ -90,6 +65,26 @@ class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragment_container,tournamentDetailsFragment)
         transaction.commit()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        tournamentPresenter.onAttach(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        tournamentPresenter.onDetach()
+    }
+
+    private fun openRegisterActivity() {
+        val rIntent = Intent(this, RegisterActivity::class.java)
+        startActivity(rIntent)
+    }
+
+    private fun openForgotPasswordActivity() {
+        val fpIntent = Intent(this, ForgotPasswordActivity::class.java)
+        startActivity(fpIntent)
     }
 
 
