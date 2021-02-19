@@ -6,6 +6,9 @@ import com.android3.siegertpclient.utils.TournamentState
 import com.android3.siegertpclient.utils.TournamentTypesUtil
 import java.util.*
 
+/**
+ * Tournament class is to shoe the attribute in Tournament
+ */
 
 //Replacement Class for Tournament without the connection to Room
 data class TournamentData(

@@ -16,7 +16,8 @@ import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView{
+class TeamTournamentsFragment : Fragment() , TeamContract.ITeamView {
+
 
     private val teamPresenter: TeamPresenter = TeamPresenter()
 
@@ -47,6 +48,7 @@ class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView{
 
     override fun onDestroy() {
         super.onDestroy()
+        teamPresenter.onDetach()
     }
 
     fun showTournaments(tournaments: List<Tournament>) {

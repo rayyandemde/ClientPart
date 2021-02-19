@@ -28,7 +28,15 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
 
         return view
     }
+    override fun onResume() {
+        super.onResume()
+        tournamentPresenter.onAttach(this)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        tournamentPresenter.onDetach()
+    }
     fun showGames(games: List<Game>) {
         TODO("Not yet implemented")
     }

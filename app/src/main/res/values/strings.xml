@@ -21,4 +21,10 @@
         <item>Single</item>
         <item>Team</item>
     </string-array>
+
+    <string-array name="TypeOfGame_array">
+        <item>KO</item>
+        <item>League</item>
+        <item>KO with Gruppe</item>
+    </string-array>
 </resources>
