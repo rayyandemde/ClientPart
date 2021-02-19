@@ -34,7 +34,9 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         when(item.itemId){
             R.id.navigation_feed -> transaction.replace(R.id.fragment_container, feedFragment)
             R.id.navigation_createtournament -> homepagePresenter.onCreateTournamentBtnClicked()
+
             //R.id.navigation_createtournament -> homepagePresenter.goToTournament()
+
             R.id.navigation_createteam -> homepagePresenter.onCreateTeamBtnClicked()
             R.id.navigation_jointeam -> transaction.replace(R.id.fragment_container, joinTeamFragment)
             R.id.navigation_userprofile -> homepagePresenter.onUserBtnClicked()
