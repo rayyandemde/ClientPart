@@ -67,6 +67,8 @@ class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragment_container,tournamentDetailsFragment)
         transaction.commit()
+
+
     }
 
     override fun onResume() {

@@ -51,7 +51,8 @@ class CreateTeamActivity : BaseActivity(), CreateTeamContract.ICreateTeamView {
 
     //navigate to the Home Activity.
     override fun navigateToHomepageActivity() {
-        //Will not be implemented
+        val hIntent = Intent(this, HomepageActivity::class.java)
+        startActivity(hIntent)
     }
 
     //navigate to the team Activity.

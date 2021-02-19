@@ -19,8 +19,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:id="@+id/addBt"
+        android:layout_width="37dp"
+        android:layout_height="39dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/black_back_btn_icon"
         app:layout_constraintBottom_toBottomOf="parent"

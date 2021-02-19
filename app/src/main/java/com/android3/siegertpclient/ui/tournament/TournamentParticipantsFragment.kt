@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,16 +16,27 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
 
     private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
 
+
     var tournamentParticipantsRecycler: RecyclerView? = null
+
+    var centerBt : Button? =null
+    var linkEt : EditText? =null
+    var openBt : Button?=null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         var view = inflater.inflate(R.layout.fragment_tournamentparticipants, container, false)
 
+
         tournamentParticipantsRecycler = view.findViewById<RecyclerView>(R.id.participants_recycler)
 
         tournamentParticipantsRecycler!!.layoutManager = LinearLayoutManager(context)
         tournamentParticipantsRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
+
+
+        centerBt = view.findViewById(R.id.buttonCenter)
+        linkEt = view.findViewById(R.id.stagesImagesLink)
+        openBt = view.findViewById(R.id.openLinkBtn)
 
         return view
     }
