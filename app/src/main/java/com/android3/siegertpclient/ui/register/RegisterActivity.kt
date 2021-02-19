@@ -13,11 +13,13 @@ import com.android3.siegertpclient.ui.login.LoginActivity
 
 class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
 
-    private val registerPresenter: RegisterPresenter = RegisterPresenter()
+    lateinit var registerPresenter: RegisterPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        registerPresenter = RegisterPresenter(this)
 
         val username : EditText = findViewById(R.id.username)
         val forename : EditText = findViewById(R.id.firstName)
