@@ -9,6 +9,7 @@ import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
 import com.android3.siegertpclient.ui.invitation.InvitationActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
+import com.android3.siegertpclient.ui.tournament.TournamentActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -31,7 +32,8 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
 
         when(item.itemId){
             R.id.navigation_feed -> transaction.replace(R.id.fragment_container, feedFragment)
-            R.id.navigation_createtournament -> homepagePresenter.onCreateTournamentBtnClicked()
+            //R.id.navigation_createtournament -> homepagePresenter.onCreateTournamentBtnClicked()
+            R.id.navigation_createtournament -> homepagePresenter.goToTournament()
             R.id.navigation_createteam -> homepagePresenter.onCreateTeamBtnClicked()
             R.id.navigation_jointeam -> transaction.replace(R.id.fragment_container, joinTeamFragment)
             R.id.navigation_userprofile -> homepagePresenter.onUserBtnClicked()
@@ -113,5 +115,9 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
 
     override fun showError(errorId: Int) {
         TODO("Not yet implemented")
+    }
+    override fun goToTournamentScreen() {
+        val tournamentIntent = Intent(this, TournamentActivity::class.java)
+        startActivity(tournamentIntent )
     }
 }

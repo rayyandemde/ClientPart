@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.widget.*
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
+import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.FeedFragment
+import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.homepage.JoinTeamFragment
 import com.android3.siegertpclient.ui.register.RegisterActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -65,8 +67,11 @@ class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
         transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
 
         when(item.itemId){
-            //R.id.navigation_tournament -> transaction.replace(R.id.fragment_container, )
-         //   R.id.navigation_jointeam -> transaction.replace(R.id.fragment_container, joinTeamFragment)
+            R.id.navigation_tournament_info -> transaction.replace(R.id.fragment_container, tournamentDetailsFragment)
+            R.id.navigation_participants -> transaction.replace(R.id.fragment_container, tournamentParticipantsFragment)
+            R.id.navigation_schedule -> transaction.replace(R.id.fragment_container, tournamentSchedulesFragment)
+            R.id.navigation_match_info -> transaction.replace(R.id.fragment_container, tournamentMatchesFragment)
+            R.id.navigation_changelogs -> transaction.replace(R.id.fragment_container, tournamentUpdatesFragment)
         }
 
         transaction.commit()
@@ -83,13 +88,13 @@ class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val transaction = supportFragmentManager.beginTransaction()
-        //transaction.add(R.id.fragment_container, feedFragment)
+        transaction.add(R.id.fragment_container,tournamentDetailsFragment)
         transaction.commit()
     }
 
 
     override fun showTournamentDetailsFragment() {
-        TODO("Not yet implemented")
+
     }
 
     override fun showTournamentParticipantsFragment() {
@@ -109,7 +114,8 @@ class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
     }
 
     override fun navigateToHomepageActivity() {
-        TODO("Not yet implemented")
+        val cTeamIntent = Intent(this, HomepageActivity::class.java)
+        startActivity(cTeamIntent)
     }
 
     override fun showProgress() {
@@ -121,11 +127,11 @@ class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
     }
 
     override fun showError(errorId: Int) {
-        TODO("Not yet implemented")
+        Toast.makeText(applicationContext, errorId, Toast.LENGTH_LONG).show()
     }
 
 }
