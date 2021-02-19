@@ -1,16 +1,27 @@
 package com.android3.siegertpclient.data.tournament
 
+import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote.TournamentDetail
+import com.android3.siegertpclient.utils.ParticipantFormUtil
+import com.android3.siegertpclient.utils.TournamentState
+import com.android3.siegertpclient.utils.TournamentTypesUtil
+import java.util.*
+
+
+//Replacement Class for Tournament without the connection to Room
 data class TournamentData(
-    var tournamentId: String,
-    var participantForm: String,
-    var adminId:String,
-    var tournamentTypes: String,
-    var TypeOfGame: String,
-    var location: String,
-    var registrationDeadline: String,
-    var startTime: String,
-    var endTime: String,
-    var tournamentName: String,
+    val tournamentId : String,
+    val participantForm : ParticipantFormUtil,
+    val adminId : String,
+    val tournamentTypes : TournamentTypesUtil,
+    val typeOfGame : String,
+    val location : String,
+    val registrationDeadline : Date,
+    val startTime : Date,
+    val endTime : Date,
+    val tournamentName : String,
+    val maxParticipantNumber : Int,
+    val type : String,
+    val currentState : TournamentState,
 
     var participantList: ParticipantList?,
 
