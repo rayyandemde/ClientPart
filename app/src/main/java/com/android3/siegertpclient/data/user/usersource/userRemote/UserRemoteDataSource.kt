@@ -4,7 +4,6 @@ import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.user.TeamList
 import com.android3.siegertpclient.data.user.TournamentList
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserServiceDummy
 import com.android3.siegertpclient.utils.TokenUtil
 import retrofit2.Response
 import kotlin.RuntimeException

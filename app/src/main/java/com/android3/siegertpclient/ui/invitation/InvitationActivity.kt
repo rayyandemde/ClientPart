@@ -2,11 +2,14 @@ package com.android3.siegertpclient.ui.invitation
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
+import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class InvitationActivity : BaseActivity(), InvitationContract.IInvitationView {
@@ -16,6 +19,11 @@ class InvitationActivity : BaseActivity(), InvitationContract.IInvitationView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_invitation)
+
+        var teamInvitationRecycler: RecyclerView = findViewById<RecyclerView>(R.id.user_invitation_recycler)
+
+        teamInvitationRecycler!!.layoutManager = LinearLayoutManager(applicationContext)
+        teamInvitationRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
 
         val backBtn: FloatingActionButton = findViewById(R.id.backBtnInvitation)
         backBtn.setOnClickListener{
