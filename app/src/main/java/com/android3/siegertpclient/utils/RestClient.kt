@@ -7,6 +7,7 @@ import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRe
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.Executors
 
 class RestClient {
     private var baseUrl = "https://sieger-teamthree.herokuapp.com/"
@@ -15,6 +16,7 @@ class RestClient {
         val retrofit : Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .callbackExecutor(Executors.newSingleThreadExecutor())
             .build()
         return retrofit.create(UserService::class.java)
     }
@@ -23,6 +25,7 @@ class RestClient {
         val retrofit : Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .callbackExecutor(Executors.newSingleThreadExecutor())
             .build()
         return retrofit.create(InvitationService::class.java)
     }
@@ -31,6 +34,7 @@ class RestClient {
         val retrofit : Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .callbackExecutor(Executors.newSingleThreadExecutor())
             .build()
         return retrofit.create(TeamService::class.java)
     }
@@ -39,6 +43,7 @@ class RestClient {
         val retrofit : Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .callbackExecutor(Executors.newSingleThreadExecutor())
             .build()
         return retrofit.create(GameService::class.java)
     }
@@ -47,6 +52,7 @@ class RestClient {
         val retrofit : Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .callbackExecutor(Executors.newSingleThreadExecutor())
             .build()
         return retrofit.create(TournamentService::class.java)
     }
