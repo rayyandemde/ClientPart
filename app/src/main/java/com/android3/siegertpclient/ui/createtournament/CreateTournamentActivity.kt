@@ -16,10 +16,15 @@ import com.android3.siegertpclient.ui.tournament.TournamentActivity
 
 import android.widget.Spinner as Spinner
 
+/**
+ * This class is to implement the activity to create the tournament.
+ */
 class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreateTournamentView{
 
+    //The presenter that to create the tournament.
     private val createTournamentPresenter: CreateTournamentPresenter = CreateTournamentPresenter()
 
+    //This method is to create the view of the createTournament page.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_createtournament)
@@ -80,11 +85,13 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         }
     }
 
+    //To start the instance state.
     override fun onResume() {
         super.onResume()
         createTournamentPresenter.onAttach(this)
     }
 
+    //To destroy the instance state.
     override fun onDestroy() {
         super.onDestroy()
         createTournamentPresenter.onDetach()

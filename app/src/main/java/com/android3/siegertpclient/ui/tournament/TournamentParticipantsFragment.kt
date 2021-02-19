@@ -17,7 +17,15 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
 
         return view
     }
+    override fun onResume() {
+        super.onResume()
+        tournamentPresenter.onAttach(this)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        tournamentPresenter.onDetach()
+    }
 //    fun showParticipantList(participants: List<Participant>) {
 //        TODO("Not yet implemented")
 //    }

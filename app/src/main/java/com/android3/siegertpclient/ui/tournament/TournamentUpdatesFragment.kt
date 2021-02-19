@@ -17,7 +17,15 @@ class TournamentUpdatesFragment : Fragment(), TournamentContract.ITournamentView
 
         return view
     }
+    override fun onResume() {
+        super.onResume()
+        tournamentPresenter.onAttach(this)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        tournamentPresenter.onDetach()
+    }
     fun showUpdateLogs(logs: List<String>) {
         TODO("Not yet implemented")
     }
