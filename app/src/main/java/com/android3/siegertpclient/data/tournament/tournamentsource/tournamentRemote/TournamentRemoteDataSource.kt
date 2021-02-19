@@ -10,6 +10,11 @@ import java.util.*
 
 class TournamentRemoteDataSource (private val tournamentService: TournamentService) : ITournamentDataSource {
 
+    /*TODO include as soon as Tournament is updated
+    private fun convertTRespToTournament(tResp : TournamentResponse) : Tournament {
+
+    }*/
+
     fun createNewTournament(tournamentForm : String, tournamentSize : String, tournamentName: String,
                             tournamentDetail: TournamentDetail, ownUserId: String) : Tournament {
         val userCall = tournamentService.createNewTournament(tournamentForm, tournamentSize,
