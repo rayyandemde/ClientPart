@@ -53,6 +53,10 @@ class TeamMemberFragment : Fragment() , TeamContract.ITeamView {
         TODO("Not yet implemented")
     }
 
+    override fun navigateToHomepageActivity() {
+        TODO("Not yet implemented")
+    }
+
     override fun showProgress() {
         TODO("Not yet implemented")
     }
