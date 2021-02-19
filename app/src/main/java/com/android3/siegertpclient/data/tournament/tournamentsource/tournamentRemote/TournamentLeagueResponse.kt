@@ -5,10 +5,10 @@ import com.android3.siegertpclient.utils.TournamentState
 import com.android3.siegertpclient.utils.TournamentTypesUtil
 import java.util.*
 
-public data class TournamentResponse (
-    val tournamentId : String,
+class TournamentLeagueResponse(
+    val tournamentId : String
     val tournamentDetail : TournamentDetail,
-    val gameList : List<String>,
+    val gameList : List<String>
     val participantList : List<String>,
     val tournamentName : String,
     val maxParticipantNumber : Int,
@@ -18,13 +18,14 @@ public data class TournamentResponse (
     val leagueTable: LeagueTable
 )
 
-data class TournamentDetail (
-    val participantForm : ParticipantFormUtil,
-    val adminId : String,
-    val tournamentTypes : TournamentTypesUtil,
-    val typeOfGame : String,
-    val location : String,
-    val registrationDeadline : Date,
-    val startTime : Date,
-    val endTime : Date
+data class LeagueTable(
+    val tables:List<ParticipantActualStanding>
+)
+data class ParticipantActualStanding(
+    val participantId:String,
+    val plays:Int,
+    val win:Int,
+    val lose:Int,
+    val draw: Int,
+    val points:Int
 )
