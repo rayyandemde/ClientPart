@@ -8,7 +8,7 @@ import com.android3.siegertpclient.R
 class TournamentOverviewCardRecyclerAdapter : RecyclerView.Adapter<CardHolder>() {
 
     override fun getItemCount(): Int {
-        return 10
+        return 20
     }
 
     override fun onBindViewHolder(holder: CardHolder, position: Int) {

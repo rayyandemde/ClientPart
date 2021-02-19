@@ -6,6 +6,11 @@ import com.android3.siegertpclient.ui.base.BasePresenter
 
 class TournamentPresenter : BasePresenter<TournamentContract.ITournamentView>(), TournamentContract.ITeamPresenter {
 
+    fun onDeleteTournamentBtnClicked() {
+        //Do something to remote
+        view?.navigateToHomepageActivity()
+    }
+
     fun onJoinBtnClicked() {
 
     }

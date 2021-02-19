@@ -7,7 +7,7 @@ import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 
-class SplashActivity : BaseActivity() {
+class SplashActivity : BaseActivity() ,SplashContract.ISplashView{
 
     private val splashPresenter: SplashPresenter = SplashPresenter()
 
@@ -19,6 +19,24 @@ class SplashActivity : BaseActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }, 1000)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        splashPresenter.onAttach(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        splashPresenter.onDetach()
+    }
+
+    override fun navigateToLoginActivity() {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToHomepageActivity() {
+        TODO("Not yet implemented")
     }
 
     override fun showProgress() {

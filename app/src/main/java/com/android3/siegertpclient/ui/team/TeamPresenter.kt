@@ -3,16 +3,21 @@ package com.android3.siegertpclient.ui.team
 import com.android3.siegertpclient.ui.base.BasePresenter
 
 class TeamPresenter : BasePresenter<TeamContract.ITeamView>(), TeamContract.ITeamPresenter{
+
+    fun onHomeBtnClicked() {
+        view?.navigateToHomepageActivity()
+    }
+
     override fun onBackBtnClicked() {
-        TODO("Not yet implemented")
+        //Will not be implemented
     }
 
     override fun onMemberBtnClicked() {
-        TODO("Not yet implemented")
+        //Will not be implemented
     }
 
     override fun onTeamTournamentBtnClicked() {
-        TODO("Not yet implemented")
+        //Will not be implemented
     }
 
     override fun checkIfAdmin(userId: String) {

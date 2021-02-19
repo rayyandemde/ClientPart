@@ -46,7 +46,7 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragment_container, teamTournamentsFragment)
+        transaction.add(R.id.fragment_container, teamMemberFragment)
         transaction.commit()
     }
 
@@ -70,6 +70,10 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
 
     override fun showTeamTournamentsFragment() {
         //Will not be implemented
+    }
+
+    override fun navigateToHomepageActivity() {
+        TODO("Not yet implemented")
     }
 
     override fun showProgress() {

@@ -4,37 +4,47 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.R.*
+import com.android3.siegertpclient.R.id.*
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordPresenter
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
+
 import com.android3.siegertpclient.ui.tournament.TournamentActivity
 
+import android.widget.Spinner as Spinner
+
+/**
+ * This class is to implement the activity to create the tournament.
+ */
 class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreateTournamentView{
 
+    //The presenter that to create the tournament.
     private val createTournamentPresenter: CreateTournamentPresenter = CreateTournamentPresenter()
 
+    //This method is to create the view of the createTournament page.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_createtournament)
 
-        val NameEt: EditText = findViewById(R.id.Name)
+        val NameEt: EditText = findViewById(Name)
 
-        val DateEt: EditText = findViewById(R.id.Date)
+        val DateEt: EditText = findViewById(Date)
 
-        val MaxPlayerEt: EditText = findViewById(R.id.MaxPlayer)
+        val MaxPlayerEt: EditText = findViewById(MaxPlayer)
 
-        val LocationEt: EditText = findViewById(R.id.Location)
+        val LocationEt: EditText = findViewById(Location)
 
-        val DeadlineEt: EditText = findViewById(R.id.Regideadline)
+        val DeadlineEt: EditText = findViewById(Regideadline)
 
-        val PrizeEt: EditText = findViewById(R.id.Prize)
+        val PrizeEt: EditText = findViewById(Prize)
 
-       val ParticipanttypeSpinner :Spinner = findViewById(R.id.ParticipantForm)
+       val ParticipanttypeSpinner : Spinner = findViewById(ParticipantForm)
         ArrayAdapter.createFromResource(
             this,
-            R.array.Participanttypes_array,
+            array.Participanttypes_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
@@ -43,10 +53,22 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
             ParticipanttypeSpinner.adapter = adapter
         }
 
-        val TournamenttypeSpinner :Spinner = findViewById(R.id.TournamentType)
+        val GametypeSpinner : Spinner = findViewById(TypeOfGame1)
         ArrayAdapter.createFromResource(
             this,
-            R.array.Tournamenttypes_array,
+            array.TypeOfGame_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            ParticipanttypeSpinner.adapter = adapter
+        }
+
+        val TournamenttypeSpinner : Spinner = findViewById(TournamentType)
+        ArrayAdapter.createFromResource(
+            this,
+            array.Tournamenttypes_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
@@ -55,17 +77,21 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
             TournamenttypeSpinner.adapter = adapter
         }
 
+
         val createBtn: Button = findViewById(R.id.buttonCreateTournament)
+
         createBtn.setOnClickListener{
             createTournamentPresenter.onCreateBtnClicked()
         }
     }
 
+    //To start the instance state.
     override fun onResume() {
         super.onResume()
         createTournamentPresenter.onAttach(this)
     }
 
+    //To destroy the instance state.
     override fun onDestroy() {
         super.onDestroy()
         createTournamentPresenter.onDetach()

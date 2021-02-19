@@ -18,12 +18,12 @@ class TournamentLocalDataSource(val tournamentDao: TournamentDao) {
 
 
     fun getUser(){
-        tournamentDao!!.allTournaments
+        tournamentDao.allTournaments
     }
     fun deleteUser(){
-        tournamentDao!!.deleteAllTournaments()
+        tournamentDao.deleteAllTournaments()
     }
     fun updateUser(tournament:Tournament){
-        tournamentDao!!.updateTournaments(tournament)
+        tournamentDao.updateTournaments(tournament)
     }
 }

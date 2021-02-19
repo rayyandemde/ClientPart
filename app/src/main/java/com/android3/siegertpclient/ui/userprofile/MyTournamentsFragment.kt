@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
+import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
 import com.android3.siegertpclient.ui.setting.SettingActivity
 
 class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
@@ -17,10 +20,16 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
 
     var settingBtn: Button? = null
     var homeBtn: Button? = null
+    var myTournamentsRecycler: RecyclerView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         var view = inflater!!.inflate(R.layout.fragment_mytournaments, container, false)
+
+        myTournamentsRecycler = view.findViewById<RecyclerView>(R.id.my_tournament_recycler)
+
+        myTournamentsRecycler!!.layoutManager = LinearLayoutManager(context)
+        myTournamentsRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
 
         settingBtn = view.findViewById(R.id.settingsButton)
         settingBtn?.setOnClickListener{

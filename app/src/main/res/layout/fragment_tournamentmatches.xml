@@ -10,7 +10,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tournament_matches_recycler"
-        android:layout_width="504dp"
+        android:layout_width="match_parent"
         android:layout_height="369dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="56dp"
@@ -31,11 +31,11 @@
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="194dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="You can input a link where you upload your tournaments branch or table"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tournament_matches_recycler" />
 

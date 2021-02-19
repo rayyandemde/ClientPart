@@ -11,7 +11,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/team_member_recycler"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="421dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="56dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
@@ -22,6 +22,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="112dp"
         android:background="@drawable/black_back_btn_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

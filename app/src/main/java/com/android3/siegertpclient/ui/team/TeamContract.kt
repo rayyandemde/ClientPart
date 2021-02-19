@@ -9,6 +9,8 @@ interface TeamContract {
         fun showMemberFragment()
 
         fun showTeamTournamentsFragment()
+
+        fun navigateToHomepageActivity()
     }
 
     interface ITeamPresenter {
