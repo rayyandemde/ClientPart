@@ -1,6 +1,7 @@
 package com.android3.siegertpclient.ui.register
 
 import android.content.Context
+import android.util.Log
 import android.util.Patterns
 import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
@@ -19,11 +20,11 @@ class RegisterPresenter() : BasePresenter<RegisterContract.IRegisterView>(), Reg
     ) {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             view?.showErrorOnEmail("Email is not valid")
-            //throw an exception
+            return
         }
-        if (password == retypePassword) {
+        if (password != retypePassword) {
             view?.showErrorOnPassword("Password doesn't match")
-            //throw exception
+            return
         }
 
         val user = userRepo.register(email, password, username, forename, surname)

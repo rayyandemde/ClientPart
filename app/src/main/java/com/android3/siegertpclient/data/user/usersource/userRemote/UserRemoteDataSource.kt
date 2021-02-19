@@ -1,17 +1,22 @@
 package com.android3.siegertpclient.data.user.usersource.userRemote
 
+import android.util.Log
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.TokenUtil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 import kotlin.RuntimeException
 
 class UserRemoteDataSource (private val userService : UserService) {
 
     private val runtimeError = "Response of Server was not successful"
 
-    fun createNewUser (username: String, surname: String, firstName: String, userId : String) : User {
+    fun createNewUser (username: String, surname: String, firstName: String, userId : String) : User? {
         val user = hashMapOf<String, String>()
         user["surname"] = surname
         user["forename"] = firstName
@@ -22,8 +27,22 @@ class UserRemoteDataSource (private val userService : UserService) {
         if (userCall.isCanceled) {
             throw RuntimeException(runtimeError)
         }
-        val response = userCall.execute()
-        return response.body()
+        //val response = userCall.execute()
+        var userTest: User? = null
+        val response = userCall.enqueue(object : Callback<User> {
+            override fun onFailure(call: Call<User>?, t: Throwable?) {
+                Log.e("retrofit", "call failed")
+            }
+
+            override fun onResponse(call: Call<User>?, response: Response<User>?) {
+                Log.e("retrofit", "call success")
+                userTest = response?.body()
+                println(userTest)
+            }
+
+        })
+
+        return userTest
     }
 
     fun getUserById (userId : String) : User {
@@ -83,3 +102,4 @@ class UserRemoteDataSource (private val userService : UserService) {
     }
 
 }
+
