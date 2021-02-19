@@ -1,29 +1,25 @@
 package com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote
 
 import com.android3.siegertpclient.data.game.Game
+import com.android3.siegertpclient.data.tournament.ParticipantConverter
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.tournament.TournamentData
 import com.android3.siegertpclient.data.tournament.tournamentsource.ITournamentDataSource
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.ParticipantFormUtil
-import com.android3.siegertpclient.utils.TournamentState
 import com.android3.siegertpclient.utils.TournamentTypesUtil
-import java.net.CacheResponse
 import java.util.*
 
 class TournamentRemoteDataSource (private val tournamentService: TournamentService) : ITournamentDataSource {
 
-    private fun convertTRespToTournament(tResp : Map<String, Any?>) : TournamentData {
-
-    }
-    private fun convertToLeague(response: Map<String, Any?>):TournamentLeague{
-        val tournamentId: String = response.get("tournamentId").toString()
-        val detail : TournamentDetail = response.get("tournamentDetail") as TournamentDetail
-
-
-        return TournamentLeague(tournamentId,detail,response.get("gameList") as List<String>,
-            response.get("participantList") as List<String>,response.get("tournamentName") as String,
-            response.get("maxParticipantNumber") as Int, response.get("currentState") as TournamentState,
-            response.get("leagueTable") as LeagueTable)
+    private fun convertTRespToTournament(tResp : TournamentResponse) : TournamentData {
+        val participantConverter = ParticipantConverter()
+        val pList = participantConverter.toParticipantList(tResp.participantList)
+        val gList = participantConverter.toGameList(tResp.gameList)
+        return TournamentData(tResp.tournamentId, tResp.tournamentDetail.participantForm, tResp.tournamentDetail.adminId,
+        tResp.tournamentDetail.tournamentTypes, tResp.tournamentDetail.typeOfGame, tResp.tournamentDetail.location,
+        tResp.tournamentDetail.registrationDeadline, tResp.tournamentDetail.startTime, tResp.tournamentDetail.endTime,
+        tResp.tournamentName, tResp.maxParticipantNumber, tResp.type, tResp.currentState, pList, gList)
     }
 
     fun createNewTournament(tournamentForm : String, tournamentSize : String, tournamentName: String,
@@ -38,22 +34,14 @@ class TournamentRemoteDataSource (private val tournamentService: TournamentServi
         return convertTRespToTournament(response.body())
     }
 
-    fun getTournamentById(tourneyId : String, ownUserId: String) : Tournament {
+    fun getTournamentById(tourneyId : String, ownUserId: String) : TournamentData {
         val userCall = tournamentService.getTournamentById(tourneyId, ownUserId)
         val response = userCall.execute()
         if (!response.isSuccessful) {
 
             //TOdo implement error code
         }
-        if(response.body()["type"]?.equals("League") == true){
-            return convertToLeague(response.body())
-        }
-        if(response.body()["type"]?.equals("KnockOut") == true){
-            return convertToLeague(response.body())
-        }
-        if(response.body()["type"]?.equals("KnockOutWithGroup") == true){
-            return convertToLeague(response.body())
-        }
+        return convertTRespToTournament(response.body())
     }
 
     fun getTournamentByName(tournamentName : String, ownUserId: String) : TournamentData {

@@ -3,6 +3,9 @@ package com.android3.siegertpclient.data.team.teamsource.teamLocal
 import androidx.room.*
 import com.android3.siegertpclient.data.tournament.Tournament
 
+/**
+ * TeamDao used to call the team database.
+ */
 @Dao
 interface TeamDao {
     @Insert

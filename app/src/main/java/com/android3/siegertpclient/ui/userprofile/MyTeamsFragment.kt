@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView{
 
     var myTeamsRecycler: RecyclerView? = null
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         var view = inflater!!.inflate(R.layout.fragment_myteams, container, false)
@@ -24,6 +26,7 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView{
 
         myTeamsRecycler!!.layoutManager = LinearLayoutManager(context)
         myTeamsRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
+
 
         return view
     }

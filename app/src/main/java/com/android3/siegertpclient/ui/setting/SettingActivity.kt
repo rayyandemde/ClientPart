@@ -3,6 +3,7 @@ package com.android3.siegertpclient.ui.setting
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
@@ -24,6 +25,13 @@ class SettingActivity : BaseActivity() , SettingContract.ISettingView {
             settingPresenter.onBackBtnClicked()
         }
 
+        val languageBt : Button = findViewById(R.id.changeLanguage)
+
+        val firstnameEt : EditText = findViewById(R.id.changeFirstName)
+
+        val lastnameEt: EditText = findViewById(R.id.changeLastName)
+
+        val saveBt : Button = findViewById(R.id.saveSettings)
         val logoutTv: TextView = findViewById(R.id.logout)
         logoutTv.setOnClickListener{
             settingPresenter.onLogoutBtnClicked()

@@ -3,6 +3,9 @@ package com.android3.siegertpclient.data.invitation.invitationsource.invitationL
 import com.android3.siegertpclient.data.Result.Result
 import com.android3.siegertpclient.data.invitation.Invitation
 
+/**
+ * Invitation local data source of to conect with the invitationDao.
+ */
 class InvitationLocalDataSource(val invitationDao: InvitationDao) {
     fun saveInvitation(newInvitation: Invitation) {
         invitationDao.insertInvitation(newInvitation)

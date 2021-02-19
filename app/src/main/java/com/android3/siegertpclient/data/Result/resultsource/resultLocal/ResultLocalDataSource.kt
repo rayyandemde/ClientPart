@@ -3,7 +3,9 @@ package com.android3.siegertpclient.data.Result.resultsource.resultLocal
 import com.android3.siegertpclient.data.Result.Result
 import com.android3.siegertpclient.data.tournament.Tournament
 
-
+/**
+ * Local data source that connect to the resultDao.
+ * */
 class ResultLocalDataSource(val resultDao: ResultDao) {
     fun saveResult(result: Result) {
         resultDao.insertResult(result)
