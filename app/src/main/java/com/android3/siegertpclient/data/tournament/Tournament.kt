@@ -4,6 +4,9 @@ import androidx.room.*
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.android3.siegertpclient.utils.ParticipantFormUtil
+import com.android3.siegertpclient.utils.TournamentState
+import com.android3.siegertpclient.utils.TournamentTypesUtil
 
 @Entity
 data class Tournament(
@@ -11,13 +14,13 @@ data class Tournament(
     var tournamentId: String,
     @ColumnInfo(name = "participant_form") var participantForm: String,
     @ColumnInfo(name = "admin_id") var adminId:String,
-    @ColumnInfo(name = "tournament_name") var tournamentName: String,
     @ColumnInfo(name = "tournament_types") var tournamentTypes: String,
     @ColumnInfo(name = "type_of_game") var TypeOfGame: String,
     @ColumnInfo(name = "location") var location: String,
     @ColumnInfo(name = "registration_deadline") var registrationDeadline: String,
     @ColumnInfo(name = "start_time") var startTime: String,
     @ColumnInfo(name = "end_time") var endTime: String,
+    @ColumnInfo(name = "tournament_name") var tournamentName: String,
 
     @TypeConverters(ParticipantConverter::class)
     @ColumnInfo(name = "participant_list") var participantList: ParticipantList?,

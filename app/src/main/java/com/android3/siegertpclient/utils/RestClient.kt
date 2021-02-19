@@ -15,7 +15,6 @@ class RestClient {
             .baseUrl("https://sieger-kit.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        //Todo Include baseURL
         return retrofit.create(UserService::class.java)
     }
 
@@ -24,7 +23,6 @@ class RestClient {
             .baseUrl("https://sieger-kit.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        //Todo Include baseURL
         return retrofit.create(InvitationService::class.java)
     }
 
@@ -33,7 +31,6 @@ class RestClient {
             .baseUrl("https://sieger-kit.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        //Todo Include baseURL
         return retrofit.create(TeamService::class.java)
     }
 
@@ -42,7 +39,6 @@ class RestClient {
             .baseUrl("https://sieger-kit.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        //Todo Include baseURL
         return retrofit.create(GameService::class.java)
     }
 
@@ -51,7 +47,6 @@ class RestClient {
             .baseUrl("https://sieger-kit.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        //Todo Include baseURL
         return retrofit.create(TournamentService::class.java)
     }
 

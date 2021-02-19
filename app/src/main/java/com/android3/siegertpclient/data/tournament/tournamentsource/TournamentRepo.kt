@@ -1,7 +1,7 @@
 package com.android3.siegertpclient.data.tournament.tournamentsource
 
 import com.android3.siegertpclient.data.game.Game
-import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.data.tournament.TournamentData
 import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote.TournamentDetail
 import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote.TournamentRemoteDataSource
 import com.android3.siegertpclient.data.user.User
@@ -20,18 +20,18 @@ class TournamentRepo {
     fun createNewTournament(
         tournamentForm: String, tournamentSize: String, tournamentName: String,
         tournamentDetail: TournamentDetail, ownUserId: String
-    ): Tournament {
+    ): TournamentData {
         return tournamentRemote.createNewTournament(
             tournamentForm, tournamentSize,
             tournamentName, tournamentDetail, ownUserId
         )
     }
 
-    fun getTournamentById(tourneyId: String, ownUserId: String): Tournament {
+    fun getTournamentById(tourneyId: String, ownUserId: String): TournamentData {
         return tournamentRemote.getTournamentById(tourneyId, ownUserId)
     }
 
-    fun getTournamentByName(tournamentName: String, ownUserId: String): Tournament {
+    fun getTournamentByName(tournamentName: String, ownUserId: String): TournamentData {
         return tournamentRemote.getTournamentByName(tournamentName, ownUserId)
     }
 
@@ -44,7 +44,7 @@ class TournamentRepo {
         tournamentTypes: TournamentTypesUtil, typeOfGame: String, location: String,
         registrationDeadline: Date, startTime: Date, endTime: Date,
         ownUserId: String
-    ): Tournament {
+    ): TournamentData {
         return tournamentRemote.updateTournamentDetailById(
             tournamentName, participantForm, adminId, tournamentTypes,
             typeOfGame, location, registrationDeadline, startTime, endTime, ownUserId

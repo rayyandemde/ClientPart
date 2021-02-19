@@ -1,17 +1,22 @@
 package com.android3.siegertpclient.data.user.usersource.userRemote
 
 import com.android3.siegertpclient.data.invitation.Invitation
-import com.android3.siegertpclient.data.user.NotificationList
 import com.android3.siegertpclient.data.user.TeamList
 import com.android3.siegertpclient.data.user.TournamentList
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserServiceDummy
 import com.android3.siegertpclient.utils.TokenUtil
+import retrofit2.Response
 import kotlin.RuntimeException
 
 class UserRemoteDataSource (private val userService : UserService) {
 
     private val runtimeError = "Response of Server was not successful"
+
+    private fun convertURespToUser (uResp : UserResponse) : User {
+        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
+            uResp.teamList, uResp.tournamentList)
+    }
 
     fun createNewUser (username: String, surname: String, firstName: String, userId : String) : User {
         val user = hashMapOf<String, String>()
@@ -23,24 +28,17 @@ class UserRemoteDataSource (private val userService : UserService) {
         if (userCall.isCanceled) {
             throw RuntimeException(runtimeError)
         }
-        /* Real implementation
-        val response = userCall.execute()
-        if (!response.isSuccessful) {
+        var response : Response<UserResponse>? = null
+        Thread(Runnable {
+            response = userCall.execute()
+        }).start()
+//        val response = userCall.execute()
+        if (!response?.isSuccessful!!) {
             throw RuntimeException(runtimeError)
         }
-        val uResp =  response.body()
-        */
-        //Dummy implementation
-        val dummyList = arrayListOf<String>("dummyL1", "dummyL2")
-        val tournamentLists = TournamentList(dummyList)
-        val notifications = NotificationList(dummyList)
-        val teamList = TeamList(dummyList)
+        val uResp = response?.body()
+        return convertURespToUser(uResp!!)
 
-        val uResp = UserResponse("dummyUsername", "dummySurname", "dummyForename", "dummyId",
-            tournamentLists, notifications, teamList , "invitationListDummy")
-        //
-        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
-            uResp.teamList, uResp.tournamentList)
     }
 
     fun getUserById (userId : String) : User {
@@ -50,9 +48,7 @@ class UserRemoteDataSource (private val userService : UserService) {
             throw RuntimeException(runtimeError)
         }
         val uResp =  response.body()
-
-        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
-            uResp.teamList, uResp.tournamentList)
+        return convertURespToUser(uResp)
     }
 
     fun getUserByUsername (username : String) : User {
@@ -62,8 +58,7 @@ class UserRemoteDataSource (private val userService : UserService) {
             throw RuntimeException(runtimeError)
         }
         val uResp =  response.body()
-        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
-            uResp.teamList, uResp.tournamentList)
+        return convertURespToUser(uResp)
     }
 
     fun getUsersTournaments (username: String) : TournamentList {
@@ -101,8 +96,7 @@ class UserRemoteDataSource (private val userService : UserService) {
         if (!response.isSuccessful) {
             throw RuntimeException(runtimeError)
         }
-        return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
-            uResp.teamList, uResp.tournamentList)
+        return convertURespToUser(uResp)
     }
 
 }
