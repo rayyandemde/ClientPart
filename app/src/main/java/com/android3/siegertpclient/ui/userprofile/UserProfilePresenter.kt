@@ -1,8 +1,13 @@
 package com.android3.siegertpclient.ui.userprofile
 
+import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
 
 class UserProfilePresenter : BasePresenter<UserProfileContract.IUserProfileView>(), UserProfileContract.IUserProfilePresenter{
+
+    private var userRepo = UserRepo()
+
     override fun onSettingBtnClicked() {
         view?.navigateToSettingActivity()
     }
@@ -25,6 +30,14 @@ class UserProfilePresenter : BasePresenter<UserProfileContract.IUserProfileView>
 
     override fun getTeams() {
         TODO("Not yet implemented")
+    }
+
+    fun getDummyUser() : User {
+        return userRepo.register("dummyEmail",
+            "dummyPassword",
+            "dummyUserName",
+            "dummyFirstName",
+            "dummySurname")
     }
 
 }

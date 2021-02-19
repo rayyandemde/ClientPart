@@ -1,13 +1,16 @@
 package com.android3.siegertpclient.ui.register
 
 import android.content.Context
+import android.os.AsyncTask
+import android.os.AsyncTask.execute
 import android.util.Patterns
-import com.android3.siegertpclient.data.userdummy.usersource.UserRepoDummy
+import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
+import com.android3.siegertpclient.data.user.User
 
 class RegisterPresenter(context: Context) : BasePresenter<RegisterContract.IRegisterView>(), RegisterContract.IRegisterPresenter{
 
-    private var userRepo = UserRepoDummy(context)
+    private var userRepo = UserRepo()
 
     override fun onRegisterBtnClicked(
         email: String,
@@ -19,24 +22,24 @@ class RegisterPresenter(context: Context) : BasePresenter<RegisterContract.IRegi
     ) {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             view?.showErrorOnEmail("Email is not valid")
-            //throw an exception
+            return
         }
-        if (password == retypePassword) {
+        if (password != retypePassword) {
             view?.showErrorOnPassword("Password doesn't match")
-            //throw exception
+            return
         }
 
         val user = userRepo.register(email, password, username, forename, surname)
         if (user == null) {
             view?.showError("Register failed")
+            return
         } else {
             view?.navigateToHomepageActivity()
         }
-
-
     }
 
     override fun onLoginTxtClicked() {
         view?.navigateToLoginActivity()
     }
 }
+

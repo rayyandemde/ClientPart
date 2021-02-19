@@ -1,5 +1,6 @@
 package com.android3.siegertpclient.data.user.usersource
 
+import android.util.Log
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.user.NotificationList
 import com.android3.siegertpclient.data.user.TeamList
@@ -28,6 +29,12 @@ class UserRepo() : IUserDataSource {
         auth = FirebaseAuth.getInstance()
         auth.createUserWithEmailAndPassword(email, password)
         val user = userRemote.createNewUser(username, surname, firstName, auth.currentUser?.uid.toString())
+        if(user.teamList == null) {
+            Log.e("LOG","This object has been failed to created")
+        } else {
+            Log.e("LOG","Object Success")
+        }
+
         userLocal.saveUser(user)
         return user
     }

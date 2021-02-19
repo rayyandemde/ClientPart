@@ -2,11 +2,13 @@ package com.android3.siegertpclient.ui.userprofile
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.setting.SettingActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.android3.siegertpclient.data.user.User
 
 class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView {
 

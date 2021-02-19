@@ -1,6 +1,7 @@
 package com.android3.siegertpclient.data.user.usersource.userRemote
 
 import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.user.NotificationList
 import com.android3.siegertpclient.data.user.TeamList
 import com.android3.siegertpclient.data.user.TournamentList
 import com.android3.siegertpclient.data.user.User
@@ -22,14 +23,24 @@ class UserRemoteDataSource (private val userService : UserService) {
         if (userCall.isCanceled) {
             throw RuntimeException(runtimeError)
         }
+        /* Real implementation
         val response = userCall.execute()
         if (!response.isSuccessful) {
             throw RuntimeException(runtimeError)
         }
         val uResp =  response.body()
+        */
+        //Dummy implementation
+        val dummyList = arrayListOf<String>("dummyL1", "dummyL2")
+        val tournamentLists = TournamentList(dummyList)
+        val notifications = NotificationList(dummyList)
+        val teamList = TeamList(dummyList)
+
+        val uResp = UserResponse("dummyUsername", "dummySurname", "dummyForename", "dummyId",
+            tournamentLists, notifications, teamList , "invitationListDummy")
+        //
         return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
             uResp.teamList, uResp.tournamentList)
-
     }
 
     fun getUserById (userId : String) : User {
@@ -39,6 +50,7 @@ class UserRemoteDataSource (private val userService : UserService) {
             throw RuntimeException(runtimeError)
         }
         val uResp =  response.body()
+
         return User(uResp.userId, uResp.username, uResp.forename, uResp.surname, uResp.notificationList,
             uResp.teamList, uResp.tournamentList)
     }
