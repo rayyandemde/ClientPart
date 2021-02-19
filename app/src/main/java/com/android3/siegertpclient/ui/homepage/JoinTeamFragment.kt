@@ -15,6 +15,7 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
 
     private val homepagePresenter: HomepagePresenter = HomepagePresenter()
 
+    //dummyTest
     var dummyUsername: EditText? = null
     var dummyEmail: EditText? = null
     var dummySurname: EditText? = null
@@ -24,10 +25,16 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
     var dummyGetBtn: Button? = null
     var dummyInfoTv: TextView? = null
 
+    //realImplementation
+    var teamNameEt: EditText? = null
+    var teamPassword: EditText? = null
+    var joinTeamBtn: Button? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         var view = inflater!!.inflate(R.layout.fragment_jointeam, container, false)
 
+        //Dummy implementation
         dummyEmail = view.findViewById<EditText>(R.id.dummyEmail)
         dummyUsername = view.findViewById<EditText>(R.id.dummyUsername)
         dummySurname = view.findViewById<EditText>(R.id.dummySurname)
@@ -44,6 +51,12 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
                 dummyForename?.getText().toString(),
                 dummySurname?.getText().toString())
         }
+        ////
+
+        //Real implementation
+        teamNameEt = view.findViewById<EditText>(R.id.teamName)
+        teamPassword = view.findViewById<EditText>(R.id.teamPassword)
+        joinTeamBtn = view.findViewById<Button>(R.id.joinTeamBtn)
 
         return view
     }

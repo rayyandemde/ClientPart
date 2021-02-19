@@ -8,6 +8,8 @@ interface ForgotPasswordContract {
 
         fun showSuccess(message: String)
 
+        fun navigateToLoginActivity()
+
         fun navigateToHomepageActivity()
     }
 

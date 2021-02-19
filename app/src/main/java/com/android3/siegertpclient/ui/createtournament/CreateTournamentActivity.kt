@@ -9,6 +9,7 @@ import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordPresenter
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
+import com.android3.siegertpclient.ui.tournament.TournamentActivity
 
 class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreateTournamentView{
 
@@ -54,7 +55,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
             TournamenttypeSpinner.adapter = adapter
         }
 
-        val createBtn: Button = findViewById(R.id.buttoncreate)
+        val createBtn: Button = findViewById(R.id.buttonCreateTournament)
         createBtn.setOnClickListener{
             createTournamentPresenter.onCreateBtnClicked()
         }
@@ -71,13 +72,16 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
     }
 
     override fun navigateToHomepageActivity() {
-        val fpIntent2 = Intent(this, HomepageActivity::class.java)
-        startActivity(fpIntent2)
+        //Will not be implemented
     }
 
     override fun navigateToLoginActivity() {
-        val fpIntent2 = Intent(this, LoginActivity::class.java)
-        startActivity(fpIntent2)
+        //Will not be implemented
+    }
+
+    override fun navigateToTournamentActivity() {
+        val tIntent = Intent(this, TournamentActivity::class.java)
+        startActivity(tIntent)
     }
 
     override fun showErrorOnTournamentName(message: String) {
