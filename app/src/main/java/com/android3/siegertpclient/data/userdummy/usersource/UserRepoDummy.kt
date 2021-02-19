@@ -1,5 +1,6 @@
 package com.android3.siegertpclient.data.userdummy.usersource
 
+import android.content.Context
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserServiceDummy
 import com.android3.siegertpclient.data.userdummy.TeamList
@@ -7,13 +8,17 @@ import com.android3.siegertpclient.data.userdummy.TournamentList
 import com.android3.siegertpclient.data.userdummy.User
 import com.android3.siegertpclient.data.userdummy.usersource.userLocal.UserLocalDataSource
 import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserRemoteDataSourceDummy
+import com.android3.siegertpclient.utils.OnlineChecker
 import com.android3.siegertpclient.utils.RestClient
 import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Retrofit
 
-class UserRepoDummy() {
+class UserRepoDummy(var context: Context) {
 
     private val restClient = RestClient()
+
+    var onlineChecker = OnlineChecker(context)
+
 
     private val retrofit = Retrofit.Builder().baseUrl("https://our.server.com/").build()
 
