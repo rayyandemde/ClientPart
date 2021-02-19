@@ -6,6 +6,7 @@ import com.android3.siegertpclient.data.user.TournamentList
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.data.userdummy.usersource.userRemote.UserServiceDummy
 import com.android3.siegertpclient.utils.TokenUtil
+import retrofit2.Response
 import kotlin.RuntimeException
 
 class UserRemoteDataSource (private val userService : UserService) {
@@ -27,12 +28,16 @@ class UserRemoteDataSource (private val userService : UserService) {
         if (userCall.isCanceled) {
             throw RuntimeException(runtimeError)
         }
-        val response = userCall.execute()
-        if (!response.isSuccessful) {
+        var response : Response<UserResponse>? = null
+        Thread(Runnable {
+            response = userCall.execute()
+        }).start()
+//        val response = userCall.execute()
+        if (!response?.isSuccessful!!) {
             throw RuntimeException(runtimeError)
         }
-        val uResp =  response.body()
-        return convertURespToUser(uResp)
+        val uResp = response?.body()
+        return convertURespToUser(uResp!!)
 
     }
 
