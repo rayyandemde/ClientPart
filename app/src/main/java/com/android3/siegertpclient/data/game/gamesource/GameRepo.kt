@@ -4,6 +4,9 @@ import com.android3.siegertpclient.data.game.Game
 import com.android3.siegertpclient.data.game.gamesource.gameRemote.GameRemoteDataSource
 import com.android3.siegertpclient.utils.RestClient
 
+/**
+ * Repository about the game used to call the game data source.
+ */
 class GameRepo : IGameDataSource {
 
     private val restClient = RestClient()

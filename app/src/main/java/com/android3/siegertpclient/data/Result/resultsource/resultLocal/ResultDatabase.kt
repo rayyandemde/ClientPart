@@ -6,7 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.android3.siegertpclient.data.Result.Result
 
-
+/**
+ * Room database use result as entity.
+ */
 @Database(entities = [Result::class], version = 1, exportSchema = false)
 abstract class ResultDatabase : RoomDatabase() {
     abstract val resultDao: ResultDao?

@@ -3,16 +3,10 @@ package com.android3.siegertpclient.data.setting.settingsource.settingLocal
 import com.android3.siegertpclient.data.Result.Result
 import com.android3.siegertpclient.data.setting.Setting
 
+/**
+ * class setting local data source is used to set the local data source.
+ */
 class SettingLocalDataSource(val settingDao: SettingDao) {
-    /**
-    fun check(Language: String): Boolean {
-        if (Language == "English") {
-            return true
-        }
-        return if (Language == "German") {
-            true
-        } else false
-    }**/
 
     fun saveSetting(newSetting: Setting) {
         settingDao.insertSetting(newSetting)

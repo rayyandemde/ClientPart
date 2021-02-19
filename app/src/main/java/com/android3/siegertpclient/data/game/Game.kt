@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Game entity that need for the roomdatabase.
+ */
 @Entity
 data class Game(
     @PrimaryKey

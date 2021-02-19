@@ -1,7 +1,7 @@
 package com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote
 
 import com.android3.siegertpclient.data.game.Game
-
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.ParticipantFormUtil
 import com.android3.siegertpclient.utils.TournamentTypesUtil
@@ -15,15 +15,15 @@ interface TournamentService {
     @POST("tournaments")
     fun createNewTournament(@Body tournamentForm : String, tournamentSize : String, tournamentName: String,
                             tournamentDetail: TournamentDetail,
-                            @Header("currentUserId") ownUserId: String) : Call<Map<String, Any?>>
+                            @Header("currentUserId") ownUserId: String) : Call<TournamentResponse>
 
     @GET("tournaments")
     fun getTournamentById(@Query("id") tourneyId : String,
-                          @Header("currentUserId") ownUserId: String) : Call<Map<String, Any?>>
+                          @Header("currentUserId") ownUserId: String) : Call<TournamentResponse>
 
     @GET("tournaments/{tournamentName}")
     fun getTournamentByName(@Path("tournamentName") tournamentName : String,
-                            @Header("currentUserId") ownUserId: String) : Call<Map<String, Any?>>
+                            @Header("currentUserId") ownUserId: String) : Call<TournamentResponse>
 
     @GET("tournaments/{tournamentName}/participants")
     fun getTournamentParticipants(@Path("tournamentName") tournamentName : String,
@@ -34,7 +34,7 @@ interface TournamentService {
                                    @Body participantForm: ParticipantFormUtil, adminId : String,
                                    tournamentTypes: TournamentTypesUtil, typeOfGame : String, location : String,
                                    registrationDeadline : Date, startTime : Date, endTime : Date,
-                                   @Header("currentUserId") ownUserId: String) : Call<Map<String, Any?>>
+                                   @Header("currentUserId") ownUserId: String) : Call<TournamentResponse>
 
     @DELETE("tournaments/{tournamentName}")
     fun deleteTournament(@Path("tournamentName") tournamentName : String,

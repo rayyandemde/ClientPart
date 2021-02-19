@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +16,9 @@ import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAda
 class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentView{
 
     private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
+    var centerBt : Button? =null
+    var linkEt : EditText? =null
+    var openBt : Button?=null
 
     var tournamentMatchesRecycler: RecyclerView? = null
 
@@ -25,6 +30,10 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
 
         tournamentMatchesRecycler!!.layoutManager = LinearLayoutManager(context)
         tournamentMatchesRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
+
+        centerBt = view.findViewById(R.id.buttonCenter)
+        linkEt = view.findViewById(R.id.stagesImagesLink)
+        openBt = view.findViewById(R.id.openLinkBtn)
 
         return view
     }

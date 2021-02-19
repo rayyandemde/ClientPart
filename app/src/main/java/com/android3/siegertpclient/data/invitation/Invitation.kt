@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Invitation class used to implement as an Entity for the Room database.
+ */
 @Entity
 data class Invitation(
     @PrimaryKey

@@ -13,7 +13,9 @@ import com.android3.siegertpclient.ui.homepage.JoinTeamFragment
 import com.android3.siegertpclient.ui.register.RegisterActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
+/**
+ * This tournament
+ */
 class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
 
     private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
@@ -65,6 +67,8 @@ class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragment_container,tournamentDetailsFragment)
         transaction.commit()
+
+
     }
 
     override fun onResume() {
