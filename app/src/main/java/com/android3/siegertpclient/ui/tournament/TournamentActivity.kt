@@ -13,7 +13,9 @@ import com.android3.siegertpclient.ui.homepage.JoinTeamFragment
 import com.android3.siegertpclient.ui.register.RegisterActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
+/**
+ * This tournament
+ */
 class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
 
     private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
