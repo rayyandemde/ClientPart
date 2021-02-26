@@ -21,14 +21,14 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
 
         registerPresenter = RegisterPresenter()
 
-        val username : EditText = findViewById(R.id.username)
-        val forename : EditText = findViewById(R.id.firstName)
-        val surname : EditText = findViewById(R.id.lastName)
-        val email : EditText = findViewById(R.id.email)
-        val password : EditText = findViewById(R.id.password)
-        val retypePassword : EditText = findViewById(R.id.retypePassword)
+        val username : EditText = findViewById(R.id.et_username)
+        val forename : EditText = findViewById(R.id.et_first_name)
+        val surname : EditText = findViewById(R.id.et_last_name)
+        val email : EditText = findViewById(R.id.et_email)
+        val password : EditText = findViewById(R.id.et_password)
+        val retypePassword : EditText = findViewById(R.id.et_retype_password)
 
-        val signUpBtn: Button = findViewById(R.id.signUpBtn)
+        val signUpBtn: Button = findViewById(R.id.button_sign_up)
         signUpBtn.setOnClickListener {
             val usernameString = username.text.toString()
             val emailString = email.text.toString()
@@ -40,7 +40,7 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
                 retypePasswordString, surnameString, forenameString, usernameString)
         }
 
-        val loginTv: TextView = findViewById(R.id.loginClickable)
+        val loginTv: TextView = findViewById(R.id.tv_login)
         loginTv.setOnClickListener {
             registerPresenter.onLoginTxtClicked()
         }
