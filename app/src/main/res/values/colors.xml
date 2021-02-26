@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="accent">#FF0000</color>
+    <color name="app_color">#DDA700</color>
+    <color name="app_color_dark">#C49D27</color>
+    <color name="app_complimentary">#D9DD00</color>
+    <color name="app_complimentary_dark">#C4C427</color>
 </resources>

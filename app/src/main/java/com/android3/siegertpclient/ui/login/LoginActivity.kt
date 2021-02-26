@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
@@ -17,6 +18,7 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
     private val loginPresenter: LoginPresenter = LoginPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)

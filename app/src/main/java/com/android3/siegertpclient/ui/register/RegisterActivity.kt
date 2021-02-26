@@ -7,41 +7,36 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.databinding.ActivityRegisterBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 
 class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
-
+    private lateinit var  binding: ActivityRegisterBinding
     lateinit var registerPresenter: RegisterPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         registerPresenter = RegisterPresenter()
 
-        val username : EditText = findViewById(R.id.et_username)
-        val forename : EditText = findViewById(R.id.et_first_name)
-        val surname : EditText = findViewById(R.id.et_last_name)
-        val email : EditText = findViewById(R.id.et_email)
-        val password : EditText = findViewById(R.id.et_password)
-        val retypePassword : EditText = findViewById(R.id.et_retype_password)
+        val username = binding.etUsername.text.toString()
+        val forename = binding.etFirstName.text.toString()
+        val surname = binding.etLastName.text.toString()
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
+        val retypePassword = binding.etRetypePassword.text.toString()
 
-        val signUpBtn: Button = findViewById(R.id.button_sign_up)
-        signUpBtn.setOnClickListener {
-            val usernameString = username.text.toString()
-            val emailString = email.text.toString()
-            val passwordString = password.text.toString()
-            val retypePasswordString = retypePassword.text.toString()
-            val forenameString = forename.text.toString()
-            val surnameString = surname.text.toString()
-            registerPresenter.onRegisterBtnClicked(emailString, passwordString,
-                retypePasswordString, surnameString, forenameString, usernameString)
+        binding.buttonSignUp.setOnClickListener {
+            registerPresenter.onRegisterBtnClicked(email, password,
+                retypePassword, surname, forename, username)
         }
 
-        val loginTv: TextView = findViewById(R.id.tv_login)
-        loginTv.setOnClickListener {
+        binding.tvLogin.setOnClickListener {
             registerPresenter.onLoginTxtClicked()
         }
     }
