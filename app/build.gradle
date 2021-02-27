@@ -7,6 +7,11 @@ plugins {
     id("org.jetbrains.dokka") version "1.4.20"
 }
 
+
+repositories {
+    jcenter()
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.2"
@@ -66,4 +71,7 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    //Dokka
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.4.20")
 }

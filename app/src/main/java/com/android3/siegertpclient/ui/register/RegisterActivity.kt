@@ -12,6 +12,9 @@ import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 
+/**
+ * Testing javadoc here
+ */
 class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
     private lateinit var  binding: ActivityRegisterBinding
     lateinit var registerPresenter: RegisterPresenter
