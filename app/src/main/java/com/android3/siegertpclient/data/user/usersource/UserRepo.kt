@@ -6,6 +6,7 @@ import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import com.android3.siegertpclient.utils.RestClient
+
 import com.google.firebase.auth.FirebaseAuth
 
 class UserRepo() {

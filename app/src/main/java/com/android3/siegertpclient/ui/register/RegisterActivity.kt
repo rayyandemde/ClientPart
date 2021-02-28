@@ -2,15 +2,18 @@ package com.android3.siegertpclient.ui.register
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.text.TextUtils
 import android.widget.Toast
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.databinding.ActivityRegisterBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
+import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
+
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 /**
  * Testing javadoc here
@@ -30,13 +33,58 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
         val username = binding.etUsername.text.toString()
         val forename = binding.etFirstName.text.toString()
         val surname = binding.etLastName.text.toString()
-        val email = binding.etEmail.text.toString()
-        val password = binding.etPassword.text.toString()
+        val email = binding.etEmail.text.toString().trim { it <= ' '}
+        val password = binding.etPassword.text.toString().trim { it <= ' '}
         val retypePassword = binding.etRetypePassword.text.toString()
 
         binding.buttonSignUp.setOnClickListener {
-            registerPresenter.onRegisterBtnClicked(email, password,
-                retypePassword, surname, forename, username)
+            //registerPresenter.onRegisterBtnClicked(email, password, retypePassword, surname, forename, username)
+            when {
+                TextUtils.isEmpty(email) -> {
+                    Toast.makeText(
+                        this@RegisterActivity,
+                        "Please enter email.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                TextUtils.isEmpty(password) -> {
+                    Toast.makeText(
+                        this@RegisterActivity,
+                        "Please enter password.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener({ task ->
+                            if (task.isSuccessful) {
+                                val firebaseUser: FirebaseUser = task.result!!.user!!
+
+                                Toast.makeText(
+                                    this@RegisterActivity,
+                                    "You are registered successfully.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                                val intent =
+                                    Intent(this@RegisterActivity, UserProfileActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                intent.putExtra("user_id", firebaseUser.uid)
+                                intent.putExtra("email_id", email)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(
+                                    this@RegisterActivity,
+                                    task.exception!!.message.toString(),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                        })
+                }
+            }
         }
 
         binding.tvLogin.setOnClickListener {
