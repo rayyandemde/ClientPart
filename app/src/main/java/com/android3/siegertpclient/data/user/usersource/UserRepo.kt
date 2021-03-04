@@ -21,13 +21,13 @@ class UserRepo() {
                  password : String,
                  username: String,
                  firstName: String,
-                 surname: String) : User {
+                 surname: String) : User? {
         auth = FirebaseAuth.getInstance()
         auth.createUserWithEmailAndPassword(email, password)
         return userRemote.createNewUser(username, surname, firstName, auth.currentUser?.uid.toString())
     }
 
-    fun login(email : String, password : String) : User {
+    fun login(email : String, password : String) : User? {
         auth = FirebaseAuth.getInstance()
         auth.signInWithEmailAndPassword(email, password)
         return userRemote.getUserById(auth.currentUser?.uid.toString())
@@ -45,20 +45,20 @@ class UserRepo() {
         userRemote.getUserById(auth.currentUser?.uid.toString())
     }
 
-    fun getUsersTournaments (username: String) : List<Tournament> {
+    fun getUsersTournaments (username: String) : List<Tournament>? {
         return userRemote.getUsersTournaments(username)
     }
 
-    fun getUserTeams (username: String) : List<Team> {
+    fun getUserTeams (username: String) : List<Team>? {
         return userRemote.getUsersTeams(username)
     }
 
-    fun getUsersInvitations (username: String) : List<Invitation> {
+    fun getUsersInvitations (username: String) : List<Invitation>? {
         return userRemote.getUsersInvitations(username)
     }
 
     fun updateUserDetail (oldUsername : String, newUsername : String, firstName: String,
-                          surname: String) : User {
+                          surname: String) : User? {
         return userRemote.updateUserDetail(oldUsername, newUsername, firstName, surname)
     }
 
