@@ -1,5 +1,6 @@
 package com.android3.siegertpclient.ui.register
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -7,8 +8,10 @@ import android.widget.Toast
 import com.android3.siegertpclient.databinding.ActivityRegisterBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
+import com.android3.siegertpclient.ui.homepage.HomepageDummyActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
+import com.android3.siegertpclient.utils.TokenUtil
 
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
@@ -19,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser
  * Testing javadoc here
  */
 class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
-    private lateinit var  binding: ActivityRegisterBinding
+    private lateinit var binding: ActivityRegisterBinding
     lateinit var registerPresenter: RegisterPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,14 +36,20 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
         val username = binding.etUsername.text.toString()
         val forename = binding.etFirstName.text.toString()
         val surname = binding.etLastName.text.toString()
-        val email = binding.etEmail.text.toString().trim { it <= ' '}
-        val password = binding.etPassword.text.toString().trim { it <= ' '}
+        val email = binding.etEmail
+        val password = binding.etPassword
         val retypePassword = binding.etRetypePassword.text.toString()
 
         binding.buttonSignUp.setOnClickListener {
             //registerPresenter.onRegisterBtnClicked(email, password, retypePassword, surname, forename, username)
+
+            val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
+            val emailString = email.text.toString().trim { it <= ' ' }
+            val passwordString = password.text.toString().trim { it <= ' ' }
             when {
-                TextUtils.isEmpty(email) -> {
+                TextUtils.isEmpty(emailString) -> {
                     Toast.makeText(
                         this@RegisterActivity,
                         "Please enter email.",
@@ -48,7 +57,7 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
                     ).show()
                 }
 
-                TextUtils.isEmpty(password) -> {
+                TextUtils.isEmpty(passwordString) -> {
                     Toast.makeText(
                         this@RegisterActivity,
                         "Please enter password.",
@@ -56,10 +65,11 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
                     ).show()
                 }
                 else -> {
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                    FirebaseAuth.getInstance()
+                        .createUserWithEmailAndPassword(emailString, passwordString)
                         .addOnCompleteListener({ task ->
                             if (task.isSuccessful) {
-                                val firebaseUser: FirebaseUser = task.result!!.user!!
+                                val firebaseUser = task.result!!.user!!
 
                                 Toast.makeText(
                                     this@RegisterActivity,
@@ -67,11 +77,20 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
                                     Toast.LENGTH_SHORT
                                 ).show()
 
+                                val token = TokenUtil.getBearerToken()
+
+                                editor.apply {
+                                    putString("userId", firebaseUser.uid)
+                                    putString("email", emailString)
+                                    putString("token", token)
+                                }.apply()
+
                                 val intent =
-                                    Intent(this@RegisterActivity, UserProfileActivity::class.java)
-                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    Intent(this@RegisterActivity, HomepageDummyActivity::class.java)
+                                intent.flags =
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 intent.putExtra("user_id", firebaseUser.uid)
-                                intent.putExtra("email_id", email)
+                                intent.putExtra("email_id", emailString)
                                 startActivity(intent)
                                 finish()
                             } else {
@@ -120,8 +139,7 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
     }
 
     override fun navigateToLoginActivity() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+        onBackPressed()
     }
 
     override fun showProgress() {

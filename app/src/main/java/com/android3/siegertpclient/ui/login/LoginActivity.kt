@@ -2,18 +2,24 @@ package com.android3.siegertpclient.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.databinding.ActivityLoginBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
+import com.android3.siegertpclient.ui.homepage.HomepageDummyActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : BaseActivity(), LoginContract.ILoginView {
+    private lateinit var binding: ActivityLoginBinding
 
     private val loginPresenter: LoginPresenter = LoginPresenter()
 
@@ -21,21 +27,72 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
-        val emailTxt : EditText = findViewById(R.id.email)
-        val passwordTxt: EditText = findViewById(R.id.password)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val email = binding.etEmail
+        val password = binding.etPassword
 
         val registerTv: TextView = findViewById(R.id.registerClickable)
         registerTv.setOnClickListener {
             loginPresenter.onRegisterTextClicked()
         }
 
-        val loginBtn: Button = findViewById(R.id.loginBtn)
-        loginBtn.setOnClickListener{
+        binding.btnLogin.setOnClickListener{
             //loginPresenter.onLoginBtnClicked(emailTxt.text.toString(), passwordTxt.text.toString())
             //This is only test method
-            loginPresenter.onLoginBtnClickedDummy()
+            //loginPresenter.onLoginBtnClickedDummy()
+
+            //Dummy Login page
+            val emailString = email.text.toString().trim { it <= ' '}
+            val passwordString = password.text.toString().trim { it <= ' '}
+            when {
+                TextUtils.isEmpty(emailString) -> {
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Please enter email.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                TextUtils.isEmpty(passwordString) -> {
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Please enter password.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                    FirebaseAuth.getInstance().signInWithEmailAndPassword(emailString, passwordString)
+                        .addOnCompleteListener({ task ->
+                            if (task.isSuccessful) {
+                                val firebaseUser: FirebaseUser = task.result!!.user!!
+
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "You are logged in successfully.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                                val intent =
+                                    Intent(this@LoginActivity, HomepageDummyActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                intent.putExtra("user_id", FirebaseAuth.getInstance().currentUser!!.uid)
+                                intent.putExtra("email_id", emailString)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    task.exception!!.message.toString(),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                        })
+                }
+            }
         }
 
         val forgotPasswordTv: TextView = findViewById(R.id.forgotPassword)
