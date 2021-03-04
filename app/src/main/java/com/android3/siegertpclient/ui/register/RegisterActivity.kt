@@ -77,12 +77,9 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
                                     Toast.LENGTH_SHORT
                                 ).show()
 
-                                val token = TokenUtil.getBearerToken()
-
                                 editor.apply {
                                     putString("userId", firebaseUser.uid)
                                     putString("email", emailString)
-                                    putString("token", token)
                                 }.apply()
 
                                 val intent =

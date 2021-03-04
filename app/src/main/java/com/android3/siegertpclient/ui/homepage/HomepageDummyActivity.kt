@@ -3,6 +3,7 @@ package com.android3.siegertpclient.ui.homepage
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.android3.siegertpclient.databinding.ActivityHomepageDummyBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
@@ -24,17 +25,20 @@ class HomepageDummyActivity : BaseActivity() {
         val emailId = intent.getStringExtra("email_id")
 
         val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
         val savedUserID = sharedPreferences.getString("userId", null)
+        val savedEmail = sharedPreferences.getString("email", null)
 
-
-
-        /*
         val user = FirebaseAuth.getInstance().currentUser!!
         user.getIdToken(true)
             .addOnCompleteListener({ task ->
                 if (task.isSuccessful()) {
                     val token = task.result!!.token!!
-                    binding.tvTestId.text = "User Token :: " + token.toString()
+                    val tokenBearer = "Bearer ".plus(token)
+                    Log.e("TokenSuccess", tokenBearer)
+                    editor.putString("token", tokenBearer)
+                    editor.commit()
+                    //binding.tvTestId.text = "User Token :: " + token.toString()
                 } else {
                     Toast.makeText(
                         this@HomepageDummyActivity,
@@ -43,17 +47,27 @@ class HomepageDummyActivity : BaseActivity() {
                     ).show()
                 }
             })
-*/
 
         //binding.tvTestId.text = "User ID :: $userId"
         //binding.tvTestId.text = "User Token :: " + token
-        binding.tvTestId.text = "User ID :: "
-        binding.tvTestEmail.text = "Email ID :: $emailId"
+        //binding.tvTestId.text = "User ID :: ".plus(savedUserID)
+        binding.tvTestId.text = "Token :: "
+        binding.tvTestEmail.text = "Email ID :: ".plus(savedEmail)
 
         binding.buttonTestLogout.setOnClickListener {
+            editor.apply {
+                editor.remove("userId")
+                editor.remove("email")
+                editor.remove("token")
+            }.apply()
+
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(this@HomepageDummyActivity, LoginActivity::class.java))
             finish()
+        }
+
+        binding.buttonTestToken.setOnClickListener {
+            binding.tvTestId.text = sharedPreferences.getString("token", "doesn't got anything yet")
         }
 
     }

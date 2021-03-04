@@ -1,5 +1,6 @@
 package com.android3.siegertpclient.ui.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -15,6 +16,7 @@ import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.homepage.HomepageDummyActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
+import com.android3.siegertpclient.utils.TokenUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -45,6 +47,9 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
             //loginPresenter.onLoginBtnClickedDummy()
 
             //Dummy Login page
+            val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
             val emailString = email.text.toString().trim { it <= ' '}
             val passwordString = password.text.toString().trim { it <= ' '}
             when {
@@ -74,6 +79,11 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
                                     "You are logged in successfully.",
                                     Toast.LENGTH_SHORT
                                 ).show()
+
+                                editor.apply {
+                                    putString("userId", firebaseUser.uid)
+                                    putString("email", emailString)
+                                }.apply()
 
                                 val intent =
                                     Intent(this@LoginActivity, HomepageDummyActivity::class.java)
