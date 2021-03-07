@@ -8,6 +8,7 @@ import com.android3.siegertpclient.utils.OnlineChecker
 
 class RegisterPresenter(context: Context) : BasePresenter<RegisterContract.IRegisterView>(), RegisterContract.IRegisterPresenter{
 
+    private var context = context
     private var onlineChecker = OnlineChecker(context)
 
     private var userRepo = UserRepo()
@@ -24,7 +25,7 @@ class RegisterPresenter(context: Context) : BasePresenter<RegisterContract.IRegi
             view?.showErrorOnEmail("Email is not valid")
             //throw an exception
         }
-        if (password == retypePassword) {
+        if (password != retypePassword) {
             view?.showErrorOnPassword("Password doesn't match")
             //throw exception
         }
@@ -41,12 +42,5 @@ class RegisterPresenter(context: Context) : BasePresenter<RegisterContract.IRegi
 
     override fun onLoginTxtClicked() {
         view?.navigateToLoginActivity()
-
-        /*
-        if(onlineChecker.isOnline()) {
-            view?.showError("There's Internet Connection")
-        } else {
-            view?.showError("There's no internet connection")
-        }*/
     }
 }

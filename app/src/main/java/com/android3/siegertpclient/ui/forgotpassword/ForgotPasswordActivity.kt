@@ -63,10 +63,12 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPas
 
     override fun showProgress() {
         binding.pbRequest.visibility = View.VISIBLE
+        binding.btnSend.isEnabled = false
     }
 
     override fun hideProgress() {
         binding.pbRequest.visibility = View.GONE
+        binding.btnSend.isEnabled = true
     }
 
     override fun showError(errorMessage: String) {

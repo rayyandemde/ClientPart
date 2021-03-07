@@ -36,12 +36,12 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
 
         registerPresenter = RegisterPresenter(this)
 
-        val username = binding.etUsername.text.toString()
-        val forename = binding.etFirstName.text.toString()
-        val surname = binding.etLastName.text.toString()
+        val username = binding.etUsername
+        val forename = binding.etFirstName
+        val surname = binding.etLastName
         val email = binding.etEmail
         val password = binding.etPassword
-        val retypePassword = binding.etRetypePassword.text.toString()
+        val retypePassword = binding.etRetypePassword
 
         binding.buttonSignUp.setOnClickListener {
             //registerPresenter.onRegisterBtnClicked(email, password, retypePassword, surname, forename, username)
@@ -128,20 +128,26 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
     }
 
     override fun showErrorOnEmail(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+        doToast("")
     }
 
     override fun showErrorOnPassword(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+        doToast("")
     }
 
     override fun showErrorOnUsername(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+        doToast("")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_LONG).show()
     }
 
     override fun navigateToHomepageActivity() {
-        val intent = Intent(this, HomepageActivity::class.java)
+        val homepageIntent = Intent(this@RegisterActivity, HomepageActivity::class.java)
+        homepageIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
+        finish()
     }
 
     override fun navigateToLoginActivity() {

@@ -4,10 +4,11 @@ import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.utils.RestClient
 import com.android3.siegertpclient.utils.TokenUtil
-import kotlin.RuntimeException
+import retrofit2.Response
 
-class UserRemoteDataSource (private val userService : UserService) {
+class UserRemoteDataSource(private val userService: UserService) {
 
     private val runtimeError = "Response of Server was not successful"
 
@@ -81,5 +82,4 @@ class UserRemoteDataSource (private val userService : UserService) {
         }
         return uResp
     }
-
 }

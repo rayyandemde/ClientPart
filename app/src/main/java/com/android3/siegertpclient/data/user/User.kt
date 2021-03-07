@@ -1,20 +1,15 @@
 package com.android3.siegertpclient.data.user
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-data class User (
-    @SerializedName("username")
-    val username : String,
-    @SerializedName("surname")
-    val surname : String,
-    @SerializedName("forename")
-    val forename : String,
-    @SerializedName("userId")
-    val userId : String,
-    @SerializedName("tournamentList")
-    val tournamentList: List<String>,
-    @SerializedName("teamList")
+@Parcelize
+data class User(
+    val forename: String,
+    val invitationList: List<String>,
+    val surname: String,
     val teamList: List<String>,
-    @SerializedName("invitationList")
-    val invitationList : List<String>
-)
+    val tournamentList: List<String>,
+    val userId: String,
+    val username: String
+)  : Parcelable

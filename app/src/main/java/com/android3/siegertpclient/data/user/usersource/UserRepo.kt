@@ -8,6 +8,7 @@ import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDat
 import com.android3.siegertpclient.utils.RestClient
 
 import com.google.firebase.auth.FirebaseAuth
+import retrofit2.Response
 
 class UserRepo() {
 
