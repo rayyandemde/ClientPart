@@ -37,6 +37,8 @@ class RegisterPresenter() : BasePresenter<RegisterContract.IRegisterView>(), Reg
     }
 
     override fun onLoginTxtClicked() {
-        view?.navigateToLoginActivity()
+
+        //view?.navigateToLoginActivity()
+
     }
 }
