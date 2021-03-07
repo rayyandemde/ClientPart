@@ -11,6 +11,7 @@ import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.homepage.HomepageDummyActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
+import com.android3.siegertpclient.utils.OnlineChecker
 import com.android3.siegertpclient.utils.TokenUtil
 
 import com.google.android.gms.tasks.OnCompleteListener
@@ -25,13 +26,15 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var registerPresenter: RegisterPresenter
 
+    //private var onlineChecker = OnlineChecker(applicationContext)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        registerPresenter = RegisterPresenter()
+        registerPresenter = RegisterPresenter(this)
 
         val username = binding.etUsername.text.toString()
         val forename = binding.etFirstName.text.toString()
@@ -105,6 +108,12 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
 
         binding.tvLogin.setOnClickListener {
             registerPresenter.onLoginTxtClicked()
+            /*
+            if(onlineChecker.isOnline()) {
+                showError("There's Internet Connection")
+            } else {
+                showError("There's No internet connection")
+            }*/
         }
     }
 

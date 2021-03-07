@@ -4,8 +4,11 @@ import android.content.Context
 import android.util.Patterns
 import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
+import com.android3.siegertpclient.utils.OnlineChecker
 
-class RegisterPresenter() : BasePresenter<RegisterContract.IRegisterView>(), RegisterContract.IRegisterPresenter{
+class RegisterPresenter(context: Context) : BasePresenter<RegisterContract.IRegisterView>(), RegisterContract.IRegisterPresenter{
+
+    private var onlineChecker = OnlineChecker(context)
 
     private var userRepo = UserRepo()
 
@@ -37,8 +40,13 @@ class RegisterPresenter() : BasePresenter<RegisterContract.IRegisterView>(), Reg
     }
 
     override fun onLoginTxtClicked() {
+        view?.navigateToLoginActivity()
 
-        //view?.navigateToLoginActivity()
-
+        /*
+        if(onlineChecker.isOnline()) {
+            view?.showError("There's Internet Connection")
+        } else {
+            view?.showError("There's no internet connection")
+        }*/
     }
 }
