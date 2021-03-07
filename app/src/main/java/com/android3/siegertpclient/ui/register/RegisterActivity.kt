@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser
  */
 class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
     private lateinit var binding: ActivityRegisterBinding
-    lateinit var registerPresenter: RegisterPresenter
+    private lateinit var registerPresenter: RegisterPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

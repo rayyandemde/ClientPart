@@ -7,6 +7,8 @@ import android.util.Log
 import android.widget.Toast
 import com.android3.siegertpclient.databinding.ActivityHomepageDummyBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
+import com.android3.siegertpclient.ui.dummyretrofit.TestRetrofitActivity
+import com.android3.siegertpclient.ui.invitation.InvitationActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -68,6 +70,11 @@ class HomepageDummyActivity : BaseActivity() {
 
         binding.buttonTestToken.setOnClickListener {
             binding.tvTestId.text = sharedPreferences.getString("token", "doesn't got anything yet")
+        }
+
+        binding.buttonGoTest.setOnClickListener {
+            val testIntent = Intent(this, TestRetrofitActivity::class.java)
+            startActivity(testIntent)
         }
 
     }
