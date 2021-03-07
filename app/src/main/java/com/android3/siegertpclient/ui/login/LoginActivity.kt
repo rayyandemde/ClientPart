@@ -27,7 +27,7 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        setTheme(R.style.AppTheme)
+        setTheme(R.style.Theme_SiegerTPClient)
         super.onCreate(savedInstanceState)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -36,8 +36,7 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         val email = binding.etEmail
         val password = binding.etPassword
 
-        val registerTv: TextView = findViewById(R.id.registerClickable)
-        registerTv.setOnClickListener {
+        binding.tvRegister.setOnClickListener {
             loginPresenter.onRegisterTextClicked()
         }
 
@@ -105,8 +104,7 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
             }
         }
 
-        val forgotPasswordTv: TextView = findViewById(R.id.forgotPassword)
-        forgotPasswordTv.setOnClickListener {
+        binding.tvForgotPassword.setOnClickListener {
             loginPresenter.onForgotPasswordTextClicked()
         }
     }
