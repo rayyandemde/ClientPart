@@ -29,7 +29,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_createtournament)
 
-        val NameEt: EditText = findViewById(Name)
+        val NameEt: EditText = findViewById()
 
         val DateEt: EditText = findViewById(Date)
 
