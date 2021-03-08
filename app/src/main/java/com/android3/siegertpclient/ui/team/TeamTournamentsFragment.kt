@@ -84,10 +84,6 @@ class TeamTournamentsFragment : Fragment() , TeamContract.ITeamView {
         TODO("Not yet implemented")
     }
 
-    override fun showError(errorId: Int) {
-        TODO("Not yet implemented")
-    }
-
     override fun showNoInternetConnection() {
         TODO("Not yet implemented")
     }

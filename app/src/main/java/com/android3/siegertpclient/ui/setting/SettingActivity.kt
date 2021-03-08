@@ -11,6 +11,7 @@ import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 
 class SettingActivity : BaseActivity() , SettingContract.ISettingView {
 
@@ -19,6 +20,8 @@ class SettingActivity : BaseActivity() , SettingContract.ISettingView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
+
+        val user = FirebaseAuth.getInstance().currentUser!!
 
         val backBtn: FloatingActionButton = findViewById(R.id.backButtonSetting)
         backBtn.setOnClickListener{
@@ -31,10 +34,15 @@ class SettingActivity : BaseActivity() , SettingContract.ISettingView {
 
         val lastnameEt: EditText = findViewById(R.id.changeLastName)
 
+        val testEt: TextView = findViewById(R.id.tv_test_id)
+        testEt.setText("The user is :: ".plus(user.uid))
+
         val saveBt : Button = findViewById(R.id.saveSettings)
         val logoutTv: TextView = findViewById(R.id.logout)
         logoutTv.setOnClickListener{
-            settingPresenter.onLogoutBtnClicked()
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(this@SettingActivity, LoginActivity::class.java))
+            finish()
         }
     }
 
@@ -71,10 +79,6 @@ class SettingActivity : BaseActivity() , SettingContract.ISettingView {
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun showError(errorId: Int) {
         TODO("Not yet implemented")
     }
 

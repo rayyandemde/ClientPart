@@ -7,7 +7,6 @@ import com.android3.siegertpclient.databinding.ActivityForgotpasswordBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 
 class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPasswordView {
-
     private lateinit var binding: ActivityForgotpasswordBinding
     private lateinit var forgotPasswordPresenter: ForgotPasswordPresenter
 
@@ -51,11 +50,6 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPas
         doToast("There's no internet connection to make the request.")
     }
 
-    private fun doToast(message: String) {
-        Toast.makeText(this@ForgotPasswordActivity, message, Toast.LENGTH_LONG).show()
-    }
-
-
     override fun navigateToLoginActivity() {
         onBackPressed()
     }
@@ -70,9 +64,11 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPas
         binding.btnSend.isEnabled = true
     }
 
+    //Not being used at the moment
     override fun showError(errorMessage: String) {
     }
 
-    override fun showError(errorId: Int) {
+    private fun doToast(message: String) {
+        Toast.makeText(this@ForgotPasswordActivity, message, Toast.LENGTH_LONG).show()
     }
 }

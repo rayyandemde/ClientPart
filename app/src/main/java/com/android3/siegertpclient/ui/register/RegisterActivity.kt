@@ -2,7 +2,6 @@ package com.android3.siegertpclient.ui.register
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -16,8 +15,6 @@ import com.android3.siegertpclient.ui.homepage.HomepageActivity
 class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var registerPresenter: RegisterPresenter
-
-    //private var onlineChecker = OnlineChecker(applicationContext)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +31,7 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
         val passwordEt = binding.etPassword
         val retypePasswordEt = binding.etRetypePassword
 
-        binding.buttonSignUp.setOnClickListener {
+        binding.btnSignUp.setOnClickListener {
             val email = editTextTrimmer(emailEt)
             val password = editTextTrimmer(passwordEt)
             val retypePassword = editTextTrimmer(retypePasswordEt)
@@ -42,7 +39,14 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
             val forename = editTextTrimmer(forenameEt)
             val username = editTextTrimmer(usernameEt)
 
-            registerPresenter.onRegisterBtnClicked(email, password, retypePassword, surname, forename, username)
+            registerPresenter.onRegisterBtnClicked(
+                email,
+                password,
+                retypePassword,
+                surname,
+                forename,
+                username
+            )
         }
 
         binding.tvLogin.setOnClickListener {
@@ -78,9 +82,9 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
 
     override fun navigateToHomepageActivity() {
         doToast("You are registered successfully.")
-        val homepageIntent = Intent(this@RegisterActivity, HomepageActivity::class.java)
-        homepageIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(homepageIntent)
+        val intent = Intent(this@RegisterActivity, HomepageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
         finish()
     }
 
@@ -88,28 +92,25 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
         onBackPressed()
     }
 
+    override fun showNoInternetConnection() {
+        doToast("There's no internet connection to make the request.")
+    }
+
     override fun showProgress() {
         binding.pbRequest.visibility = View.VISIBLE
-        binding.buttonSignUp.isEnabled = false
+        binding.btnSignUp.isEnabled = false
     }
 
     override fun hideProgress() {
         binding.pbRequest.visibility = View.GONE
-        binding.buttonSignUp.isEnabled = true
+        binding.btnSignUp.isEnabled = true
     }
 
     override fun showError(errorMessage: String) {
         doToast(errorMessage)
     }
 
-    override fun showError(errorId: Int) {
-    }
-
-    override fun showNoInternetConnection() {
-        doToast("There's no internet connection to make the request.")
-    }
-
-    private fun editTextTrimmer(editText: EditText) : String{
+    private fun editTextTrimmer(editText: EditText): String {
         return editText.text.toString().trim { it <= ' ' }
     }
 

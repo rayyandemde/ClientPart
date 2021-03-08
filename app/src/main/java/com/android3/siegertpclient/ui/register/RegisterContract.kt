@@ -19,8 +19,10 @@ interface RegisterContract {
 
     interface IRegisterPresenter {
 
-        fun onRegisterBtnClicked(email: String, password: String, retypePassword : String, surname : String,
-        forename : String, username : String)
+        fun onRegisterBtnClicked(
+            email: String, password: String, retypePassword: String, surname: String,
+            forename: String, username: String
+        )
 
         fun onLoginTxtClicked()
     }
