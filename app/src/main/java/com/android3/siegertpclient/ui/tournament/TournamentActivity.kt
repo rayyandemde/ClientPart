@@ -133,4 +133,8 @@ class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
         Toast.makeText(applicationContext, errorId, Toast.LENGTH_LONG).show()
     }
 
+    override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
+    }
+
 }

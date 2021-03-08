@@ -7,7 +7,7 @@ import com.android3.siegertpclient.ui.base.BasePresenter
 import com.android3.siegertpclient.utils.OnlineChecker
 import com.google.firebase.auth.FirebaseAuth
 
-class ForgotPasswordPresenter(context: Context) :
+class ForgotPasswordPresenter(private val context: Context) :
     BasePresenter<ForgotPasswordContract.IForgotPasswordView>(),
     ForgotPasswordContract.IForgotPasswordPresenter {
 
@@ -28,8 +28,8 @@ class ForgotPasswordPresenter(context: Context) :
             } else {
                 auth = FirebaseAuth.getInstance()
                 auth.sendPasswordResetEmail(email)
-                    .addOnCompleteListener {
-                        if (it.isSuccessful) {
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
                             view?.hideProgress()
                             view?.showSuccess()
                         } else {
@@ -39,6 +39,7 @@ class ForgotPasswordPresenter(context: Context) :
                     }
             }
         } else {
+            view?.hideProgress()
             view?.showNoInternetConnection()
         }
     }

@@ -92,4 +92,8 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
         TODO("Not yet implemented")
     }
 
+    override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
+    }
+
 }

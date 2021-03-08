@@ -1,17 +1,26 @@
 package com.android3.siegertpclient.ui.register
 
 import android.content.Context
+import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
+import android.widget.Toast
 import com.android3.siegertpclient.data.user.usersource.UserRepo
+import com.android3.siegertpclient.data.user.usersource.UserRepo2
 import com.android3.siegertpclient.ui.base.BasePresenter
 import com.android3.siegertpclient.utils.OnlineChecker
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class RegisterPresenter(context: Context) : BasePresenter<RegisterContract.IRegisterView>(), RegisterContract.IRegisterPresenter{
+class RegisterPresenter(private val context: Context) :
+    BasePresenter<RegisterContract.IRegisterView>(), RegisterContract.IRegisterPresenter {
 
-    private var context = context
     private var onlineChecker = OnlineChecker(context)
 
-    private var userRepo = UserRepo()
+    private var userRepo = UserRepo2()
 
     override fun onRegisterBtnClicked(
         email: String,
@@ -21,21 +30,80 @@ class RegisterPresenter(context: Context) : BasePresenter<RegisterContract.IRegi
         forename: String,
         username: String
     ) {
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            view?.showErrorOnEmail("Email is not valid")
-            //throw an exception
-        }
-        if (password != retypePassword) {
-            view?.showErrorOnPassword("Password doesn't match")
-            //throw exception
+        view?.showProgress()
+
+        when {
+            TextUtils.isEmpty(email) or TextUtils.isEmpty(password)
+                    or TextUtils.isEmpty(retypePassword) or TextUtils.isEmpty(surname)
+                    or TextUtils.isEmpty(forename) or TextUtils.isEmpty(username) -> {
+                        view?.showIncompleteInput()
+                        view?.hideProgress()
+                    }
+
+            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                view?.showErrorOnEmail()
+                view?.hideProgress()
+            }
+
+            password != retypePassword -> {
+                view?.showErrorOnPassword()
+                view?.hideProgress()
+            }
+            else -> {
+                if (onlineChecker.isOnline()) {
+                    FirebaseAuth.getInstance()
+                        .createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener({ task ->
+                            if (task.isSuccessful) {
+                                val firebaseUser = task.result!!.user!!
+
+                                firebaseUser.getIdToken(true).addOnCompleteListener({ task2 ->
+                                    if (task2.isSuccessful()) {
+                                        val token = task2.result!!.token!!
+                                        val tokenBearer = "Bearer ".plus(token)
+                                        GlobalScope.launch(Dispatchers.IO) {
+                                            try {
+                                                val response = userRepo
+                                                    .createNewUser(username, forename,
+                                                        surname, firebaseUser.uid ,  tokenBearer)
+                                                if(response.isSuccessful) {
+                                                    withContext(Dispatchers.Main) {
+                                                        view?.navigateToHomepageActivity()
+                                                    }
+                                                }
+                                            }catch (e: Exception){
+                                                withContext(Dispatchers.Main) {
+                                                    view?.hideProgress()
+                                                    view?.showError("Oops... It seems there's unexpected error")
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        view?.hideProgress()
+                                        view?.showError(task.exception!!.message.toString())
+                                    }
+                                })
+                            } else {
+                                view?.hideProgress()
+                                view?.showError(task.exception!!.message.toString())
+                            }
+
+                        })
+                } else {
+                    view?.hideProgress()
+                    view?.showNoInternetConnection()
+                }
+            }
         }
 
+
+        /*
         val user = userRepo.register(email, password, username, forename, surname)
         if (user == null) {
             view?.showError("Register failed")
         } else {
             view?.navigateToHomepageActivity()
-        }
+        } */
 
 
     }

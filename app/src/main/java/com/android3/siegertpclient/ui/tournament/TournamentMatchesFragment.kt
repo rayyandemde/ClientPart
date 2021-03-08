@@ -98,6 +98,10 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
         TODO("Not yet implemented")
     }
 
+    override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
+    }
+
 //    fun showListOfParticipant(participants: Participant[]) {
 //        TODO("Not yet implemented")
 //    }

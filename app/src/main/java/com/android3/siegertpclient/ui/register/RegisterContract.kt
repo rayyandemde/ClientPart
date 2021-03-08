@@ -4,11 +4,13 @@ interface RegisterContract {
 
     interface IRegisterView : BaseView {
 
-        fun showErrorOnEmail(message: String)
+        fun showIncompleteInput()
 
-        fun showErrorOnPassword(message: String)
+        fun showErrorOnEmail()
 
-        fun showErrorOnUsername(message: String)
+        fun showErrorOnPassword()
+
+        fun showErrorOnUsername()
 
         fun navigateToHomepageActivity()
 

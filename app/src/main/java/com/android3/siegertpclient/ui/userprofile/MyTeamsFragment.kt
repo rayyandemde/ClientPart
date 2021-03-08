@@ -78,4 +78,8 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView{
     override fun showError(errorId: Int) {
         TODO("Not yet implemented")
     }
+
+    override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
+    }
 }

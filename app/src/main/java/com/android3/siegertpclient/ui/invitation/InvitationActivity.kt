@@ -65,4 +65,8 @@ class InvitationActivity : BaseActivity(), InvitationContract.IInvitationView {
     override fun showError(errorId: Int) {
         TODO("Not yet implemented")
     }
+
+    override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
+    }
 }

@@ -150,4 +150,8 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         TODO("Not yet implemented")
     }
 
+    override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
+    }
+
 }

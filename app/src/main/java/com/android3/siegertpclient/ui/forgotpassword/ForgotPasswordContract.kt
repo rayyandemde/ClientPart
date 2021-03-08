@@ -8,8 +8,6 @@ interface ForgotPasswordContract {
 
         fun showSuccess()
 
-        fun showNoInternetConnection()
-
         fun navigateToLoginActivity()
     }
 

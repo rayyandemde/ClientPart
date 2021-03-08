@@ -25,8 +25,7 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPas
         }
 
         binding.btnSend.setOnClickListener {
-            forgotPasswordPresenter.onSendBtnClicked(
-                emailEt.getText().toString().trim { it <= ' ' })
+            forgotPasswordPresenter.onSendBtnClicked(emailEt.text.toString().trim { it <= ' ' })
         }
     }
 

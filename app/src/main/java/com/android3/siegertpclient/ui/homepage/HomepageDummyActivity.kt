@@ -34,21 +34,21 @@ class HomepageDummyActivity : BaseActivity() {
         val user = FirebaseAuth.getInstance().currentUser!!
         user.getIdToken(true)
             .addOnCompleteListener({ task ->
-                if (task.isSuccessful()) {
-                    val token = task.result!!.token!!
-                    val tokenBearer = "Bearer ".plus(token)
-                    Log.e("TokenSuccess", tokenBearer)
-                    editor.putString("token", tokenBearer)
-                    editor.commit()
-                    //binding.tvTestId.text = "User Token :: " + token.toString()
-                } else {
-                    Toast.makeText(
-                        this@HomepageDummyActivity,
-                        task.exception!!.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
+            if (task.isSuccessful()) {
+                val token = task.result!!.token!!
+                val tokenBearer = "Bearer ".plus(token)
+                Log.e("TokenSuccess", tokenBearer)
+                editor.putString("token", tokenBearer)
+                editor.commit()
+                //binding.tvTestId.text = "User Token :: " + token.toString()
+            } else {
+                Toast.makeText(
+                    this@HomepageDummyActivity,
+                    task.exception!!.message.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
 
         //binding.tvTestId.text = "User ID :: $userId"
         //binding.tvTestId.text = "User Token :: " + token
@@ -92,6 +92,10 @@ class HomepageDummyActivity : BaseActivity() {
     }
 
     override fun showError(errorId: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showNoInternetConnection() {
         TODO("Not yet implemented")
     }
 }
