@@ -1,86 +1,118 @@
 package com.android3.siegertpclient.ui.createtournament
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.R.*
 import com.android3.siegertpclient.R.id.*
+import com.android3.siegertpclient.databinding.ActivityCreatetournamentBinding
+import com.android3.siegertpclient.databinding.ActivityLoginBinding
+import com.android3.siegertpclient.databinding.ActivityRegisterBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordPresenter
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
+import com.android3.siegertpclient.ui.login.LoginPresenter
 import com.android3.siegertpclient.ui.register.RegisterActivity
+import com.android3.siegertpclient.ui.register.RegisterPresenter
 
 import com.android3.siegertpclient.ui.tournament.TournamentActivity
+import java.util.*
 
 import android.widget.Spinner as Spinner
 
 /**
  * This class is to implement the activity to create the tournament.
  */
-class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreateTournamentView{
-
+class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreateTournamentView, DatePickerDialog.OnDateSetListener {
+    private lateinit var binding: ActivityCreatetournamentBinding
     //The presenter that to create the tournament.
-    private val createTournamentPresenter: CreateTournamentPresenter = CreateTournamentPresenter()
+    private lateinit var createTournamentPresenter: CreateTournamentPresenter
+
+    var day = 0
+    var month = 0
+    var year = 0
+
+    var savedDay = 0
+    var savedMonth = 0
+    var savedYear = 0
 
     //This method is to create the view of the createTournament page.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_createtournament)
 
-        val NameEt: EditText = findViewById()
+        binding = ActivityCreatetournamentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val DateEt: EditText = findViewById(Date)
+        createTournamentPresenter = CreateTournamentPresenter(this)
 
-        val MaxPlayerEt: EditText = findViewById(MaxPlayer)
+        val nameEt = binding.etTournamentName
 
-        val LocationEt: EditText = findViewById(Location)
+        binding.spTypeOfGame.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                adapterView: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                //Dummy implementation
+                val dummyString = adapterView?.getItemAtPosition(position).toString()
+                Toast.makeText(this@CreateTournamentActivity, "You choose the Game :: ".plus(dummyString), Toast.LENGTH_LONG).show()
+            }
 
-        val DeadlineEt: EditText = findViewById(Regideadline)
-
-        val PrizeEt: EditText = findViewById(Prize)
-
-       val ParticipanttypeSpinner : Spinner = findViewById(ParticipantForm)
-        ArrayAdapter.createFromResource(
-            this,
-            array.Participanttypes_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            ParticipanttypeSpinner.adapter = adapter
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
         }
 
-        val GametypeSpinner : Spinner = findViewById(TypeOfGame1)
-        ArrayAdapter.createFromResource(
-            this,
-            array.TypeOfGame_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            ParticipanttypeSpinner.adapter = adapter
+        binding.spTournamentType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                adapterView: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                //Dummy implementation
+                val dummyString = adapterView?.getItemAtPosition(position).toString()
+                Toast.makeText(this@CreateTournamentActivity, "You choose the Tournament  :: ".plus(dummyString), Toast.LENGTH_LONG).show()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
         }
 
-        val TournamenttypeSpinner : Spinner = findViewById(TournamentType)
-        ArrayAdapter.createFromResource(
-            this,
-            array.Tournamenttypes_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            TournamenttypeSpinner.adapter = adapter
+        binding.spParticipantForm.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                adapterView: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                //Dummy implementation
+                val dummyString = adapterView?.getItemAtPosition(position).toString()
+                Toast.makeText(this@CreateTournamentActivity, "You choose the Participant  :: ".plus(dummyString), Toast.LENGTH_LONG).show()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
         }
 
+        val locationEt = binding.etLocation
+        val dateEt = binding.etTime
+        val maxPlayersEt = binding.etMaxPlayer
+        val registrationDeadlineTv = binding.tvRegistrationDeadline
 
-        val createBtn: Button = findViewById(R.id.buttonCreateTournament)
+        binding.tvRegistrationDeadline.setOnClickListener {
+            getDateCalendar()
 
-        createBtn.setOnClickListener{
+            DatePickerDialog(this, this, year, month, day).show()
+        }
+
+        // val prizeEt = binding.etPrize
+
+        binding.btnCreateTournament.setOnClickListener{
             createTournamentPresenter.onCreateBtnClicked()
         }
     }
@@ -149,5 +181,20 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
 
     override fun showNoInternetConnection() {
         TODO("Not yet implemented")
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        savedDay = dayOfMonth
+        savedMonth = month
+        savedYear = year
+
+        binding.tvRegistrationDeadline.text = "$savedYear-$savedMonth-$savedDay"
+    }
+
+    private fun getDateCalendar() {
+        val cal = Calendar.getInstance()
+        day = cal.get(Calendar.DAY_OF_MONTH)
+        month = cal.get(Calendar.MONTH)
+        year = cal.get(Calendar.YEAR)
     }
 }
