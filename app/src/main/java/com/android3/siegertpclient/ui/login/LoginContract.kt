@@ -4,6 +4,10 @@ interface LoginContract {
 
     interface ILoginView : BaseView {
 
+        fun showIncompleteInput()
+
+        fun showErrorOnEmail()
+
         fun navigateToHomepageActivity()
 
         fun navigateToForgotPasswordActivity()

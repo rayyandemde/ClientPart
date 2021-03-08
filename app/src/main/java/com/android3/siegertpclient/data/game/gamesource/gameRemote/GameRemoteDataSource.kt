@@ -4,7 +4,7 @@ import com.android3.siegertpclient.data.game.Game
 
 class GameRemoteDataSource (private val gameService: GameService) {
 
-    fun getGameById(tournamentName : String, gameId : String, ownUserId : String) : Game {
+    fun getGameById(tournamentName : String, gameId : String, ownUserId : String) : Game? {
         val userCall = gameService.getGameById(tournamentName, gameId, ownUserId)
         val response = userCall.execute()
         if (!response.isSuccessful) {
@@ -15,7 +15,7 @@ class GameRemoteDataSource (private val gameService: GameService) {
     }
 
     fun updateGameById(tournamentName : String, gameId : String, firstWins : Boolean,
-                       secondWins : Boolean, draws : Boolean, ownUserId : String) : Game {
+                       secondWins : Boolean, draws : Boolean, ownUserId : String) : Game? {
         val userCall = gameService.updateGameById(tournamentName, gameId, firstWins, secondWins, draws, ownUserId)
         val response = userCall.execute()
         if (!response.isSuccessful) {

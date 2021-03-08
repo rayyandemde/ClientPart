@@ -6,7 +6,7 @@ import com.android3.siegertpclient.data.invitation.invitationsource.IInvitationD
 class InvitationRemoteDataSource (private val invitationService : InvitationService) : IInvitationDataSource {
 
     fun createInvitation(senderId : String, recipientId : String, tournamentId : String,
-                         participantForm : String, ownUserId : String) : Invitation {
+                         participantForm : String, ownUserId : String) : Invitation? {
         val response = invitationService.createInvitation(senderId, recipientId, tournamentId,participantForm, ownUserId)
         return  response.body()
     }

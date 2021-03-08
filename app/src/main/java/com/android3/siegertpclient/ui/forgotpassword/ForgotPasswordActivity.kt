@@ -1,35 +1,30 @@
 package com.android3.siegertpclient.ui.forgotpassword
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.view.View
 import android.widget.Toast
-import com.android3.siegertpclient.R
+import com.android3.siegertpclient.databinding.ActivityForgotpasswordBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
-import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.login.LoginActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPasswordView {
-
-    private val forgotPasswordPresenter: ForgotPasswordPresenter = ForgotPasswordPresenter()
+    private lateinit var binding: ActivityForgotpasswordBinding
+    private lateinit var forgotPasswordPresenter: ForgotPasswordPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_forgotpassword)
 
-        val emailEt: EditText = findViewById(R.id.email)
+        binding = ActivityForgotpasswordBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val backBtn: FloatingActionButton = findViewById(R.id.backBtnForgot)
-        backBtn.setOnClickListener{
+        forgotPasswordPresenter = ForgotPasswordPresenter(this)
+        val emailEt = binding.etEmail
+
+        binding.btnBack.setOnClickListener {
             forgotPasswordPresenter.onBackBtnClicked()
         }
 
-        val signUpBtn: Button = findViewById(R.id.buttonSend)
-        signUpBtn.setOnClickListener{
-            forgotPasswordPresenter.onSendBtnClicked(emailEt.getText().toString())
+        binding.btnSend.setOnClickListener {
+            forgotPasswordPresenter.onSendBtnClicked(emailEt.text.toString().trim { it <= ' ' })
         }
     }
 
@@ -43,38 +38,37 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordContract.IForgotPas
         forgotPasswordPresenter.onDetach()
     }
 
-    override fun showErrorOnEmail(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    override fun showErrorOnEmail() {
+        doToast("Email address is not valid")
     }
 
-    override fun showSuccess(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    override fun showSuccess() {
+        doToast("Email for changing password sent.")
     }
 
+    override fun showNoInternetConnection() {
+        doToast("There's no internet connection to make the request.")
+    }
 
     override fun navigateToLoginActivity() {
-        val lIntent = Intent(this, LoginActivity::class.java)
-        startActivity(lIntent)
-    }
-
-    override fun navigateToHomepageActivity() {
-        //Will not be implemented
+        onBackPressed()
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        binding.pbRequest.visibility = View.VISIBLE
+        binding.btnSend.isEnabled = false
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.pbRequest.visibility = View.GONE
+        binding.btnSend.isEnabled = true
     }
 
+    //Not being used at the moment
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
     }
 
-    override fun showError(errorId: Int) {
-        TODO("Not yet implemented")
+    private fun doToast(message: String) {
+        Toast.makeText(this@ForgotPasswordActivity, message, Toast.LENGTH_LONG).show()
     }
-
 }

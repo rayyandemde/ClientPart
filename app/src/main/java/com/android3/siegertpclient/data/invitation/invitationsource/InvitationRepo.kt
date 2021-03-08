@@ -15,7 +15,7 @@ class InvitationRepo () {
     var invitationRemote = InvitationRemoteDataSource(invitationService)
 
     fun createInvitation(senderId : String, recipientId : String, tournamentId : String,
-                         participantForm : String, token : String) : Invitation {
+                         participantForm : String, token : String) : Invitation? {
         val newInvitation = invitationRemote.createInvitation(senderId, recipientId, tournamentId, participantForm, token)
         return newInvitation
     }

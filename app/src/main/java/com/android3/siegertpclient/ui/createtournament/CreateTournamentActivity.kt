@@ -147,7 +147,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
     }
 
-    override fun showError(errorId: Int) {
-        Toast.makeText(applicationContext, errorId, Toast.LENGTH_LONG).show()
+    override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
     }
 }

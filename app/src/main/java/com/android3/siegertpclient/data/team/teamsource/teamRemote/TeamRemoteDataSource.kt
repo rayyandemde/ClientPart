@@ -10,27 +10,27 @@ import retrofit2.http.*
 
 class TeamRemoteDataSource (private val teamService: TeamService) : ITeamDataSource {
 
-    fun createNewTeam(adminId : String, name : String, password : String, ownUserId: String) : Team {
+    fun createNewTeam(adminId : String, name : String, password : String, ownUserId: String) : Team? {
         val response = teamService.createNewTeam(adminId, name, password, ownUserId)
         return response.body()
     }
 
-    fun getTeamByName(teamName : String, ownUserId: String) : Team {
+    fun getTeamByName(teamName : String, ownUserId: String) : Team? {
         val response = teamService.getTeamByName(teamName, ownUserId)
         return response.body()
     }
 
-    fun getTeamById(teamId : String, ownUserId: String) : Team {
+    fun getTeamById(teamId : String, ownUserId: String) : Team? {
         val response = teamService.getTeamById(teamId, ownUserId)
         return response.body()
     }
 
-    fun getTeamTournaments(teamName: String,ownUserId: String) : Array<Tournament> {
+    fun getTeamTournaments(teamName: String,ownUserId: String) : Array<Tournament>? {
         val response = teamService.getTeamTournaments(teamName, ownUserId)
         return response.body()
     }
 
-    fun getTeamInvitations(teamName: String, ownUserId: String) : Array<Invitation> {
+    fun getTeamInvitations(teamName: String, ownUserId: String) : Array<Invitation>? {
         val response = teamService.getTeamInvitations(teamName, ownUserId)
         return response.body()
     }
@@ -39,7 +39,7 @@ class TeamRemoteDataSource (private val teamService: TeamService) : ITeamDataSou
         val response = teamService.deleteTeam(teamName, ownUserId)
     }
 
-    fun getTeamMembers(teamName: String, ownUserId: String) : Array<User> {
+    fun getTeamMembers(teamName: String, ownUserId: String) : Array<User>? {
         val response = teamService.getTeamMembers(teamName, ownUserId)
         return response.body()
     }

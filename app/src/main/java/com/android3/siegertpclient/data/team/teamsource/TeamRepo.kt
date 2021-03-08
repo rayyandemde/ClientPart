@@ -14,23 +14,23 @@ class TeamRepo : ITeamDataSource {
 
     var teamRemote = TeamRemoteDataSource(teamService)
 
-    fun createNewTeam(adminId : String, name : String, password : String, token: String) : Team {
+    fun createNewTeam(adminId : String, name : String, password : String, token: String) : Team? {
         return teamRemote.createNewTeam(adminId, name, password, token)
     }
 
-    fun getTeamByName(teamName : String, token: String) : Team {
+    fun getTeamByName(teamName : String, token: String) : Team? {
         return teamRemote.getTeamByName(teamName, token)
     }
 
-    fun getTeamById(teamId : String, token: String) : Team {
+    fun getTeamById(teamId : String, token: String) : Team? {
         return teamRemote.getTeamById(teamId, token)
     }
 
-    fun getTeamTournaments(teamName: String,token: String) : Array<Tournament> {
+    fun getTeamTournaments(teamName: String,token: String) : Array<Tournament>? {
         return teamRemote.getTeamTournaments(teamName, token)
     }
 
-    fun getTeamInvitations(teamName: String, token: String) : Array<Invitation> {
+    fun getTeamInvitations(teamName: String, token: String) : Array<Invitation>? {
         return teamRemote.getTeamInvitations(teamName, token)
     }
 
@@ -38,7 +38,7 @@ class TeamRepo : ITeamDataSource {
         teamRemote.deleteTeam(teamName, token)
     }
 
-    fun getTeamMembers(teamName: String, token: String) : Array<User> {
+    fun getTeamMembers(teamName: String, token: String) : Array<User>? {
         return teamRemote.getTeamMembers(teamName, token)
     }
 

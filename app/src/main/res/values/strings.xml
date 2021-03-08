@@ -1,16 +1,26 @@
 <resources>
     <string name="app_name">Sieger</string>
-    <string name="title_activity_login2">LoginActivity2</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_account">"Create your account"</string>
+    <string name="username">Username</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="action_sign_up">Sign Up</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="title_activity_homepage_dummy">HomepageDummyActivity</string>
+    <string name="login_guide">Login to your account</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="register">Register</string>
+    <string name="forgot_password_guide">To reset password, enter your email, press the button and check mail to follow instruction.</string>
+    <string name="settings">Settings</string>
+    <string name="change_language">Change language</string>
+    <string name="change_first_name">Change First Name</string>
+    <string name="change_last_name">Change Last Name</string>
+    <string name="save_settings">Save Settings</string>
+    <string name="logout">Logout</string>
 
     <string-array name="Tournamenttypes_array">
         <item>Open</item>

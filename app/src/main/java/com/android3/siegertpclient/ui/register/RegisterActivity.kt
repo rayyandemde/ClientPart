@@ -2,46 +2,54 @@ package com.android3.siegertpclient.ui.register
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.view.View
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import com.android3.siegertpclient.R
+import com.android3.siegertpclient.databinding.ActivityRegisterBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.login.LoginActivity
 
+/**
+ * Testing javadoc here
+ */
 class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
-
-    lateinit var registerPresenter: RegisterPresenter
+    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var registerPresenter: RegisterPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
 
-        registerPresenter = RegisterPresenter()
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val username : EditText = findViewById(R.id.username)
-        val forename : EditText = findViewById(R.id.firstName)
-        val surname : EditText = findViewById(R.id.lastName)
-        val email : EditText = findViewById(R.id.email)
-        val password : EditText = findViewById(R.id.password)
-        val retypePassword : EditText = findViewById(R.id.retypePassword)
+        registerPresenter = RegisterPresenter(this)
 
-        val signUpBtn: Button = findViewById(R.id.signUpBtn)
-        signUpBtn.setOnClickListener {
-            val usernameString = username.text.toString()
-            val emailString = email.text.toString()
-            val passwordString = password.text.toString()
-            val retypePasswordString = retypePassword.text.toString()
-            val forenameString = forename.text.toString()
-            val surnameString = surname.text.toString()
-            registerPresenter.onRegisterBtnClicked(emailString, passwordString,
-                retypePasswordString, surnameString, forenameString, usernameString)
+        val usernameEt = binding.etUsername
+        val forenameEt = binding.etFirstName
+        val surnameEt = binding.etLastName
+        val emailEt = binding.etEmail
+        val passwordEt = binding.etPassword
+        val retypePasswordEt = binding.etRetypePassword
+
+        binding.btnSignUp.setOnClickListener {
+            val email = editTextTrimmer(emailEt)
+            val password = editTextTrimmer(passwordEt)
+            val retypePassword = editTextTrimmer(retypePasswordEt)
+            val surname = editTextTrimmer(surnameEt)
+            val forename = editTextTrimmer(forenameEt)
+            val username = editTextTrimmer(usernameEt)
+
+            registerPresenter.onRegisterBtnClicked(
+                email,
+                password,
+                retypePassword,
+                surname,
+                forename,
+                username
+            )
         }
 
-        val loginTv: TextView = findViewById(R.id.loginClickable)
-        loginTv.setOnClickListener {
+        binding.tvLogin.setOnClickListener {
             registerPresenter.onLoginTxtClicked()
         }
     }
@@ -56,42 +64,57 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
         registerPresenter.onDetach()
     }
 
-    override fun showErrorOnEmail(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    override fun showIncompleteInput() {
+        doToast("Please fill in all of the field")
     }
 
-    override fun showErrorOnPassword(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    override fun showErrorOnEmail() {
+        doToast("Email is not valid")
     }
 
-    override fun showErrorOnUsername(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    override fun showErrorOnPassword() {
+        doToast("Password doesn't match")
+    }
+
+    override fun showErrorOnUsername() {
+        doToast("Username already exist")
     }
 
     override fun navigateToHomepageActivity() {
-        val intent = Intent(this, HomepageActivity::class.java)
+        doToast("You are registered successfully.")
+        val intent = Intent(this@RegisterActivity, HomepageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
+        finish()
     }
 
     override fun navigateToLoginActivity() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+        onBackPressed()
+    }
+
+    override fun showNoInternetConnection() {
+        doToast("There's no internet connection to make the request.")
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        binding.pbRequest.visibility = View.VISIBLE
+        binding.btnSignUp.isEnabled = false
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.pbRequest.visibility = View.GONE
+        binding.btnSignUp.isEnabled = true
     }
 
     override fun showError(errorMessage: String) {
-        Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
+        doToast(errorMessage)
     }
 
-    override fun showError(errorId: Int) {
-        TODO("Not yet implemented")
+    private fun editTextTrimmer(editText: EditText): String {
+        return editText.text.toString().trim { it <= ' ' }
     }
 
+    private fun doToast(message: String) {
+        Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_LONG).show()
+    }
 }

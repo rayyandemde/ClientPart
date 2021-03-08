@@ -6,35 +6,33 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.databinding.ActivityRegisterBinding
+import com.android3.siegertpclient.databinding.ActivitySettingBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 
 class SettingActivity : BaseActivity() , SettingContract.ISettingView {
-
+    private lateinit var binding: ActivitySettingBinding
     private val settingPresenter: SettingPresenter = SettingPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting)
 
-        val backBtn: FloatingActionButton = findViewById(R.id.backButtonSetting)
-        backBtn.setOnClickListener{
+        binding = ActivitySettingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.fabBack.setOnClickListener{
             settingPresenter.onBackBtnClicked()
         }
 
-        val languageBt : Button = findViewById(R.id.changeLanguage)
-
-        val firstnameEt : EditText = findViewById(R.id.changeFirstName)
-
-        val lastnameEt: EditText = findViewById(R.id.changeLastName)
-
-        val saveBt : Button = findViewById(R.id.saveSettings)
-        val logoutTv: TextView = findViewById(R.id.logout)
-        logoutTv.setOnClickListener{
-            settingPresenter.onLogoutBtnClicked()
+        binding.tvLogout.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(this@SettingActivity, LoginActivity::class.java))
+            finish()
         }
     }
 
@@ -74,8 +72,7 @@ class SettingActivity : BaseActivity() , SettingContract.ISettingView {
         TODO("Not yet implemented")
     }
 
-    override fun showError(errorId: Int) {
+    override fun showNoInternetConnection() {
         TODO("Not yet implemented")
     }
-
 }
