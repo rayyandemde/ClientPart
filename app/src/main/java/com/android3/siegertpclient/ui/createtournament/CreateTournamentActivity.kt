@@ -50,8 +50,9 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         createTournamentPresenter = CreateTournamentPresenter(this)
 
         val nameEt = binding.etTournamentName
+        val typeOfGameEt = binding.etTypeOfGame
 
-        binding.spTypeOfGame.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.spMatchType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 adapterView: AdapterView<*>?,
                 view: View?,
@@ -99,18 +100,22 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
             }
         }
 
-        val locationEt = binding.etLocation
-        val dateEt = binding.etTime
-        val maxPlayersEt = binding.etMaxPlayer
-        val registrationDeadlineTv = binding.tvRegistrationDeadline
-
-        binding.tvRegistrationDeadline.setOnClickListener {
+        binding.btnRegistrationDeadline.setOnClickListener {
             getDateCalendar()
-
             DatePickerDialog(this, this, year, month, day).show()
+            binding.btnRegistrationDeadline.text = "$savedYear-$savedMonth-$savedDay"
         }
 
-        // val prizeEt = binding.etPrize
+        binding.btnStartTime.setOnClickListener {
+
+        }
+
+        binding.btnEndTime.setOnClickListener {
+
+        }
+
+        val locationEt = binding.etLocation
+        val maxPlayersEt = binding.etMaxPlayer
 
         binding.btnCreateTournament.setOnClickListener{
             createTournamentPresenter.onCreateBtnClicked()
@@ -187,8 +192,6 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         savedDay = dayOfMonth
         savedMonth = month
         savedYear = year
-
-        binding.tvRegistrationDeadline.text = "$savedYear-$savedMonth-$savedDay"
     }
 
     private fun getDateCalendar() {

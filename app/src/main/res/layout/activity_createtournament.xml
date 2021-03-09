@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:text="@string/create_a_new_tournament"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -35,8 +35,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_create_a_tournament" />
 
+    <EditText
+        android:id="@+id/et_type_of_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:ems="10"
+        android:hint="@string/type_of_game_e_g_chess"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_tournament_name" />
+
     <Spinner
-        android:id="@+id/sp_type_of_game"
+        android:id="@+id/sp_match_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
@@ -46,7 +60,7 @@
         android:entries="@array/sa_type_of_game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_tournament_name" />
+        app:layout_constraintTop_toBottomOf="@id/et_type_of_game" />
 
     <Spinner
         android:id="@+id/sp_tournament_type"
@@ -59,7 +73,7 @@
         android:entries="@array/sa_tournament_types"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sp_type_of_game" />
+        app:layout_constraintTop_toBottomOf="@id/sp_match_type" />
 
     <Spinner
         android:id="@+id/sp_participant_form"
@@ -74,6 +88,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sp_tournament_type" />
 
+    <Button
+        android:id="@+id/btn_registration_deadline"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:gravity="center"
+        android:text="@string/registation_deadline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sp_participant_form" />
+
+    <LinearLayout
+        android:id="@+id/ll_tournament_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_registration_deadline">
+
+        <Button
+            android:id="@+id/btn_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:ems="10"
+            android:text="@string/start_time" />
+
+        <Button
+            android:id="@+id/btn_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="@string/end_time" />
+    </LinearLayout>
+
     <EditText
         android:id="@+id/et_location"
         android:layout_width="wrap_content"
@@ -86,21 +139,7 @@
         android:hint="@string/location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sp_participant_form" />
-
-    <EditText
-        android:id="@+id/et_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Date and Time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_location" />
+        app:layout_constraintTop_toBottomOf="@id/ll_tournament_time" />
 
     <EditText
         android:id="@+id/et_max_player"
@@ -114,35 +153,7 @@
         android:hint="@string/max_player"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_time"/>
-
-    <TextView
-        android:id="@+id/tv_registration_deadline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:gravity="center"
-        android:ems="10"
-        android:text="Registation Deadline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_max_player"/>
-
-    <EditText
-        android:id="@+id/et_prize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Prize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_registration_deadline"/>
+        app:layout_constraintTop_toBottomOf="@id/et_location"/>
 
     <Button
         android:id="@+id/btn_create_tournament"
@@ -156,6 +167,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_prize"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintTop_toBottomOf="@id/et_max_player"
+        app:layout_constraintVertical_bias="0.109" />
 </androidx.constraintlayout.widget.ConstraintLayout>

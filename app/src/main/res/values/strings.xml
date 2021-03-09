@@ -25,9 +25,13 @@
     <string name="tournament_name">Tournament Name</string>
     <string name="location">Location</string>
     <string name="max_player">Max Player</string>
+    <string name="registation_deadline">Registation Deadline</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="type_of_game_e_g_chess">Type of Game (e.g. Chess)</string>
 
     <string-array name="sa_type_of_game">
-        <item>Type of Game</item>
+        <item>Match Type</item>
         <item>KO</item>
         <item>League</item>
         <item>KO with Groups</item>
