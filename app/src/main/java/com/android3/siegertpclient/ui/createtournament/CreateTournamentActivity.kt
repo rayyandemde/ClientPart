@@ -5,29 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.R.*
 import com.android3.siegertpclient.R.id.*
 import com.android3.siegertpclient.databinding.ActivityCreatetournamentBinding
-import com.android3.siegertpclient.databinding.ActivityLoginBinding
-import com.android3.siegertpclient.databinding.ActivityRegisterBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
-import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordPresenter
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.login.LoginActivity
-import com.android3.siegertpclient.ui.login.LoginPresenter
-import com.android3.siegertpclient.ui.register.RegisterActivity
-import com.android3.siegertpclient.ui.register.RegisterPresenter
 
 import com.android3.siegertpclient.ui.tournament.TournamentActivity
 import java.util.*
 
-import android.widget.Spinner as Spinner
-
 /**
  * This class is to implement the activity to create the tournament.
  */
-class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreateTournamentView, DatePickerDialog.OnDateSetListener {
+class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreateTournamentView {
     private lateinit var binding: ActivityCreatetournamentBinding
     //The presenter that to create the tournament.
     private lateinit var createTournamentPresenter: CreateTournamentPresenter
@@ -35,10 +25,6 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
     var day = 0
     var month = 0
     var year = 0
-
-    var savedDay = 0
-    var savedMonth = 0
-    var savedYear = 0
 
     //This method is to create the view of the createTournament page.
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +38,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         val nameEt = binding.etTournamentName
         val typeOfGameEt = binding.etTypeOfGame
 
+        var matchType = ""
         binding.spMatchType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 adapterView: AdapterView<*>?,
@@ -59,15 +46,14 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
                 position: Int,
                 id: Long
             ) {
-                //Dummy implementation
-                val dummyString = adapterView?.getItemAtPosition(position).toString()
-                Toast.makeText(this@CreateTournamentActivity, "You choose the Game :: ".plus(dummyString), Toast.LENGTH_LONG).show()
+                matchType = adapterView?.getItemAtPosition(position).toString()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
 
+        var tournamentType = ""
         binding.spTournamentType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 adapterView: AdapterView<*>?,
@@ -75,15 +61,14 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
                 position: Int,
                 id: Long
             ) {
-                //Dummy implementation
-                val dummyString = adapterView?.getItemAtPosition(position).toString()
-                Toast.makeText(this@CreateTournamentActivity, "You choose the Tournament  :: ".plus(dummyString), Toast.LENGTH_LONG).show()
+                tournamentType = adapterView?.getItemAtPosition(position).toString()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
 
+        var participantForm = ""
         binding.spParticipantForm.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 adapterView: AdapterView<*>?,
@@ -91,9 +76,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
                 position: Int,
                 id: Long
             ) {
-                //Dummy implementation
-                val dummyString = adapterView?.getItemAtPosition(position).toString()
-                Toast.makeText(this@CreateTournamentActivity, "You choose the Participant  :: ".plus(dummyString), Toast.LENGTH_LONG).show()
+                participantForm = adapterView?.getItemAtPosition(position).toString()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -102,23 +85,54 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
 
         binding.btnRegistrationDeadline.setOnClickListener {
             getDateCalendar()
-            DatePickerDialog(this, this, year, month, day).show()
-            binding.btnRegistrationDeadline.text = "$savedYear-$savedMonth-$savedDay"
+            DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+
+                val monthCalibrate = monthOfYear + 1
+                binding.btnRegistrationDeadline.text = "$year-$monthCalibrate-$dayOfMonth"
+
+            }, year, month, day).show()
         }
 
-        binding.btnStartTime.setOnClickListener {
-
+        binding.btnStartDate.setOnClickListener {
+            getDateCalendar()
+            DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                val monthCalibrate = monthOfYear + 1
+                binding.btnStartDate.text = "$year-$monthCalibrate-$dayOfMonth"
+            }, year, month, day).show()
         }
 
-        binding.btnEndTime.setOnClickListener {
-
+        binding.btnEndDate.setOnClickListener {
+            getDateCalendar()
+            DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                val monthCalibrate = monthOfYear + 1
+                binding.btnEndDate.text = "$year-$monthCalibrate-$dayOfMonth"
+            }, year, month, day).show()
         }
 
         val locationEt = binding.etLocation
         val maxPlayersEt = binding.etMaxPlayer
 
-        binding.btnCreateTournament.setOnClickListener{
-            createTournamentPresenter.onCreateBtnClicked()
+        binding.btnCreate.setOnClickListener{
+            val name = editTextTrimmer(nameEt)
+            val typeOfGame = editTextTrimmer(typeOfGameEt)
+            val registrationDeadline = binding.btnRegistrationDeadline.text.toString()
+            val startTime = binding.btnStartDate.text.toString()
+            val endTime = binding.btnEndDate.text.toString()
+            val location = editTextTrimmer(locationEt)
+            val maxParticipantNumber = editTextTrimmer(maxPlayersEt).toInt()
+
+            createTournamentPresenter.onCreateBtnClicked(
+                name,
+                typeOfGame,
+                matchType,
+                tournamentType,
+                participantForm,
+                registrationDeadline,
+                startTime,
+                endTime,
+                location,
+                maxParticipantNumber
+            )
         }
     }
 
@@ -135,17 +149,13 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
     }
 
     override fun navigateToHomepageActivity() {
-        val hIntent = Intent(this, HomepageActivity::class.java)
-        startActivity(hIntent)
-    }
-
-    override fun navigateToLoginActivity() {
-        //Will not be implemented
+        val intent = Intent(this@CreateTournamentActivity, HomepageActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToTournamentActivity() {
-        val tIntent = Intent(this, TournamentActivity::class.java)
-        startActivity(tIntent)
+        val intent = Intent(this@CreateTournamentActivity, TournamentActivity::class.java)
+        startActivity(intent)
     }
 
     override fun showErrorOnTournamentName(message: String) {
@@ -168,30 +178,22 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
-    override fun showErrorOnPrize(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
-    }
-
     override fun showProgress() {
-        TODO("Not yet implemented")
+        binding.pbRequest.visibility = View.VISIBLE
+        binding.btnCreate.isEnabled = false
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.pbRequest.visibility = View.GONE
+        binding.btnCreate.isEnabled = true
     }
 
     override fun showError(errorMessage: String) {
-        Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
-    }
-
-    override fun showNoInternetConnection() {
         TODO("Not yet implemented")
     }
 
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        savedDay = dayOfMonth
-        savedMonth = month
-        savedYear = year
+    override fun showNoInternetConnection() {
+        doToast("There's no internet connection to make the request.")
     }
 
     private fun getDateCalendar() {
@@ -199,5 +201,13 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         day = cal.get(Calendar.DAY_OF_MONTH)
         month = cal.get(Calendar.MONTH)
         year = cal.get(Calendar.YEAR)
+    }
+
+    private fun editTextTrimmer(editText: EditText): String {
+        return editText.text.toString().trim { it <= ' ' }
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(this@CreateTournamentActivity, message, Toast.LENGTH_LONG).show()
     }
 }
