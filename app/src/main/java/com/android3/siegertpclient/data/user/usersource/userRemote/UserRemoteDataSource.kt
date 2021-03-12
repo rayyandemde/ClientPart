@@ -21,7 +21,6 @@ class UserRemoteDataSource(private val userService: UserService) {
         user["userId"] = userId
 
         val userCall = userService.createNewUser(user, TokenUtil.getBearerToken())
-        val response = userCall.execute()
 
         userCall.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -33,12 +32,12 @@ class UserRemoteDataSource(private val userService: UserService) {
             }
 
         })
+        val response = userCall.execute()
         return response.body()
     }
 
     fun getUserById(userId: String) : User? {
         val userCall = userService.getUserById(userId, TokenUtil.getBearerToken())
-        val response = userCall.execute()
         userCall.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 TODO("Not yet implemented")
@@ -49,12 +48,12 @@ class UserRemoteDataSource(private val userService: UserService) {
             }
 
         })
+        val response = userCall.execute()
         return response.body()
     }
 
     fun getUserByUsername(username: String) : User? {
         val userCall = userService.getUserByUsername(username, TokenUtil.getBearerToken())
-        val response = userCall.execute()
         userCall.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 TODO("Not yet implemented")
@@ -65,12 +64,12 @@ class UserRemoteDataSource(private val userService: UserService) {
             }
 
         })
+        val response = userCall.execute()
         return response.body()
     }
 
     fun getUsersTournaments(username: String) : List<Tournament>? {
         val userCall = userService.getUsersTournaments(username, TokenUtil.getBearerToken())
-        val response = userCall.execute()
         userCall.enqueue(object : Callback<List<Tournament>> {
             override fun onResponse(
                 call: Call<List<Tournament>>,
@@ -84,12 +83,12 @@ class UserRemoteDataSource(private val userService: UserService) {
             }
 
         })
+        val response = userCall.execute()
         return response.body()
     }
 
     fun getUsersTeams(username: String) : List<Team>? {
         val userCall = userService.getUserTeams(username, TokenUtil.getBearerToken())
-        val response = userCall.execute()
         userCall.enqueue(object : Callback<List<Team>> {
             override fun onResponse(call: Call<List<Team>>, response: Response<List<Team>>) {
                 TODO("Not yet implemented")
@@ -100,12 +99,12 @@ class UserRemoteDataSource(private val userService: UserService) {
             }
 
         })
+        val response = userCall.execute()
         return response.body()
     }
 
     fun getUsersInvitations(username: String) : List<Invitation>? {
         val userCall = userService.getUserInvitations(username, TokenUtil.getBearerToken())
-        val response = userCall.execute()
         userCall.enqueue(object : Callback<List<Invitation>> {
             override fun onResponse(
                 call: Call<List<Invitation>>,
@@ -119,6 +118,7 @@ class UserRemoteDataSource(private val userService: UserService) {
             }
 
         })
+        val response = userCall.execute()
         return response.body()
     }
 
@@ -132,7 +132,6 @@ class UserRemoteDataSource(private val userService: UserService) {
             oldUsername, newUsername, forename, surname,
             TokenUtil.getBearerToken()
         )
-        val response = userCall.execute()
         userCall.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 TODO("Not yet implemented")
@@ -142,6 +141,7 @@ class UserRemoteDataSource(private val userService: UserService) {
                 TODO("Not yet implemented")
             }
         })
+        val response = userCall.execute()
         return response.body()
     }
 }
