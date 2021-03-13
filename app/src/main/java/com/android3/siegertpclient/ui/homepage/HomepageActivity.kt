@@ -61,8 +61,8 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         transaction.add(R.id.fragment_container, feedFragment)
         transaction.commit()
 
-        val previousItent = intent
-        val token = previousItent.getStringExtra(KEY_TOKEN)
+        val previousIntent = intent
+        val token = previousIntent.getStringExtra(KEY_TOKEN)
 
         homepagePresenter.getUserInfo(token)
     }
@@ -76,6 +76,10 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
     override fun onDestroy() {
         super.onDestroy()
         homepagePresenter.onDetach()
+    }
+
+    override fun onBackPressed() {
+
     }
 
     override fun navigateToInvitationActivity() {

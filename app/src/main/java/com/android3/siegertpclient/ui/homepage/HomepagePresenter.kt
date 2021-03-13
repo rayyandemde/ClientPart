@@ -2,12 +2,13 @@ package com.android3.siegertpclient.ui.homepage
 
 import android.content.Context
 import com.android3.siegertpclient.data.user.usersource.UserRepo
+import com.android3.siegertpclient.data.user.usersource.UserRepo2
 import com.android3.siegertpclient.ui.base.BasePresenter
 import com.android3.siegertpclient.utils.PreferencesProvider
 
 class HomepagePresenter(private val context: Context) : BasePresenter<HomepageContract.IHomepageView>(), HomepageContract.IHomepagePresenter{
 
-    private val userRepo: UserRepo = UserRepo()
+    private var userRepo = UserRepo2()
 
     private var preferencesProvider = PreferencesProvider(context)
 
@@ -47,17 +48,18 @@ class HomepagePresenter(private val context: Context) : BasePresenter<HomepageCo
         view?.navigateToInvitationActivity()
     }
 
-    override fun getUserInfo(token: String) {
-        TODO("Not yet implemented")
+    override fun getUserInfo(token: String?) {
+
     }
 
+    /*
     fun createDummyAccount(email : String,
                            password : String,
                            username: String,
                            firstName: String,
                            surname: String) {
         userRepo.register(email,password, username,firstName, surname)
-    }
+    }*/
 
     fun goToTournament() {
        view?.goToTournamentScreen()

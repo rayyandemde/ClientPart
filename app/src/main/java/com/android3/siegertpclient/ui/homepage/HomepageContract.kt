@@ -49,6 +49,6 @@ interface HomepageContract {
 
         fun onInvitationBtnClicked()
 
-        fun getUserInfo(token: String)
+        fun getUserInfo(token: String?)
     }
 }

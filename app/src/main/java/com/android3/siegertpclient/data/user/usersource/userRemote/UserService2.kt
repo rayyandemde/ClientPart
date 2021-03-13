@@ -13,6 +13,12 @@ interface UserService2 {
         @Header("Authorization") token: String
     ): Response<User>
 
+    @GET("users")
+    suspend fun getUserById(
+        @Query("id") id: String,
+        @Header("Authorization") token: String
+    ): Response<User>
+
     @PUT("users/{username}")
     suspend fun updateUserDetails(
         @Path("username") oldUsername: String,

@@ -34,13 +34,14 @@ class UserRepo() {
         return userRemote.getUserById(auth.currentUser?.uid.toString())
     }
 
-//    fun getUserById (userId : String) : User {
-//        return userRemote.getUserById(userId)
-//    }
-//
-//    fun getUserByUsername (username : String) : User {
-//        return userRemote.getUserByUsername(username)
-//    }
+    fun getUserById (userId : String) : User? {
+       return userRemote.getUserById(userId)
+    }
+
+    fun getUserByUsername (username : String) : User? {
+        return userRemote.getUserByUsername(username)
+    }
+
     fun getCurrentUser() {
         auth = FirebaseAuth.getInstance()
         userRemote.getUserById(auth.currentUser?.uid.toString())

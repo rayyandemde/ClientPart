@@ -22,6 +22,10 @@ class UserRemoteDataSource2 {
         return RestClient2.userService.createNewUser(user, token)
     }
 
+    suspend fun getUserById (userId: String, token: String) : Response<User> {
+        return RestClient2.userService.getUserById(userId, token)
+    }
+
     suspend fun updateUserDetail(
         oldUsername: String,
         newUsername: String,
