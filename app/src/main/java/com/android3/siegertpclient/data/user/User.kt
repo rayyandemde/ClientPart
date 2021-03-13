@@ -2,6 +2,7 @@ package com.android3.siegertpclient.data.user
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class User(

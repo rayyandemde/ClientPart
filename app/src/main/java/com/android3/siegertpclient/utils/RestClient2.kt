@@ -12,8 +12,7 @@ import retrofit2.create
 import java.lang.reflect.Type
 
 object RestClient2 {
-
-
+    /*
     object TournamentDeserializer : JsonDeserializer<Tournament2> {
         override fun deserialize(
             json: JsonElement?,
@@ -37,7 +36,7 @@ object RestClient2 {
                 }
             }
         }
-    }
+    }*/
 
     object TournamentSerializer : JsonSerializer<Tournament2> {
         override fun serialize(
@@ -56,17 +55,19 @@ object RestClient2 {
             .build()
     }
 
+    /*
     private val tournamentRetrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(getTournamentGson()))
             .build()
-    }
+    }*/
 
     val userService: UserService2 by lazy {
         retrofit.create(UserService2::class.java)
     }
 
+/*
     val tournamentService: TournamentService2 by lazy {
         tournamentRetrofit.create(TournamentService2::class.java)
     }
@@ -75,5 +76,5 @@ object RestClient2 {
     private fun getTournamentGson(): Gson {
         return GsonBuilder().registerTypeAdapter(Tournament2::class.java, TournamentDeserializer)
             .registerTypeAdapter(Tournament2::class.java, TournamentSerializer).create()
-    }
+    }*/
 }

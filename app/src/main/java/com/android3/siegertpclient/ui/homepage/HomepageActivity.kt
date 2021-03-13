@@ -2,21 +2,20 @@ package com.android3.siegertpclient.ui.homepage
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
 import com.android3.siegertpclient.ui.createtournament.CreateTournamentActivity
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_TOKEN
 import com.android3.siegertpclient.ui.invitation.InvitationActivity
-import com.android3.siegertpclient.ui.register.RegisterActivity
 import com.android3.siegertpclient.ui.tournament.TournamentActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
 
-    private val homepagePresenter: HomepagePresenter = HomepagePresenter()
+    private lateinit var homepagePresenter: HomepagePresenter
 
     private val joinTeamFragment: JoinTeamFragment
     private val feedFragment: FeedFragment
@@ -52,6 +51,8 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
 
+        homepagePresenter = HomepagePresenter(this)
+
         val navigationBar: BottomNavigationView = findViewById(R.id.navigation) as BottomNavigationView
 
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -59,6 +60,11 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragment_container, feedFragment)
         transaction.commit()
+
+        val previousItent = intent
+        val token = previousItent.getStringExtra(KEY_TOKEN)
+
+        homepagePresenter.getUserInfo(token)
     }
 
     override fun onResume() {

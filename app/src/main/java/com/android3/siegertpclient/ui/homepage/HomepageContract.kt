@@ -48,5 +48,7 @@ interface HomepageContract {
         fun loadTournamentOverviews()
 
         fun onInvitationBtnClicked()
+
+        fun getUserInfo(token: String)
     }
 }

@@ -6,8 +6,6 @@ interface SettingsContract {
 
         fun navigateToUserProfileActivity()
 
-        fun showMessageOnPage(message: String)
-
         fun navigateToLoginActivity()
     }
 
@@ -15,7 +13,13 @@ interface SettingsContract {
 
         fun onBackBtnClicked()
 
-        fun onSaveBtnClicked()
+        fun onChangeLanguageBtnClicked()
+
+        fun onSaveBtnClicked(
+            changedUsername: String,
+            changedForename: String,
+            changedSurname: String
+        )
 
         fun onLogoutBtnClicked()
     }

@@ -67,7 +67,7 @@ class RegisterPresenter(private val context: Context) :
                                                     )
                                                 if (response.isSuccessful) {
                                                     withContext(Dispatchers.Main) {
-                                                        view?.navigateToHomepageActivity()
+                                                        view?.navigateToHomepageActivity(tokenBearer)
                                                     }
                                                 }
                                             } catch (e: Exception) {

@@ -1,11 +1,15 @@
 package com.android3.siegertpclient.ui.homepage
 
+import android.content.Context
 import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
+import com.android3.siegertpclient.utils.PreferencesProvider
 
-class HomepagePresenter() : BasePresenter<HomepageContract.IHomepageView>(), HomepageContract.IHomepagePresenter{
+class HomepagePresenter(private val context: Context) : BasePresenter<HomepageContract.IHomepageView>(), HomepageContract.IHomepagePresenter{
 
     private val userRepo: UserRepo = UserRepo()
+
+    private var preferencesProvider = PreferencesProvider(context)
 
     override fun onMailBtnClicked() {
         TODO("Not yet implemented")
@@ -41,6 +45,10 @@ class HomepagePresenter() : BasePresenter<HomepageContract.IHomepageView>(), Hom
 
     override fun onInvitationBtnClicked() {
         view?.navigateToInvitationActivity()
+    }
+
+    override fun getUserInfo(token: String) {
+        TODO("Not yet implemented")
     }
 
     fun createDummyAccount(email : String,
