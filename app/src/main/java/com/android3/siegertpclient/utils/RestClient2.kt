@@ -67,12 +67,13 @@ object RestClient2 {
         retrofit.create(UserService2::class.java)
     }
 
-/*
+
     val tournamentService: TournamentService2 by lazy {
-        tournamentRetrofit.create(TournamentService2::class.java)
+        retrofit.create(TournamentService2::class.java)
     }
 
 
+/*
     private fun getTournamentGson(): Gson {
         return GsonBuilder().registerTypeAdapter(Tournament2::class.java, TournamentDeserializer)
             .registerTypeAdapter(Tournament2::class.java, TournamentSerializer).create()

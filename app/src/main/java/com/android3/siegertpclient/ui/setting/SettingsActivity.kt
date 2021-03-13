@@ -8,9 +8,7 @@ import android.widget.Toast
 import com.android3.siegertpclient.databinding.ActivitySettingsBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
-import com.android3.siegertpclient.ui.register.RegisterPresenter
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
-import com.google.firebase.auth.FirebaseAuth
 
 class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
     private lateinit var binding: ActivitySettingsBinding
@@ -49,12 +47,10 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
         }
 
         binding.tvLogout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(this@SettingsActivity, LoginActivity::class.java))
-            finish()
+            settingsPresenter.onLogoutTextClicked()
         }
 
-        binding.tvTestUserUpdate.text = "You are now something"
+        binding.tvTestUserUpdate.text = settingsPresenter.getUser()
     }
 
     override fun onResume() {

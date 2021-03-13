@@ -4,6 +4,9 @@ import android.content.Context
 import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.data.user.usersource.UserRepo2
 import com.android3.siegertpclient.ui.base.BasePresenter
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_FORENAME
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_SURNAME
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USERNAME
 import com.android3.siegertpclient.utils.PreferencesProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -54,17 +57,18 @@ class HomepagePresenter(private val context: Context) :
     }
 
     override fun getUserInfo(userId: String, token: String) {
-        /*
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val response = userRepo
                     .getUserById(
-                        username, forename,
-                        surname, firebaseUser.uid, tokenBearer
+                        userId, token
                     )
                 if (response.isSuccessful) {
                     withContext(Dispatchers.Main) {
-                        view?.navigateToHomepageActivity(tokenBearer)
+                        preferencesProvider.putString(KEY_USERNAME, response.body()!!.username)
+                        preferencesProvider.putString(KEY_FORENAME, response.body()!!.forename)
+                        preferencesProvider.putString(KEY_SURNAME, response.body()!!.surname)
+                        view?.showError(response.body()!!.toString())
                     }
                 }
             } catch (e: Exception) {
@@ -72,7 +76,7 @@ class HomepagePresenter(private val context: Context) :
                     view?.showError("Oops... It seems there's unexpected error")
                 }
             }
-        }*/
+        }
     }
 
     /*

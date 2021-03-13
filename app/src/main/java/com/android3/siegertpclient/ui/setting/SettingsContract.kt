@@ -21,6 +21,6 @@ interface SettingsContract {
             changedSurname: String
         )
 
-        fun onLogoutBtnClicked()
+        fun onLogoutTextClicked()
     }
 }

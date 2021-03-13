@@ -13,4 +13,8 @@ class PreferencesProvider(context: Context) {
     fun getString(key : String) : String? {
         return sharedPreferences.getString(key, null)
     }
+
+    fun clearData() {
+        sharedPreferences.edit().clear().apply()
+    }
 }
