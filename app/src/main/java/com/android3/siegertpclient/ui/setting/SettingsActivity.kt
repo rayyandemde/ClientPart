@@ -2,27 +2,20 @@ package com.android3.siegertpclient.ui.setting
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import com.android3.siegertpclient.R
-import com.android3.siegertpclient.databinding.ActivityRegisterBinding
-import com.android3.siegertpclient.databinding.ActivitySettingBinding
+import com.android3.siegertpclient.databinding.ActivitySettingsBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
-import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 
-class SettingActivity : BaseActivity() , SettingContract.ISettingView {
-    private lateinit var binding: ActivitySettingBinding
-    private val settingPresenter: SettingPresenter = SettingPresenter()
+class SettingsActivity : BaseActivity() , SettingsContract.ISettingView {
+    private lateinit var binding: ActivitySettingsBinding
+    private val settingPresenter: SettingsPresenter = SettingsPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivitySettingBinding.inflate(layoutInflater)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.fabBack.setOnClickListener{
@@ -31,7 +24,7 @@ class SettingActivity : BaseActivity() , SettingContract.ISettingView {
 
         binding.tvLogout.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(this@SettingActivity, LoginActivity::class.java))
+            startActivity(Intent(this@SettingsActivity, LoginActivity::class.java))
             finish()
         }
     }

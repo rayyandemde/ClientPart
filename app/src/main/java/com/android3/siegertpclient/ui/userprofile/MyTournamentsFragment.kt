@@ -9,11 +9,10 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.databinding.FragmentMytournamentsBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
-import com.android3.siegertpclient.ui.setting.SettingActivity
+import com.android3.siegertpclient.ui.setting.SettingsActivity
 
 class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
     private var _binding: FragmentMytournamentsBinding? = null
@@ -85,7 +84,7 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
     }
 
     override fun navigateToSettingActivity() {
-        val sIntent = Intent(activity, SettingActivity::class.java)
+        val sIntent = Intent(activity, SettingsActivity::class.java)
         startActivity(sIntent)
     }
 

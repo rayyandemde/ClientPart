@@ -1,6 +1,6 @@
 import com.android3.siegertpclient.ui.base.BaseView
 
-interface SettingContract {
+interface SettingsContract {
 
     interface ISettingView : BaseView {
 

@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.setting.SettingActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView {

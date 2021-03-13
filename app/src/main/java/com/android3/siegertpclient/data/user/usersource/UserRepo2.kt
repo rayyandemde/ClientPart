@@ -18,4 +18,17 @@ class UserRepo2 {
     ): Response<User> {
         return userRemoteDataSource2.createNewUser(username, surname, forename, userId, token)
     }
+
+    suspend fun updateUserDetail(
+        oldUsername: String, newUsername: String, newForename: String,
+        newSurname: String, token: String
+    ): Response<User> {
+        return userRemoteDataSource2.updateUserDetail(
+            oldUsername,
+            newUsername,
+            newForename,
+            newSurname,
+            token
+        )
+    }
 }

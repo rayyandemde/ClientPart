@@ -1,10 +1,9 @@
 package com.android3.siegertpclient.data.user.usersource.userRemote
 
 import com.android3.siegertpclient.data.user.User
+import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface UserService2 {
 
@@ -13,4 +12,12 @@ interface UserService2 {
         @Body user: Map<String, String>,
         @Header("Authorization") token: String
     ): Response<User>
+
+    @PUT("users/{username}")
+    suspend fun updateUserDetails(
+        @Path("username") oldUsername: String,
+        @Body username: String, @Body surname: String,
+        @Body forename: String, @Header("Authorization") token: String
+    )
+            : Response<User>
 }
