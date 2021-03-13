@@ -19,6 +19,7 @@ import java.util.*
  */
 class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreateTournamentView {
     private lateinit var binding: ActivityCreatetournamentBinding
+
     //The presenter that to create the tournament.
     private lateinit var createTournamentPresenter: CreateTournamentPresenter
 
@@ -54,65 +55,85 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         }
 
         var tournamentType = ""
-        binding.spTournamentType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                adapterView: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                tournamentType = adapterView?.getItemAtPosition(position).toString()
-            }
+        binding.spTournamentType.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    adapterView: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    tournamentType = adapterView?.getItemAtPosition(position).toString()
+                }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
             }
-        }
 
         var participantForm = ""
-        binding.spParticipantForm.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                adapterView: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                participantForm = adapterView?.getItemAtPosition(position).toString()
-            }
+        binding.spParticipantForm.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    adapterView: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    participantForm = adapterView?.getItemAtPosition(position).toString()
+                }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
             }
-        }
 
         binding.btnRegistrationDeadline.setOnClickListener {
             getDateCalendar()
-            DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            DatePickerDialog(
+                this,
+                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 
-                val monthCalibrate = monthOfYear + 1
-                binding.btnRegistrationDeadline.text = "$year-$monthCalibrate-$dayOfMonth"
+                    val monthCalibrate = monthOfYear + 1
+                    binding.btnRegistrationDeadline.text = "$year-$monthCalibrate-$dayOfMonth"
 
-            }, year, month, day).show()
+                },
+                year,
+                month,
+                day
+            ).show()
         }
 
         binding.btnStartDate.setOnClickListener {
             getDateCalendar()
-            DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                val monthCalibrate = monthOfYear + 1
-                binding.btnStartDate.text = "$year-$monthCalibrate-$dayOfMonth"
-            }, year, month, day).show()
+            DatePickerDialog(
+                this,
+                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    val monthCalibrate = monthOfYear + 1
+                    binding.btnStartDate.text = "$year-$monthCalibrate-$dayOfMonth"
+                },
+                year,
+                month,
+                day
+            ).show()
         }
 
         binding.btnEndDate.setOnClickListener {
             getDateCalendar()
-            DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                val monthCalibrate = monthOfYear + 1
-                binding.btnEndDate.text = "$year-$monthCalibrate-$dayOfMonth"
-            }, year, month, day).show()
+            DatePickerDialog(
+                this,
+                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    val monthCalibrate = monthOfYear + 1
+                    binding.btnEndDate.text = "$year-$monthCalibrate-$dayOfMonth"
+                },
+                year,
+                month,
+                day
+            ).show()
         }
 
         val locationEt = binding.etLocation
         val maxPlayersEt = binding.etMaxPlayer
 
-        binding.btnCreate.setOnClickListener{
+        binding.btnCreate.setOnClickListener {
             val name = editTextTrimmer(nameEt)
             val typeOfGame = editTextTrimmer(typeOfGameEt)
             val registrationDeadline = binding.btnRegistrationDeadline.text.toString()
