@@ -2,41 +2,45 @@ package com.android3.siegertpclient.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.databinding.ActivityLoginBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
 
-class LoginActivity : BaseActivity(), LoginContract.ILoginView {
 
-    private val loginPresenter: LoginPresenter = LoginPresenter()
+class LoginActivity : BaseActivity(), LoginContract.ILoginView {
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var loginPresenter: LoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        setTheme(R.style.Theme_SiegerTPClient)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
-        val emailTxt : EditText = findViewById(R.id.email)
-        val passwordTxt: EditText = findViewById(R.id.password)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val registerTv: TextView = findViewById(R.id.registerClickable)
-        registerTv.setOnClickListener {
+        loginPresenter = LoginPresenter(this)
+
+        val emailEt = binding.etEmail
+        val passwordEt = binding.etPassword
+
+        binding.tvRegister.setOnClickListener {
             loginPresenter.onRegisterTextClicked()
         }
 
-        val loginBtn: Button = findViewById(R.id.loginBtn)
-        loginBtn.setOnClickListener{
-            //loginPresenter.onLoginBtnClicked(emailTxt.text.toString(), passwordTxt.text.toString())
-            //This is only test method
-            loginPresenter.onLoginBtnClickedDummy()
+        binding.btnLogin.setOnClickListener {
+            loginPresenter.onLoginBtnClicked(
+                emailEt.text.toString().trim { it <= ' ' },
+                passwordEt.text.toString().trim { it <= ' ' })
         }
 
-        val forgotPasswordTv: TextView = findViewById(R.id.forgotPassword)
-        forgotPasswordTv.setOnClickListener {
+        binding.tvForgotPassword.setOnClickListener {
             loginPresenter.onForgotPasswordTextClicked()
         }
     }
@@ -51,35 +55,51 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         loginPresenter.onDetach()
     }
 
+    override fun showIncompleteInput() {
+        doToast("Please fill in all of the field")
+    }
+
+    override fun showErrorOnEmail() {
+        doToast("Email is not valid")
+    }
+
     override fun navigateToHomepageActivity() {
-        val hIntent = Intent(this, HomepageActivity::class.java)
-        startActivity(hIntent)
+        doToast("You are logged in successfully.")
+        val intent = Intent(this@LoginActivity, HomepageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 
     override fun navigateToForgotPasswordActivity() {
-        val fpIntent = Intent(this, ForgotPasswordActivity::class.java)
-        startActivity(fpIntent)
+        val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToRegisterActivity() {
-        val fpIntent2 = Intent(this, RegisterActivity::class.java)
-        startActivity(fpIntent2)
+        val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        binding.pbRequest.visibility = View.VISIBLE
+        binding.btnLogin.isEnabled = false
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.pbRequest.visibility = View.GONE
+        binding.btnLogin.isEnabled = true
     }
 
     override fun showError(errorMessage: String) {
-        Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
+        doToast(errorMessage)
     }
 
-    override fun showError(errorId: Int) {
-        TODO("Not yet implemented")
+    override fun showNoInternetConnection() {
+        doToast("There's no internet connection to make the request.")
     }
 
+    private fun doToast(message: String) {
+        Toast.makeText(this@LoginActivity, message, Toast.LENGTH_LONG).show()
+    }
 }

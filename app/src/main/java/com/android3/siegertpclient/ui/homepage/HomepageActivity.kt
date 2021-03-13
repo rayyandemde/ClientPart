@@ -116,9 +116,10 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         TODO("Not yet implemented")
     }
 
-    override fun showError(errorId: Int) {
+    override fun showNoInternetConnection() {
         TODO("Not yet implemented")
     }
+
     override fun goToTournamentScreen() {
         val tournamentIntent = Intent(this, TournamentActivity::class.java)
         startActivity(tournamentIntent )

@@ -9,7 +9,7 @@
     tools:context=".ui.homepage.JoinTeamFragment">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/text_jt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="132dp"
@@ -20,32 +20,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/joinTeamBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Join Team"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/text_jt_desc"
+        android:layout_width="237dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="24dp"
+        android:text="Please enter the team name and its password to join a team"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teamPassword"
-        app:layout_constraintVertical_bias="0.019" />
+        app:layout_constraintTop_toBottomOf="@+id/text_jt_title" />
 
     <EditText
         android:id="@+id/teamPassword"
         android:layout_width="330dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="216dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/edittext_white"
         android:hint="    Team Password"
+
         android:selectAllOnFocus="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        app:layout_constraintVertical_bias="0.132" />
+        app:layout_constraintTop_toBottomOf="@+id/teamName" />
 
     <EditText
         android:id="@+id/teamName"
@@ -58,17 +56,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/text_jt_desc" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="237dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="24dp"
-        android:text="Please enter the team name and its password to join a team"
+    <Button
+        android:id="@+id/joinTeamBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Join Team"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/teamPassword"
+        app:layout_constraintVertical_bias="0.019" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

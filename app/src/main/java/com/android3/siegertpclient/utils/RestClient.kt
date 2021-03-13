@@ -12,6 +12,7 @@ import java.util.concurrent.Executors
 class RestClient {
     private var baseUrl = "https://sieger-teamthree.herokuapp.com/"
 
+
     fun getUserService(): UserService {
         val retrofit : Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -56,7 +57,4 @@ class RestClient {
             .build()
         return retrofit.create(TournamentService::class.java)
     }
-
-
-
 }

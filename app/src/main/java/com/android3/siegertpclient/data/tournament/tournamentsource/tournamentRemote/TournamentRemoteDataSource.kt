@@ -23,7 +23,7 @@ class TournamentRemoteDataSource (private val tournamentService: TournamentServi
     }
 
     fun createNewTournament(tournamentForm : String, tournamentSize : String, tournamentName: String,
-                            tournamentDetail: TournamentDetail, ownUserId: String) : TournamentData {
+                            tournamentDetail: TournamentDetail, ownUserId: String) : TournamentData? {
         val userCall = tournamentService.createNewTournament(tournamentForm, tournamentSize,
             tournamentName, tournamentDetail, ownUserId)
         val response = userCall.execute()
@@ -31,30 +31,30 @@ class TournamentRemoteDataSource (private val tournamentService: TournamentServi
 
             //TOdo implement error code
         }
-        return convertTRespToTournament(response.body())
+        return convertTRespToTournament(response.body()!!)
     }
 
-    fun getTournamentById(tourneyId : String, ownUserId: String) : TournamentData {
+    fun getTournamentById(tourneyId : String, ownUserId: String) : TournamentData? {
         val userCall = tournamentService.getTournamentById(tourneyId, ownUserId)
         val response = userCall.execute()
         if (!response.isSuccessful) {
 
             //TOdo implement error code
         }
-        return convertTRespToTournament(response.body())
+        return convertTRespToTournament(response.body()!!)
     }
 
-    fun getTournamentByName(tournamentName : String, ownUserId: String) : TournamentData {
+    fun getTournamentByName(tournamentName : String, ownUserId: String) : TournamentData? {
         val userCall = tournamentService.getTournamentByName(tournamentName, ownUserId)
         val response = userCall.execute()
         if (!response.isSuccessful) {
 
             //TOdo implement error code
         }
-        return convertTRespToTournament(response.body())
+        return convertTRespToTournament(response.body()!!)
     }
 
-    fun getTournamentParticipants(tournamentName : String, ownUserId: String) : Array<User> {
+    fun getTournamentParticipants(tournamentName : String, ownUserId: String) : Array<User>? {
         val userCall = tournamentService.getTournamentParticipants(tournamentName, ownUserId)
         val response = userCall.execute()
         if (!response.isSuccessful) {
@@ -67,7 +67,7 @@ class TournamentRemoteDataSource (private val tournamentService: TournamentServi
     fun updateTournamentDetailById(tournamentName : String, participantForm: ParticipantFormUtil, adminId : String,
                                    tournamentTypes: TournamentTypesUtil, typeOfGame : String, location : String,
                                    registrationDeadline : Date, startTime : Date, endTime : Date,
-                                   ownUserId: String) : TournamentData {
+                                   ownUserId: String) : TournamentData? {
         val userCall = tournamentService.updateTournamentDetailById(tournamentName, participantForm, adminId,
             tournamentTypes, typeOfGame, location, registrationDeadline, startTime, endTime, ownUserId)
         val response = userCall.execute()
@@ -75,10 +75,10 @@ class TournamentRemoteDataSource (private val tournamentService: TournamentServi
 
             //TOdo implement error code
         }
-        return convertTRespToTournament(response.body())
+        return convertTRespToTournament(response.body()!!)
     }
 
-    fun deleteTournament(tournamentName : String, ownUserId: String) : Boolean {
+    fun deleteTournament(tournamentName : String, ownUserId: String) : Boolean? {
         val userCall = tournamentService.deleteTournament(tournamentName, ownUserId)
         val response = userCall.execute()
         if (!response.isSuccessful) {
@@ -88,7 +88,7 @@ class TournamentRemoteDataSource (private val tournamentService: TournamentServi
         return response.body()
     }
 
-    fun handleParticipation(tournamentName : String, participate : Map<String, Boolean>, ownUserId: String) : Boolean {
+    fun handleParticipation(tournamentName : String, participate : Map<String, Boolean>, ownUserId: String) : Boolean? {
         val userCall = tournamentService.handleParticipation(tournamentName, participate, ownUserId)
         val response = userCall.execute()
         if (!response.isSuccessful) {
@@ -98,7 +98,7 @@ class TournamentRemoteDataSource (private val tournamentService: TournamentServi
         return response.body()
     }
 
-    fun getTournamentsGames(tournamentName : String, ownUserId: String) : Array<Game> {
+    fun getTournamentsGames(tournamentName : String, ownUserId: String) : Array<Game>? {
         val userCall = tournamentService.getTournamentsGames(tournamentName, ownUserId)
         val response = userCall.execute()
         if (!response.isSuccessful) {
@@ -108,7 +108,7 @@ class TournamentRemoteDataSource (private val tournamentService: TournamentServi
         return response.body()
     }
 
-    fun createGames(tournamentName : String, ownUserId: String) : Array<Game> {
+    fun createGames(tournamentName : String, ownUserId: String) : Array<Game>? {
         val userCall = tournamentService.createGames(tournamentName, ownUserId)
         val response = userCall.execute()
         if (!response.isSuccessful) {

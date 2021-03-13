@@ -43,6 +43,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "665099937222-ir7drouoee9jlr160poqaeitopvhg514.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android3.siegertpclient",
+            "certificate_hash": "2ca6c205c55b1c7e12880d7ad5a1c6a2adc0fb1a"
+          }
+        },
+        {
           "client_id": "665099937222-9eqsg48iu7evanl8shqcvvgtdjlvneha.apps.googleusercontent.com",
           "client_type": 3
         }

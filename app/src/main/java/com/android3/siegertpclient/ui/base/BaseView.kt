@@ -1,7 +1,5 @@
 package com.android3.siegertpclient.ui.base
 
-import androidx.annotation.StringRes
-
 interface BaseView {
 
     fun showProgress()
@@ -10,5 +8,5 @@ interface BaseView {
 
     fun showError(errorMessage: String)
 
-    fun showError(@StringRes errorId: Int)
+    fun showNoInternetConnection()
 }

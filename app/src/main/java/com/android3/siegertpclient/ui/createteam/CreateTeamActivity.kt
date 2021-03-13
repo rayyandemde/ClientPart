@@ -79,8 +79,7 @@ class CreateTeamActivity : BaseActivity(), CreateTeamContract.ICreateTeamView {
         TODO("Not yet implemented")
     }
 
-    //show the error of a special id give as Integer.
-    override fun showError(errorId: Int) {
+    override fun showNoInternetConnection() {
         TODO("Not yet implemented")
     }
 }

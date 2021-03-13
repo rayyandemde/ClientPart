@@ -14,11 +14,11 @@ class GameRepo : IGameDataSource {
 
     private val gameRemote = GameRemoteDataSource(gameService)
 
-    fun getGameById(tournamentName : String, gameId : String, token : String) : Game {
+    fun getGameById(tournamentName : String, gameId : String, token : String) : Game? {
         return gameRemote.getGameById(tournamentName, gameId, token)
     }
 
-    fun updateGameById(tournamentName : String, gameId : String, firstWins : Boolean, secondWins : Boolean, draws : Boolean, token : String) : Game {
+    fun updateGameById(tournamentName : String, gameId : String, firstWins : Boolean, secondWins : Boolean, draws : Boolean, token : String) : Game? {
         return gameRemote.updateGameById(tournamentName, gameId, firstWins, secondWins, draws, token)
     }
 
