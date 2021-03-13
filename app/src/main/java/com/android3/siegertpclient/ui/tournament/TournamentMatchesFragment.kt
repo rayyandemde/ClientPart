@@ -13,6 +13,7 @@ import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.game.Game
 import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
 
+
 class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentView{
 
     private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
