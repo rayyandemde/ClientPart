@@ -5,8 +5,13 @@ import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.data.user.usersource.UserRepo2
 import com.android3.siegertpclient.ui.base.BasePresenter
 import com.android3.siegertpclient.utils.PreferencesProvider
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class HomepagePresenter(private val context: Context) : BasePresenter<HomepageContract.IHomepageView>(), HomepageContract.IHomepagePresenter{
+class HomepagePresenter(private val context: Context) :
+    BasePresenter<HomepageContract.IHomepageView>(), HomepageContract.IHomepagePresenter {
 
     private var userRepo = UserRepo2()
 
@@ -48,8 +53,26 @@ class HomepagePresenter(private val context: Context) : BasePresenter<HomepageCo
         view?.navigateToInvitationActivity()
     }
 
-    override fun getUserInfo(token: String?) {
-
+    override fun getUserInfo(userId: String, token: String) {
+        /*
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val response = userRepo
+                    .getUserById(
+                        username, forename,
+                        surname, firebaseUser.uid, tokenBearer
+                    )
+                if (response.isSuccessful) {
+                    withContext(Dispatchers.Main) {
+                        view?.navigateToHomepageActivity(tokenBearer)
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    view?.showError("Oops... It seems there's unexpected error")
+                }
+            }
+        }*/
     }
 
     /*
@@ -62,6 +85,6 @@ class HomepagePresenter(private val context: Context) : BasePresenter<HomepageCo
     }*/
 
     fun goToTournament() {
-       view?.goToTournamentScreen()
+        view?.goToTournamentScreen()
     }
 }

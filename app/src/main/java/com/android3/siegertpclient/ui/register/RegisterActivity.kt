@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.android3.siegertpclient.databinding.ActivityRegisterBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_TOKEN
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER_ID
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 
 /**
@@ -81,10 +82,11 @@ class RegisterActivity : BaseActivity(), RegisterContract.IRegisterView {
         doToast("Username already exist")
     }
 
-    override fun navigateToHomepageActivity(token: String) {
+    override fun navigateToHomepageActivity(userId: String, token: String) {
         doToast("You are registered successfully.")
         val intent = Intent(this@RegisterActivity, HomepageActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        intent.putExtra(KEY_USER_ID, userId)
         intent.putExtra(KEY_TOKEN, token)
         startActivity(intent)
         finish()

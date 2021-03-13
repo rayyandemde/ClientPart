@@ -7,6 +7,10 @@ import android.util.Patterns
 import com.android3.siegertpclient.ui.base.BasePresenter
 import com.android3.siegertpclient.utils.OnlineChecker
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class LoginPresenter(private val context: Context) : BasePresenter<LoginContract.ILoginView>(),
@@ -33,7 +37,21 @@ class LoginPresenter(private val context: Context) : BasePresenter<LoginContract
                         .signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener({ task ->
                             if (task.isSuccessful) {
-                                view?.navigateToHomepageActivity()
+                                val firebaseUser = task.result!!.user!!
+
+                                firebaseUser.getIdToken(true).addOnCompleteListener({ task2 ->
+                                    if (task2.isSuccessful()) {
+                                        val token = task2.result!!.token!!
+                                        val tokenBearer = "Bearer ".plus(token)
+                                        view?.navigateToHomepageActivity(
+                                            firebaseUser.uid,
+                                            tokenBearer
+                                        )
+                                    } else {
+                                        view?.hideProgress()
+                                        view?.showError(task2.exception!!.message.toString())
+                                    }
+                                })
                             } else {
                                 view?.hideProgress()
                                 view?.showError(task.exception!!.message.toString())

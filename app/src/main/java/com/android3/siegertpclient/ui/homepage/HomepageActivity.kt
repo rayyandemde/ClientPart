@@ -2,12 +2,14 @@ package com.android3.siegertpclient.ui.homepage
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
 import com.android3.siegertpclient.ui.createtournament.CreateTournamentActivity
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_TOKEN
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER_ID
 import com.android3.siegertpclient.ui.invitation.InvitationActivity
 import com.android3.siegertpclient.ui.tournament.TournamentActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
@@ -62,9 +64,10 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         transaction.commit()
 
         val previousIntent = intent
+        val userId = previousIntent.getStringExtra(KEY_USER_ID)
         val token = previousIntent.getStringExtra(KEY_TOKEN)
 
-        homepagePresenter.getUserInfo(token)
+        homepagePresenter.getUserInfo(userId, token)
     }
 
     override fun onResume() {
@@ -78,8 +81,8 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         homepagePresenter.onDetach()
     }
 
+    //To prevent app from closing after login
     override fun onBackPressed() {
-
     }
 
     override fun navigateToInvitationActivity() {
@@ -123,7 +126,7 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
@@ -133,5 +136,9 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
     override fun goToTournamentScreen() {
         val tournamentIntent = Intent(this, TournamentActivity::class.java)
         startActivity(tournamentIntent )
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(this@HomepageActivity, message, Toast.LENGTH_LONG).show()
     }
 }

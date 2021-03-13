@@ -12,7 +12,7 @@ interface RegisterContract {
 
         fun showErrorOnUsername()
 
-        fun navigateToHomepageActivity(token: String)
+        fun navigateToHomepageActivity(userId: String, token: String)
 
         fun navigateToLoginActivity()
     }
