@@ -4,6 +4,9 @@ import androidx.room.*
 import com.android3.siegertpclient.data.Result.Result
 import com.android3.siegertpclient.data.game.Game
 
+/**
+ * ResultDao that store all the methods that in room database.
+ */
 @Dao
 interface ResultDao {
     @Insert

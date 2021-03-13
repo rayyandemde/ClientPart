@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Result Entity for the room database.
+ */
 @Entity
 data class Result (
     @PrimaryKey

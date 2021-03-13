@@ -19,9 +19,7 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
 
     var tournamentParticipantsRecycler: RecyclerView? = null
 
-    var centerBt : Button? =null
-    var linkEt : EditText? =null
-    var openBt : Button?=null
+    var addBt : Button? =null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
@@ -34,9 +32,8 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
         tournamentParticipantsRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
 
 
-        centerBt = view.findViewById(R.id.buttonCenter)
-        linkEt = view.findViewById(R.id.stagesImagesLink)
-        openBt = view.findViewById(R.id.openLinkBtn)
+        addBt = view.findViewById(R.id.add)
+
 
         return view
     }

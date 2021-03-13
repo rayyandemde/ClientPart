@@ -18,10 +18,13 @@ class CreateTeamActivity : BaseActivity(), CreateTeamContract.ICreateTeamView {
     //Connection with the create Team Presenter.
     private val createTeamPresenter: CreateTeamPresenter = CreateTeamPresenter()
 
+
     //OnCreate method is to create the view of the
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_createteam)
+
+
 
         val createTeamBtn: Button = findViewById(R.id.createTeamBtn)
         createTeamBtn.setOnClickListener {

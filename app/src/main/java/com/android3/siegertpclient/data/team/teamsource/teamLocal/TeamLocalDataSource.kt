@@ -2,7 +2,9 @@ package com.android3.siegertpclient.data.team.teamsource.teamLocal
 
 import com.android3.siegertpclient.data.tournament.Tournament
 import java.util.regex.Pattern
-
+/**
+ * Local data source of the team.
+ */
 class TeamLocalDataSource(val teamDao: TeamDao) {
     fun check(teamName: String): Boolean {
         val b1 = Pattern.matches("[a-zA-Z0-9]", teamName)

@@ -3,8 +3,6 @@ package com.android3.siegertpclient.ui.team
 import android.os.Bundle
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.base.BaseActivity
-import com.android3.siegertpclient.ui.userprofile.MyTeamsFragment
-import com.android3.siegertpclient.ui.userprofile.MyTournamentsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class TeamActivity : BaseActivity(), TeamContract.ITeamView {

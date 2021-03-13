@@ -8,6 +8,9 @@ import com.android3.siegertpclient.utils.ParticipantFormUtil
 import com.android3.siegertpclient.utils.TournamentState
 import com.android3.siegertpclient.utils.TournamentTypesUtil
 
+/**
+ * The Tournament entity used by the room database.
+ */
 @Entity
 data class Tournament(
     @PrimaryKey

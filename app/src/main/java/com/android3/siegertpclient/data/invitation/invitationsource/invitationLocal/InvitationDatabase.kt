@@ -6,6 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.android3.siegertpclient.data.invitation.Invitation
 
+/**
+ * Roomdatabase use to store the invitation.
+ */
 @Database(entities = [Invitation::class], version = 1, exportSchema = false)
 abstract class InvitationDatabase : RoomDatabase() {
     abstract val invitationDao: InvitationDao?

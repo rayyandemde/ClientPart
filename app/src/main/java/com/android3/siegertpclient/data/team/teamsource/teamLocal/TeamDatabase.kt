@@ -3,6 +3,9 @@ package com.android3.siegertpclient.data.team.teamsource.teamLocal
 import android.content.Context
 import androidx.room.*
 
+/**
+ * Team database of the room database.
+ */
 @Database(entities = [Team::class], version = 1, exportSchema = false)
 @TypeConverters(MemberConverter::class)
 abstract class TeamDatabase : RoomDatabase() {
