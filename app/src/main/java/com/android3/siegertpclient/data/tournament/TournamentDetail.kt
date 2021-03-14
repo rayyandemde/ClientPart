@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.data.tournament
 
-data class TournamentDetailXX(
+data class TournamentDetail(
     val adminId: String,
     val endTime: String,
     val location: String,
