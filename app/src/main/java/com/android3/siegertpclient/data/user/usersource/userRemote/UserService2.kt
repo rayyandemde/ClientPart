@@ -1,7 +1,9 @@
 package com.android3.siegertpclient.data.user.usersource.userRemote
 
+import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -13,17 +15,41 @@ interface UserService2 {
         @Header("Authorization") token: String
     ): Response<User>
 
+    @GET("users/{username}")
+    suspend fun getUserByUsername(
+        @Path("username") username: String,
+        @Header("Authorization") token: String
+    ): Response<User>
+
     @GET("users")
     suspend fun getUserById(
         @Query("id") id: String,
         @Header("Authorization") token: String
     ): Response<User>
 
+    @GET("users/{username}/tournaments")
+    suspend fun getUsersTournaments(
+        @Path("username") username: String,
+        @Header("Authorization") token: String
+    ): Response<List<Tournament>>
+
+    @GET("users/{username}/teams")
+    suspend fun getUserTeams(
+        @Path("username") username: String,
+        @Header("Authorization") token: String
+    ): Response<List<Team>>
+
+    @GET("users/{username}/invitations")
+    suspend fun getUserInvitations(
+        @Path("username") username: String,
+        @Header("Authorization") token: String
+    ): Response<List<Invitation>>
+
     @PUT("users/{username}")
     suspend fun updateUserDetails(
         @Path("username") oldUsername: String,
-        @Body username: String, @Body surname: String,
-        @Body forename: String, @Header("Authorization") token: String
+        @Body newUsername: String, @Body forename: String,
+        @Body surname: String, @Header("Authorization") token: String
     )
             : Response<User>
 }
