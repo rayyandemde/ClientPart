@@ -1,67 +1,86 @@
 package com.android3.siegertpclient.data.user.usersource
 
+import android.content.Context
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
-import com.android3.siegertpclient.utils.RestClient
+import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource2
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_FORENAME
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_SURNAME
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_TOKEN
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USERNAME
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER_ID
+import com.android3.siegertpclient.utils.PreferencesProvider
 
-import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Response
 
-class UserRepo() {
+class UserRepo2(private val context: Context) {
 
-    private val restClient = RestClient()
-    private val userService = restClient.getUserService()
-    private lateinit var auth : FirebaseAuth
+    private val userRemoteDataSource = UserRemoteDataSource2()
+    private var localData = PreferencesProvider(context)
 
-    var userRemote = UserRemoteDataSource(userService)
-
-    fun register(email : String,
-                 password : String,
-                 username: String,
-                 firstName: String,
-                 surname: String) : User? {
-        auth = FirebaseAuth.getInstance()
-        auth.createUserWithEmailAndPassword(email, password)
-        return userRemote.createNewUser(username, surname, firstName, auth.currentUser?.uid.toString())
+    suspend fun createNewUser(
+        username: String,
+        forename: String,
+        surname: String,
+        userId: String,
+        token: String
+    ): User? {
+        val response = userRemoteDataSource.createNewUser(username, surname, forename, userId, token)
+        if (response.isSuccessful) {
+            localData.putUser(response.body()!!)
+            localData.putString(KEY_USERNAME, response.body()!!.username)
+            localData.putString(KEY_USER_ID, userId)
+            localData.putString(KEY_TOKEN, token)
+            return response.body()!!
+        }
+        return null
     }
 
-    fun login(email : String, password : String) : User? {
-        auth = FirebaseAuth.getInstance()
-        auth.signInWithEmailAndPassword(email, password)
-        return userRemote.getUserById(auth.currentUser?.uid.toString())
+    suspend fun getUserById(userId: String, token: String): User? {
+        val response = userRemoteDataSource.getUserById(userId, token)
+        if (response.isSuccessful) {
+            localData.putUser(response.body()!!)
+            localData.putString(KEY_USERNAME, response.body()!!.username)
+            localData.putString(KEY_USER_ID, userId)
+            localData.putString(KEY_TOKEN, token)
+            return response.body()!!
+        }
+        return null
     }
 
-    fun getUserById (userId : String) : User? {
-       return userRemote.getUserById(userId)
+    suspend fun getUserByUsername(username: String, token: String): Response<User> {
+        return userRemoteDataSource.getUserByUsername(username, token)
     }
 
-    fun getUserByUsername (username : String) : User? {
-        return userRemote.getUserByUsername(username)
+    suspend fun getUsersTournaments(username: String, token: String): Response<List<Tournament>> {
+        return userRemoteDataSource.getUsersTournaments(username, token)
     }
 
-    fun getCurrentUser() {
-        auth = FirebaseAuth.getInstance()
-        userRemote.getUserById(auth.currentUser?.uid.toString())
+    suspend fun getUserTeams(username: String, token: String): Response<List<Team>> {
+        return userRemoteDataSource.getUsersTeams(username, token)
     }
 
-    fun getUsersTournaments (username: String) : List<Tournament>? {
-        return userRemote.getUsersTournaments(username)
+    suspend fun getUsersInvitations(username: String, token: String): Response<List<Invitation>> {
+        return userRemoteDataSource.getUsersInvitations(username, token)
     }
 
-    fun getUserTeams (username: String) : List<Team>? {
-        return userRemote.getUsersTeams(username)
+    suspend fun updateUserDetail(
+        oldUsername: String, newUsername: String, newForename: String,
+        newSurname: String, token: String
+    ): Response<User> {
+        return userRemoteDataSource.updateUserDetail(
+            oldUsername,
+            newUsername,
+            newForename,
+            newSurname,
+            token
+        )
     }
 
-    fun getUsersInvitations (username: String) : List<Invitation>? {
-        return userRemote.getUsersInvitations(username)
+    suspend fun getUserLocal(): User? {
+        return localData.getUser(KEY_USER)
     }
-
-    fun updateUserDetail (oldUsername : String, newUsername : String, firstName: String,
-                          surname: String) : User? {
-        return userRemote.updateUserDetail(oldUsername, newUsername, firstName, surname)
-    }
-
 }

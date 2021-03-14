@@ -1,13 +1,8 @@
 package com.android3.siegertpclient.ui.homepage
 
 import android.content.Context
-import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.data.user.usersource.UserRepo2
 import com.android3.siegertpclient.ui.base.BasePresenter
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_FORENAME
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_SURNAME
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USERNAME
-import com.android3.siegertpclient.utils.PreferencesProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
