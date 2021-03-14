@@ -5,9 +5,7 @@ import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource2
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_FORENAME
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_SURNAME
+import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_TOKEN
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USERNAME
@@ -16,9 +14,9 @@ import com.android3.siegertpclient.utils.PreferencesProvider
 
 import retrofit2.Response
 
-class UserRepo2(private val context: Context) {
+class UserRepo(private val context: Context) {
 
-    private val userRemoteDataSource = UserRemoteDataSource2()
+    private val userRemoteDataSource = UserRemoteDataSource()
     private var localData = PreferencesProvider(context)
 
     suspend fun createNewUser(
@@ -28,7 +26,8 @@ class UserRepo2(private val context: Context) {
         userId: String,
         token: String
     ): User? {
-        val response = userRemoteDataSource.createNewUser(username, surname, forename, userId, token)
+        val response =
+            userRemoteDataSource.createNewUser(username, surname, forename, userId, token)
         if (response.isSuccessful) {
             localData.putUser(response.body()!!)
             localData.putString(KEY_USERNAME, response.body()!!.username)

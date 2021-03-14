@@ -5,10 +5,9 @@ import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.RestClient2
-import com.android3.siegertpclient.utils.TokenUtil
 import retrofit2.Response
 
-class UserRemoteDataSource2 {
+class UserRemoteDataSource {
 
     suspend fun createNewUser(
         username: String,

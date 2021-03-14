@@ -2,7 +2,6 @@ package com.android3.siegertpclient.data.user
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class User(
@@ -13,4 +12,4 @@ data class User(
     val tournamentList: List<String>,
     val userId: String,
     val username: String
-)  : Parcelable
+) : Parcelable
