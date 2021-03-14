@@ -15,6 +15,7 @@ interface UserService {
         @Header("Authorization") token: String
     ): Response<User>
 
+    //getUserById alternative, not used at current implementation
     @GET("users/{username}")
     suspend fun getUserByUsername(
         @Path("username") username: String,
@@ -48,8 +49,8 @@ interface UserService {
     @PUT("users/{username}")
     suspend fun updateUserDetails(
         @Path("username") oldUsername: String,
-        @Body newUsername: String, @Body forename: String,
-        @Body surname: String, @Header("Authorization") token: String
+        @Body newUsername: String, @Body surname: String,
+        @Body forename: String, @Header("Authorization") token: String
     )
             : Response<User>
 }

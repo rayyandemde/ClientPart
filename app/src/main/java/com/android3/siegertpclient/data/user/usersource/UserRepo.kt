@@ -53,8 +53,18 @@ class UserRepo(private val context: Context) {
         return null
     }
 
-    suspend fun getUserByUsername(username: String, token: String): Response<User> {
-        return userRemoteDataSource.getUserByUsername(username, token)
+    //getUserById alternative, not used at current implementation
+    suspend fun getUserByUsername(username: String, token: String): User? {
+        val response = userRemoteDataSource.getUserByUsername(username, token)
+        if (response.isSuccessful) {
+            localData.putUser(response.body()!!)
+            localData.putString(KEY_USERNAME, username)
+            localData.putString(KEY_USER_ID, response.body()!!.userId)
+            localData.putString(KEY_TOKEN, token)
+            localData.putBoolean(IS_LOGGED_IN, true)
+            return response.body()!!
+        }
+        return null
     }
 
     suspend fun getUsersTournaments(username: String, token: String): Response<List<Tournament>> {
@@ -70,16 +80,17 @@ class UserRepo(private val context: Context) {
     }
 
     suspend fun updateUserDetail(
-        oldUsername: String, newUsername: String, newForename: String,
-        newSurname: String, token: String
-    ): Response<User> {
-        return userRemoteDataSource.updateUserDetail(
-            oldUsername,
-            newUsername,
-            newForename,
-            newSurname,
-            token
-        )
+        oldUsername: String, newUsername: String, surname: String,
+        forename: String, token: String
+    ): User? {
+        val response = userRemoteDataSource.updateUserDetail(oldUsername, newUsername, surname, forename, token)
+        if (response.isSuccessful) {
+            localData.putUser(response.body()!!)
+            localData.putString(KEY_USERNAME, newUsername)
+            localData.putString(KEY_TOKEN, token)
+            return response.body()!!
+        }
+        return null
     }
 
     fun getUserLocal(): User? {

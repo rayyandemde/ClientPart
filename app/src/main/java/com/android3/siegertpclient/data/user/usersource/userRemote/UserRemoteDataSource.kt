@@ -24,6 +24,7 @@ class UserRemoteDataSource {
         return RestClient2.userService.createNewUser(user, token)
     }
 
+    //getUserById alternative, not used at current implementation
     suspend fun getUserById(userId: String, token: String): Response<User> {
         return RestClient2.userService.getUserById(userId, token)
     }
@@ -47,15 +48,15 @@ class UserRemoteDataSource {
     suspend fun updateUserDetail(
         oldUsername: String,
         newUsername: String,
-        newForename: String,
-        newSurname: String,
+        surname: String,
+        forename: String,
         token: String
     ): Response<User> {
         return RestClient2.userService.updateUserDetails(
             oldUsername,
             newUsername,
-            newForename,
-            newSurname,
+            surname,
+            forename,
             token
         )
     }
