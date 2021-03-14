@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.databinding.ActivityLoginBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.homepage.HomepageDummyActivity
@@ -66,17 +65,9 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
     }
 
     override fun navigateToHomepageActivity() {
-        /*
         doToast("You are logged in successfully.")
         val intent = Intent(this@LoginActivity, HomepageActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.putExtra(Constants.KEY_USER_ID, userId)
-        intent.putExtra(Constants.KEY_TOKEN, token)
-        startActivity(intent)
-        finish()*/
-        val intent = Intent(this@LoginActivity, HomepageActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        // intent.putExtra(Constants.KEY_TOKEN, token)
         startActivity(intent)
         finish()
     }
