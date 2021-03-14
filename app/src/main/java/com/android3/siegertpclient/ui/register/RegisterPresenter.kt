@@ -17,7 +17,7 @@ class RegisterPresenter(private val context: Context) :
 
     private var onlineChecker = OnlineChecker(context)
 
-    private var userRepo = UserRepo2()
+    private var userRepo = UserRepo2(context)
 
     override fun onRegisterBtnClicked(
         email: String,
@@ -60,6 +60,7 @@ class RegisterPresenter(private val context: Context) :
                                         val tokenBearer = "Bearer ".plus(token)
                                         GlobalScope.launch(Dispatchers.IO) {
                                             try {
+                                                /*
                                                 val response = userRepo
                                                     .createNewUser(
                                                         username, forename,
@@ -68,6 +69,16 @@ class RegisterPresenter(private val context: Context) :
                                                 if (response.isSuccessful) {
                                                     withContext(Dispatchers.Main) {
                                                         view?.navigateToHomepageActivity(firebaseUser.uid, tokenBearer)
+                                                    }
+                                                }*/
+                                                val user = userRepo
+                                                    .createNewUser(
+                                                        username, forename,
+                                                        surname, firebaseUser.uid, tokenBearer
+                                                    )
+                                                if (user != null) {
+                                                    withContext(Dispatchers.Main) {
+                                                        view?.navigateToHomepageActivity()
                                                     }
                                                 }
                                             } catch (e: Exception) {

@@ -1,7 +1,6 @@
 package com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote
 
-import com.android3.siegertpclient.data.tournament.TournamentData
-import com.android3.siegertpclient.data.tournament.TournamentTest
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.RestClient2
 import retrofit2.Response
@@ -17,7 +16,7 @@ class TournamentRemoteDataSource2 {
         return RestClient2.userService.createNewUser(user, token)
     }
 
-    suspend fun getTournamentById(tourneyId : String, token: String) : Response<TournamentTest> {
+    suspend fun getTournamentById(tourneyId : String, token: String) : Response<Tournament> {
         return RestClient2.tournamentService.getTournamentById(tourneyId, token)
     }
 }

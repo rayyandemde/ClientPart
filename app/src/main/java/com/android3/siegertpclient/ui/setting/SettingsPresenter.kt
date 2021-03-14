@@ -5,6 +5,7 @@ import android.content.Intent
 import com.android3.siegertpclient.ui.base.BasePresenter
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_FORENAME
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_SURNAME
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USERNAME
 import com.android3.siegertpclient.ui.login.LoginActivity
 import com.android3.siegertpclient.utils.OnlineChecker
@@ -18,8 +19,9 @@ class SettingsPresenter(private val context: Context) : BasePresenter<SettingsCo
 
     fun getUser() : String {
         val username = preferencesProvider.getString(KEY_USERNAME)!!
-        val forename = preferencesProvider.getString(KEY_FORENAME)!!
-        val surname = preferencesProvider.getString(KEY_SURNAME)!!
+        val user = preferencesProvider.getUser(KEY_USER)
+        val forename = user!!.forename
+        val surname = user!!.surname
         return "Username :: $username \nFirst Name :: $forename \nLast Name :: $surname"
     }
 

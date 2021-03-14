@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote
 
-import com.android3.siegertpclient.data.tournament.TournamentTest
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import retrofit2.Call
 import retrofit2.Response
@@ -16,5 +16,5 @@ interface TournamentService2 {
 
     @GET("tournaments")
     suspend fun getTournamentById(@Query("id") tourneyId : String,
-                                  @Header("Authorization") token: String) : Response<TournamentTest>
+                                  @Header("Authorization") token: String) : Response<Tournament>
 }

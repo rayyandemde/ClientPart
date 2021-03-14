@@ -8,7 +8,7 @@ interface LoginContract {
 
         fun showErrorOnEmail()
 
-        fun navigateToHomepageActivity(userId: String, token: String)
+        fun navigateToHomepageActivity()
 
         fun navigateToForgotPasswordActivity()
 

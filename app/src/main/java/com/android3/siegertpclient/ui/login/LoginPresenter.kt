@@ -4,6 +4,7 @@ import LoginContract
 import android.content.Context
 import android.text.TextUtils
 import android.util.Patterns
+import com.android3.siegertpclient.data.user.usersource.UserRepo2
 import com.android3.siegertpclient.ui.base.BasePresenter
 import com.android3.siegertpclient.utils.OnlineChecker
 import com.google.firebase.auth.FirebaseAuth
@@ -17,6 +18,8 @@ class LoginPresenter(private val context: Context) : BasePresenter<LoginContract
     LoginContract.ILoginPresenter {
 
     private var onlineChecker = OnlineChecker(context)
+
+    private var userRepo = UserRepo2(context)
 
     override fun onLoginBtnClicked(email: String, password: String) {
         view?.showProgress()
@@ -43,10 +46,26 @@ class LoginPresenter(private val context: Context) : BasePresenter<LoginContract
                                     if (task2.isSuccessful()) {
                                         val token = task2.result!!.token!!
                                         val tokenBearer = "Bearer ".plus(token)
+                                        /*
                                         view?.navigateToHomepageActivity(
                                             firebaseUser.uid,
                                             tokenBearer
-                                        )
+                                        )*/
+                                        GlobalScope.launch(Dispatchers.IO) {
+                                            try {
+                                                val user = userRepo.getUserById(firebaseUser.uid, tokenBearer)
+                                                if (user != null) {
+                                                    withContext(Dispatchers.Main) {
+                                                        view?.navigateToHomepageActivity()
+                                                    }
+                                                }
+                                            } catch (e: Exception) {
+                                                withContext(Dispatchers.Main) {
+                                                    view?.hideProgress()
+                                                    view?.showError("Oops... It seems there's unexpected error")
+                                                }
+                                            }
+                                        }
                                     } else {
                                         view?.hideProgress()
                                         view?.showError(task2.exception!!.message.toString())

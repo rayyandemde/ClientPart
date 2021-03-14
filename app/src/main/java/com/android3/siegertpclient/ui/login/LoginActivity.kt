@@ -65,7 +65,7 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         doToast("Email is not valid")
     }
 
-    override fun navigateToHomepageActivity(userId: String, token: String) {
+    override fun navigateToHomepageActivity() {
         /*
         doToast("You are logged in successfully.")
         val intent = Intent(this@LoginActivity, HomepageActivity::class.java)
@@ -74,8 +74,9 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         intent.putExtra(Constants.KEY_TOKEN, token)
         startActivity(intent)
         finish()*/
-        val intent = Intent(this@LoginActivity, HomepageDummyActivity::class.java)
-        intent.putExtra(Constants.KEY_TOKEN, token)
+        val intent = Intent(this@LoginActivity, HomepageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        // intent.putExtra(Constants.KEY_TOKEN, token)
         startActivity(intent)
         finish()
     }

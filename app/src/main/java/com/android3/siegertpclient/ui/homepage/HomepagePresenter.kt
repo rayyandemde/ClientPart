@@ -16,9 +16,7 @@ import kotlinx.coroutines.withContext
 class HomepagePresenter(private val context: Context) :
     BasePresenter<HomepageContract.IHomepageView>(), HomepageContract.IHomepagePresenter {
 
-    private var userRepo = UserRepo2()
-
-    private var preferencesProvider = PreferencesProvider(context)
+    private var userRepo = UserRepo2(context)
 
     override fun onMailBtnClicked() {
         TODO("Not yet implemented")
@@ -56,19 +54,13 @@ class HomepagePresenter(private val context: Context) :
         view?.navigateToInvitationActivity()
     }
 
-    override fun getUserInfo(userId: String, token: String) {
+    override fun getUserLocal() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val response = userRepo
-                    .getUserById(
-                        userId, token
-                    )
-                if (response.isSuccessful) {
+                val user = userRepo.getUserLocal()
+                if (user != null) {
                     withContext(Dispatchers.Main) {
-                        preferencesProvider.putString(KEY_USERNAME, response.body()!!.username)
-                        preferencesProvider.putString(KEY_FORENAME, response.body()!!.forename)
-                        preferencesProvider.putString(KEY_SURNAME, response.body()!!.surname)
-                        view?.showError(response.body()!!.toString())
+                        view?.showError("You are now :: ".plus(user.toString()))
                     }
                 }
             } catch (e: Exception) {

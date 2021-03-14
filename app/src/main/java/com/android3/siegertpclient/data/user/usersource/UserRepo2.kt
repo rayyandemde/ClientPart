@@ -1,17 +1,25 @@
 package com.android3.siegertpclient.data.user.usersource
 
+import android.content.Context
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource2
-import com.google.firebase.auth.FirebaseAuth
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_FORENAME
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_SURNAME
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_TOKEN
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USERNAME
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER_ID
+import com.android3.siegertpclient.utils.PreferencesProvider
 
 import retrofit2.Response
 
-class UserRepo2 {
+class UserRepo2(private val context: Context) {
 
     private val userRemoteDataSource = UserRemoteDataSource2()
+    private var localData = PreferencesProvider(context)
 
     suspend fun createNewUser(
         username: String,
@@ -19,12 +27,28 @@ class UserRepo2 {
         surname: String,
         userId: String,
         token: String
-    ): Response<User> {
-        return userRemoteDataSource.createNewUser(username, surname, forename, userId, token)
+    ): User? {
+        val response = userRemoteDataSource.createNewUser(username, surname, forename, userId, token)
+        if (response.isSuccessful) {
+            localData.putUser(response.body()!!)
+            localData.putString(KEY_USERNAME, response.body()!!.username)
+            localData.putString(KEY_USER_ID, userId)
+            localData.putString(KEY_TOKEN, token)
+            return response.body()!!
+        }
+        return null
     }
 
-    suspend fun getUserById(userId: String, token: String): Response<User> {
-        return userRemoteDataSource.getUserById(userId, token)
+    suspend fun getUserById(userId: String, token: String): User? {
+        val response = userRemoteDataSource.getUserById(userId, token)
+        if (response.isSuccessful) {
+            localData.putUser(response.body()!!)
+            localData.putString(KEY_USERNAME, response.body()!!.username)
+            localData.putString(KEY_USER_ID, userId)
+            localData.putString(KEY_TOKEN, token)
+            return response.body()!!
+        }
+        return null
     }
 
     suspend fun getUserByUsername(username: String, token: String): Response<User> {
@@ -54,5 +78,9 @@ class UserRepo2 {
             newSurname,
             token
         )
+    }
+
+    suspend fun getUserLocal(): User? {
+        return localData.getUser(KEY_USER)
     }
 }

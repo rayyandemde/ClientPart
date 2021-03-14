@@ -49,7 +49,7 @@ interface HomepageContract {
 
         fun onInvitationBtnClicked()
 
-        fun getUserInfo(userId: String, token: String)
+        fun getUserLocal()
     }
 
     interface IFeedPresenter {

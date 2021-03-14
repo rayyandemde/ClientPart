@@ -10,6 +10,7 @@ class Constants {
         const val KEY_TOKEN = "KEY_TOKEN"
 
         //User
+        const val KEY_USER = "KEY_USER"
         const val KEY_USER_ID = "KEY_USER_ID"
         const val KEY_FORENAME = "KEY_FORENAME"
         const val KEY_SURNAME = "KEY_SURNAME"

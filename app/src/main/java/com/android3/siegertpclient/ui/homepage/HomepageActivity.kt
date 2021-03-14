@@ -63,11 +63,12 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         transaction.add(R.id.fragment_container, feedFragment)
         transaction.commit()
 
+        /*
         val previousIntent = intent
         val userId = previousIntent.getStringExtra(KEY_USER_ID)
-        val token = previousIntent.getStringExtra(KEY_TOKEN)
+        val token = previousIntent.getStringExtra(KEY_TOKEN)*/
 
-        homepagePresenter.getUserInfo(userId, token)
+        homepagePresenter.getUserLocal()
     }
 
     override fun onResume() {
