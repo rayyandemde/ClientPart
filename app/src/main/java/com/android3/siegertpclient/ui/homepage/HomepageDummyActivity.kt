@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.android3.siegertpclient.data.tournament.tournamentsource.TournamentRepo2
-import com.android3.siegertpclient.data.user.usersource.UserRepo2
+import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.databinding.ActivityHomepageDummyBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants

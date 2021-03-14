@@ -1,7 +1,7 @@
 package com.android3.siegertpclient.ui.homepage
 
 import android.content.Context
-import com.android3.siegertpclient.data.user.usersource.UserRepo2
+import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 class HomepagePresenter(private val context: Context) :
     BasePresenter<HomepageContract.IHomepageView>(), HomepageContract.IHomepagePresenter {
 
-    private var userRepo = UserRepo2(context)
+    private var userRepo = UserRepo(context)
 
     override fun onMailBtnClicked() {
         TODO("Not yet implemented")

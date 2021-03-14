@@ -6,8 +6,9 @@ class Constants {
         const val BASE_URL = "https://sieger-teamthree.herokuapp.com/"
 
         //SharedPreference keys
-        //Token
+        //Token & Session
         const val KEY_TOKEN = "KEY_TOKEN"
+        const val IS_LOGGED_IN = "IS_LOGGED_IN"
 
         //User
         const val KEY_USER = "KEY_USER"

@@ -6,6 +6,7 @@ import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
+import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.IS_LOGGED_IN
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_TOKEN
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USERNAME
@@ -33,6 +34,7 @@ class UserRepo(private val context: Context) {
             localData.putString(KEY_USERNAME, response.body()!!.username)
             localData.putString(KEY_USER_ID, userId)
             localData.putString(KEY_TOKEN, token)
+            localData.putBoolean(IS_LOGGED_IN, true)
             return response.body()!!
         }
         return null
@@ -45,6 +47,7 @@ class UserRepo(private val context: Context) {
             localData.putString(KEY_USERNAME, response.body()!!.username)
             localData.putString(KEY_USER_ID, userId)
             localData.putString(KEY_TOKEN, token)
+            localData.putBoolean(IS_LOGGED_IN, true)
             return response.body()!!
         }
         return null
@@ -79,7 +82,11 @@ class UserRepo(private val context: Context) {
         )
     }
 
-    suspend fun getUserLocal(): User? {
+    fun getUserLocal(): User? {
         return localData.getUser(KEY_USER)
+    }
+
+    fun checkUserLoggedIn() : Boolean {
+        return localData.getBoolean(IS_LOGGED_IN)
     }
 }

@@ -82,9 +82,10 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         homepagePresenter.onDetach()
     }
 
+    /*
     //To prevent app from closing after login
     override fun onBackPressed() {
-    }
+    }*/
 
     override fun navigateToInvitationActivity() {
         val invIntent = Intent(this, InvitationActivity::class.java)

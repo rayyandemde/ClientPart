@@ -20,6 +20,12 @@ class LoginPresenter(private val context: Context) : BasePresenter<LoginContract
 
     private var userRepo = UserRepo(context)
 
+    override fun checkSession() {
+        if (userRepo.checkUserLoggedIn()) {
+            view?.navigateToHomepageActivity()
+        }
+    }
+
     override fun onLoginBtnClicked(email: String, password: String) {
         view?.showProgress()
 
