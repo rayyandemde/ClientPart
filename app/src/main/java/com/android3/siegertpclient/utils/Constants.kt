@@ -16,5 +16,6 @@ class Constants {
         const val KEY_FORENAME = "KEY_FORENAME"
         const val KEY_SURNAME = "KEY_SURNAME"
         const val KEY_USERNAME = "KEY_USERNAME"
+        const val KEY_CURRENT_TOURNAMENT = "KEY_CURRENT_TOURNAMENT"
     }
 }
