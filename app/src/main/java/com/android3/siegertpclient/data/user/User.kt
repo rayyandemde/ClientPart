@@ -12,4 +12,4 @@ data class User(
     val tournamentList: List<String>,
     val userId: String,
     val username: String
-)  : Parcelable
+) : Parcelable

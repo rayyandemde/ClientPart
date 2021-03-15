@@ -1,54 +1,64 @@
 package com.android3.siegertpclient.data.team.teamsource.teamRemote
 
 import com.android3.siegertpclient.data.invitation.Invitation
-import com.android3.siegertpclient.data.team.teamsource.ITeamDataSource
-import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
+import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.utils.RestClient2
 import retrofit2.Response
 import retrofit2.http.*
 
-class TeamRemoteDataSource (private val teamService: TeamService) : ITeamDataSource {
+class TeamRemoteDataSource {
 
-    fun createNewTeam(adminId : String, name : String, password : String, ownUserId: String) : Team? {
-        val response = teamService.createNewTeam(adminId, name, password, ownUserId)
-        return response.body()
+    suspend fun createNewTeam(
+        adminId: String,
+        name: String,
+        password: String,
+        token: String
+    ): Response<Team> {
+        return RestClient2.teamService.createNewTeam(adminId, name, password, token)
     }
 
-    fun getTeamByName(teamName : String, ownUserId: String) : Team? {
-        val response = teamService.getTeamByName(teamName, ownUserId)
-        return response.body()
+    suspend fun getTeamByName(teamName: String, ownUserId: String): Response<Team>? {
+        return null
     }
 
-    fun getTeamById(teamId : String, ownUserId: String) : Team? {
-        val response = teamService.getTeamById(teamId, ownUserId)
-        return response.body()
+    suspend fun getTeamById(teamId: String, ownUserId: String): Response<Team>? {
+        return null
     }
 
-    fun getTeamTournaments(teamName: String,ownUserId: String) : Array<Tournament>? {
-        val response = teamService.getTeamTournaments(teamName, ownUserId)
-        return response.body()
+    suspend fun getTeamTournaments(
+        teamName: String,
+        ownUserId: String
+    ): Response<Array<Tournament>>? {
+        return null
     }
 
-    fun getTeamInvitations(teamName: String, ownUserId: String) : Array<Invitation>? {
-        val response = teamService.getTeamInvitations(teamName, ownUserId)
-        return response.body()
+    suspend fun getTeamInvitations(
+        teamName: String,
+        ownUserId: String
+    ): Response<Array<Invitation>>? {
+        return null
     }
 
-    fun deleteTeam(teamName: String, ownUserId: String) {
-        val response = teamService.deleteTeam(teamName, ownUserId)
+    suspend fun deleteTeam(teamName: String, ownUserId: String) {
+
     }
 
-    fun getTeamMembers(teamName: String, ownUserId: String) : Array<User>? {
-        val response = teamService.getTeamMembers(teamName, ownUserId)
-        return response.body()
+    suspend fun getTeamMembers(teamName: String, ownUserId: String): Response<List<User>>? {
+        return null
     }
 
-    fun kickTeamMember(teamName: String, memberId : String, ownUserId: String) {
-        val response = teamService.kickTeamMember(teamName, memberId, ownUserId)
+    suspend fun kickTeamMember(teamName: String, memberId: String, ownUserId: String) {
+
     }
 
-    fun handleMembership(teamName: String, activity : String, password: String, ownUserId: String) {
-        val response = teamService.handleMembership(teamName, activity, password, ownUserId)
+    suspend fun handleMembership(
+        teamName: String,
+        activity: String,
+        password: String,
+        ownUserId: String
+    ) {
+
     }
 }

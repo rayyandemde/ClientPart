@@ -49,4 +49,8 @@ interface HomepageContract {
 
         fun onInvitationBtnClicked()
     }
+
+    interface IFeedPresenter {
+
+    }
 }

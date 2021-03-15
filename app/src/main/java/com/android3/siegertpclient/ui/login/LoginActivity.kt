@@ -6,10 +6,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.databinding.ActivityLoginBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
+import com.android3.siegertpclient.ui.homepage.HomepageDummyActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
 
 
@@ -22,10 +24,11 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         setTheme(R.style.Theme_SiegerTPClient)
         super.onCreate(savedInstanceState)
 
+        loginPresenter = LoginPresenter(this)
+        loginPresenter.checkSession()
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        loginPresenter = LoginPresenter(this)
 
         val emailEt = binding.etEmail
         val passwordEt = binding.etPassword
@@ -48,6 +51,7 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
     override fun onResume() {
         super.onResume()
         loginPresenter.onAttach(this)
+        loginPresenter.checkSession()
     }
 
     override fun onDestroy() {
@@ -64,7 +68,6 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
     }
 
     override fun navigateToHomepageActivity() {
-        doToast("You are logged in successfully.")
         val intent = Intent(this@LoginActivity, HomepageActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

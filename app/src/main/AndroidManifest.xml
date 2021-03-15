@@ -48,7 +48,7 @@
             android:name=".ui.createteam.CreateTeamActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.setting.SettingActivity"
+            android:name=".ui.setting.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.team.TeamActivity"
