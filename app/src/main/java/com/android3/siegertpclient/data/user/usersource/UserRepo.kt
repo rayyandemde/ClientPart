@@ -12,6 +12,8 @@ import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USERNAME
 import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER_ID
 import com.android3.siegertpclient.utils.PreferencesProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 import retrofit2.Response
 
@@ -93,11 +95,19 @@ class UserRepo(private val context: Context) {
         return null
     }
 
+    fun getFirebaseUser(): FirebaseUser {
+        return FirebaseAuth.getInstance().currentUser!!
+    }
+
     fun getUserLocal(): User? {
         return localData.getUser(KEY_USER)
     }
 
     fun checkUserLoggedIn() : Boolean {
         return localData.getBoolean(IS_LOGGED_IN)
+    }
+
+    fun getToken() : String? {
+        return localData.getString(KEY_TOKEN)
     }
 }

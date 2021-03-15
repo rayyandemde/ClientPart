@@ -55,20 +55,16 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
 
         homepagePresenter = HomepagePresenter(this)
 
+
         val navigationBar: BottomNavigationView = findViewById(R.id.navigation) as BottomNavigationView
 
+
         navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
 
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragment_container, feedFragment)
         transaction.commit()
-
-        /*
-        val previousIntent = intent
-        val userId = previousIntent.getStringExtra(KEY_USER_ID)
-        val token = previousIntent.getStringExtra(KEY_TOKEN)*/
-
-        homepagePresenter.getUserLocal()
     }
 
     override fun onResume() {
@@ -132,7 +128,7 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("This is it")
     }
 
     override fun goToTournamentScreen() {

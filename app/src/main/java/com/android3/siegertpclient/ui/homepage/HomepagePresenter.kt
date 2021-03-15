@@ -49,22 +49,6 @@ class HomepagePresenter(private val context: Context) :
         view?.navigateToInvitationActivity()
     }
 
-    override fun getUserLocal() {
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                val user = userRepo.getUserLocal()
-                if (user != null) {
-                    withContext(Dispatchers.Main) {
-                        view?.showError("You are now :: ".plus(user.toString()))
-                    }
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    view?.showError("Oops... It seems there's unexpected error")
-                }
-            }
-        }
-    }
 
     /*
     fun createDummyAccount(email : String,

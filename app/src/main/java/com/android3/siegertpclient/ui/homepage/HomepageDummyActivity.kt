@@ -37,7 +37,7 @@ class HomepageDummyActivity : BaseActivity() {
         val savedUserID = sharedPreferences.getString("userId", null)
         val savedEmail = sharedPreferences.getString("email", null)
 
-        /*
+
         val user = FirebaseAuth.getInstance().currentUser!!
         user.getIdToken(true)
             .addOnCompleteListener({ task ->
@@ -55,7 +55,7 @@ class HomepageDummyActivity : BaseActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-        })*/
+        })
 
         //binding.tvTestId.text = "User ID :: $userId"
         //binding.tvTestId.text = "User Token :: " + token

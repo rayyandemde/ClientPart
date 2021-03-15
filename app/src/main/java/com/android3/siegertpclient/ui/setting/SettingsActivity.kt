@@ -3,6 +3,7 @@ package com.android3.siegertpclient.ui.setting
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.Toast
 import com.android3.siegertpclient.databinding.ActivitySettingsBinding
@@ -26,13 +27,24 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
             settingsPresenter.onBackBtnClicked()
         }
 
-        binding.btnChangeLanguage.setOnClickListener {
-            settingsPresenter.onChangeLanguageBtnClicked()
-        }
-
         val changeUsernameEt = binding.etUsername
         val changeForenameEt = binding.etFirstName
         val changeSurnameEt = binding.etLastName
+
+        var language = ""
+        binding.spChangeLanguages.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                adapterView: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                language = adapterView?.getItemAtPosition(position).toString()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
 
         binding.btnSaveSettings.setOnClickListener {
             val changedUsername = editTextTrimmer(changeUsernameEt)
@@ -50,7 +62,7 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
             settingsPresenter.onLogoutTextClicked()
         }
 
-        binding.tvTestUserUpdate.text = settingsPresenter.getUser()
+        setTestUserText()
     }
 
     override fun onResume() {
@@ -99,5 +111,9 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
 
     private fun doToast(message: String) {
         Toast.makeText(this@SettingsActivity, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun setTestUserText() {
+        binding.tvTestUserUpdate.text = settingsPresenter.getUser()
     }
 }

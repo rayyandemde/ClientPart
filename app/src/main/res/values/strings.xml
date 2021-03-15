@@ -51,4 +51,9 @@
         <item>SINGLE</item>
         <item>TEAM</item>
     </string-array>
+
+    <string-array name="sa_languages">
+        <item>Change Language</item>
+        <item>ENGLISH</item>
+    </string-array>
 </resources>

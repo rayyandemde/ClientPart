@@ -48,8 +48,6 @@ interface HomepageContract {
         fun loadTournamentOverviews()
 
         fun onInvitationBtnClicked()
-
-        fun getUserLocal()
     }
 
     interface IFeedPresenter {

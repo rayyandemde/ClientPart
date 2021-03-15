@@ -73,7 +73,7 @@ class RegisterPresenter(private val context: Context) :
                                             } catch (e: Exception) {
                                                 withContext(Dispatchers.Main) {
                                                     view?.hideProgress()
-                                                    view?.showError("Oops... It seems there's unexpected error")
+                                                    view?.showError("Oops... It seems there's unexpected error. Please try again.")
                                                 }
                                             }
                                         }

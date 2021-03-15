@@ -52,12 +52,10 @@ class UserRemoteDataSource {
         forename: String,
         token: String
     ): Response<User> {
-        return RestClient2.userService.updateUserDetails(
-            oldUsername,
-            newUsername,
-            surname,
-            forename,
-            token
-        )
+        val newUser = hashMapOf<String, String>()
+        newUser["username"] = newUsername
+        newUser["surname"] = surname
+        newUser["forename"] = forename
+        return RestClient2.userService.updateUserDetails(oldUsername, newUser, token)
     }
 }

@@ -7,13 +7,15 @@ interface SettingsContract {
         fun navigateToUserProfileActivity()
 
         fun navigateToLoginActivity()
+
+        fun setTestUserText()
     }
 
     interface ISettingPresenter {
 
         fun onBackBtnClicked()
 
-        fun onChangeLanguageBtnClicked()
+        fun onChangeLanguageSpinnerSelected()
 
         fun onSaveBtnClicked(
             changedUsername: String,

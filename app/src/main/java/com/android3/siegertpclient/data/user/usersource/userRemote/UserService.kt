@@ -49,8 +49,7 @@ interface UserService {
     @PUT("users/{username}")
     suspend fun updateUserDetails(
         @Path("username") oldUsername: String,
-        @Body newUsername: String, @Body surname: String,
-        @Body forename: String, @Header("Authorization") token: String
+        @Body user: Map<String, String>, @Header("Authorization") token: String
     )
             : Response<User>
 }
