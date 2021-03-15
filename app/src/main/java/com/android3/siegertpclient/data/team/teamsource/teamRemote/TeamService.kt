@@ -60,15 +60,16 @@ interface TeamService {
     ) : Response<ApiResponse>
 
     @POST("teams/{teamName}")
-    suspend fun joinTeam(
-        @Path("teamName") teamName: String, @Body activity: String, password: String,
+    suspend fun handleMembership(
+        @Path("teamName") teamName: String,
+        @Body membership : Map<String, String>,
         @Header("Authorization") token: String
     ) : Response<ApiResponse>
     //TODO toggle password only on join activity
 
-    @POST("teams/{teamName}")
-    suspend fun quitTeam(
-        @Path("teamName") teamName: String, @Body activity: String,
-        @Header("Authorization") token: String
-    ) : Response<ApiResponse>
+//    @POST("teams/{teamName}")
+//    suspend fun quitTeam(
+//        @Path("teamName") teamName: String, @Body activity: String,
+//        @Header("Authorization") token: String
+//    ) : Response<ApiResponse>
 }
