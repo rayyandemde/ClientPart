@@ -41,7 +41,7 @@ interface TeamService {
 
     @POST("teams")
     suspend fun createNewTeam(
-        @Body adminId: String, name: String, password: String,
+        @Body team : Map<String, Any>,
         @Header("Authorization") token: String
     ): Response<Team>
 

@@ -42,7 +42,7 @@ class PreferencesProvider(context: Context) {
         putString(KEY_CURRENT_TOURNAMENT, json)
     }
 
-    
+
     fun getCurrentTournament(tournamentKey : String) : Tournament? {
         val json = getString(KEY_CURRENT_TOURNAMENT)
         return if (json != null) Gson().fromJson(json, Tournament::class.java) else null
