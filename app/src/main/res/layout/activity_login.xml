@@ -102,6 +102,7 @@
         app:layout_constraintVertical_bias="0.132" />
 
     <LinearLayout
+        android:id="@+id/ll_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -119,7 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="Doesn't have an account yet?" />
+            android:text="@string/doesn_t_have_an_account_yet" />
 
         <TextView
             android:id="@+id/tv_register"
@@ -127,6 +128,36 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="@string/register"
+            android:textColor="@color/accent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_register">
+
+        <Button
+            android:id="@+id/btn_test_service_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:onClick="enqueueWork"
+            android:text="Service on" />
+
+        <Button
+            android:id="@+id/btn_test_service_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="service off"
             android:textColor="@color/accent" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -110,4 +110,8 @@ class UserRepo(private val context: Context) {
     fun getToken() : String? {
         return localData.getString(KEY_TOKEN)
     }
+
+    fun getCurrentUserId() : String? {
+        return localData.getString(KEY_USER_ID)
+    }
 }

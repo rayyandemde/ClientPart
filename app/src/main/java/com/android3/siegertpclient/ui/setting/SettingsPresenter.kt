@@ -51,38 +51,42 @@ class SettingsPresenter(private val context: Context) :
     ) {
         view?.showProgress()
 
-        val currentUser = userRepo.getUserLocal()
-        var newUsername =
-            if (TextUtils.isEmpty(changedUsername)) currentUser!!.username else changedUsername
-        var newForename =
-            if (TextUtils.isEmpty(changedForename)) currentUser!!.forename else changedForename
-        var newSurname =
-            if (TextUtils.isEmpty(changedSurname)) currentUser!!.surname else changedSurname
-        val token = userRepo.getToken()
+        if (!onlineChecker.isOnline()) {
+            view?.showNoInternetConnection()
+            view?.hideProgress()
+        } else {
+            val currentUser = userRepo.getUserLocal()
+            var newUsername =
+                if (TextUtils.isEmpty(changedUsername)) currentUser!!.username else changedUsername
+            var newForename =
+                if (TextUtils.isEmpty(changedForename)) currentUser!!.forename else changedForename
+            var newSurname =
+                if (TextUtils.isEmpty(changedSurname)) currentUser!!.surname else changedSurname
+            val token = userRepo.getToken()
 
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                val user = userRepo.updateUserDetail(
-                    currentUser!!.username,
-                    newUsername,
-                    newSurname,
-                    newForename,
-                    token!!
-                )
-                if (user != null) {
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
+                    val user = userRepo.updateUserDetail(
+                        currentUser!!.username,
+                        newUsername,
+                        newSurname,
+                        newForename,
+                        token!!
+                    )
+                    if (user != null) {
+                        withContext(Dispatchers.Main) {
+                            view?.setTestUserText()
+                            view?.hideProgress()
+                        }
+                    }
+                } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
-                        view?.setTestUserText()
+                        view?.showError("Oops... It seems there's unexpected error. Please try again.")
                         view?.hideProgress()
                     }
                 }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    view?.showError("Oops... It seems there's unexpected error. Please try again.")
-                    view?.hideProgress()
-                }
             }
         }
-
     }
 
     override fun onLogoutTextClicked() {

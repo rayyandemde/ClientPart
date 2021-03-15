@@ -61,6 +61,10 @@ class CreateTeamActivity : BaseActivity(), CreateTeamContract.ICreateTeamView {
         TODO("Not yet implemented")
     }
 
+    override fun showIncompleteInput() {
+        doToast("Please fill in all of the field")
+    }
+
     //navigate to the Home Activity.
     override fun navigateToHomepageActivity() {
         val intent = Intent(this@CreateTeamActivity, HomepageActivity::class.java)

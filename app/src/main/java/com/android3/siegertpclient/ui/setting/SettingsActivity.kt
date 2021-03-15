@@ -63,6 +63,9 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
         }
 
         setTestUserText()
+
+        /*
+        TokenUpdateIntentService.stopService()*/
     }
 
     override fun onResume() {
