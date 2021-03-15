@@ -1,6 +1,7 @@
 package com.android3.siegertpclient.data.team.teamsource.teamRemote
 
 import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.payload.ApiResponse
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
@@ -50,24 +51,24 @@ interface TeamService {
     suspend fun deleteTeam(
         @Path("teamName") teamName: String,
         @Header("Authorization") token: String
-    )
+    ) : Response<ApiResponse>
 
     @DELETE("teams/{teamName}/members/{id}")
     suspend fun kickTeamMember(
         @Path("teamName") teamName: String, @Path("id") memberId: String,
         @Header("Authorization") token: String
-    )
+    ) : Response<ApiResponse>
 
     @POST("teams/{teamName}")
     suspend fun joinTeam(
         @Path("teamName") teamName: String, @Body activity: String, password: String,
         @Header("Authorization") token: String
-    )
+    ) : Response<ApiResponse>
     //TODO toggle password only on join activity
 
     @POST("teams/{teamName}")
     suspend fun quitTeam(
         @Path("teamName") teamName: String, @Body activity: String,
         @Header("Authorization") token: String
-    )
+    ) : Response<ApiResponse>
 }
