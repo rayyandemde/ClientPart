@@ -31,6 +31,8 @@
     <string name="type_of_game_e_g_chess">Type of Game (e.g. Chess)</string>
     <string name="create">Create</string>
     <string name="change_username">Change Username</string>
+    <string name="create_a_team">Create a Team</string>
+    <string name="team_name">Team Name</string>
 
     <string-array name="sa_type_of_game">
         <item>Match Type</item>
