@@ -71,5 +71,9 @@ class TournamentRemoteDataSource2 {
         return RestClient2.tournamentService.deleteGameById(tournamentName, gameId, token)
     }
 
+    suspend fun updateTournamentDetail(tournamentName: String, tournamentDetail: TournamentDetail, token: String) : Response<Tournament> {
+        return RestClient2.tournamentService.updateTournamentDetail(tournamentName, tournamentDetail, token)
+    }
+
 
 }

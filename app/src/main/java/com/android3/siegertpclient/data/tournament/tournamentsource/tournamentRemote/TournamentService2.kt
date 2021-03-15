@@ -4,6 +4,7 @@ import com.android3.siegertpclient.data.payload.ApiResponse
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.user.User
 import retrofit2.Call
 import retrofit2.Response
@@ -65,6 +66,13 @@ interface TournamentService2 {
         @Path("tournamentName") tournamentName : String,
         @Header("Authorization") token : String
     ) : Response<List<Game>>
+
+    @POST("tournaments/{tournamentName}")
+    suspend fun updateTournamentDetail(
+        @Path("tournamentName") tournamentName: String,
+        @Body tournamentDetail: TournamentDetail,
+        @Header("Authorization") token: String
+    ) : Response<Tournament>
 
     @PUT("tournaments/{tournamentName}/games/{id}")
     suspend fun updateGameById(
