@@ -8,7 +8,7 @@
     tools:context=".ui.setting.SettingActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout"
+        android:id="@+id/setting_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

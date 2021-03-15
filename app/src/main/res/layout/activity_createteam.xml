@@ -9,6 +9,7 @@
     tools:context=".ui.createteam.CreateTeamActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/create_team_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp"
