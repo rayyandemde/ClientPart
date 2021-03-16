@@ -100,7 +100,7 @@ class UserRepo(private val context: Context) {
     }
 
     fun getUserLocal(): User? {
-        return localData.getUser(KEY_USER)
+        return localData.getUser()
     }
 
     fun checkUserLoggedIn() : Boolean {

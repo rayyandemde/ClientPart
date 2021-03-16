@@ -1,6 +1,5 @@
 package com.android3.siegertpclient.utils
 
-import com.android3.siegertpclient.data.game.gamesource.gameRemote.GameService
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationService
 import com.android3.siegertpclient.data.team.teamsource.teamRemote.TeamService
 import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote.TournamentService2
@@ -27,10 +26,6 @@ object RestClient2 {
 
     val teamService: TeamService by lazy {
         retrofit.create(TeamService::class.java)
-    }
-
-    val gameService: GameService by lazy {
-        retrofit.create(GameService::class.java)
     }
 
     val tournamentService: TournamentService2 by lazy {

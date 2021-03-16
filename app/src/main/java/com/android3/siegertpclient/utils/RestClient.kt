@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.utils
 
-import com.android3.siegertpclient.data.game.gamesource.gameRemote.GameService
+//import com.android3.siegertpclient.data.game.gamesource.gameRemote.GameService
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationService
 import com.android3.siegertpclient.data.team.teamsource.teamRemote.TeamService
 import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote.TournamentService
@@ -40,14 +40,14 @@ class RestClient {
         return retrofit.create(TeamService::class.java)
     }
 
-    fun getGameService() : GameService {
-        val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .callbackExecutor(Executors.newSingleThreadExecutor())
-            .build()
-        return retrofit.create(GameService::class.java)
-    }
+//    fun getGameService() : GameService {
+//        val retrofit : Retrofit = Retrofit.Builder()
+//            .baseUrl(baseUrl)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .callbackExecutor(Executors.newSingleThreadExecutor())
+//            .build()
+//        return retrofit.create(GameService::class.java)
+//    }
 
     fun getTournamentService() : TournamentService {
         val retrofit : Retrofit = Retrofit.Builder()
