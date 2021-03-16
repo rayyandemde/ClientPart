@@ -45,7 +45,7 @@ class TeamRemoteDataSource {
         return RestClient2.teamService.deleteTeam(teamName, token)
     }
 
-    suspend fun getTeamMembers(teamName : String, token : String): Response<List<User>>? {
+    suspend fun getTeamMembers(teamName : String, token : String): Response<List<User>> {
         return RestClient2.teamService.getTeamMembers(teamName, token)
     }
 
