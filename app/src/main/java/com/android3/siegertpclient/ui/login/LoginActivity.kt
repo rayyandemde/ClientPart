@@ -15,6 +15,7 @@ import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
+import com.android3.siegertpclient.ui.team.TeamActivity
 import com.android3.siegertpclient.utils.tokenservice.TokenUpdateReceiver
 
 
@@ -51,9 +52,11 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         }
 
         binding.btnTestServiceOff.setOnClickListener {
-
+            val intent = Intent(this@LoginActivity, TeamActivity::class.java)
+            startActivity(intent)
         }
 
+        /*
         binding.btnTestServiceOff.setOnClickListener {
             //TokenUpdateJobIntentService.stopHandle()
             val intent = Intent(applicationContext, TokenUpdateReceiver::class.java)
@@ -63,7 +66,7 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
             )
             val alarm = this.getSystemService(ALARM_SERVICE) as AlarmManager
             alarm.cancel(pIntent)
-        }
+        }*/
 
     }
 

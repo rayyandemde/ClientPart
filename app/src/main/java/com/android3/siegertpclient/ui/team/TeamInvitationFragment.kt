@@ -21,7 +21,7 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView  {
 
         var view = inflater!!.inflate(R.layout.fragment_team_invitation, container, false)
 
-        teamInvitationRecycler = view.findViewById<RecyclerView>(R.id.team_invitation_recycler)
+        teamInvitationRecycler = view.findViewById<RecyclerView>(R.id.rv_team_invitation)
 
         teamInvitationRecycler!!.layoutManager = LinearLayoutManager(context)
         teamInvitationRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()

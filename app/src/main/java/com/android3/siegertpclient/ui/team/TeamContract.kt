@@ -3,14 +3,7 @@ import com.android3.siegertpclient.ui.base.BaseView
 interface TeamContract {
 
     interface ITeamView : BaseView {
-
-        fun showAdminFragment()
-
-        fun showMemberFragment()
-
-        fun showTeamTournamentsFragment()
-
-        fun navigateToHomepageActivity()
+        
     }
 
     interface ITeamPresenter {
@@ -22,5 +15,17 @@ interface TeamContract {
         fun onTeamTournamentBtnClicked()
 
         fun checkIfAdmin(userId: String)
+    }
+
+    interface ITeamMembersPresenter {
+
+    }
+
+    interface ITeamTournamentsPresenter {
+
+    }
+
+    interface ITeamInvitationsPresenter {
+
     }
 }

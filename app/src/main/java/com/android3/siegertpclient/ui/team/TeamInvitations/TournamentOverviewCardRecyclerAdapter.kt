@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.databinding.TournamentOverviewCardBinding
 
 class TournamentOverviewCardRecyclerAdapter : RecyclerView.Adapter<CardHolder>() {
 
@@ -12,11 +13,14 @@ class TournamentOverviewCardRecyclerAdapter : RecyclerView.Adapter<CardHolder>()
     }
 
     override fun onBindViewHolder(holder: CardHolder, position: Int) {
-        //Not yet implemented
+        val image = holder.binding.dummyImage
+        val text = holder.binding.dummyOverview
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardHolder {
+        /*
         var cardItem = LayoutInflater.from(parent?.context).inflate(R.layout.tournament_overview_card, parent, false)
-        return CardHolder(cardItem)
+        return CardHolder(cardItem)*/
+        return CardHolder(TournamentOverviewCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 }

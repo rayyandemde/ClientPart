@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
 
 class TeamMemberFragment : Fragment() , TeamContract.ITeamView {
+    private var _binding: FragmentTeamMemberBinding? = null
+    private val binding get() = _binding!!
 
     private val teamPresenter: TeamPresenter = TeamPresenter()
 
@@ -20,21 +23,16 @@ class TeamMemberFragment : Fragment() , TeamContract.ITeamView {
 
     var addBt : Button?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentTeamMemberBinding.inflate(inflater, container,  false)
 
-        var view = inflater!!.inflate(R.layout.fragment_team_member, container, false)
+        binding.rvTeamMember.layoutManager = LinearLayoutManager(context)
+        binding.rvTeamMember.adapter = TournamentOverviewCardRecyclerAdapter()
 
-        teamMemberRecycler = view.findViewById<RecyclerView>(R.id.team_member_recycler)
+        binding.btnAdd.setOnClickListener {
 
-        teamMemberRecycler!!.layoutManager = LinearLayoutManager(context)
-        teamMemberRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
+        }
 
-        addBt = view.findViewById(R.id.addBt)
-        /**
-        addBt.setOnClickListener(
-            teamPresenter.
-        )
-        **/
-        return view
+        return binding.root
     }
 
     fun showMember(users: List<User>) {

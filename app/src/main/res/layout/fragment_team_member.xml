@@ -9,18 +9,18 @@
     tools:context=".ui.team.TeamMemberFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/team_member_recycler"
+        android:id="@+id/rv_team_member"
         android:layout_width="match_parent"
-        android:layout_height="421dp"
+        android:layout_height="502dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="56dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/addBt"
+        android:id="@+id/btn_add"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="30dp"
@@ -30,6 +30,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/team_member_recycler"
+        app:layout_constraintTop_toBottomOf="@+id/rv_team_member"
         app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

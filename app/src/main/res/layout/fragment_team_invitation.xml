@@ -9,7 +9,7 @@
     tools:context=".ui.team.TeamInvitationFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/team_invitation_recycler"
+        android:id="@+id/rv_team_invitation"
         android:layout_width="match_parent"
         android:layout_height="612dp"
         android:layout_marginStart="4dp"

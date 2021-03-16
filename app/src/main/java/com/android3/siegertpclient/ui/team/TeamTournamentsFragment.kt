@@ -28,12 +28,12 @@ class TeamTournamentsFragment : Fragment() , TeamContract.ITeamView {
 
         var view = inflater!!.inflate(R.layout.fragment_teamtournaments, container, false)
 
-        teamTournamentsRecycler = view.findViewById<RecyclerView>(R.id.team_tournaments_recycler)
+        teamTournamentsRecycler = view.findViewById<RecyclerView>(R.id.rv_team_tournaments)
 
         teamTournamentsRecycler!!.layoutManager = LinearLayoutManager(context)
         teamTournamentsRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
 
-        homeBtn = view.findViewById<ImageView>(R.id.homeBtnTeam)
+        homeBtn = view.findViewById<ImageView>(R.id.btn_home)
         homeBtn?.setOnClickListener{
             teamPresenter.onHomeBtnClicked()
         }
