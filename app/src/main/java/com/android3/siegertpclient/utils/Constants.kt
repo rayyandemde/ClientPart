@@ -16,7 +16,12 @@ class Constants {
         const val KEY_FORENAME = "KEY_FORENAME"
         const val KEY_SURNAME = "KEY_SURNAME"
         const val KEY_USERNAME = "KEY_USERNAME"
+
+        //Tournament
         const val KEY_CURRENT_TOURNAMENT = "KEY_CURRENT_TOURNAMENT"
+
+        //Team
         const val KEY_CURRENT_TEAM = "KEY_CURRENT_TEAM"
+        const val KEY_TEAM_NAME = "KEY_TEAM_NAME"
     }
 }

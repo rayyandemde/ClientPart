@@ -30,7 +30,7 @@ class SettingsPresenter(private val context: Context) :
 
     fun getUser(): String {
         val username = preferencesProvider.getString(KEY_USERNAME)!!
-        val user = preferencesProvider.getUser(KEY_USER)
+        val user = preferencesProvider.getUser()
         val forename = user!!.forename
         val surname = user!!.surname
         return "Username :: $username \nFirst Name :: $forename \nLast Name :: $surname"

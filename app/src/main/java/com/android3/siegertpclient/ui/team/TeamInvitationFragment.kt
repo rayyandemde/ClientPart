@@ -11,15 +11,21 @@ import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
 
-class TeamInvitationFragment : Fragment(), TeamContract.ITeamView  {
+class TeamInvitationFragment : Fragment(), TeamContract.ITeamView {
 
-    private val teamPresenter: TeamPresenter = TeamPresenter()
+    private var teamPresenter: TeamPresenter? = null
 
     var teamInvitationRecycler: RecyclerView? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
         var view = inflater!!.inflate(R.layout.fragment_team_invitation, container, false)
+
+        teamPresenter = TeamPresenter(requireActivity().applicationContext)
 
         teamInvitationRecycler = view.findViewById<RecyclerView>(R.id.rv_team_invitation)
 
@@ -28,29 +34,22 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView  {
 
         return view
     }
+
     override fun onResume() {
         super.onResume()
-        teamPresenter.onAttach(this)
+        teamPresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        teamPresenter.onDetach()
+        teamPresenter?.onDetach()
     }
 
-    override fun showAdminFragment() {
+    override fun navigateToTournamentActivity() {
         TODO("Not yet implemented")
     }
 
-    override fun showMemberFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTeamTournamentsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun navigateToHomepageActivity() {
+    override fun showMembers(teamMembers: List<User>) {
         TODO("Not yet implemented")
     }
 
@@ -69,5 +68,4 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView  {
     override fun showNoInternetConnection() {
         TODO("Not yet implemented")
     }
-
 }

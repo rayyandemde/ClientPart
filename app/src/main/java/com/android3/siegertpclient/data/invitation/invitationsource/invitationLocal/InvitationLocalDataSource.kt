@@ -1,6 +1,5 @@
 package com.android3.siegertpclient.data.invitation.invitationsource.invitationLocal
 
-import com.android3.siegertpclient.data.Result.Result
 import com.android3.siegertpclient.data.invitation.Invitation
 
 /**

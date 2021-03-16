@@ -19,8 +19,8 @@ class TournamentRemoteDataSource2 {
         token : String) : Response<Tournament> {
         val tournament = hashMapOf<String, Any>()
         tournament["type"] = type
-        tournament["participantSize"] = participantSize
-        tournament["name"] = name
+        tournament["maxParticipantNumber"] = participantSize
+        tournament["tournamentName"] = name
         tournament["tournamentDetail"] = tournamentDetail
         return RestClient2.tournamentService.createNewTournament(tournament, token)
     }

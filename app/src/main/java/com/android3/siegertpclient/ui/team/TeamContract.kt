@@ -1,31 +1,23 @@
+import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.ui.base.BaseView
 
 interface TeamContract {
 
     interface ITeamView : BaseView {
-        
+        fun navigateToTournamentActivity()
+
+        fun showMembers(teamMembers: List<User>)
     }
 
     interface ITeamPresenter {
+        fun onMembersRefresh()
 
-        fun onBackBtnClicked()
+        fun onTournamentsRefresh()
 
-        fun onMemberBtnClicked()
+        fun onInvitationRefresh()
 
-        fun onTeamTournamentBtnClicked()
+        fun onAddBtnClicked()
 
-        fun checkIfAdmin(userId: String)
-    }
-
-    interface ITeamMembersPresenter {
-
-    }
-
-    interface ITeamTournamentsPresenter {
-
-    }
-
-    interface ITeamInvitationsPresenter {
-
+        fun onHomeBtnClicked()
     }
 }

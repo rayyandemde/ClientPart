@@ -1,6 +1,5 @@
 package com.android3.siegertpclient.ui.tournament
 
-import com.android3.siegertpclient.data.game.Game
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BasePresenter
 

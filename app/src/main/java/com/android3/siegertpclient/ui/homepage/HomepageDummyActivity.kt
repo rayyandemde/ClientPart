@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 class HomepageDummyActivity : BaseActivity() {
     private lateinit var binding: ActivityHomepageDummyBinding
 
-    private var tournamentRepo = TournamentRepo2()
+    private var tournamentRepo = TournamentRepo2(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,27 +84,7 @@ class HomepageDummyActivity : BaseActivity() {
         }
 
         binding.buttonGoTest.setOnClickListener {
-            showProgress()
-            GlobalScope.launch(Dispatchers.IO) {
-                try {
-                    val response = tournamentRepo
-                        .getTournamentById("f7822baf-1960-458d-b035-d4186c6fdee3", token)
-                    if (response.isSuccessful) {
-                        withContext(Dispatchers.Main) {
-                            //binding.tvTestId.text = "Success"
-                            showError("Success")
-                            binding.tvTestId.text = response.body()!!.toString()
-                            hideProgress()
-                        }
-                    }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        binding.tvTestId.text = "Oops... It seems there's unexpected error"
-                        showError("Oops... It seems there's unexpected error")
-                        hideProgress()
-                    }
-                }
-            }
+
         }
 
     }

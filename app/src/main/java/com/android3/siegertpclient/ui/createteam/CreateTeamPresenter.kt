@@ -42,7 +42,7 @@ class CreateTeamPresenter(private val context: Context) : BasePresenter<CreateTe
             } else -> {
             GlobalScope.launch(Dispatchers.IO) {
                 try {
-                    val team = teamRepo.createNewTeam(userId!!, teamName, teamPassword, token!!)
+                    val team = teamRepo.createNewTeam(userId!!, teamName, teamPassword)
                     if (team != null) {
                         withContext(Dispatchers.Main) {
                             view?.navigateToTeamActivity()

@@ -8,7 +8,7 @@ import com.android3.siegertpclient.utils.OnlineChecker
 class CreateTournamentPresenter(private val context: Context) : BasePresenter<CreateTournamentContract.ICreateTournamentView>(), CreateTournamentContract.ICreateTournamentPresenter{
     private var onlineChecker = OnlineChecker(context)
 
-    private var tournamentRepo = TournamentRepo2()
+    private var tournamentRepo = TournamentRepo2(context)
 
     override fun onBackBtnClicked() {
         view?.navigateToHomepageActivity()
