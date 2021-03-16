@@ -1,44 +1,55 @@
 package com.android3.siegertpclient.data.user.usersource.userRemote
 
 import com.android3.siegertpclient.data.invitation.Invitation
-import com.android3.siegertpclient.data.team.teamsource.teamLocal.Team
+import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
-
 
 interface UserService {
 
     @POST("users")
-    fun createNewUser(@Body user : Map<String, String>,
-                      @Header("Authorization") token : String) : Call<User>
+    suspend fun createNewUser(
+        @Body user: Map<String, String>,
+        @Header("Authorization") token: String
+    ): Response<User>
 
+    //getUserById alternative, not used at current implementation
     @GET("users/{username}")
-    fun getUserByUsername(@Path("username") username: String,
-                          @Header("Authorization") token : String) : Call<User>
+    suspend fun getUserByUsername(
+        @Path("username") username: String,
+        @Header("Authorization") token: String
+    ): Response<User>
 
     @GET("users")
-    fun getUserById (@Query("id") id : String,
-                     @Header("Authorization") token : String) : Call<User>
+    suspend fun getUserById(
+        @Query("id") id: String,
+        @Header("Authorization") token: String
+    ): Response<User>
 
     @GET("users/{username}/tournaments")
-    fun getUsersTournaments (@Path("username") username: String,
-                             @Header("Authorization") token : String) : Call<List<Tournament>>
+    suspend fun getUsersTournaments(
+        @Path("username") username: String,
+        @Header("Authorization") token: String
+    ): Response<List<Tournament>>
 
     @GET("users/{username}/teams")
-    fun getUserTeams(@Path("username") username: String,
-                     @Header("Authorization") token : String) : Call<List<Team>>
+    suspend fun getUserTeams(
+        @Path("username") username: String,
+        @Header("Authorization") token: String
+    ): Response<List<Team>>
 
     @GET("users/{username}/invitations")
-    fun getUserInvitations(@Path("username") username: String,
-                           @Header("Authorization") token : String) : Call<List<Invitation>>
+    suspend fun getUserInvitations(
+        @Path("username") username: String,
+        @Header("Authorization") token: String
+    ): Response<List<Invitation>>
 
     @PUT("users/{username}")
-    fun updateUserDetails(@Path("username") oldUsername: String,
-                          @Body newUsername : String, @Body forename : String,
-                          @Body surname : String, @Header("Authorization") token : String)
-                    : Call<User>
-
+    suspend fun updateUserDetails(
+        @Path("username") oldUsername: String,
+        @Body user: Map<String, String>, @Header("Authorization") token: String
+    )
+            : Response<User>
 }

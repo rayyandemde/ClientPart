@@ -13,8 +13,6 @@ interface CreateTeamContract {
 
     interface ICreateTeamPresenter {
 
-        fun onBackBtnClicked()
-
-        fun onCreateBtnClicked()
+        fun onCreateBtnClicked(teamName: String, teamPassword: String)
     }
 }

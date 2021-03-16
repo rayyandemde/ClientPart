@@ -13,15 +13,19 @@ import com.android3.siegertpclient.data.tournament.Tournament
 
 class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
 
-    private val homepagePresenter: HomepagePresenter = HomepagePresenter()
+    // private val homepagePresenter: HomepagePresenter = HomepagePresenter()
 
     var teamNameEt: EditText? = null
     var teamPassword: EditText? = null
     var joinTeamBtn: Button? = null
 
+    private lateinit var homepagePresenter: HomepagePresenter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         var view = inflater!!.inflate(R.layout.fragment_jointeam, container, false)
+
+        homepagePresenter = HomepagePresenter(requireActivity().applicationContext)
 
         teamNameEt = view.findViewById<EditText>(R.id.teamName)
         teamPassword = view.findViewById<EditText>(R.id.teamPassword)

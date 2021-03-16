@@ -25,11 +25,15 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView {
     var feedRecycler: RecyclerView? = null
     var invitationBtn: Button? = null
 
-    private val homepagePresenter: HomepagePresenter = HomepagePresenter()
+    //private val homepagePresenter: HomepagePresenter = HomepagePresenter(activity)
+
+    private lateinit var homepagePresenter: HomepagePresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         var view = inflater.inflate(R.layout.fragment_feed, container, false)
+
+        homepagePresenter = HomepagePresenter(requireActivity().applicationContext)
 
         feedRecycler = view.findViewById<RecyclerView>(R.id.feed_recycler)
 

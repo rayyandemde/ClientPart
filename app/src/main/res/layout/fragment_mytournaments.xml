@@ -41,7 +41,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="8dp"
-                android:background="@drawable/home_icon"
+                android:background="@drawable/home_icon_setting"
                 app:tint="#ffffff" />
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>

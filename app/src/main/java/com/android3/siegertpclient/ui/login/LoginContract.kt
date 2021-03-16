@@ -17,6 +17,8 @@ interface LoginContract {
 
     interface ILoginPresenter {
 
+        fun checkSession()
+
         fun onLoginBtnClicked(email: String, password: String)
 
         fun onForgotPasswordTextClicked()

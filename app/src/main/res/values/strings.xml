@@ -21,20 +21,41 @@
     <string name="change_last_name">Change Last Name</string>
     <string name="save_settings">Save Settings</string>
     <string name="logout">Logout</string>
+    <string name="create_a_new_tournament">Create A New Tournament</string>
+    <string name="tournament_name">Tournament Name</string>
+    <string name="location">Location</string>
+    <string name="max_player">Max Player</string>
+    <string name="registation_deadline">Registation Deadline</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="type_of_game_e_g_chess">Type of Game (e.g. Chess)</string>
+    <string name="create">Create</string>
+    <string name="change_username">Change Username</string>
+    <string name="create_a_team">Create a Team</string>
+    <string name="team_name">Team Name</string>
 
-    <string-array name="Tournamenttypes_array">
-        <item>Open</item>
-        <item>Private</item>
-    </string-array>
-
-    <string-array name="Participanttypes_array">
-        <item>Single</item>
-        <item>Team</item>
-    </string-array>
-
-    <string-array name="TypeOfGame_array">
-        <item>KO</item>
+    <string-array name="sa_type_of_game">
+        <item>Match Type</item>
+        <item>KnockOut</item>
         <item>League</item>
-        <item>KO with Gruppe</item>
+        <item>KnockOutWithGroup</item>
+    </string-array>
+
+    <string-array name="sa_tournament_types">
+        <item>Tournament Type</item>
+        <item>PRIVATE</item>
+        <!--Open tournament feature is not yet available in the current version of this app-->
+        <!--<item>OPEN</item>-->
+    </string-array>
+
+    <string-array name="sa_participant_types">
+        <item>Participant Form</item>
+        <item>SINGLE</item>
+        <item>TEAM</item>
+    </string-array>
+
+    <string-array name="sa_languages">
+        <item>Change Language</item>
+        <item>ENGLISH</item>
     </string-array>
 </resources>

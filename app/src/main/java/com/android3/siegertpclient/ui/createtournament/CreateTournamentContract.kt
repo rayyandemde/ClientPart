@@ -6,8 +6,6 @@ interface CreateTournamentContract {
 
         fun navigateToHomepageActivity()
 
-        fun navigateToLoginActivity()
-
         fun navigateToTournamentActivity()
 
         fun showErrorOnTournamentName(message: String)
@@ -19,15 +17,23 @@ interface CreateTournamentContract {
         fun showErrorOnMaxPlayers(message: String)
 
         fun showErrorOnRegistrationTime(message: String)
-
-        fun showErrorOnPrize(message: String)
     }
 
     interface ICreateTournamentPresenter {
 
         fun onBackBtnClicked()
 
-        fun onCreateBtnClicked()
-
+        fun onCreateBtnClicked(
+            name: String,
+            typeOfGame: String,
+            matchType: String,
+            tournamentType: String,
+            participantForm: String,
+            registrationDeadline: String,
+            startTime: String,
+            endTime: String,
+            location: String,
+            maxParticipantNumber: Int
+        )
     }
 }

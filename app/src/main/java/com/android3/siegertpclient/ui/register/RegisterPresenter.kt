@@ -3,7 +3,7 @@ package com.android3.siegertpclient.ui.register
 import android.content.Context
 import android.text.TextUtils
 import android.util.Patterns
-import com.android3.siegertpclient.data.user.usersource.UserRepo2
+import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
 import com.android3.siegertpclient.utils.OnlineChecker
 import com.google.firebase.auth.FirebaseAuth
@@ -17,7 +17,7 @@ class RegisterPresenter(private val context: Context) :
 
     private var onlineChecker = OnlineChecker(context)
 
-    private var userRepo = UserRepo2()
+    private var userRepo = UserRepo(context)
 
     override fun onRegisterBtnClicked(
         email: String,
@@ -60,12 +60,12 @@ class RegisterPresenter(private val context: Context) :
                                         val tokenBearer = "Bearer ".plus(token)
                                         GlobalScope.launch(Dispatchers.IO) {
                                             try {
-                                                val response = userRepo
+                                                val user = userRepo
                                                     .createNewUser(
                                                         username, forename,
                                                         surname, firebaseUser.uid, tokenBearer
                                                     )
-                                                if (response.isSuccessful) {
+                                                if (user != null) {
                                                     withContext(Dispatchers.Main) {
                                                         view?.navigateToHomepageActivity()
                                                     }
@@ -73,7 +73,7 @@ class RegisterPresenter(private val context: Context) :
                                             } catch (e: Exception) {
                                                 withContext(Dispatchers.Main) {
                                                     view?.hideProgress()
-                                                    view?.showError("Oops... It seems there's unexpected error")
+                                                    view?.showError("Oops... It seems there's unexpected error. Please try again.")
                                                 }
                                             }
                                         }
