@@ -20,8 +20,7 @@ class TournamentRepo2(private val context: Context) {
         type : String,
         participantSize: Int,
         name : String,
-        tournamentDetail : TournamentDetail,
-        token: String
+        tournamentDetail : TournamentDetail
     ): Tournament? {
         val response = tournamentRemoteDataSource2.createNewTournament(type,
             participantSize, name, tournamentDetail, Token.getBearerToken(context)!!)
@@ -32,7 +31,7 @@ class TournamentRepo2(private val context: Context) {
         return null
     }
 
-    suspend fun getTournamentById(tourneyId: String, token: String): Tournament? {
+    suspend fun getTournamentById(tourneyId: String): Tournament? {
         val response =
             tournamentRemoteDataSource2.getTournamentById(tourneyId, Token.getBearerToken(context)!!)
         if (response.isSuccessful) {
@@ -42,7 +41,7 @@ class TournamentRepo2(private val context: Context) {
         return null
     }
 
-    suspend fun getTournamentByName(tourneyName: String, token: String): Tournament? {
+    suspend fun getTournamentByName(tourneyName: String): Tournament? {
         val response =
             tournamentRemoteDataSource2.getTournamentByName(tourneyName, Token.getBearerToken(context)!!)
         if (response.isSuccessful) {

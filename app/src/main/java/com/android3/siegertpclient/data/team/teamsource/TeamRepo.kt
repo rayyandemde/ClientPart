@@ -18,7 +18,7 @@ class TeamRepo(private val context: Context) {
     private val teamRemoteDataSource = TeamRemoteDataSource()
     private var localData = PreferencesProvider(context)
 
-    suspend fun createNewTeam(adminId : String, name : String, password : String, token: String) : Team? {
+    suspend fun createNewTeam(adminId : String, name : String, password : String) : Team? {
         val response =
             teamRemoteDataSource.createNewTeam(adminId, name, password, Token.getBearerToken(context)!!)
         if (response.isSuccessful) {
@@ -28,7 +28,7 @@ class TeamRepo(private val context: Context) {
         return null
     }
 
-    suspend fun getTeamByName(teamName : String, token: String) : Team? {
+    suspend fun getTeamByName(teamName : String) : Team? {
         val response =
             teamRemoteDataSource.getTeamByName(teamName, Token.getBearerToken(context)!!)
         if (response.isSuccessful) {
@@ -38,7 +38,7 @@ class TeamRepo(private val context: Context) {
         return null
     }
 
-    suspend fun getTeamById(teamId : String, token: String) : Team? {
+    suspend fun getTeamById(teamId : String) : Team? {
         val response =
             teamRemoteDataSource.getTeamById(teamId, Token.getBearerToken(context)!!)
         if (response.isSuccessful) {
@@ -48,7 +48,7 @@ class TeamRepo(private val context: Context) {
         return null
     }
 
-    suspend fun getTeamTournaments(teamName: String, token: String) : List<Tournament>? {
+    suspend fun getTeamTournaments(teamName: String) : List<Tournament>? {
         val response =
             teamRemoteDataSource.getTeamTournaments(teamName, Token.getBearerToken(context)!!)
         if (response.isSuccessful) {
@@ -57,7 +57,7 @@ class TeamRepo(private val context: Context) {
         return null
     }
 
-    suspend fun getTeamInvitations(teamName: String, token: String) : List<Invitation>? {
+    suspend fun getTeamInvitations(teamName: String) : List<Invitation>? {
         val response =
             teamRemoteDataSource.getTeamInvitations(teamName, Token.getBearerToken(context)!!)
         if (response.isSuccessful) {
@@ -66,7 +66,7 @@ class TeamRepo(private val context: Context) {
         return null
     }
 
-    suspend fun deleteTeam(teamName: String, token: String) : ApiResponse? {
+    suspend fun deleteTeam(teamName: String) : ApiResponse? {
         val response =
             teamRemoteDataSource.deleteTeam(teamName, Token.getBearerToken(context)!!)
         if (response.isSuccessful) {
@@ -75,7 +75,7 @@ class TeamRepo(private val context: Context) {
         return null
     }
 
-    suspend fun getTeamMembers(teamName: String, token: String) : List<User>? {
+    suspend fun getTeamMembers(teamName: String) : List<User>? {
         val response =
             teamRemoteDataSource.getTeamMembers(teamName, Token.getBearerToken(context)!!)
         if (response.isSuccessful) {
@@ -84,7 +84,7 @@ class TeamRepo(private val context: Context) {
         return null
     }
 
-    suspend fun kickTeamMember(teamName: String, memberId : String, token: String) : ApiResponse? {
+    suspend fun kickTeamMember(teamName: String, memberId : String) : ApiResponse? {
         val response =
             teamRemoteDataSource.kickTeamMember(teamName, memberId, Token.getBearerToken(context)!!)
         if (response.isSuccessful) {
