@@ -8,9 +8,17 @@
     android:orientation="vertical"
     tools:context=".ui.userprofile.MyTeamsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_teams_recycler"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_rv_my_teams"
         android:layout_width="match_parent"
-        android:layout_height="597dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+        android:layout_height="600dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_my_teams"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            tools:listitem="@layout/card_team_overview"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

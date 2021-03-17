@@ -5,14 +5,25 @@ import com.android3.siegertpclient.data.team.teamsource.teamRemote.TeamService
 import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote.TournamentService2
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserService
 import com.android3.siegertpclient.utils.Constants.Companion.BASE_URL
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object RestClient {
+    private val okhttp =
+        OkHttpClient.Builder()
+            .callTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .build()
+
     private val retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okhttp)
             .build()
     }
 

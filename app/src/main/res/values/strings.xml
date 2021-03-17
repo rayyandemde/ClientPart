@@ -35,6 +35,9 @@
     <string name="team_name">Team Name</string>
     <string name="doesn_t_have_an_account_yet">Doesn\'t have an account yet?</string>
     <string name="user_overview_template">This is user overview</string>
+    <string name="team_overview_template">This is team overview</string>
+    <string name="user_no_team">You haven\'t joined any teams</string>
+    <string name="team_no_member">You have no member at the moment</string>
 
     <string-array name="sa_type_of_game">
         <item>Match Type</item>

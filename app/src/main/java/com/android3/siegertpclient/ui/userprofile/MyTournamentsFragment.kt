@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.databinding.FragmentMytournamentsBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
@@ -18,7 +19,7 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
     private var _binding: FragmentMytournamentsBinding? = null
     private val binding get() = _binding!!
 
-    private val userProfilePresenter: UserProfilePresenter = UserProfilePresenter()
+    private var userProfilePresenter: UserProfilePresenter? = null
 
     var settingBtn: Button? = null
     var homeBtn: Button? = null
@@ -29,6 +30,8 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
 
         //var view = inflater!!.inflate(R.layout.fragment_mytournaments, container, false)
 
+        userProfilePresenter = UserProfilePresenter(requireContext())
+
         val myTournamentRecycler = binding.recyclerMyTournaments
         //myTournamentsRecycler = view.findViewById<RecyclerView>(R.id.my_tournament_recycler)
 
@@ -36,11 +39,11 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
         myTournamentsRecycler?.adapter = TournamentOverviewCardRecyclerAdapter()
 
         binding.buttonSettings.setOnClickListener{
-            userProfilePresenter.onSettingBtnClicked()
+            userProfilePresenter?.onSettingBtnClicked()
         }
 
         binding.buttonHome.setOnClickListener{
-            userProfilePresenter.onHomeBtnClicked()
+            userProfilePresenter?.onHomeBtnClicked()
         }
 
         //return view
@@ -49,7 +52,7 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
 
     override fun onResume() {
         super.onResume()
-        userProfilePresenter.onAttach(this)
+        userProfilePresenter?.onAttach(this)
     }
 
     override fun onDestroyView() {
@@ -59,7 +62,7 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
 
     override fun onDestroy() {
         super.onDestroy()
-        userProfilePresenter.onDetach()
+        userProfilePresenter?.onDetach()
     }
 
     fun showTournaments() {
@@ -70,12 +73,8 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
         TODO("Not yet implemented")
     }
 
-    override fun showMyTournamentsFragment() {
+    override fun showMyTeams(myTeams: List<Team>?) {
         TODO("Not yet implemented")
-    }
-
-    override fun showMyTeamsFragment() {
-        //Will not be implemented
     }
 
     override fun navigateToHomepageActivity() {

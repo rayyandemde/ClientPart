@@ -34,6 +34,7 @@ class TeamPresenter(private val context: Context) : BasePresenter<TeamContract.I
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
                         view?.showError(e.message.toString())
+                        view?.showMembers(null)
                         //view?.showError("Oops... It seems there's unexpected error. Please try again.")
                         view?.hideProgress()
                     }

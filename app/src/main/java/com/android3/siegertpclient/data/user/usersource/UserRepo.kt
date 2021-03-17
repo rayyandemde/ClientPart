@@ -11,6 +11,7 @@ import com.android3.siegertpclient.utils.Constants.Companion.KEY_TOKEN
 import com.android3.siegertpclient.utils.Constants.Companion.KEY_USERNAME
 import com.android3.siegertpclient.utils.Constants.Companion.KEY_USER_ID
 import com.android3.siegertpclient.utils.PreferencesProvider
+import com.android3.siegertpclient.utils.commonlocalgetter.Token
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -72,8 +73,12 @@ class UserRepo(private val context: Context) {
         return userRemoteDataSource.getUsersTournaments(username, token)
     }
 
-    suspend fun getUserTeams(username: String, token: String): Response<List<Team>> {
-        return userRemoteDataSource.getUsersTeams(username, token)
+    suspend fun getUserTeams(): List<Team>? {
+        val response = userRemoteDataSource.getUsersTeams(localData.getString(KEY_USERNAME)!!, Token.getBearerToken(context)!!)
+        if (response.isSuccessful) {
+            return response.body()!!
+        }
+        return null
     }
 
     suspend fun getUsersInvitations(username: String, token: String): Response<List<Invitation>> {

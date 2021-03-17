@@ -3,28 +3,39 @@ package com.android3.siegertpclient.utils.recyclerviewadapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.databinding.CardTeamOverviewBinding
+import com.android3.siegertpclient.databinding.CardUserOverviewBinding
 import com.android3.siegertpclient.databinding.TournamentOverviewCardBinding
 
-//Not yet implemented
-class TeamAdapter : RecyclerView.Adapter<TeamAdapter.CardHolder>() {
-    class CardHolder(val binding: TournamentOverviewCardBinding) : RecyclerView.ViewHolder(binding.root) {
-        // private val dummyImageView: ImageView = itemView.findViewById<ImageView>(R.id.dummy_image)
-        // private val titleTextView: TextView = itemView.findViewById<TextView>(R.id.dummy_overview)
+class TeamAdapter : RecyclerView.Adapter<TeamAdapter.TeamHolder>() {
+
+    private var teamList = emptyList<Team>()
+
+    class TeamHolder(val binding: CardTeamOverviewBinding) : RecyclerView.ViewHolder(binding.root) {
+        val teamOverViewTv = binding.tvTeamOverview
     }
 
-    override fun getItemCount(): Int {
-        return 20
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamAdapter.TeamHolder {
+        return TeamAdapter.TeamHolder(
+            CardTeamOverviewBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
-    override fun onBindViewHolder(holder: CardHolder, position: Int) {
-        val image = holder.binding.dummyImage
-        val text = holder.binding.dummyOverview
+    override fun onBindViewHolder(holder: TeamHolder, position: Int) {
+        val current = teamList[position]
+        holder.teamOverViewTv.text = current.teamName
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardHolder {
-        /*
-        var cardItem = LayoutInflater.from(parent?.context).inflate(R.layout.tournament_overview_card, parent, false)
-        return CardHolder(cardItem)*/
-        return CardHolder(TournamentOverviewCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun getItemCount() = teamList.size
+
+    fun setData(newList: List<Team>) {
+        teamList = newList
+        notifyDataSetChanged()
     }
 }

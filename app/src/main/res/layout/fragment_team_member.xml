@@ -26,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/user_overview_card"/>
+            tools:listitem="@layout/card_user_overview"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

@@ -49,7 +49,7 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView {
         TODO("Not yet implemented")
     }
 
-    override fun showMembers(teamMembers: List<User>) {
+    override fun showMembers(teamMembers: List<User>?) {
         TODO("Not yet implemented")
     }
 

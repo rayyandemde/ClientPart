@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
@@ -16,10 +17,11 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView {
 
     private var teamPresenter: TeamPresenter? = null
 
-    private val userAdapter by lazy { UserAdapter() }
+    private val noUser by lazy {
+        listOf(User(getString(R.string.team_no_member), emptyList(), "...", emptyList(), emptyList(), "","..."))
+    }
 
-    //
-    private var testDummyUsers: List<User>? = null
+    private val userAdapter by lazy { UserAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,12 +33,6 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView {
 
         binding.rvTeamMember.adapter = userAdapter
 
-        val noUser = User("no user", listOf("aa"), "are", listOf("aa"), listOf("aa"), "aaId","There")
-        val dummyUser2 = User("bbFN", listOf("bb"), "bbSN", listOf("bb"), listOf("bb"), "bbId","bbUN")
-        val dummyUser3 = User("ccFN", listOf("bb"), "ccSN", listOf("cc"), listOf("cc"), "ccId","ccUN")
-
-        //userAdapter.setData(listOf(noUser))
-        //binding.tvNoUsers.visibility = View.VISIBLE
         teamPresenter?.onMembersRefresh()
 
         binding.srlRvTeamMember.setOnRefreshListener {
@@ -64,9 +60,12 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView {
         TODO("Not yet implemented")
     }
 
-    override fun showMembers(teamMembers: List<User>) {
-        userAdapter.setData(teamMembers)
-        //binding.tvNoUsers.visibility = View.GONE
+    override fun showMembers(teamMembers: List<User>?) {
+        if (teamMembers != null) {
+            userAdapter.setData(teamMembers)
+        } else {
+            userAdapter.setData(noUser)
+        }
     }
 
     override fun showProgress() {

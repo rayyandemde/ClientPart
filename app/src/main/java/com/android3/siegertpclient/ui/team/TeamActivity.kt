@@ -77,7 +77,7 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
         TODO("Not yet implemented")
     }
 
-    override fun showMembers(teamMembers: List<User>) {
+    override fun showMembers(teamMembers: List<User>?) {
         TODO("Not yet implemented")
     }
 
@@ -95,9 +95,5 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
 
     override fun showNoInternetConnection() {
         TODO("Not yet implemented")
-    }
-
-    private fun doToast(message: String) {
-        Toast.makeText(this@TeamActivity, message, Toast.LENGTH_LONG).show()
     }
 }

@@ -74,11 +74,9 @@ class TeamRepo(private val context: Context) {
     }
 
     suspend fun getTeamMembers() : List<User>? {
-        val response = teamRemoteDataSource.getTeamMembers(TeamNameUtil.getCurrentTeamName(context)!!, Token.getBearerToken(context)!!)
-
-        /* dummy implementation
-        val token = "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjRlMDBlOGZlNWYyYzg4Y2YwYzcwNDRmMzA3ZjdlNzM5Nzg4ZTRmMWUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYW5kcm9pZHRlYW0zLTdmOTY4IiwiYXVkIjoiYW5kcm9pZHRlYW0zLTdmOTY4IiwiYXV0aF90aW1lIjoxNjE1OTM3NTY4LCJ1c2VyX2lkIjoiOTBzd3Bwb3E2TmVhMmFaSjAwalFDYkZFVGFtMiIsInN1YiI6Ijkwc3dwcG9xNk5lYTJhWkowMGpRQ2JGRVRhbTIiLCJpYXQiOjE2MTU5Mzc1NjgsImV4cCI6MTYxNTk0MTE2OCwiZW1haWwiOiJ0ZXN0MjhmZWJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInRlc3QyOGZlYkBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.R2zW5OtWrvPux_8sF91ZmPTYAA1TCSsrRNafoJ4U8zYmqgf_7o_bP8TPJqpaj10uum3NEQGnSvHYr_ujReU66TsR_xnIqrGt_mZiR45C1V91yJVhqfd2fq61XXj-S5UbWcsTT90UUxRB5mAw6iPavp3KpX6kOv1hiRwzERNY36PqdaMbjVpYOvy5GZ2VTZ-pWV-5YQU47LLUZ0g_M9cv9waIcvkqgd4Xp1kkPYuB2v_wJbEwsQhyQRcSbXAUARoDxmO7UO0dxa2NisJ5fZGJ1XH6EFOcPf252-KvF_c0uXnYd87F8dSQGhDtXEzLvaD85fOftV_bHGNvR-4n0SmezQ"
-        val response = teamRemoteDataSource.getTeamMembers("test28febteam", token) */
+        //val response = teamRemoteDataSource.getTeamMembers(TeamNameUtil.getCurrentTeamName(context)!!, Token.getBearerToken(context)!!)
+        val token = "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjRlMDBlOGZlNWYyYzg4Y2YwYzcwNDRmMzA3ZjdlNzM5Nzg4ZTRmMWUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYW5kcm9pZHRlYW0zLTdmOTY4IiwiYXVkIjoiYW5kcm9pZHRlYW0zLTdmOTY4IiwiYXV0aF90aW1lIjoxNjE1OTQ2MjA5LCJ1c2VyX2lkIjoiOTBzd3Bwb3E2TmVhMmFaSjAwalFDYkZFVGFtMiIsInN1YiI6Ijkwc3dwcG9xNk5lYTJhWkowMGpRQ2JGRVRhbTIiLCJpYXQiOjE2MTU5NDYyMDksImV4cCI6MTYxNTk0OTgwOSwiZW1haWwiOiJ0ZXN0MjhmZWJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInRlc3QyOGZlYkBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.aENhhJ2nHS3NdkgdHZG_aCjznthpUK5-1i-MnlhXQS8QNQK6DMfyxiI2ZxNQMLGwnQnrhjFbEBXg74eTng8mBp5L30g2UFYTcDdMrcesoX2otOmJb-BtOLra8ToQM1QUf0_Xuuc8jDsHV0ls9euHVYaa2BCjvBgLnFBgC3feu02NU2a3G7BnLFJmZsAXEEsl9HC5x_6vzXW5MLf1PwWBcOJMAuHfg6CQtSDflHTWvTPOJui8jDhSsUlYq-PDpRuZPbRVTEX193B0xGiandOEYe4DPHQQ0QEWYx1Lpxdya0MlVfuIKNEkODVbPUJ9sVORd9kXhNsKzdIrK9gEeBIOhw"
+        val response = teamRemoteDataSource.getTeamMembers("test28febteam", token)
         if (response.isSuccessful) {
             return response.body()!!
         }

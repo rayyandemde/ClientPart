@@ -6,7 +6,7 @@ interface TeamContract {
     interface ITeamView : BaseView {
         fun navigateToTournamentActivity()
 
-        fun showMembers(teamMembers: List<User>)
+        fun showMembers(teamMembers: List<User>?)
     }
 
     interface ITeamPresenter {

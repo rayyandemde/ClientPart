@@ -3,13 +3,16 @@ package com.android3.siegertpclient.ui.userprofile
 import android.content.Intent
 import android.os.Bundle
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.databinding.ActivityUserprofileBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView {
 
-    private val userProfilePresenter: UserProfilePresenter = UserProfilePresenter()
+    private lateinit var binding: ActivityUserprofileBinding
+    private lateinit var userProfilePresenter: UserProfilePresenter
 
     private val myTeamsFragment: MyTeamsFragment
     private val myTournamentsFragment: MyTournamentsFragment
@@ -25,8 +28,8 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
         transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
 
         when(item.itemId){
-            R.id.navigation_my_tournament -> transaction.replace(R.id.fragment_container, myTournamentsFragment)
-            R.id.navigation_my_team -> transaction.replace(R.id.fragment_container, myTeamsFragment)
+            R.id.navigation_my_tournament -> transaction.replace(R.id.container_userprofile_fragment, myTournamentsFragment)
+            R.id.navigation_my_team -> transaction.replace(R.id.container_userprofile_fragment, myTeamsFragment)
         }
 
         transaction.commit()
@@ -36,14 +39,17 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_userprofile)
 
-        val navigationBar: BottomNavigationView = findViewById(R.id.navigation_user) as BottomNavigationView
+        binding = ActivityUserprofileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        userProfilePresenter = UserProfilePresenter(this)
+
+
+        binding.navigationUser.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragment_container, myTournamentsFragment)
+        transaction.add(R.id.container_userprofile_fragment, myTournamentsFragment)
         transaction.commit()
     }
 
@@ -57,17 +63,13 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
         userProfilePresenter.onDetach()
     }
 
-    override fun showMyTournamentsFragment() {
-        //Will not be implemented
-    }
+    override fun showMyTeams(myTeams: List<Team>?) {
 
-    override fun showMyTeamsFragment() {
-        //Will not be implemented
     }
 
     override fun navigateToHomepageActivity() {
-        val hIntent = Intent(this, HomepageActivity::class.java)
-        startActivity(hIntent)
+        val intent = Intent(this, HomepageActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToSettingActivity() {
@@ -89,5 +91,4 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
     override fun showNoInternetConnection() {
         TODO("Not yet implemented")
     }
-
 }
