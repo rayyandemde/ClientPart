@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:src="@drawable/black_trophy_icon" />
+                android:src="@drawable/ic_user" />
 
             <TextView
                 android:id="@+id/tv_user_overview"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:text="This is user overview"/>
+                android:text="@string/user_overview_template"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

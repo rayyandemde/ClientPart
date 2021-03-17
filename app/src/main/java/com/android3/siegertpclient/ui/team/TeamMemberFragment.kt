@@ -66,7 +66,7 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView {
 
     override fun showMembers(teamMembers: List<User>) {
         userAdapter.setData(teamMembers)
-        binding.tvNoUsers.visibility = View.GONE
+        //binding.tvNoUsers.visibility = View.GONE
     }
 
     override fun showProgress() {

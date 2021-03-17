@@ -26,31 +26,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/user_overview_card"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <TextView
-        android:id="@+id/tv_no_users"
-        android:layout_width="225dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="You currently have no member. Swipe down to update"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/srl_rv_team_member"
-        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btn_add"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/black_back_btn_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_no_users" />
+        app:layout_constraintTop_toBottomOf="@+id/srl_rv_team_member" />
 </androidx.constraintlayout.widget.ConstraintLayout>

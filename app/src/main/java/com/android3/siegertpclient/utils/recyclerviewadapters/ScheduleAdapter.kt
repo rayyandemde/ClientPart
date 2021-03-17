@@ -1,10 +1,11 @@
-package com.android3.siegertpclient.ui.dummyretrofit.util.recyclerviewadapters
+package com.android3.siegertpclient.utils.recyclerviewadapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.databinding.TournamentOverviewCardBinding
 
+//Not yet implemented
 class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.CardHolder>() {
     class CardHolder(val binding: TournamentOverviewCardBinding) : RecyclerView.ViewHolder(binding.root) {
         // private val dummyImageView: ImageView = itemView.findViewById<ImageView>(R.id.dummy_image)

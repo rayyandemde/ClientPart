@@ -8,8 +8,6 @@ import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
 import com.android3.siegertpclient.ui.createtournament.CreateTournamentActivity
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_TOKEN
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER_ID
 import com.android3.siegertpclient.ui.invitation.InvitationActivity
 import com.android3.siegertpclient.ui.tournament.TournamentActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity

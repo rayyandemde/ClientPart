@@ -7,16 +7,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.android3.siegertpclient.data.tournament.tournamentsource.TournamentRepo2
-import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.databinding.ActivityHomepageDummyBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants
+import com.android3.siegertpclient.utils.Constants
 import com.android3.siegertpclient.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HomepageDummyActivity : BaseActivity() {
     private lateinit var binding: ActivityHomepageDummyBinding

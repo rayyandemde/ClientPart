@@ -6,11 +6,10 @@ import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.IS_LOGGED_IN
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_TOKEN
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USERNAME
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER_ID
+import com.android3.siegertpclient.utils.Constants.Companion.IS_LOGGED_IN
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_TOKEN
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_USERNAME
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_USER_ID
 import com.android3.siegertpclient.utils.PreferencesProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -32,7 +31,7 @@ class UserRepo(private val context: Context) {
         val response =
             userRemoteDataSource.createNewUser(username, surname, forename, userId, token)
         if (response.isSuccessful) {
-            localData.putUser(response.body()!!)
+            localData.putCurrentUser(response.body()!!)
             localData.putString(KEY_USERNAME, response.body()!!.username)
             localData.putString(KEY_USER_ID, userId)
             localData.putString(KEY_TOKEN, token)
@@ -45,7 +44,7 @@ class UserRepo(private val context: Context) {
     suspend fun getUserById(userId: String, token: String): User? {
         val response = userRemoteDataSource.getUserById(userId, token)
         if (response.isSuccessful) {
-            localData.putUser(response.body()!!)
+            localData.putCurrentUser(response.body()!!)
             localData.putString(KEY_USERNAME, response.body()!!.username)
             localData.putString(KEY_USER_ID, userId)
             localData.putString(KEY_TOKEN, token)
@@ -59,7 +58,7 @@ class UserRepo(private val context: Context) {
     suspend fun getUserByUsername(username: String, token: String): User? {
         val response = userRemoteDataSource.getUserByUsername(username, token)
         if (response.isSuccessful) {
-            localData.putUser(response.body()!!)
+            localData.putCurrentUser(response.body()!!)
             localData.putString(KEY_USERNAME, username)
             localData.putString(KEY_USER_ID, response.body()!!.userId)
             localData.putString(KEY_TOKEN, token)
@@ -87,7 +86,7 @@ class UserRepo(private val context: Context) {
     ): User? {
         val response = userRemoteDataSource.updateUserDetail(oldUsername, newUsername, surname, forename, token)
         if (response.isSuccessful) {
-            localData.putUser(response.body()!!)
+            localData.putCurrentUser(response.body()!!)
             localData.putString(KEY_USERNAME, newUsername)
             localData.putString(KEY_TOKEN, token)
             return response.body()!!
@@ -100,7 +99,7 @@ class UserRepo(private val context: Context) {
     }
 
     fun getUserLocal(): User? {
-        return localData.getUser()
+        return localData.getCurrentUser()
     }
 
     fun checkUserLoggedIn() : Boolean {

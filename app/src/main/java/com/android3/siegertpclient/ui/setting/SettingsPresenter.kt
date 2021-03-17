@@ -1,17 +1,10 @@
 package com.android3.siegertpclient.ui.setting
 
 import android.content.Context
-import android.content.Intent
 import android.text.TextUtils
-import android.util.Log
-import android.widget.Toast
 import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_FORENAME
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_SURNAME
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USERNAME
-import com.android3.siegertpclient.ui.login.LoginActivity
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_USERNAME
 import com.android3.siegertpclient.utils.OnlineChecker
 import com.android3.siegertpclient.utils.PreferencesProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -30,7 +23,7 @@ class SettingsPresenter(private val context: Context) :
 
     fun getUser(): String {
         val username = preferencesProvider.getString(KEY_USERNAME)!!
-        val user = preferencesProvider.getUser()
+        val user = preferencesProvider.getCurrentUser()
         val forename = user!!.forename
         val surname = user!!.surname
         return "Username :: $username \nFirst Name :: $forename \nLast Name :: $surname"

@@ -1,4 +1,4 @@
-package com.android3.siegertpclient.ui.dummyretrofit.util
+package com.android3.siegertpclient.utils
 
 class Constants {
     companion object {

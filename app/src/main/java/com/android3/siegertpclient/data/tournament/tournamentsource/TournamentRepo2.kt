@@ -9,8 +9,7 @@ import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote.TournamentRemoteDataSource2
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.PreferencesProvider
-import com.android3.siegertpclient.utils.Token
-import retrofit2.Response
+import com.android3.siegertpclient.utils.commonlocalgetter.Token
 
 class TournamentRepo2(private val context: Context) {
     private val tournamentRemoteDataSource2 = TournamentRemoteDataSource2()
