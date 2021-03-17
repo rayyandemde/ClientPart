@@ -11,9 +11,12 @@ import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.databinding.FragmentMyteamsBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
+import com.android3.siegertpclient.ui.team.TeamActivity
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_TEAM_NAME
 import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
 
-class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView{
+class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
+    TeamAdapter.OnTeamItemClickListener {
 
     private var _binding: FragmentMyteamsBinding? = null
     private val binding get() = _binding!!
@@ -24,7 +27,7 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView{
         listOf(Team("", emptyList(), emptyList(), "", getString(R.string.user_no_team), "", emptyList()))
     }
 
-    private val teamAdapter by lazy { TeamAdapter() }
+    private val teamAdapter by lazy { TeamAdapter(this) }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -33,7 +36,9 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView{
 
         binding.rvMyTeams.adapter = teamAdapter
 
+
         userProfilePresenter?.onTeamsRefresh()
+
 
         binding.srlRvMyTeams.setOnRefreshListener {
             userProfilePresenter?.onTeamsRefresh()
@@ -55,8 +60,8 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView{
         TODO("Not yet implemented")
     }
 
-    fun navigateToTeamActivity()  {
-        val intent = Intent(activity, HomepageActivity::class.java)
+    override fun navigateToTeamActivity()  {
+        val intent = Intent(activity, TeamActivity::class.java)
         startActivity(intent)
     }
 
@@ -94,5 +99,9 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView{
 
     private fun doToast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onTeamItemClick(position: Int) {
+        val clickedTeam = userProfilePresenter?.userTeamClicked(position)
     }
 }

@@ -10,9 +10,13 @@ interface UserProfileContract {
         fun navigateToHomepageActivity()
 
         fun navigateToSettingActivity()
+
+        fun navigateToTeamActivity()
     }
 
     interface IUserProfilePresenter {
+
+        fun userTeamClicked(position: Int)
 
         fun onSettingBtnClicked()
 

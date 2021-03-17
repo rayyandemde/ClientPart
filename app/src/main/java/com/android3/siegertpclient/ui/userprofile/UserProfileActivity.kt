@@ -76,6 +76,10 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
         //Not implemented here
     }
 
+    override fun navigateToTeamActivity() {
+        TODO("Not yet implemented")
+    }
+
     override fun showProgress() {
         TODO("Not yet implemented")
     }

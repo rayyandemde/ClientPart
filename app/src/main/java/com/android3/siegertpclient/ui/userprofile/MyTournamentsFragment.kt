@@ -87,6 +87,10 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
         startActivity(sIntent)
     }
 
+    override fun navigateToTeamActivity() {
+        TODO("Not yet implemented")
+    }
+
     override fun showProgress() {
         TODO("Not yet implemented")
     }
