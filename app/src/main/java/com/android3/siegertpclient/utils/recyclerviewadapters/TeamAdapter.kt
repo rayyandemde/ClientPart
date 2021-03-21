@@ -1,22 +1,16 @@
 package com.android3.siegertpclient.utils.recyclerviewadapters
 
 import android.view.LayoutInflater
-import android.view.OrientationEventListener
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.data.team.Team
-import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.CardTeamOverviewBinding
-import com.android3.siegertpclient.databinding.CardUserOverviewBinding
-import com.android3.siegertpclient.databinding.TournamentOverviewCardBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter.TeamHolder
 
 class TeamAdapter(private val listener: OnTeamItemClickListener) : RecyclerView.Adapter<TeamHolder>() {
 
     private var teamList = emptyList<Team>()
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamHolder {
         return TeamHolder(

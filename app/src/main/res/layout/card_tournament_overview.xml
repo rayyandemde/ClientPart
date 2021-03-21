@@ -18,19 +18,19 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/dummy_image"
+                android:id="@+id/iv_trophy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:src="@drawable/black_trophy_icon" />
+                android:src="@drawable/ic_user" />
 
             <TextView
-                android:id="@+id/dummy_overview"
+                android:id="@+id/tv_user_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:text="This is the overview card"/>
+                android:text="This is tournament overview"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

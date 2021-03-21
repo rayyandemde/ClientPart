@@ -1,30 +1,53 @@
 package com.android3.siegertpclient.utils.recyclerviewadapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.databinding.TournamentOverviewCardBinding
+import com.android3.siegertpclient.data.tournament.Game
+import com.android3.siegertpclient.databinding.CardGameOverviewBinding
+import com.android3.siegertpclient.utils.recyclerviewadapters.GameAdapter.GameHolder
 
-//Not yet implemented
-class GameAdapter : RecyclerView.Adapter<GameAdapter.CardHolder>() {
-    class CardHolder(val binding: TournamentOverviewCardBinding) : RecyclerView.ViewHolder(binding.root) {
-        // private val dummyImageView: ImageView = itemView.findViewById<ImageView>(R.id.dummy_image)
-        // private val titleTextView: TextView = itemView.findViewById<TextView>(R.id.dummy_overview)
+class GameAdapter(private val listener: OnGameItemClickListener) : RecyclerView.Adapter<GameHolder>() {
+
+    private var gameList = emptyList<Game>()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameHolder {
+        return GameHolder(
+            CardGameOverviewBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
-    override fun getItemCount(): Int {
-        return 20
+    override fun onBindViewHolder(holder: GameHolder, position: Int) {
     }
 
-    override fun onBindViewHolder(holder: CardHolder, position: Int) {
-        val image = holder.binding.dummyImage
-        val text = holder.binding.dummyOverview
+    override fun getItemCount() = gameList.size
+
+    fun setData(newList: List<Game>) {
+        gameList = newList
+        notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardHolder {
-        /*
-        var cardItem = LayoutInflater.from(parent?.context).inflate(R.layout.tournament_overview_card, parent, false)
-        return CardHolder(cardItem)*/
-        return CardHolder(TournamentOverviewCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    inner class GameHolder(val binding: CardGameOverviewBinding) : RecyclerView.ViewHolder(binding.root),
+        View.OnClickListener {
+
+        init {
+            binding.root.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onGameItemClick(position)
+            }
+        }
+    }
+
+    interface OnGameItemClickListener {
+        fun onGameItemClick(position: Int)
     }
 }

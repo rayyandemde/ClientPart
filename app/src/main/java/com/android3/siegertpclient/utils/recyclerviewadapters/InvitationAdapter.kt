@@ -1,30 +1,53 @@
 package com.android3.siegertpclient.utils.recyclerviewadapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.databinding.TournamentOverviewCardBinding
+import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.databinding.CardInvitationOverviewBinding
+import com.android3.siegertpclient.utils.recyclerviewadapters.InvitationAdapter.InvitationHolder
 
-//Not yet implemented
-class InvitationAdapter : RecyclerView.Adapter<InvitationAdapter.CardHolder>() {
-    class CardHolder(val binding: TournamentOverviewCardBinding) : RecyclerView.ViewHolder(binding.root) {
-        // private val dummyImageView: ImageView = itemView.findViewById<ImageView>(R.id.dummy_image)
-        // private val titleTextView: TextView = itemView.findViewById<TextView>(R.id.dummy_overview)
+class InvitationAdapter(private val listener: OnInvitationItemClickListener) : RecyclerView.Adapter<InvitationHolder>() {
+
+    private var invitationList = emptyList<Invitation>()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InvitationHolder {
+        return InvitationHolder(
+            CardInvitationOverviewBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
-    override fun getItemCount(): Int {
-        return 20
+    override fun onBindViewHolder(holder: InvitationHolder, position: Int) {
     }
 
-    override fun onBindViewHolder(holder: CardHolder, position: Int) {
-        val image = holder.binding.dummyImage
-        val text = holder.binding.dummyOverview
+    override fun getItemCount() = invitationList.size
+
+    fun setData(newList: List<Invitation>) {
+        invitationList = newList
+        notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardHolder {
-        /*
-        var cardItem = LayoutInflater.from(parent?.context).inflate(R.layout.tournament_overview_card, parent, false)
-        return CardHolder(cardItem)*/
-        return CardHolder(TournamentOverviewCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    inner class InvitationHolder(val binding: CardInvitationOverviewBinding) : RecyclerView.ViewHolder(binding.root),
+        View.OnClickListener {
+
+        init {
+            binding.root.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onInvitationItemClick(position)
+            }
+        }
+    }
+
+    interface OnInvitationItemClickListener {
+        fun onInvitationItemClick(position: Int)
     }
 }

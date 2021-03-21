@@ -1,19 +1,17 @@
 package com.android3.siegertpclient.utils.recyclerviewadapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.CardUserOverviewBinding
+import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter.UserHolder
 
-class UserAdapter :
-    RecyclerView.Adapter<UserAdapter.UserHolder>() {
+class UserAdapter(private val listener: OnUserItemClickListener) :
+    RecyclerView.Adapter<UserHolder>() {
 
     private var userList = emptyList<User>()
-
-    class UserHolder(val binding: CardUserOverviewBinding) : RecyclerView.ViewHolder(binding.root) {
-        val userOverviewTv = binding.tvUserOverview
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder {
         return UserHolder(
@@ -36,5 +34,25 @@ class UserAdapter :
     fun setData(newList: List<User>) {
         userList = newList
         notifyDataSetChanged()
+    }
+
+    inner class UserHolder(val binding: CardUserOverviewBinding) : RecyclerView.ViewHolder(binding.root),
+        View.OnClickListener {
+        val userOverviewTv = binding.tvUserOverview
+
+        init {
+            binding.root.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onUserItemClick(position)
+            }
+        }
+    }
+
+    interface OnUserItemClickListener {
+        fun onUserItemClick(position: Int)
     }
 }
