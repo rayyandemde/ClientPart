@@ -13,10 +13,10 @@ import java.util.concurrent.TimeUnit
 object RestClient {
     private val okhttp =
         OkHttpClient.Builder()
-            .callTimeout(1, TimeUnit.MINUTES)
-            .writeTimeout(1, TimeUnit.MINUTES)
-            .readTimeout(1, TimeUnit.MINUTES)
-            .connectTimeout(1, TimeUnit.MINUTES)
+            .callTimeout(2, TimeUnit.MINUTES)
+            .writeTimeout(2, TimeUnit.MINUTES)
+            .readTimeout(2, TimeUnit.MINUTES)
+            .connectTimeout(2, TimeUnit.MINUTES)
             .build()
 
     private val retrofit by lazy {

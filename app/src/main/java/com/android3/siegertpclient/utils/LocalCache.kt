@@ -1,11 +1,14 @@
-package com.android3.siegertpclient.utils.commonlocalgetter
+package com.android3.siegertpclient.utils
 
 import android.content.Context
-import com.android3.siegertpclient.utils.Constants
-import com.android3.siegertpclient.utils.PreferencesProvider
 
-class TeamNameUtil {
+class LocalCache {
     companion object {
+        fun getBearerToken(context: Context) : String? {
+            val localData = PreferencesProvider(context)
+            return localData.getString(Constants.KEY_TOKEN)
+        }
+
         fun getCurrentTeamName(context: Context) : String? {
             val localData = PreferencesProvider(context)
             return localData.getString(Constants.KEY_TEAM_NAME)

@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
-
 class OnlineChecker(private val context: Context) {
 
     val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
