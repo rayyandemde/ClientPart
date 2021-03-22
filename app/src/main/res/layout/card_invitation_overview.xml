@@ -18,19 +18,19 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_trophy"
+                android:id="@+id/iv_invitation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:src="@drawable/notification_icon" />
 
             <TextView
-                android:id="@+id/tv_user_overview"
+                android:id="@+id/tv_invitation_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:text="This is invitation overview"/>
+                android:text="@string/invitation_overview_template"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

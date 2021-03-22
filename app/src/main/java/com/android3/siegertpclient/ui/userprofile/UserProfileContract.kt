@@ -16,8 +16,6 @@ interface UserProfileContract {
 
     interface IUserProfilePresenter {
 
-        fun userTeamClicked(position: Int)
-
         fun onSettingBtnClicked()
 
         fun onHomeBtnClicked()

@@ -55,6 +55,7 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
     override fun onDestroy() {
         super.onDestroy()
         userProfilePresenter?.onDetach()
+        _binding = null
     }
     fun showTeams() {
         TODO("Not yet implemented")

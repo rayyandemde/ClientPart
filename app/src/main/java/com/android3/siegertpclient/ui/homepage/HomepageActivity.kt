@@ -76,6 +76,10 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         homepagePresenter.onDetach()
     }
 
+    override fun showFeed(feed: List<Tournament>?) {
+        TODO("Not yet implemented")
+    }
+
     /*
     //To prevent app from closing after login
     override fun onBackPressed() {
@@ -101,13 +105,10 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         startActivity(cTeamIntent)
     }
 
-    override fun showFeedFragment() {
-        //Will not be implemented
+    override fun navigateToTournamentActivity() {
+        TODO("Not yet implemented")
     }
 
-    override fun showJoinTeamFragment() {
-        //Will not be implemented
-    }
 
     override fun showSearchResult(tournaments: List<Tournament>) {
         //Open tournament feature will not be implemented
@@ -127,11 +128,6 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
 
     override fun showNoInternetConnection() {
         doToast("This is it")
-    }
-
-    override fun goToTournamentScreen() {
-        val tournamentIntent = Intent(this, TournamentActivity::class.java)
-        startActivity(tournamentIntent )
     }
 
     private fun doToast(message: String) {

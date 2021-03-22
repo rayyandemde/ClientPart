@@ -18,19 +18,19 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_trophy"
+                android:id="@+id/iv_schedules"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:src="@drawable/ic_user" />
+                android:src="@drawable/ic_schedules" />
 
             <TextView
-                android:id="@+id/tv_user_overview"
+                android:id="@+id/tv_schedule_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:text="This is schedule overview"/>
+                android:text="@string/schedule_overview_template"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

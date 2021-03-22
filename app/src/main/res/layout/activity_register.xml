@@ -161,6 +161,4 @@
             android:text="@string/login"
             android:textColor="@color/accent" />
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

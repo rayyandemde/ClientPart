@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.databinding.FragmentMytournamentsBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
 import com.android3.siegertpclient.ui.setting.SettingsActivity
 
 class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {

@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
-import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
 
 class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView {
 

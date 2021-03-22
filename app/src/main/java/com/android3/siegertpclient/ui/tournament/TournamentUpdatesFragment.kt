@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
@@ -19,7 +18,7 @@ class TournamentUpdatesFragment : Fragment(), TournamentContract.ITournamentView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
-        var view = inflater.inflate(R.layout.fragment_tournamentupdates, container, false)
+        var view = inflater.inflate(R.layout.fragment_delete_tournament, container, false)
 
         deleteBtn = view.findViewById<Button>(R.id.deleteTournamentBtn)
         deleteBtn?.setOnClickListener {

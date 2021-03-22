@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.databinding.ActivityInvitationBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
-import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class InvitationActivity : BaseActivity(), InvitationContract.IInvitationView {
 
-    private val invitationPresenter: InvitationPresenter = InvitationPresenter()
+    private lateinit var binding: ActivityInvitationBinding
+    private lateinit var invitationPresenter: InvitationPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

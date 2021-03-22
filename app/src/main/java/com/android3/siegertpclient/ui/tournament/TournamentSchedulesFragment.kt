@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Game
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
 
 class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentView{
 

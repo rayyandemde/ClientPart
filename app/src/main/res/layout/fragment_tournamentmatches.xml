@@ -8,58 +8,31 @@
     android:orientation="vertical"
     tools:context=".ui.tournament.TournamentMatchesFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tournament_matches_recycler"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_rv_tournament_matches"
         android:layout_width="match_parent"
-        android:layout_height="369dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="56dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_height="500dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tournament_matches"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            tools:listitem="@layout/card_game_overview"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
-        android:id="@+id/buttonCenter"
+        android:id="@+id/btn_add_matches"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/black_back_btn_icon"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tournament_matches_recycler"
-        app:layout_constraintVertical_bias="0.056" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="You can input a link where you upload your tournaments branch or table"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tournament_matches_recycler" />
-
-    <EditText
-        android:id="@+id/stagesImagesLink"
-        android:layout_width="244dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="36dp"
-        android:background="@drawable/edittext_white"
-        android:hint="    Input your files link here"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <Button
-        android:id="@+id/openLinkBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="56dp"
-        android:text="Open"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCenter" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/srl_rv_tournament_matches" />
 </androidx.constraintlayout.widget.ConstraintLayout>

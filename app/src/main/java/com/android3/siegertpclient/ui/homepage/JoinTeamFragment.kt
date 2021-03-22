@@ -48,6 +48,10 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
         TODO("Not yet implemented")
     }
 
+    override fun showFeed(feed: List<Tournament>?) {
+        TODO("Not yet implemented")
+    }
+
     override fun navigateToInvitationActivity() {
         TODO("Not yet implemented")
     }
@@ -64,11 +68,7 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
         TODO("Not yet implemented")
     }
 
-    override fun showFeedFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showJoinTeamFragment() {
+    override fun navigateToTournamentActivity() {
         TODO("Not yet implemented")
     }
 

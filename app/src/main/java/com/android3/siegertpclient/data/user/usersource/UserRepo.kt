@@ -10,8 +10,8 @@ import com.android3.siegertpclient.utils.Constants.Companion.IS_LOGGED_IN
 import com.android3.siegertpclient.utils.Constants.Companion.KEY_TOKEN
 import com.android3.siegertpclient.utils.Constants.Companion.KEY_USERNAME
 import com.android3.siegertpclient.utils.Constants.Companion.KEY_USER_ID
+import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.PreferencesProvider
-import com.android3.siegertpclient.utils.commonlocalgetter.Token
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -74,7 +74,7 @@ class UserRepo(private val context: Context) {
     }
 
     suspend fun getUserTeams(): List<Team>? {
-        val response = userRemoteDataSource.getUsersTeams(localData.getString(KEY_USERNAME)!!, Token.getBearerToken(context)!!)
+        val response = userRemoteDataSource.getUsersTeams(localData.getString(KEY_USERNAME)!!, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
             localData.putCurrentUserTeams(response.body()!!)
             return response.body()!!

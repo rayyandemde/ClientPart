@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
 
 class TeamInvitationFragment : Fragment(), TeamContract.ITeamView {
 
