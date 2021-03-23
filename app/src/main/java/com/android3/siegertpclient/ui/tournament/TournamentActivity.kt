@@ -52,23 +52,23 @@ class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView 
                 R.id.navigation_tournament_info -> transaction.replace(
                     R.id.container_tournament_fragments,
                     tournamentDetailsFragment
-                )
+                ).addToBackStack(null)
                 R.id.navigation_participants -> transaction.replace(
                     R.id.container_tournament_fragments,
                     tournamentParticipantsFragment
-                )
+                ).addToBackStack(null)
                 R.id.navigation_schedule -> transaction.replace(
                     R.id.container_tournament_fragments,
                     tournamentSchedulesFragment
-                )
+                ).addToBackStack(null)
                 R.id.navigation_match_info -> transaction.replace(
                     R.id.container_tournament_fragments,
                     tournamentMatchesFragment
-                )
+                ).addToBackStack(null)
                 R.id.navigation_changelogs -> transaction.replace(
                     R.id.container_tournament_fragments,
                     deleteTournamentFragment
-                )
+                ).addToBackStack(null)
             }
 
             transaction.commit()
@@ -111,25 +111,19 @@ class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView 
         startActivity(fpIntent)
     }
 
+    override fun showCurrentTournamentDetails(
+        tournamentName: String,
+        typeOfGame: String,
+        matchType: String,
+        tournamentType: String,
+        participantForm: String,
+        registrationDeadline: String,
+        startDate: String,
+        endDate: String,
+        location: String,
+        maxPlayer: Int
+    ) {
 
-    override fun showTournamentDetailsFragment() {
-
-    }
-
-    override fun showTournamentParticipantsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentScheduleFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showResultFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentUpdatesFragment() {
-        TODO("Not yet implemented")
     }
 
     override fun navigateToHomepageActivity() {

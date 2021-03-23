@@ -150,4 +150,7 @@ class TournamentRepo(private val context: Context) {
         return null
     }
 
+    fun getCurrentTournament() : Tournament {
+        return localData.getCurrentTournament()!!
+    }
 }

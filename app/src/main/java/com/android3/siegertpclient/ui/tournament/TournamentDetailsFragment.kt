@@ -28,6 +28,8 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
         _binding = FragmentTournamentdetailsBinding.inflate(inflater, container, false)
         tournamentPresenter = TournamentPresenter(requireContext())
 
+        tournamentPresenter?.initTournamentDetails()
+
         day = 0
         month = 0
         year = 0
@@ -80,6 +82,8 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
 
         var locationEt = binding.etLocation
 
+
+
         return binding.root
     }
 
@@ -101,24 +105,26 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
         TODO("Not yet implemented")
     }
 
-    override fun showTournamentDetailsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentParticipantsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentScheduleFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showResultFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentUpdatesFragment() {
-        TODO("Not yet implemented")
+    override fun showCurrentTournamentDetails(
+        tournamentName: String,
+        typeOfGame: String,
+        matchType: String,
+        tournamentType: String,
+        participantForm: String,
+        registrationDeadline: String,
+        startDate: String,
+        endDate: String,
+        location: String,
+        maxPlayer: Int
+    ) {
+        binding.etTournamentName.setText(tournamentName)
+        binding.tvTypeOfGame.text = typeOfGame
+        binding.tvMatchType.text = matchType
+        binding.tvTournamentType.text = tournamentType
+        binding.tvParticipantForm.text = participantForm
+        binding.btnRegistrationDeadline.text = registrationDeadline
+        binding.etLocation.setText(location)
+        binding.tvMaxPlayer.text = maxPlayer.toString()
     }
 
     override fun navigateToHomepageActivity() {

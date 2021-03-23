@@ -3,38 +3,27 @@ import com.android3.siegertpclient.ui.base.BaseView
 interface TournamentContract {
 
     interface ITournamentView : BaseView {
-
-        fun showTournamentDetailsFragment()
-
-        fun showTournamentParticipantsFragment()
-
-        fun showTournamentScheduleFragment()
-
-        fun showResultFragment()
-
-        fun showTournamentUpdatesFragment()
+        fun showCurrentTournamentDetails(
+            tournamentName: String,
+            typeOfGame: String,
+            matchType: String,
+            tournamentType: String,
+            participantForm: String,
+            registrationDeadline: String,
+            startDate: String,
+            endDate: String,
+            location: String,
+            maxPlayer: Int
+        )
 
         fun navigateToHomepageActivity()
     }
 
     interface ITeamPresenter {
+        fun initTournamentDetails()
 
         fun checkIfAdmin(userId: String)
 
-        fun checkAlreadyJoined(uerId: String)
-
         fun onBackBtnClicked()
-
-        fun onTournamentDetailsTabClicked()
-
-        fun onParticipantListTabClicked()
-
-        fun onScheduleTabClicked()
-
-        fun onStageSliderClicked()
-
-        fun onMatchesSliderClicked()
-
-        fun onTournamentUpdatesTabClicked()
     }
 }

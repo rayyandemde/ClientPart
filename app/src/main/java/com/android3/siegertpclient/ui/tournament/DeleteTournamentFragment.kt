@@ -44,27 +44,18 @@ class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView 
         _binding = null
     }
 
-    fun showUpdateLogs(logs: List<String>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentDetailsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentParticipantsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentScheduleFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showResultFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentUpdatesFragment() {
+    override fun showCurrentTournamentDetails(
+        tournamentName: String,
+        typeOfGame: String,
+        matchType: String,
+        tournamentType: String,
+        participantForm: String,
+        registrationDeadline: String,
+        startDate: String,
+        endDate: String,
+        location: String,
+        maxPlayer: Int
+    ) {
         TODO("Not yet implemented")
     }
 
