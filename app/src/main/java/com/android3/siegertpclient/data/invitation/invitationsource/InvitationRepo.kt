@@ -1,6 +1,5 @@
 package com.android3.siegertpclient.data.invitation.invitationsource
 
-import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationRemoteDataSource
 
 /**

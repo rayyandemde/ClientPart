@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.android3.siegertpclient.data.tournament.tournamentsource.TournamentRepo2
+import com.android3.siegertpclient.data.tournament.tournamentsource.TournamentRepo
 import com.android3.siegertpclient.databinding.ActivityHomepageDummyBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.utils.Constants
@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 class HomepageDummyActivity : BaseActivity() {
     private lateinit var binding: ActivityHomepageDummyBinding
 
-    private var tournamentRepo = TournamentRepo2(this)
+    private var tournamentRepo = TournamentRepo(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

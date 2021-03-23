@@ -6,13 +6,13 @@ import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.tournament.TournamentDetail
-import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote.TournamentRemoteDataSource2
+import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote.TournamentRemoteDataSource
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.PreferencesProvider
 
-class TournamentRepo2(private val context: Context) {
-    private val tournamentRemoteDataSource2 = TournamentRemoteDataSource2()
+class TournamentRepo(private val context: Context) {
+    private val tournamentRemoteDataSource2 = TournamentRemoteDataSource()
     private var localData = PreferencesProvider(context)
 
     suspend fun createNewTournament(

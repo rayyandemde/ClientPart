@@ -56,7 +56,7 @@ class CreateTeamActivity : BaseActivity(), CreateTeamContract.ICreateTeamView {
         createTeamPresenter.onDetach()
     }
 
-    //The method is to show the error when the password has an error and show the error message with the gived parameter
+    //The method is to show the error when the password has an error and show the error message with the given parameter
         override fun showErrorOnPassword(message: String) {
         TODO("Not yet implemented")
     }

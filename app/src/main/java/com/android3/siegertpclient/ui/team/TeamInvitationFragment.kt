@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.invitation.invitationsource.Invitation
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTeamInvitationBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.InvitationAdapter
@@ -17,7 +17,7 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAda
     private var teamPresenter: TeamPresenter? = null
 
     private val noInvitation by lazy {
-        listOf(Invitation("", "", "", "You have no invitation at the moment",""))
+        listOf(Invitation("", "", "", "", "There are no", "", "invitation for now"))
     }
 
     private val invitationAdapter by lazy { InvitationAdapter(this) }
