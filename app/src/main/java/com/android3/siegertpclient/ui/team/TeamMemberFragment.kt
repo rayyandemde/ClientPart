@@ -11,7 +11,7 @@ import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
 
-class TeamMemberFragment : Fragment(), TeamContract.ITeamView {
+class TeamMemberFragment : Fragment(), TeamContract.ITeamView, UserAdapter.OnUserItemClickListener {
     private var _binding: FragmentTeamMemberBinding? = null
     private val binding get() = _binding!!
 
@@ -21,7 +21,7 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView {
         listOf(User(getString(R.string.team_no_member), emptyList(), "...", emptyList(), emptyList(), "","..."))
     }
 
-    private val userAdapter by lazy { UserAdapter() }
+    private val userAdapter by lazy { UserAdapter(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +54,7 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView {
     override fun onDestroy() {
         super.onDestroy()
         teamPresenter?.onDetach()
+        _binding = null
     }
 
     override fun navigateToTournamentActivity() {
@@ -86,5 +87,9 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView {
 
     private fun doToast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onUserItemClick(position: Int) {
+        TODO("Not yet implemented")
     }
 }

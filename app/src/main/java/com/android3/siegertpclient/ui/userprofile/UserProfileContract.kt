@@ -23,5 +23,7 @@ interface UserProfileContract {
         fun onTournamentsRefresh()
 
         fun onTeamsRefresh()
+
+        fun userTeamClicked(position: Int)
     }
 }

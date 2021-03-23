@@ -9,7 +9,6 @@ class HomepagePresenter(private val context: Context) :
 
     private var userRepo = UserRepo(context)
 
-
     override fun onCreateTournamentBtnClicked() {
         view?.navigateToCreateTournamentActivity()
     }
@@ -24,6 +23,11 @@ class HomepagePresenter(private val context: Context) :
     }
 
     override fun onFeedRefresh() {
+        //Not yet implemented
+        view?.showError("")
+    }
+
+    override fun onJoinTeamBtnClicked() {
         TODO("Not yet implemented")
     }
 

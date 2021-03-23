@@ -9,40 +9,49 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
+import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
+import com.android3.siegertpclient.ui.team.TeamPresenter
+import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
 
-class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamentView {
+class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamentView, UserAdapter.OnUserItemClickListener {
+    private var _binding: FragmentTournamentparticipantsBinding? = null
+    private val binding get() = _binding!!
 
-    private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
+    private var tournamentPresenter: TournamentPresenter? = null
 
+    private val noUser by lazy {
+        listOf(User("There's no participant at the moment", emptyList(), "...", emptyList(), emptyList(), "","..."))
+    }
 
-    var tournamentParticipantsRecycler: RecyclerView? = null
-
-    var addBt : Button? =null
+    private val userAdapter by lazy { UserAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentTournamentparticipantsBinding.inflate(inflater, container, false)
+        tournamentPresenter = TournamentPresenter(requireContext())
 
-        var view = inflater.inflate(R.layout.fragment_tournamentparticipants, container, false)
+        binding.rvTournamentParticipants.adapter = userAdapter
 
+        binding.srlRvTournamentParticipants.setOnRefreshListener {
+        }
 
-        tournamentParticipantsRecycler = view.findViewById<RecyclerView>(R.id.participants_recycler)
+        binding.btnAddParticipants.setOnClickListener {
 
-        tournamentParticipantsRecycler!!.layoutManager = LinearLayoutManager(context)
-        tournamentParticipantsRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
+        }
 
-
-        addBt = view.findViewById(R.id.add)
-
-
-        return view
+        return binding.root
     }
+
     override fun onResume() {
         super.onResume()
-        tournamentPresenter.onAttach(this)
+        tournamentPresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        tournamentPresenter.onDetach()
+        tournamentPresenter?.onDetach()
+        _binding = null
     }
 //    fun showParticipantList(participants: List<Participant>) {
 //        TODO("Not yet implemented")
@@ -93,6 +102,10 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
     }
 
     override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onUserItemClick(position: Int) {
         TODO("Not yet implemented")
     }
 }

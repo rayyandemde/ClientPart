@@ -11,10 +11,9 @@ interface InvitationContract {
     }
 
     interface IInvitationPresenter {
-
-        fun getTournaments()
-
         fun onBackBtnClicked()
+
+        fun onInvitationRefresh()
 
         fun onAcceptBtnClicked(tournament: Tournament)
 

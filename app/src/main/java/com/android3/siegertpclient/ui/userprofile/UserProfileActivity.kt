@@ -28,8 +28,8 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
         transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
 
         when(item.itemId){
-            R.id.navigation_my_tournament -> transaction.replace(R.id.container_userprofile_fragment, myTournamentsFragment)
-            R.id.navigation_my_team -> transaction.replace(R.id.container_userprofile_fragment, myTeamsFragment)
+            R.id.navigation_my_tournament -> transaction.replace(R.id.container_userprofile_fragments, myTournamentsFragment)
+            R.id.navigation_my_team -> transaction.replace(R.id.container_userprofile_fragments, myTeamsFragment)
         }
 
         transaction.commit()
@@ -45,11 +45,10 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
 
         userProfilePresenter = UserProfilePresenter(this)
 
-
         binding.navigationUser.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.container_userprofile_fragment, myTournamentsFragment)
+        transaction.add(R.id.container_userprofile_fragments, myTournamentsFragment)
         transaction.commit()
     }
 

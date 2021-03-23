@@ -33,5 +33,7 @@ interface HomepageContract {
         fun onUserBtnClicked()
 
         fun onFeedRefresh()
+
+        fun onJoinTeamBtnClicked()
     }
 }

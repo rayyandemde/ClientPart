@@ -29,21 +29,17 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
 
     private val teamAdapter by lazy { TeamAdapter(this) }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMyteamsBinding.inflate(inflater, container, false)
         userProfilePresenter = UserProfilePresenter(requireContext())
 
         binding.rvMyTeams.adapter = teamAdapter
 
-
         userProfilePresenter?.onTeamsRefresh()
-
 
         binding.srlRvMyTeams.setOnRefreshListener {
             userProfilePresenter?.onTeamsRefresh()
         }
-
 
         return binding.root
     }

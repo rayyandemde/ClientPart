@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.databinding.FragmentFeedBinding
 import com.android3.siegertpclient.ui.invitation.InvitationActivity
 import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
@@ -20,8 +21,8 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
     private var homepagePresenter: HomepagePresenter? = null
 
     private val noTournaments by lazy {
-        //Still a template that needs to be work on
-        listOf(Team("", emptyList(), emptyList(), "", getString(R.string.user_no_team), "", emptyList()))
+        var noTournamentDetail = TournamentDetail("", "YYYY-MM-DD", "", "", "", "YYYY-MM-DD", "", "")
+        listOf(Tournament("", emptyList(), 0, false, emptyList(), emptyMap(), noTournamentDetail, "", "No Tournament Available", ""))
     }
 
     private val tournamentAdapter by lazy { TournamentAdapter(this) }

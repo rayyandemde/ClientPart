@@ -9,36 +9,41 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
+import com.android3.siegertpclient.databinding.FragmentTeamtournamentsBinding
+import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
+import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
 
-class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView {
+class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAdapter.OnTournamentItemClickListener {
+    private var _binding: FragmentTeamtournamentsBinding? = null
+    private val binding get() = _binding!!
 
     private var teamPresenter: TeamPresenter? = null
 
-    var teamTournamentsRecycler: RecyclerView? = null
-    var homeBtn: ImageView? = null
+    private val noTournaments by lazy {
+        var noTournamentDetail = TournamentDetail("", "YYYY-MM-DD", "", "", "", "YYYY-MM-DD", "", "")
+        listOf(Tournament("", emptyList(), 0, false, emptyList(), emptyMap(), noTournamentDetail, "", "No Tournament Available", ""))
+    }
+
+    private val tournamentAdapter by lazy { TournamentAdapter(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        _binding = FragmentTeamtournamentsBinding.inflate(inflater, container, false)
+        teamPresenter = TeamPresenter(requireContext())
 
-        var view = inflater!!.inflate(R.layout.fragment_teamtournaments, container, false)
+        binding.rvTeamTournaments.adapter = tournamentAdapter
 
-        teamPresenter = TeamPresenter(requireActivity().applicationContext)
-
-        teamTournamentsRecycler = view.findViewById<RecyclerView>(R.id.rv_team_tournaments)
-
-        teamTournamentsRecycler!!.layoutManager = LinearLayoutManager(context)
-        teamTournamentsRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
-
-        homeBtn = view.findViewById<ImageView>(R.id.btn_home)
-        homeBtn?.setOnClickListener {
-            teamPresenter?.onHomeBtnClicked()
+        binding.srlRvTeamTournaments.setOnRefreshListener {
         }
 
-        return view
+        return binding.root
     }
 
     override fun onResume() {
@@ -49,6 +54,7 @@ class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView {
     override fun onDestroy() {
         super.onDestroy()
         teamPresenter?.onDetach()
+        _binding = null
     }
 
     override fun navigateToTournamentActivity() {
@@ -72,6 +78,10 @@ class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView {
     }
 
     override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onTournamentItemClick(position: Int) {
         TODO("Not yet implemented")
     }
 }

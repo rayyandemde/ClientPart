@@ -1,9 +1,6 @@
 package com.android3.siegertpclient.ui.login
 
 import LoginContract
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -15,9 +12,6 @@ import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
-import com.android3.siegertpclient.ui.team.TeamActivity
-import com.android3.siegertpclient.utils.tokenservice.TokenUpdateReceiver
-
 
 class LoginActivity : BaseActivity(), LoginContract.ILoginView {
     private lateinit var binding: ActivityLoginBinding
@@ -50,24 +44,6 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
         binding.tvForgotPassword.setOnClickListener {
             loginPresenter.onForgotPasswordTextClicked()
         }
-
-        binding.btnTestServiceOff.setOnClickListener {
-            val intent = Intent(this@LoginActivity, TeamActivity::class.java)
-            startActivity(intent)
-        }
-
-        /*
-        binding.btnTestServiceOff.setOnClickListener {
-            //TokenUpdateJobIntentService.stopHandle()
-            val intent = Intent(applicationContext, TokenUpdateReceiver::class.java)
-            val pIntent = PendingIntent.getBroadcast(
-                this, TokenUpdateReceiver.REQUEST_CODE,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT
-            )
-            val alarm = this.getSystemService(ALARM_SERVICE) as AlarmManager
-            alarm.cancel(pIntent)
-        }*/
-
     }
 
     override fun onResume() {
@@ -118,26 +94,6 @@ class LoginActivity : BaseActivity(), LoginContract.ILoginView {
 
     override fun showError(errorMessage: String) {
         doToast(errorMessage)
-    }
-
-    //Background token call for testing, still not working as intended
-    fun enqueueWork(v: View) {
-        /*
-        val serviceIntent = Intent(this, TokenUpdateJobIntentService::class.java)
-        TokenUpdateJobIntentService.enqueueWork(this, serviceIntent)*/
-
-        var intent = Intent(applicationContext, TokenUpdateReceiver::class.java)
-        val pIntent = PendingIntent.getBroadcast(
-            this, TokenUpdateReceiver.REQUEST_CODE,
-            intent, PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        var firstMillis = System.currentTimeMillis()
-        var alarm = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarm.setInexactRepeating(
-            AlarmManager.RTC_WAKEUP, firstMillis,
-            20000L, pIntent
-        )
-        doToast("This button is clicked")
     }
 
     override fun showNoInternetConnection() {

@@ -9,43 +9,48 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.data.tournament.TournamentDetail
+import com.android3.siegertpclient.databinding.FragmentMyteamsBinding
 import com.android3.siegertpclient.databinding.FragmentMytournamentsBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.setting.SettingsActivity
+import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
+import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
 
-class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
+class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView, TournamentAdapter.OnTournamentItemClickListener {
     private var _binding: FragmentMytournamentsBinding? = null
     private val binding get() = _binding!!
 
     private var userProfilePresenter: UserProfilePresenter? = null
 
-    var settingBtn: Button? = null
-    var homeBtn: Button? = null
-    var myTournamentsRecycler: RecyclerView? = null
+    private val noTournaments by lazy {
+        var noTournamentDetail = TournamentDetail("", "YYYY-MM-DD", "", "", "", "YYYY-MM-DD", "", "")
+        listOf(Tournament("", emptyList(), 0, false, emptyList(), emptyMap(), noTournamentDetail, "", "No Tournament Available", ""))
+    }
+
+    private val tournamentAdapter by lazy { TournamentAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMytournamentsBinding.inflate(inflater, container, false)
-
-        //var view = inflater!!.inflate(R.layout.fragment_mytournaments, container, false)
-
         userProfilePresenter = UserProfilePresenter(requireContext())
 
-        val myTournamentRecycler = binding.recyclerMyTournaments
-        //myTournamentsRecycler = view.findViewById<RecyclerView>(R.id.my_tournament_recycler)
+        binding.rvMyTournaments.adapter = tournamentAdapter
 
-        myTournamentsRecycler?.layoutManager = LinearLayoutManager(context)
-        myTournamentsRecycler?.adapter = TournamentOverviewCardRecyclerAdapter()
+        binding.srlRvMyTournaments.setOnRefreshListener {
 
-        binding.buttonSettings.setOnClickListener{
+        }
+
+        binding.btnSetttings.setOnClickListener{
             userProfilePresenter?.onSettingBtnClicked()
         }
 
-        binding.buttonHome.setOnClickListener{
+        binding.btnHome.setOnClickListener{
             userProfilePresenter?.onHomeBtnClicked()
         }
 
-        //return view
         return binding.root
     }
 
@@ -56,6 +61,7 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        userProfilePresenter?.onDetach()
         _binding = null
     }
 
@@ -103,6 +109,10 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView {
     }
 
     override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onTournamentItemClick(position: Int) {
         TODO("Not yet implemented")
     }
 }

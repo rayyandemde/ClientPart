@@ -5,9 +5,9 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="25dp"
+    android:orientation="vertical"
     tools:context=".ui.createteam.CreateTeamActivity"
-    android:orientation="vertical">
+    tools:layout_editor_absoluteY="25dp">
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/pb_request"
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -54,12 +54,12 @@
             android:id="@+id/et_team_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="152dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="152dp"
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/team_name"
+            android:hint="@string/team_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,12 +69,12 @@
             android:id="@+id/et_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/prompt_password"
+            android:hint="@string/prompt_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

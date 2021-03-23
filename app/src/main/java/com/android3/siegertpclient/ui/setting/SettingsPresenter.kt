@@ -29,6 +29,11 @@ class SettingsPresenter(private val context: Context) :
         return "Username :: $username \nFirst Name :: $forename \nLast Name :: $surname"
     }
 
+    override fun initCurrentUserEt() {
+        val user = userRepo.getUserLocal()
+        view?.setCurrentUserEt(user!!.username, user!!.forename, user!!.surname)
+    }
+
     override fun onBackBtnClicked() {
         view?.navigateToUserProfileActivity()
     }
@@ -68,7 +73,6 @@ class SettingsPresenter(private val context: Context) :
                     )
                     if (user != null) {
                         withContext(Dispatchers.Main) {
-                            view?.setTestUserText()
                             view?.hideProgress()
                         }
                     }

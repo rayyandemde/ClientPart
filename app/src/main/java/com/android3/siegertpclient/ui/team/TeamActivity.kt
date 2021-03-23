@@ -31,15 +31,15 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
 
             when (item.itemId) {
                 R.id.navigation_team_member -> transaction.replace(
-                    R.id.container_team_fragment,
+                    R.id.container_team_fragments,
                     teamMemberFragment
                 )
                 R.id.navigation_team_tournaments -> transaction.replace(
-                    R.id.container_team_fragment,
+                    R.id.container_team_fragments,
                     teamTournamentsFragment
                 )
                 R.id.navigation_team_invitation -> transaction.replace(
-                    R.id.container_team_fragment,
+                    R.id.container_team_fragments,
                     teamInvitationFragment
                 )
             }
@@ -56,11 +56,10 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
 
         teamPresenter = TeamPresenter(this)
 
-
-        binding.navigationTeam.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        binding.bnvTeam.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.container_team_fragment, teamMemberFragment)
+        transaction.add(R.id.container_team_fragments, teamMemberFragment)
         transaction.commit()
     }
 

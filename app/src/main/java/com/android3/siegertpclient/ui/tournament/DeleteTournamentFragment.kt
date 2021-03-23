@@ -8,34 +8,40 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.tournament.Game
+import com.android3.siegertpclient.data.tournament.Result
+import com.android3.siegertpclient.databinding.FragmentDeleteTournamentBinding
+import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
+import com.android3.siegertpclient.databinding.FragmentTournamentschedulesBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
+import com.android3.siegertpclient.utils.recyclerviewadapters.ScheduleAdapter
 
-class TournamentUpdatesFragment : Fragment(), TournamentContract.ITournamentView {
+class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView {
+    private var _binding: FragmentDeleteTournamentBinding? = null
+    private val binding get() = _binding!!
 
-    private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
-
-    var deleteBtn: Button? = null
+    private var tournamentPresenter: TournamentPresenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentDeleteTournamentBinding.inflate(inflater, container, false)
+        tournamentPresenter = TournamentPresenter(requireContext())
 
-        var view = inflater.inflate(R.layout.fragment_delete_tournament, container, false)
+        binding.btnDeleteTournament.setOnClickListener {
 
-        deleteBtn = view.findViewById<Button>(R.id.deleteTournamentBtn)
-        deleteBtn?.setOnClickListener {
-            tournamentPresenter.onDeleteTournamentBtnClicked()
         }
 
-        return view
+        return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        tournamentPresenter.onAttach(this)
+        tournamentPresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        tournamentPresenter.onDetach()
+        tournamentPresenter?.onDetach()
+        _binding = null
     }
 
     fun showUpdateLogs(logs: List<String>) {

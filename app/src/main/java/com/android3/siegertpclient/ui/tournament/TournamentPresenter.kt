@@ -1,9 +1,10 @@
 package com.android3.siegertpclient.ui.tournament
 
+import android.content.Context
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BasePresenter
 
-class TournamentPresenter : BasePresenter<TournamentContract.ITournamentView>(), TournamentContract.ITeamPresenter {
+class TournamentPresenter(private val context: Context) : BasePresenter<TournamentContract.ITournamentView>(), TournamentContract.ITeamPresenter {
 
     fun onDeleteTournamentBtnClicked() {
         //Do something to remote
