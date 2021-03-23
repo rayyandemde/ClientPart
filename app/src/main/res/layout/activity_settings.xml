@@ -5,8 +5,8 @@
     android:id="@+id/ChangeLanguage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.setting.SettingsActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.setting.SettingsActivity">
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/pb_request"
@@ -14,10 +14,9 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -93,7 +92,7 @@
             android:entries="@array/sa_languages"
             android:spinnerMode="dropdown"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.65"
+            app:layout_constraintHorizontal_bias="0.7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_last_name" />
 
@@ -125,19 +124,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_save_settings"
             app:layout_constraintVertical_bias="0.237" />
-
-        <TextView
-            android:id="@+id/tv_test_user_update"
-            android:layout_width="319dp"
-            android:layout_height="56dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="24dp"
-            android:text="You are now"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_logout"
-            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

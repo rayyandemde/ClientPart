@@ -1,19 +1,17 @@
 package com.android3.siegertpclient.ui.login
 
+import LoginContract
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import com.android3.siegertpclient.R
-import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.databinding.ActivityLoginBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.homepage.HomepageDummyActivity
 import com.android3.siegertpclient.ui.register.RegisterActivity
-
 
 class LoginActivity : BaseActivity(), LoginContract.ILoginView {
     private lateinit var binding: ActivityLoginBinding

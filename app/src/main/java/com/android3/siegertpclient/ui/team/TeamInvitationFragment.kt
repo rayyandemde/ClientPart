@@ -5,52 +5,56 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
+import com.android3.siegertpclient.databinding.FragmentTeamInvitationBinding
+import com.android3.siegertpclient.utils.recyclerviewadapters.InvitationAdapter
 
-class TeamInvitationFragment : Fragment(), TeamContract.ITeamView  {
+class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAdapter.OnInvitationItemClickListener {
+    private var _binding: FragmentTeamInvitationBinding? = null
+    private val binding get() = _binding!!
 
-    private val teamPresenter: TeamPresenter = TeamPresenter()
+    private var teamPresenter: TeamPresenter? = null
 
-    var teamInvitationRecycler: RecyclerView? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
-        var view = inflater!!.inflate(R.layout.fragment_team_invitation, container, false)
-
-        teamInvitationRecycler = view.findViewById<RecyclerView>(R.id.team_invitation_recycler)
-
-        teamInvitationRecycler!!.layoutManager = LinearLayoutManager(context)
-        teamInvitationRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
-
-        return view
+    private val noInvitation by lazy {
+        listOf(Invitation("", "", "", "You have no invitation at the moment",""))
     }
+
+    private val invitationAdapter by lazy { InvitationAdapter(this) }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
+        _binding = FragmentTeamInvitationBinding.inflate(inflater, container, false)
+        teamPresenter = TeamPresenter(requireContext())
+
+        binding.rvTeamInvitation.adapter = invitationAdapter
+
+        binding.srlRvTeamInvitations.setOnRefreshListener {
+        }
+
+        return binding.root
+    }
+
     override fun onResume() {
         super.onResume()
-        teamPresenter.onAttach(this)
+        teamPresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        teamPresenter.onDetach()
+        teamPresenter?.onDetach()
+        _binding = null
     }
 
-    override fun showAdminFragment() {
+    override fun navigateToTournamentActivity() {
         TODO("Not yet implemented")
     }
 
-    override fun showMemberFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTeamTournamentsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun navigateToHomepageActivity() {
+    override fun showMembers(teamMembers: List<User>?) {
         TODO("Not yet implemented")
     }
 
@@ -70,4 +74,7 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView  {
         TODO("Not yet implemented")
     }
 
+    override fun onInvitationItemClick(position: Int) {
+        TODO("Not yet implemented")
+    }
 }

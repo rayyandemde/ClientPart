@@ -155,6 +155,11 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
                 maxParticipantNumber
             )
         }
+
+        //This is only for test
+        binding.tvCreateATournament.setOnClickListener {
+            navigateToTournamentActivity()
+        }
     }
 
     //To start the instance state.

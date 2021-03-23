@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.databinding.ActivityTournamentBinding
+import com.android3.siegertpclient.databinding.ActivityUserprofileBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
@@ -11,64 +13,82 @@ import com.android3.siegertpclient.ui.homepage.FeedFragment
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.homepage.JoinTeamFragment
 import com.android3.siegertpclient.ui.register.RegisterActivity
+import com.android3.siegertpclient.ui.userprofile.UserProfilePresenter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
  * This tournament
  */
-class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
+class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView {
+    private lateinit var binding: ActivityTournamentBinding
+    private lateinit var tournamentPresenter: TournamentPresenter
 
-    private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
+    private val tournamentMatchesFragment: TournamentMatchesFragment
 
-    private val tournamentMatchesFragment:TournamentMatchesFragment
+    private val tournamentParticipantsFragment: TournamentParticipantsFragment
 
-    private  val tournamentParticipantsFragment : TournamentParticipantsFragment
+    private val tournamentSchedulesFragment: TournamentSchedulesFragment
 
-    private val tournamentSchedulesFragment : TournamentSchedulesFragment
-
-    private val tournamentUpdatesFragment:TournamentUpdatesFragment
+    private val deleteTournamentFragment: DeleteTournamentFragment
 
     private val tournamentDetailsFragment: TournamentDetailsFragment
+
     init {
-        tournamentMatchesFragment=TournamentMatchesFragment()
+        tournamentMatchesFragment = TournamentMatchesFragment()
         tournamentSchedulesFragment = TournamentSchedulesFragment()
-       tournamentParticipantsFragment = TournamentParticipantsFragment()
-        tournamentUpdatesFragment=TournamentUpdatesFragment()
-        tournamentDetailsFragment=TournamentDetailsFragment()
+        tournamentParticipantsFragment = TournamentParticipantsFragment()
+        deleteTournamentFragment = DeleteTournamentFragment()
+        tournamentDetailsFragment = TournamentDetailsFragment()
     }
 
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val mOnNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
 
-        when(item.itemId){
-            R.id.navigation_tournament_info -> transaction.replace(R.id.fragment_container, tournamentDetailsFragment)
-            R.id.navigation_participants -> transaction.replace(R.id.fragment_container, tournamentParticipantsFragment)
-            R.id.navigation_schedule -> transaction.replace(R.id.fragment_container, tournamentSchedulesFragment)
-            R.id.navigation_match_info -> transaction.replace(R.id.fragment_container, tournamentMatchesFragment)
-            R.id.navigation_changelogs -> transaction.replace(R.id.fragment_container, tournamentUpdatesFragment)
+            when (item.itemId) {
+                R.id.navigation_tournament_info -> transaction.replace(
+                    R.id.container_tournament_fragments,
+                    tournamentDetailsFragment
+                )
+                R.id.navigation_participants -> transaction.replace(
+                    R.id.container_tournament_fragments,
+                    tournamentParticipantsFragment
+                )
+                R.id.navigation_schedule -> transaction.replace(
+                    R.id.container_tournament_fragments,
+                    tournamentSchedulesFragment
+                )
+                R.id.navigation_match_info -> transaction.replace(
+                    R.id.container_tournament_fragments,
+                    tournamentMatchesFragment
+                )
+                R.id.navigation_changelogs -> transaction.replace(
+                    R.id.container_tournament_fragments,
+                    deleteTournamentFragment
+                )
+            }
+
+            transaction.commit()
+
+            true
         }
-
-        transaction.commit()
-
-        true
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tournament)
 
-        val navigationBar: BottomNavigationView = findViewById(R.id.navigation) as BottomNavigationView
+        binding = ActivityTournamentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        tournamentPresenter = TournamentPresenter(this)
+
+        binding.bnvTournament.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragment_container,tournamentDetailsFragment)
+        transaction.add(R.id.container_tournament_fragments, tournamentDetailsFragment)
         transaction.commit()
-
-
     }
 
     override fun onResume() {

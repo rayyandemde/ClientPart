@@ -6,6 +6,8 @@ interface CreateTeamContract {
 
         fun showErrorOnPassword(message: String)
 
+        fun showIncompleteInput()
+
         fun navigateToHomepageActivity()
 
         fun navigateToTeamActivity()

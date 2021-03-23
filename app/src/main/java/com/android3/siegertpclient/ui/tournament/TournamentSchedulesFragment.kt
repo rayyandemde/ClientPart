@@ -9,36 +9,50 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
-import com.android3.siegertpclient.data.game.Game
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
+import com.android3.siegertpclient.data.tournament.Game
+import com.android3.siegertpclient.data.tournament.Result
+import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
+import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
+import com.android3.siegertpclient.databinding.FragmentTournamentschedulesBinding
+import com.android3.siegertpclient.ui.team.TeamPresenter
+import com.android3.siegertpclient.utils.recyclerviewadapters.ScheduleAdapter
+import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
 
-class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentView{
+class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentView, ScheduleAdapter.OnScheduleItemClickListener {
+    private var _binding: FragmentTournamentschedulesBinding? = null
+    private val binding get() = _binding!!
 
-    private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
+    private var tournamentPresenter: TournamentPresenter? = null
 
-    var tournamentsSchedulesRecycler: RecyclerView? = null
-
-    var addBt : Button?= null
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
-        var view = inflater.inflate(R.layout.fragment_tournamentschedules, container, false)
-
-        tournamentsSchedulesRecycler = view.findViewById<RecyclerView>(R.id.schedules_recycler)
-        tournamentsSchedulesRecycler!!.layoutManager = LinearLayoutManager(context)
-        tournamentsSchedulesRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
-
-        addBt =view.findViewById(R.id.addBt)
-
-        return view
+    private val noSchedule by lazy {
+        val noResult = Result("", "","")
+        listOf(Game("There is", "", noResult, "no schedule", ""))
     }
+
+    private val scheduleAdapter by lazy { ScheduleAdapter(this) }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentTournamentschedulesBinding.inflate(inflater, container, false)
+        tournamentPresenter = TournamentPresenter(requireContext())
+
+        binding.rvTournamentSchedules.adapter = scheduleAdapter
+
+        binding.srlRvTournamentSchedules.setOnRefreshListener {
+        }
+
+        return binding.root
+    }
+
     override fun onResume() {
         super.onResume()
-        tournamentPresenter.onAttach(this)
+        tournamentPresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        tournamentPresenter.onDetach()
+        tournamentPresenter?.onDetach()
+        _binding = null
     }
     fun showScheduleList(games: List<Game>) {
         TODO("Not yet implemented")
@@ -89,6 +103,10 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
     }
 
     override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onScheduleItemClick(position: Int) {
         TODO("Not yet implemented")
     }
 }

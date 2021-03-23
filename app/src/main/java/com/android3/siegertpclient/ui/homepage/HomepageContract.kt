@@ -1,9 +1,12 @@
+import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BaseView
 
 interface HomepageContract {
 
     interface IHomepageView : BaseView {
+
+        fun showFeed(feed: List<Tournament>?)
 
         fun navigateToInvitationActivity()
 
@@ -13,44 +16,24 @@ interface HomepageContract {
 
         fun navigateToCreateTeamActivity()
 
-        //Will not be Implemented
-        fun showFeedFragment()
-
-        //Will not be implemenetd
-        fun showJoinTeamFragment()
+        fun navigateToTournamentActivity()
 
         //Open tournament feature will not be implemented
         fun showSearchResult(tournaments: List<Tournament>)
-        fun goToTournamentScreen() {
-            TODO("Not yet implemented")
-        }
-
     }
 
     interface IHomepagePresenter {
 
-        fun onMailBtnClicked()
-
-        //Will not be implemented
-        fun onHomeBtnClicked()
+        fun onInvitationBtnClicked()
 
         fun onCreateTournamentBtnClicked()
 
         fun onCreateTeamBtnClicked()
 
-        //Will not be implemented
-        fun onJoinTeamBtnClicked()
-
         fun onUserBtnClicked()
 
-        fun onTournamentOverviewClicked()
+        fun onFeedRefresh()
 
-        fun loadTournamentOverviews()
-
-        fun onInvitationBtnClicked()
-    }
-
-    interface IFeedPresenter {
-
+        fun onJoinTeamBtnClicked()
     }
 }

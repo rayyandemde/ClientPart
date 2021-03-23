@@ -32,19 +32,20 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
         val changeSurnameEt = binding.etLastName
 
         var language = ""
-        binding.spChangeLanguages.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                adapterView: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                language = adapterView?.getItemAtPosition(position).toString()
-            }
+        binding.spChangeLanguages.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    adapterView: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    language = adapterView?.getItemAtPosition(position).toString()
+                }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
             }
-        }
 
         binding.btnSaveSettings.setOnClickListener {
             val changedUsername = editTextTrimmer(changeUsernameEt)
@@ -62,7 +63,7 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
             settingsPresenter.onLogoutTextClicked()
         }
 
-        setTestUserText()
+        settingsPresenter.initCurrentUserEt()
     }
 
     override fun onResume() {
@@ -73,6 +74,13 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
     override fun onDestroy() {
         super.onDestroy()
         settingsPresenter.onDetach()
+    }
+
+    override fun setCurrentUserEt(username: String, forename: String, surname: String) {
+        var test = binding.etFirstName.text
+        binding.etUsername.setText(username)
+        binding.etFirstName.setText(forename)
+        binding.etLastName.setText(surname)
     }
 
     override fun navigateToUserProfileActivity() {
@@ -111,9 +119,5 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
 
     private fun doToast(message: String) {
         Toast.makeText(this@SettingsActivity, message, Toast.LENGTH_LONG).show()
-    }
-
-    override fun setTestUserText() {
-        binding.tvTestUserUpdate.text = settingsPresenter.getUser()
     }
 }

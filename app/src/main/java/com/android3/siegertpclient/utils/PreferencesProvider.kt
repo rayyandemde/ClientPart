@@ -4,8 +4,10 @@ import android.content.Context
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_CURRENT_TOURNAMENT
-import com.android3.siegertpclient.ui.dummyretrofit.util.Constants.Companion.KEY_USER
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_CURRENT_TEAM
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_CURRENT_TOURNAMENT
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_USER
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_USER_TEAMS
 import com.google.gson.Gson
 
 class PreferencesProvider(context: Context) {
@@ -28,18 +30,28 @@ class PreferencesProvider(context: Context) {
         return sharedPreferences.getString(key, "")
     }
 
-    fun putUser(user: User) {
+    fun putCurrentUser(user: User) {
         val json = Gson().toJson(user)
         putString(KEY_USER, json)
     }
 
-    fun getUser() : User? {
+    fun getCurrentUser() : User? {
         val json = getString(KEY_USER)
         return if (json != null) Gson().fromJson(json, User::class.java) else null
     }
 
+    fun putCurrentUserTeams(teams: List<Team>) {
+        val json = Gson().toJson(teams)
+        putString(KEY_USER_TEAMS, json)
+    }
+
+    fun getCurrentUserTeams() : List<Team> {
+        var json = getString(KEY_USER_TEAMS)
+        return if (json != null) Gson().fromJson(json) else listOf()
+    }
+
     fun putCurrentTournament(tournament : Tournament) {
-        val json = Gson().toJson(tournament)
+        var json = Gson().toJson(tournament)
         putString(KEY_CURRENT_TOURNAMENT, json)
     }
 
@@ -51,12 +63,12 @@ class PreferencesProvider(context: Context) {
 
     fun putCurrentTeam(team : Team) {
         val json = Gson().toJson(team)
-        putString(KEY_CURRENT_TOURNAMENT, json)
+        putString(KEY_CURRENT_TEAM, json)
     }
 
 
     fun getCurrentTeam() : Team? {
-        val json = getString(KEY_CURRENT_TOURNAMENT)
+        val json = getString(KEY_CURRENT_TEAM)
         return if (json != null) Gson().fromJson(json, Team::class.java) else null
     }
 

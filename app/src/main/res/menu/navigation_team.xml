@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/navigation_team_member"
         android:icon="@drawable/create_team_icon"
-        android:title="Team Member" />
+        android:title="@string/team_member" />
 
     <item
         android:id="@+id/navigation_team_tournaments"
         android:icon="@drawable/create_tournament_icon"
-        android:title="Team Tournaments" />
+        android:title="@string/team_tournaments" />
 
     <item
         android:id="@+id/navigation_team_invitation"
         android:icon="@drawable/notification_icon"
-        android:title="Tournaments Invitation" />
-
+        android:title="@string/tournaments_invitation" />
 </menu>
