@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote
 
-import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.invitation.invitationsource.Invitation
 import retrofit2.Response
 import retrofit2.http.*
 

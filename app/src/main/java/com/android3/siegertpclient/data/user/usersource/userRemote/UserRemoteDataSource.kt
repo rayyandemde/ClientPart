@@ -1,6 +1,6 @@
 package com.android3.siegertpclient.data.user.usersource.userRemote
 
-import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.invitation.invitationsource.Invitation
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User

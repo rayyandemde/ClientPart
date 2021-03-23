@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.invitation.invitationsource.Invitation
 import com.android3.siegertpclient.databinding.CardInvitationOverviewBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.InvitationAdapter.InvitationHolder
 
