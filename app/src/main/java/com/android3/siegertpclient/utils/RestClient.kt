@@ -1,60 +1,45 @@
 package com.android3.siegertpclient.utils
 
-//import com.android3.siegertpclient.data.game.gamesource.gameRemote.GameService
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationService
 import com.android3.siegertpclient.data.team.teamsource.teamRemote.TeamService
 import com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote.TournamentService
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserService
+import com.android3.siegertpclient.utils.Constants.Companion.BASE_URL
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
-class RestClient {
-    private var baseUrl = "https://sieger-teamthree.herokuapp.com/"
-
-
-    fun getUserService(): UserService {
-        val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .callbackExecutor(Executors.newSingleThreadExecutor())
+object RestClient {
+    private val okhttp =
+        OkHttpClient.Builder()
+            .callTimeout(2, TimeUnit.MINUTES)
+            .writeTimeout(2, TimeUnit.MINUTES)
+            .readTimeout(2, TimeUnit.MINUTES)
+            .connectTimeout(2, TimeUnit.MINUTES)
             .build()
-        return retrofit.create(UserService::class.java)
+
+    private val retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okhttp)
+            .build()
     }
 
-    fun getInvitationService(): InvitationService {
-        val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .callbackExecutor(Executors.newSingleThreadExecutor())
-            .build()
-        return retrofit.create(InvitationService::class.java)
+    val userService: UserService by lazy {
+        retrofit.create(UserService::class.java)
     }
 
-    fun getTeamService() : TeamService {
-        val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .callbackExecutor(Executors.newSingleThreadExecutor())
-            .build()
-        return retrofit.create(TeamService::class.java)
+    val invitationService: InvitationService by lazy {
+        retrofit.create(InvitationService::class.java)
     }
 
-//    fun getGameService() : GameService {
-//        val retrofit : Retrofit = Retrofit.Builder()
-//            .baseUrl(baseUrl)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .callbackExecutor(Executors.newSingleThreadExecutor())
-//            .build()
-//        return retrofit.create(GameService::class.java)
-//    }
+    val teamService: TeamService by lazy {
+        retrofit.create(TeamService::class.java)
+    }
 
-    fun getTournamentService() : TournamentService {
-        val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .callbackExecutor(Executors.newSingleThreadExecutor())
-            .build()
-        return retrofit.create(TournamentService::class.java)
+    val tournamentService: TournamentService by lazy {
+        retrofit.create(TournamentService::class.java)
     }
 }

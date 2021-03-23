@@ -65,7 +65,8 @@ class LoginPresenter(private val context: Context) : BasePresenter<LoginContract
                                             } catch (e: Exception) {
                                                 withContext(Dispatchers.Main) {
                                                     view?.hideProgress()
-                                                    view?.showError("Oops... It seems there's unexpected error. Please try again.")
+                                                    view?.showError(e.message.toString())
+                                                    //view?.showError("Oops... It seems there's unexpected error. Please try again.")
                                                 }
                                             }
                                         }

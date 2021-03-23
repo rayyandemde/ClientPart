@@ -1,15 +1,17 @@
 package com.android3.siegertpclient.ui.team
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.databinding.ActivityTeamBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
-import com.android3.siegertpclient.ui.userprofile.MyTeamsFragment
-import com.android3.siegertpclient.ui.userprofile.MyTournamentsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class TeamActivity : BaseActivity(), TeamContract.ITeamView {
-
-    private val teamPresenter: TeamPresenter = TeamPresenter()
+    private lateinit var binding: ActivityTeamBinding
+    private lateinit var teamPresenter: TeamPresenter
 
     private val teamMemberFragment: TeamMemberFragment
     private val teamTournamentsFragment: TeamTournamentsFragment
@@ -21,32 +23,43 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
         teamInvitationFragment = TeamInvitationFragment()
     }
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val mOnNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
 
-        when(item.itemId){
-            R.id.navigation_team_member -> transaction.replace(R.id.fragment_container, teamMemberFragment)
-            R.id.navigation_team_tournaments -> transaction.replace(R.id.fragment_container, teamTournamentsFragment)
-            R.id.navigation_team_invitation -> transaction.replace(R.id.fragment_container, teamInvitationFragment)
+            when (item.itemId) {
+                R.id.navigation_team_member -> transaction.replace(
+                    R.id.container_team_fragments,
+                    teamMemberFragment
+                )
+                R.id.navigation_team_tournaments -> transaction.replace(
+                    R.id.container_team_fragments,
+                    teamTournamentsFragment
+                )
+                R.id.navigation_team_invitation -> transaction.replace(
+                    R.id.container_team_fragments,
+                    teamInvitationFragment
+                )
+            }
+
+            transaction.commit()
+
+            true
         }
-
-        transaction.commit()
-
-        true
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_team)
+        binding = ActivityTeamBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val navigationBar: BottomNavigationView = findViewById(R.id.navigation_team) as BottomNavigationView
+        teamPresenter = TeamPresenter(this)
 
-        navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        binding.bnvTeam.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragment_container, teamMemberFragment)
+        transaction.add(R.id.container_team_fragments, teamMemberFragment)
         transaction.commit()
     }
 
@@ -60,19 +73,11 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
         teamPresenter.onDetach()
     }
 
-    override fun showAdminFragment() {
-        //Will not be implemented
+    override fun navigateToTournamentActivity() {
+        TODO("Not yet implemented")
     }
 
-    override fun showMemberFragment() {
-        //Will not be implemented
-    }
-
-    override fun showTeamTournamentsFragment() {
-        //Will not be implemented
-    }
-
-    override fun navigateToHomepageActivity() {
+    override fun showMembers(teamMembers: List<User>?) {
         TODO("Not yet implemented")
     }
 
@@ -91,5 +96,4 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
     override fun showNoInternetConnection() {
         TODO("Not yet implemented")
     }
-
 }

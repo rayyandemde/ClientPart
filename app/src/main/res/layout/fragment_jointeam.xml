@@ -1,73 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="#c49d27"
     android:orientation="vertical"
     tools:context=".ui.homepage.JoinTeamFragment">
 
     <TextView
-        android:id="@+id/text_jt_title"
+        android:id="@+id/tv_join_a_team"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:text="Join A Team"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/join_a_team"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_jt_desc"
-        android:layout_width="237dp"
-        android:layout_height="78dp"
+        android:id="@+id/tv_join_a_team_description"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="Please enter the team name and its password to join a team"
+        android:layout_marginEnd="16dp"
+        android:text="@string/join_team_description"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_jt_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_join_a_team" />
 
     <EditText
-        android:id="@+id/teamPassword"
-        android:layout_width="330dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/edittext_white"
-        android:hint="    Team Password"
-
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teamName" />
-
-    <EditText
-        android:id="@+id/teamName"
+        android:id="@+id/et_team_name"
         android:layout_width="330dp"
         android:layout_height="40dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/edittext_white"
-        android:hint="    Team Name"
+        android:hint="@string/team_name"
+        android:paddingLeft="20dp"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_jt_desc" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_join_a_team_description" />
+
+    <EditText
+        android:id="@+id/et_team_password"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/edittext_white"
+        android:hint="@string/team_password"
+        android:paddingLeft="20dp"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_team_name" />
 
     <Button
-        android:id="@+id/joinTeamBtn"
+        android:id="@+id/btn_join_team"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Join Team"
+        android:text="@string/join_team"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teamPassword"
-        app:layout_constraintVertical_bias="0.019" />
-
+        app:layout_constraintTop_toBottomOf="@+id/et_team_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>

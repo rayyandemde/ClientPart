@@ -10,42 +10,54 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
-import com.android3.siegertpclient.data.game.Game
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
+import com.android3.siegertpclient.data.tournament.Game
+import com.android3.siegertpclient.data.tournament.Result
+import com.android3.siegertpclient.databinding.FragmentTournamentmatchesBinding
+import com.android3.siegertpclient.databinding.FragmentTournamentschedulesBinding
+import com.android3.siegertpclient.utils.recyclerviewadapters.GameAdapter
+import com.android3.siegertpclient.utils.recyclerviewadapters.ScheduleAdapter
+import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
 
-class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentView{
+class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentView, GameAdapter.OnGameItemClickListener{
+    private var _binding: FragmentTournamentmatchesBinding? = null
+    private val binding get() = _binding!!
 
-    private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
-    var centerBt : Button? =null
-    var linkEt : EditText? =null
-    var openBt : Button?=null
+    private var tournamentPresenter: TournamentPresenter? = null
 
-    var tournamentMatchesRecycler: RecyclerView? = null
+    private val noSchedule by lazy {
+        val noResult = Result("", "","")
+        listOf(Game("There is", "", noResult, "no schedule", ""))
+    }
+
+    private val gameAdapter by lazy { GameAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentTournamentmatchesBinding.inflate(inflater, container, false)
+        tournamentPresenter = TournamentPresenter(requireContext())
 
-        var view = inflater.inflate(R.layout.fragment_tournamentmatches, container, false)
+        binding.rvTournamentMatches.adapter = gameAdapter
 
-        tournamentMatchesRecycler = view.findViewById<RecyclerView>(R.id.tournament_matches_recycler)
+        binding.srlRvTournamentMatches.setOnRefreshListener {
+        }
 
-        tournamentMatchesRecycler!!.layoutManager = LinearLayoutManager(context)
-        tournamentMatchesRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
+        binding.btnAddMatches.setOnClickListener {
 
-        centerBt = view.findViewById(R.id.buttonCenter)
-        linkEt = view.findViewById(R.id.stagesImagesLink)
-        openBt = view.findViewById(R.id.openLinkBtn)
+        }
 
-        return view
+        return binding.root
     }
+
     override fun onResume() {
         super.onResume()
-        tournamentPresenter.onAttach(this)
+        tournamentPresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        tournamentPresenter.onDetach()
+        tournamentPresenter?.onDetach()
+        _binding = null
     }
+
     fun showGames(games: List<Game>) {
         TODO("Not yet implemented")
     }
@@ -95,6 +107,10 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
     }
 
     override fun showNoInternetConnection() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGameItemClick(position: Int) {
         TODO("Not yet implemented")
     }
 

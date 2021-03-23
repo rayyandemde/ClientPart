@@ -28,8 +28,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/tournament_name"
+        android:inputType="textPersonName"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,8 +56,8 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="40dp"
-        android:spinnerMode="dropdown"
         android:entries="@array/sa_type_of_game"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_type_of_game" />
@@ -69,8 +69,8 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="40dp"
-        android:spinnerMode="dropdown"
         android:entries="@array/sa_tournament_types"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sp_match_type" />
@@ -82,8 +82,8 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="40dp"
-        android:spinnerMode="dropdown"
         android:entries="@array/sa_participant_types"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sp_tournament_type" />
@@ -135,8 +135,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/location"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_tournament_time" />
@@ -149,11 +149,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:ems="10"
-        android:inputType="number"
         android:hint="@string/max_player"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_location"/>
+        app:layout_constraintTop_toBottomOf="@id/et_location" />
 
     <LinearLayout
         android:id="@+id/ll_create_tournament"
