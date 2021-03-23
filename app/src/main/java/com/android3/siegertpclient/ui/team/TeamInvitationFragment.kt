@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.android3.siegertpclient.data.invitation.invitationsource.Invitation
+import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTeamInvitationBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.InvitationAdapter

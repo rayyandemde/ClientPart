@@ -1,17 +1,30 @@
 package com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote
 
-import com.android3.siegertpclient.data.invitation.invitationsource.Invitation
+import com.android3.siegertpclient.data.payload.ApiResponse
+import com.android3.siegertpclient.utils.RestClient
+import retrofit2.Response
 
-class InvitationRemoteDataSource () {
+class InvitationRemoteDataSource() {
+    suspend fun createInvitation(
+        senderId: String, recipientId: String, tournamentId: String,
+        participantForm: String, token: String
+    ): Response<ApiResponse> {
+        val invitation = hashMapOf<String, String>()
+        invitation["senderId"] = senderId
+        invitation["recipientId"] = recipientId
+        invitation["tournamentId"] = tournamentId
+        invitation["participantForm"] = participantForm
 
-    fun createInvitation(senderId : String, recipientId : String, tournamentId : String,
-                         participantForm : String, ownUserId : String) : Invitation? {
-        return  null
+        return RestClient.invitationService.createInvitation(invitation, token)
     }
 
-    fun handleInvitationAcceptation (username: String, invitationId : String, acceptB : Boolean, ownUserId : String) {
-        val map = hashMapOf<String, Boolean>()
-        map["access"] = acceptB
+    suspend fun handleInvitationAcceptation(
+        invitationId: String,
+        acceptB: Boolean,
+        token: String
+    ): Response<ApiResponse> {
+        val accept = hashMapOf<String, Boolean>()
+        accept["accept"] = acceptB
+        return RestClient.invitationService.handleInvitationAcceptation(invitationId, accept, token)
     }
-
 }

@@ -1,13 +1,12 @@
 package com.android3.siegertpclient.data.team.teamsource.teamRemote
 
-import com.android3.siegertpclient.data.invitation.invitationsource.Invitation
+import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.payload.ApiResponse
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.utils.RestClient
 import retrofit2.Response
-import retrofit2.http.*
 
 class TeamRemoteDataSource {
 
