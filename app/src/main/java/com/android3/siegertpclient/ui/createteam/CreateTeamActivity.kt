@@ -3,16 +3,10 @@ package com.android3.siegertpclient.ui.createteam
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.databinding.ActivityCreateteamBinding
-import com.android3.siegertpclient.databinding.ActivityRegisterBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.register.RegisterPresenter
 import com.android3.siegertpclient.ui.team.TeamActivity
 
 /**
@@ -20,6 +14,7 @@ import com.android3.siegertpclient.ui.team.TeamActivity
  */
 class CreateTeamActivity : BaseActivity(), CreateTeamContract.ICreateTeamView {
     private lateinit var binding: ActivityCreateteamBinding
+
     //Connection with the create Team Presenter.
     private lateinit var createTeamPresenter: CreateTeamPresenter
 
@@ -40,8 +35,6 @@ class CreateTeamActivity : BaseActivity(), CreateTeamContract.ICreateTeamView {
                 teamNameEt.text.toString().trim { it <= ' ' },
                 teamPasswordEt.text.toString().trim { it <= ' ' })
         }
-
-
     }
 
     //The instance state is to be created now.
@@ -54,11 +47,6 @@ class CreateTeamActivity : BaseActivity(), CreateTeamContract.ICreateTeamView {
     override fun onDestroy() {
         super.onDestroy()
         createTeamPresenter.onDetach()
-    }
-
-    //The method is to show the error when the password has an error and show the error message with the given parameter
-        override fun showErrorOnPassword(message: String) {
-        TODO("Not yet implemented")
     }
 
     override fun showIncompleteInput() {
