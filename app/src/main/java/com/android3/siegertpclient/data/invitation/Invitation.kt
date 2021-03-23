@@ -1,4 +1,4 @@
-package com.android3.siegertpclient.data.invitation.invitationsource
+package com.android3.siegertpclient.data.invitation
 
 data class Invitation(
     val invitationId: String,
