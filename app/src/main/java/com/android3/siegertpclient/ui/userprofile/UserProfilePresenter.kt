@@ -24,30 +24,10 @@ class UserProfilePresenter(private val context: Context) :
 
     override fun userTeamClicked(position: Int) {
         val savedTeam = userRepo.getCurrentUserTeams()!!
+
         val chosenTeamName = savedTeam[position].teamName
         localData.putString(KEY_TEAM_NAME, chosenTeamName)
         view?.navigateToTeamActivity()
-
-        /*
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                val myTeams = userRepo.getUserTeams()
-                if (myTeams != null) {
-                    withContext(Dispatchers.Main) {
-                        view?.showError("You have chosen :: " + myTeams[position].teamName)
-                        localData.putString(KEY_TEAM_NAME, myTeams[position].teamName)
-                        view?.navigateToTeamActivity()
-                        view?.hideProgress()
-                    }
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    view?.showMyTeams(null)
-                    view?.showError("Oops... It seems there's unexpected error. Please try again.")
-                    view?.hideProgress()
-                }
-            }
-        }*/
     }
 
     override fun onSettingBtnClicked() {
@@ -76,9 +56,14 @@ class UserProfilePresenter(private val context: Context) :
                             view?.hideProgress()
                         }
                     }
+                    if (myTeams == null) {
+                        withContext(Dispatchers.Main) {
+                            view?.showError("It seems you haven't joined any team yet.")
+                            view?.hideProgress()
+                        }
+                    }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
-                        view?.showMyTeams(null)
                         view?.showError("Oops... It seems there's unexpected error. Please try again.")
                         view?.hideProgress()
                     }

@@ -15,9 +15,9 @@ class TeamRepo(private val context: Context) {
     private val teamRemoteDataSource = TeamRemoteDataSource()
     private var localData = PreferencesProvider(context)
 
-    suspend fun createNewTeam(adminId : String, name : String, password : String) : Team? {
+    suspend fun createNewTeam(name : String, password : String) : Team? {
         val response =
-            teamRemoteDataSource.createNewTeam(adminId, name, password, LocalCache.getBearerToken(context)!!)
+            teamRemoteDataSource.createNewTeam(LocalCache.getCurrentUserId(context)!!, name, password, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
             localData.putCurrentTeam(response.body()!!)
             return response.body()!!

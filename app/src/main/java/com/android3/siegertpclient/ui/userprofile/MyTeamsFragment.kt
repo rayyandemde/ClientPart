@@ -23,10 +23,6 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
 
     private var userProfilePresenter: UserProfilePresenter? = null
 
-    private val noTeam by lazy {
-        listOf(Team("", emptyList(), emptyList(), "", getString(R.string.user_no_team), "", emptyList()))
-    }
-
     private val teamAdapter by lazy { TeamAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -65,8 +61,6 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
     override fun showMyTeams(myTeams: List<Team>?) {
         if (myTeams != null) {
             teamAdapter.setData(myTeams)
-        } else {
-            teamAdapter.setData(noTeam)
         }
     }
 
