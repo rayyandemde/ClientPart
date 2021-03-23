@@ -174,6 +174,10 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         createTournamentPresenter.onDetach()
     }
 
+    override fun showIncompleteInput() {
+        doToast("Please input all of the field")
+    }
+
     override fun navigateToHomepageActivity() {
         val intent = Intent(this@CreateTournamentActivity, HomepageActivity::class.java)
         startActivity(intent)
@@ -182,26 +186,6 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
     override fun navigateToTournamentActivity() {
         val intent = Intent(this@CreateTournamentActivity, TournamentActivity::class.java)
         startActivity(intent)
-    }
-
-    override fun showErrorOnTournamentName(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
-    }
-
-    override fun showErrorOnLocation(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
-    }
-
-    override fun showErrorOnTime(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
-    }
-
-    override fun showErrorOnMaxPlayers(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
-    }
-
-    override fun showErrorOnRegistrationTime(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
     override fun showProgress() {
@@ -215,7 +199,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
