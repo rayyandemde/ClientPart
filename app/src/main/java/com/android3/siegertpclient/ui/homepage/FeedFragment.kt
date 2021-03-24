@@ -63,6 +63,14 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
         TODO("Not yet implemented")
     }
 
+    override fun showSuccess(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showIncompleteInput() {
+        TODO("Not yet implemented")
+    }
+
     override fun navigateToInvitationActivity() {
         val invIntent = Intent(activity, InvitationActivity::class.java)
         startActivity(invIntent)
@@ -84,8 +92,8 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
         TODO("Not yet implemented")
     }
 
-    override fun showSearchResult(tournaments: List<Tournament>) {
-        TODO("Not yet implemented")
+    override fun navigateToTeamActivity() {
+        //Not implemented here
     }
 
     override fun showProgress() {

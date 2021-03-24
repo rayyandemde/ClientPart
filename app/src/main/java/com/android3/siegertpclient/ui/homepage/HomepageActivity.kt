@@ -76,55 +76,58 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
     }
 
     override fun showFeed(feed: List<Tournament>?) {
+        //Not implemented here
+    }
+
+    override fun showSuccess(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showIncompleteInput() {
         TODO("Not yet implemented")
     }
 
     override fun navigateToInvitationActivity() {
-        val invIntent = Intent(this, InvitationActivity::class.java)
-        startActivity(invIntent)
+        val intent = Intent(this, InvitationActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToUserActivity() {
-        val upIntent = Intent(this, UserProfileActivity::class.java)
-        startActivity(upIntent)
+        val intent = Intent(this, UserProfileActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToCreateTournamentActivity() {
-        val cTournamentIntent = Intent(this, CreateTournamentActivity::class.java)
-        startActivity(cTournamentIntent)
+        val intent = Intent(this, CreateTournamentActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToCreateTeamActivity() {
-        val cTeamIntent = Intent(this, CreateTeamActivity::class.java)
-        startActivity(cTeamIntent)
+        val intent = Intent(this, CreateTeamActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToTournamentActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
-
-    override fun showSearchResult(tournaments: List<Tournament>) {
-        //Open tournament feature will not be implemented
+    override fun navigateToTeamActivity() {
+        TODO("Not yet implemented")
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showError(errorMessage: String) {
-        doToast(errorMessage)
+        //Not implemented here
     }
 
     override fun showNoInternetConnection() {
-        doToast("This is it")
-    }
-
-    private fun doToast(message: String) {
-        Toast.makeText(this@HomepageActivity, message, Toast.LENGTH_LONG).show()
+        //Not implemented here
     }
 }

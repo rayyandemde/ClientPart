@@ -49,9 +49,6 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
         userProfilePresenter?.onDetach()
         _binding = null
     }
-    fun showTeams() {
-        TODO("Not yet implemented")
-    }
 
     override fun navigateToTeamActivity()  {
         val intent = Intent(activity, TeamActivity::class.java)

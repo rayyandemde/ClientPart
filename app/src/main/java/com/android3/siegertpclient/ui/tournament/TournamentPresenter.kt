@@ -1,105 +1,213 @@
 package com.android3.siegertpclient.ui.tournament
 
 import android.content.Context
-import com.android3.siegertpclient.data.tournament.Tournament
+import android.text.TextUtils
+import com.android3.siegertpclient.data.tournament.TournamentDetail
+import com.android3.siegertpclient.data.tournament.tournamentsource.TournamentRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
+import com.android3.siegertpclient.utils.Constants.Companion.SINGLE
+import com.android3.siegertpclient.utils.Constants.Companion.TEAM
+import com.android3.siegertpclient.utils.LocalCache
+import com.android3.siegertpclient.utils.OnlineChecker
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TournamentPresenter(private val context: Context) : BasePresenter<TournamentContract.ITournamentView>(), TournamentContract.ITeamPresenter {
+    private var onlineChecker = OnlineChecker(context)
+    private var tournamentRepo = TournamentRepo(context)
 
-    fun onDeleteTournamentBtnClicked() {
-        //Do something to remote
+    override fun initTournamentDetails() {
+        val tournament = tournamentRepo.getCurrentTournament()
+        val tournamentDetail = tournament.tournamentDetail
+
+        val tournamentName = tournament.tournamentName
+        val typeOfGame = tournamentDetail.typeOfGame
+        val matchType = tournament.type
+        val tournamentType = tournamentDetail.tournamentTypes
+        val participantForm = tournamentDetail.participantForm
+        val registrationDeadline = tournamentDetail.registrationDeadline
+        val startDate = tournamentDetail.startTime
+        val endDate = tournamentDetail.endTime
+        val location = tournamentDetail.location
+        val maxPlayer = tournament.maxParticipantNumber
+
+        view?.showCurrentTournamentDetails(tournamentName, typeOfGame, matchType, tournamentType, participantForm, registrationDeadline, startDate, endDate, location, maxPlayer)
+    }
+
+    override fun checkEditRights() {
+        if(!isAdmin()) {
+            view?.disableEdits()
+        }
+    }
+
+    override fun onUpdateBtnClicked(
+        tournamentName: String,
+        registrationDeadline: String,
+        startTime: String,
+        endTime: String,
+        location: String
+    ) {
+        view?.showProgress()
+
+        when {
+            TextUtils.isEmpty(tournamentName) or TextUtils.isEmpty(location) -> {
+                view?.showIncompleteInput()
+                view?.hideProgress()
+            }
+            !validDateDifference(startTime, endTime) -> {
+                view?.showError("End date must ends after start date")
+                view?.hideProgress()
+            }
+            !onlineChecker.isOnline() -> {
+                view?.showNoInternetConnection()
+                view?.hideProgress()
+            }
+            else -> {
+                val oldTournament = tournamentRepo.getCurrentTournament()
+                val oldTournamentDetail = oldTournament.tournamentDetail
+                val newTournamentDetail = TournamentDetail(oldTournamentDetail.adminId, endTime, location, oldTournamentDetail.participantForm, registrationDeadline, startTime, oldTournamentDetail.tournamentTypes, oldTournamentDetail.typeOfGame)
+
+                GlobalScope.launch(Dispatchers.IO) {
+                    try {
+                        val tournament = tournamentRepo.updateTournamentDetail(tournamentName, newTournamentDetail)
+                        if (tournament != null) {
+                            withContext(Dispatchers.Main) {
+                                initTournamentDetails()
+                                view?.hideProgress()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            view?.hideProgress()
+                            view?.showError("Oops... It seems there's unexpected error. Please try again.")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onHomeBtnClicked() {
         view?.navigateToHomepageActivity()
     }
 
-    fun onJoinBtnClicked() {
-
+    override fun initParticipantAdapter() {
+        val participantForm = tournamentRepo.getCurrentTournament().tournamentDetail.participantForm
+        view?.initParticipantAdapter(participantForm)
     }
 
-    fun onKickParticipantBtnClicked() {
+    override fun onParticipantRefresh() {
+        val participantForm = tournamentRepo.getCurrentTournament().tournamentDetail.participantForm
 
+        when {
+            participantForm == SINGLE -> {
+                handleSingleRefresh()
+            }
+            participantForm == TEAM -> {
+                handleTeamRefresh()
+            }
+        }
     }
 
-    fun onAddParticipantBtnClicked() {
+    private fun handleSingleRefresh() {
+        if (!onlineChecker.isOnline()) {
+            view?.showNoInternetConnection()
+            view?.hideProgress()
+        } else {
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
+                    val participants = tournamentRepo.getTournamentParticipantsUser()
+                    if (participants != null) {
+                        withContext(Dispatchers.Main) {
+                            view?.showSingleParticipants(participants)
+                            view?.hideProgress()
+                        }
+                    }
+                    if (participants == null) {
+                        withContext(Dispatchers.Main) {
+                            view?.showError("It seems there's no participant yet.")
+                            view?.hideProgress()
+                        }
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        view?.showError("Oops... It seems there's unexpected error. Please try again.")
+                        view?.hideProgress()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handleTeamRefresh() {
         TODO("Not yet implemented")
     }
 
-    fun onDeleteScheduleBtnClicked() {
+    override fun onAddParticipantBtnClicked() {
         TODO("Not yet implemented")
     }
 
-    fun onCreateTableBtnClicked() {
+    override fun onScheduleRefresh() {
         TODO("Not yet implemented")
     }
 
-    fun onEditTableBtnClicked() {
+    override fun onGameRefresh() {
         TODO("Not yet implemented")
     }
 
-    fun onEditBranchBtnClicked() {
+    override fun checkCreateGameRights() {
         TODO("Not yet implemented")
     }
 
-    fun onAddGamesBtnClicked() {
+    override fun onCreateGameBtnClicked() {
         TODO("Not yet implemented")
     }
 
-    fun onEditGamesBtnClciked() {
+    override fun onCancelTournamentBtnClicked() {
         TODO("Not yet implemented")
     }
 
-    fun getTOurnament() : Tournament {
-        TODO("Not yet implemented")
+    override fun isAdmin() : Boolean{
+        val tournament = tournamentRepo.getCurrentTournament()
+        val tournamentDetail = tournament.tournamentDetail
+        val tournamentAdmin = tournamentDetail.adminId
+
+        if (tournamentAdmin != LocalCache.getCurrentUserId(context)) {
+            return false
+        }
+
+        return true
     }
 
- //   fun getParticipantList() : List<Participant> {
- //       TODO("Not yet implemented")
- //   }
+    private fun validDateDifference(start: String, end: String): Boolean {
+        val startYear = start.substring(0,3).toInt()
+        val startMonth = start.substring(5,6).toInt()
+        val startDate = start.substring(8,9).toInt()
 
-    fun getGameList() {
+        val endYear = end.substring(0,3).toInt()
+        val endMonth = end.substring(5,6).toInt()
+        val endDate = end.substring(8,9).toInt()
 
+        if ((endYear - startYear) < 0) {
+            return false
+        }
+
+        if (endYear - startYear == 0) {
+            if(endMonth - startMonth < 0) {
+                return false
+            }
+        }
+
+        if (endYear - startYear == 0) {
+            if(endMonth - startMonth == 0) {
+                if(endDate - startDate < 0) {
+                    return false
+                }
+            }
+        }
+
+        return true
     }
-
-    override fun checkIfAdmin(userId: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun checkAlreadyJoined(uerId: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onBackBtnClicked() {
-        view?.navigateToHomepageActivity()
-    }
-
-    override fun onTournamentDetailsTabClicked() {
-       view?.showTournamentDetailsFragment()
-    }
-
-    override fun onParticipantListTabClicked() {
-        view?.showTournamentParticipantsFragment()
-    }
-
-    override fun onScheduleTabClicked() {
-        view?.showTournamentScheduleFragment()
-    }
-
-    override fun onStageSliderClicked() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onMatchesSliderClicked() {
-
-    }
-
-    override fun onTournamentUpdatesTabClicked() {
-        TODO("Not yet implemented")
-    }
-
-//   fun getTable() : LeagueTable {
-//       TODO("Not yet implemented")
-//    }
-
-//    fun getBranch() : KnockOutMapping {
-//        TODO("Not yet implemented")
-//    }
 }

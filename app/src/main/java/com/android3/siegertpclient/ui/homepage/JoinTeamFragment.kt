@@ -1,5 +1,6 @@
 package com.android3.siegertpclient.ui.homepage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.databinding.FragmentFeedBinding
 import com.android3.siegertpclient.databinding.FragmentJointeamBinding
+import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
+import com.android3.siegertpclient.ui.team.TeamActivity
 
 class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
     private var _binding: FragmentJointeamBinding? = null
@@ -27,7 +31,9 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
         val teamPasswordEt = binding.etTeamPassword
 
         binding.btnJoinTeam.setOnClickListener {
-
+            homepagePresenter?.onJoinTeamBtnClicked(
+                teamNameEt.text.toString().trim { it <= ' ' },
+                teamPasswordEt.text.toString().trim { it <= ' ' })
         }
 
         return binding.root
@@ -44,36 +50,41 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
         _binding = null
     }
 
-    fun navigateToTeamActivity() {
-        TODO("Not yet implemented")
+    override fun showFeed(feed: List<Tournament>?) {
+        //Not implemented here
     }
 
-    override fun showFeed(feed: List<Tournament>?) {
-        TODO("Not yet implemented")
+    override fun showSuccess(message: String) {
+        doToast(message)
+    }
+
+    override fun showIncompleteInput() {
+        doToast("Please fill in all of the field")
     }
 
     override fun navigateToInvitationActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToUserActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToCreateTournamentActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToCreateTeamActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToTournamentActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
-    override fun showSearchResult(tournaments: List<Tournament>) {
-        TODO("Not yet implemented")
+    override fun navigateToTeamActivity() {
+        val intent = Intent(activity, TeamActivity::class.java)
+        startActivity(intent)
     }
 
     override fun showProgress() {
@@ -85,10 +96,14 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }

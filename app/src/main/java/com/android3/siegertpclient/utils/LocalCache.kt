@@ -29,11 +29,6 @@ class LocalCache {
             return localData.getString(Constants.KEY_TOURNAMENT_NAME)
         }
 
-        fun getCurrentTournamentParticipantForm(context: Context) : String? {
-            val localData = PreferencesProvider(context)
-            return localData.getString(Constants.KEY_TOURNAMENT_PARTICIPANT_FORM)
-        }
-
         fun getCurrentTeamId(context: Context) : String? {
             val localData = PreferencesProvider(context)
             return localData.getString(Constants.KEY_TEAM_ID)

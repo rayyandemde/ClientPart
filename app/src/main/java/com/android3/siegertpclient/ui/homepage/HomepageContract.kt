@@ -8,6 +8,10 @@ interface HomepageContract {
 
         fun showFeed(feed: List<Tournament>?)
 
+        fun showSuccess(message: String)
+
+        fun showIncompleteInput()
+
         fun navigateToInvitationActivity()
 
         fun navigateToUserActivity()
@@ -18,8 +22,7 @@ interface HomepageContract {
 
         fun navigateToTournamentActivity()
 
-        //Open tournament feature will not be implemented
-        fun showSearchResult(tournaments: List<Tournament>)
+        fun navigateToTeamActivity()
     }
 
     interface IHomepagePresenter {
@@ -34,6 +37,6 @@ interface HomepageContract {
 
         fun onFeedRefresh()
 
-        fun onJoinTeamBtnClicked()
+        fun onJoinTeamBtnClicked(teamName: String, password: String)
     }
 }

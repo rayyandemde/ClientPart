@@ -17,10 +17,6 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView, UserAdapter.OnUse
 
     private var teamPresenter: TeamPresenter? = null
 
-    private val noUser by lazy {
-        listOf(User(getString(R.string.team_no_member), emptyList(), "...", emptyList(), emptyList(), "","..."))
-    }
-
     private val userAdapter by lazy { UserAdapter(this) }
 
     override fun onCreateView(
@@ -61,11 +57,13 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView, UserAdapter.OnUse
         TODO("Not yet implemented")
     }
 
+    override fun showDeleteAlert() {
+        TODO("Not yet implemented")
+    }
+
     override fun showMembers(teamMembers: List<User>?) {
         if (teamMembers != null) {
             userAdapter.setData(teamMembers)
-        } else {
-            userAdapter.setData(noUser)
         }
     }
 

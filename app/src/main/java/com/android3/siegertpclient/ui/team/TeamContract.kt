@@ -6,6 +6,8 @@ interface TeamContract {
     interface ITeamView : BaseView {
         fun navigateToTournamentActivity()
 
+        fun showDeleteAlert()
+
         fun showMembers(teamMembers: List<User>?)
     }
 

@@ -71,6 +71,7 @@ class CreateTournamentPresenter(private val context: Context) : BasePresenter<Cr
                         if (tournament != null) {
                             withContext(Dispatchers.Main) {
                                 view?.navigateToTournamentActivity()
+                                view?.hideProgress()
                             }
                         }
                     } catch (e: Exception) {

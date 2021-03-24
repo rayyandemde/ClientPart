@@ -54,6 +54,10 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAda
         TODO("Not yet implemented")
     }
 
+    override fun showDeleteAlert() {
+        TODO("Not yet implemented")
+    }
+
     override fun showMembers(teamMembers: List<User>?) {
         TODO("Not yet implemented")
     }

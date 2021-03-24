@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.Game
+import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.ActivityTournamentBinding
 import com.android3.siegertpclient.databinding.ActivityUserprofileBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
@@ -52,23 +55,23 @@ class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView 
                 R.id.navigation_tournament_info -> transaction.replace(
                     R.id.container_tournament_fragments,
                     tournamentDetailsFragment
-                )
+                ).addToBackStack(null)
                 R.id.navigation_participants -> transaction.replace(
                     R.id.container_tournament_fragments,
                     tournamentParticipantsFragment
-                )
+                ).addToBackStack(null)
                 R.id.navigation_schedule -> transaction.replace(
                     R.id.container_tournament_fragments,
                     tournamentSchedulesFragment
-                )
+                ).addToBackStack(null)
                 R.id.navigation_match_info -> transaction.replace(
                     R.id.container_tournament_fragments,
                     tournamentMatchesFragment
-                )
-                R.id.navigation_changelogs -> transaction.replace(
+                ).addToBackStack(null)
+                R.id.navigation_delete_tournament -> transaction.replace(
                     R.id.container_tournament_fragments,
                     deleteTournamentFragment
-                )
+                ).addToBackStack(null)
             }
 
             transaction.commit()
@@ -101,56 +104,66 @@ class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView 
         tournamentPresenter.onDetach()
     }
 
-    private fun openRegisterActivity() {
-        val rIntent = Intent(this, RegisterActivity::class.java)
-        startActivity(rIntent)
+    override fun showCurrentTournamentDetails(
+        tournamentName: String,
+        typeOfGame: String,
+        matchType: String,
+        tournamentType: String,
+        participantForm: String,
+        registrationDeadline: String,
+        startDate: String,
+        endDate: String,
+        location: String,
+        maxPlayer: Int
+    ) {
+        //Not implemented here
     }
 
-    private fun openForgotPasswordActivity() {
-        val fpIntent = Intent(this, ForgotPasswordActivity::class.java)
-        startActivity(fpIntent)
+    override fun disableEdits() {
+        //Not implemented here
     }
 
-
-    override fun showTournamentDetailsFragment() {
-
+    override fun showIncompleteInput() {
+        //Not implemented here
     }
 
-    override fun showTournamentParticipantsFragment() {
+    override fun initParticipantAdapter(participantForm: String) {
         TODO("Not yet implemented")
     }
 
-    override fun showTournamentScheduleFragment() {
-        TODO("Not yet implemented")
+    override fun showSingleParticipants(participants: List<User>?) {
+        //Not implemented here
     }
 
-    override fun showResultFragment() {
-        TODO("Not yet implemented")
+    override fun showTeamParticipants(participants: List<Team>?) {
+        //Not implemented here
     }
 
-    override fun showTournamentUpdatesFragment() {
-        TODO("Not yet implemented")
+    override fun showSchedules(schedules: List<Game>?) {
+        //Not implemented here
+    }
+
+    override fun showGames(games: List<Game>?) {
+        //Not implemented here
     }
 
     override fun navigateToHomepageActivity() {
-        val cTeamIntent = Intent(this, HomepageActivity::class.java)
-        startActivity(cTeamIntent)
+        //Not implemented here
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showError(errorMessage: String) {
-        Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
+        //Not implemented here
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
-
 }

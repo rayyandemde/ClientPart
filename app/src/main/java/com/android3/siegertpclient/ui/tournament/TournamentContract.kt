@@ -1,40 +1,72 @@
+import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.Game
+import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.ui.base.BaseView
 
 interface TournamentContract {
 
     interface ITournamentView : BaseView {
+        fun showCurrentTournamentDetails(
+            tournamentName: String,
+            typeOfGame: String,
+            matchType: String,
+            tournamentType: String,
+            participantForm: String,
+            registrationDeadline: String,
+            startDate: String,
+            endDate: String,
+            location: String,
+            maxPlayer: Int
+        )
 
-        fun showTournamentDetailsFragment()
+        fun disableEdits()
 
-        fun showTournamentParticipantsFragment()
+        fun showIncompleteInput()
 
-        fun showTournamentScheduleFragment()
+        fun initParticipantAdapter(participantForm: String)
 
-        fun showResultFragment()
+        fun showSingleParticipants(participants: List<User>?)
 
-        fun showTournamentUpdatesFragment()
+        fun showTeamParticipants(participants: List<Team>?)
+
+        fun showSchedules(schedules: List<Game>?)
+
+        fun showGames(games: List<Game>?)
 
         fun navigateToHomepageActivity()
     }
 
     interface ITeamPresenter {
+        fun initTournamentDetails()
 
-        fun checkIfAdmin(userId: String)
+        fun checkEditRights()
 
-        fun checkAlreadyJoined(uerId: String)
+        fun onUpdateBtnClicked(
+            tournamentName: String,
+            registrationDeadline: String,
+            startTime: String,
+            endTime: String,
+            location: String,
+        )
 
-        fun onBackBtnClicked()
+        fun onHomeBtnClicked()
 
-        fun onTournamentDetailsTabClicked()
+        fun initParticipantAdapter()
 
-        fun onParticipantListTabClicked()
+        fun onParticipantRefresh()
 
-        fun onScheduleTabClicked()
+        fun onAddParticipantBtnClicked()
 
-        fun onStageSliderClicked()
+        fun onScheduleRefresh()
 
-        fun onMatchesSliderClicked()
+        fun onGameRefresh()
 
-        fun onTournamentUpdatesTabClicked()
+        fun checkCreateGameRights()
+
+        fun onCreateGameBtnClicked()
+
+        fun onCancelTournamentBtnClicked()
+
+        fun isAdmin() : Boolean
     }
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.tournament.Result
 import com.android3.siegertpclient.data.user.User
@@ -24,11 +25,6 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
     private val binding get() = _binding!!
 
     private var tournamentPresenter: TournamentPresenter? = null
-
-    private val noSchedule by lazy {
-        val noResult = Result("", "","")
-        listOf(Game("There is", "", noResult, "no schedule", ""))
-    }
 
     private val scheduleAdapter by lazy { ScheduleAdapter(this) }
 
@@ -54,40 +50,52 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
         tournamentPresenter?.onDetach()
         _binding = null
     }
-    fun showScheduleList(games: List<Game>) {
+
+    override fun showCurrentTournamentDetails(
+        tournamentName: String,
+        typeOfGame: String,
+        matchType: String,
+        tournamentType: String,
+        participantForm: String,
+        registrationDeadline: String,
+        startDate: String,
+        endDate: String,
+        location: String,
+        maxPlayer: Int
+    ) {
+        //Not implemented here
+    }
+
+    override fun disableEdits() {
+        //Not implemented here
+    }
+
+    override fun showIncompleteInput() {
+        //Not implemented here
+    }
+
+    override fun initParticipantAdapter(participantForm: String) {
         TODO("Not yet implemented")
     }
 
-    fun showDeleteScheduleBtn() {
+    override fun showSingleParticipants(participants: List<User>?) {
+        //Not implemented here
+    }
+
+    override fun showTeamParticipants(participants: List<Team>?) {
+        //Not implemented here
+    }
+
+    override fun showSchedules(schedules: List<Game>?) {
         TODO("Not yet implemented")
     }
 
-    fun showAddScheduleBtn() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentDetailsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentParticipantsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentScheduleFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showResultFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTournamentUpdatesFragment() {
-        TODO("Not yet implemented")
+    override fun showGames(games: List<Game>?) {
+        //Not implemented here
     }
 
     override fun navigateToHomepageActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showProgress() {
