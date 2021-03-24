@@ -1,3 +1,4 @@
+import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BaseView
 
@@ -5,9 +6,11 @@ interface InvitationContract {
 
     interface IInvitationView : BaseView {
 
-        fun showTournamentInvitation(tournaments: List<Tournament>)
+        fun showTournamentInvitation(tournaments: List<Invitation>)
 
         fun navigateToHomepageActivity()
+
+        fun navigateToTournamentActivity()
     }
 
     interface IInvitationPresenter {
@@ -18,5 +21,7 @@ interface InvitationContract {
         fun onAcceptBtnClicked(tournament: Tournament)
 
         fun onDeclineBtnClicked(tournament: Tournament)
+
+        fun onInvitationItemClicked(position : Int)
     }
 }

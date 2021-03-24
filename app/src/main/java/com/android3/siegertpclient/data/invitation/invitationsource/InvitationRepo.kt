@@ -1,8 +1,10 @@
 package com.android3.siegertpclient.data.invitation.invitationsource
 
 import android.content.Context
+import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationRemoteDataSource
 import com.android3.siegertpclient.data.payload.ApiResponse
+import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.PreferencesProvider
 import java.time.LocalDate
@@ -51,5 +53,9 @@ class InvitationRepo(private val context: Context) {
             return response.body()!!["userId"]
         }
         return null
+    }
+    
+    fun getCurrentUserInvitations() : List<Invitation> {
+        return localData.getCurrentInvitationList()
     }
 }

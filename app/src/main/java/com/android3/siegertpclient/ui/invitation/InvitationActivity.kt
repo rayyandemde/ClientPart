@@ -5,11 +5,13 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.databinding.ActivityInvitationBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
+import com.android3.siegertpclient.ui.tournament.TournamentActivity
 import com.android3.siegertpclient.utils.recyclerviewadapters.InvitationAdapter
 import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
 
@@ -57,12 +59,17 @@ class InvitationActivity : BaseActivity(), InvitationContract.IInvitationView,
         invitationPresenter.onDetach()
     }
 
-    override fun showTournamentInvitation(tournaments: List<Tournament>) {
+    override fun showTournamentInvitation(tournaments: List<Invitation>) {
         TODO("Not yet implemented")
     }
 
     override fun navigateToHomepageActivity() {
         val hIntent = Intent(this, HomepageActivity::class.java)
+        startActivity(hIntent)
+    }
+
+    override fun navigateToTournamentActivity() {
+        val hIntent = Intent(this, TournamentActivity::class.java)
         startActivity(hIntent)
     }
 
@@ -83,6 +90,6 @@ class InvitationActivity : BaseActivity(), InvitationContract.IInvitationView,
     }
 
     override fun onInvitationItemClick(position: Int) {
-        TODO("Not yet implemented")
+        invitationPresenter?.onInvitationItemClicked(position)
     }
 }
