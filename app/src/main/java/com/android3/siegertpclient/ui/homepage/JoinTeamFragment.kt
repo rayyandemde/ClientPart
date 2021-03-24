@@ -44,35 +44,31 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
         _binding = null
     }
 
-    fun navigateToTeamActivity() {
-        TODO("Not yet implemented")
-    }
-
     override fun showFeed(feed: List<Tournament>?) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToInvitationActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToUserActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToCreateTournamentActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToCreateTeamActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToTournamentActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
-    override fun showSearchResult(tournaments: List<Tournament>) {
+    override fun navigateToTeamActivity() {
         TODO("Not yet implemented")
     }
 

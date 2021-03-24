@@ -42,6 +42,7 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
                     R.id.container_team_fragments,
                     teamInvitationFragment
                 )
+                R.id.navigation_delete_team -> showDeleteAlert()
             }
 
             transaction.commit()
@@ -74,6 +75,10 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
     }
 
     override fun navigateToTournamentActivity() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showDeleteAlert() {
         TODO("Not yet implemented")
     }
 

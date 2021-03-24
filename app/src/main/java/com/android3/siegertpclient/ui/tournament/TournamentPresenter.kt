@@ -5,6 +5,8 @@ import android.text.TextUtils
 import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.tournament.tournamentsource.TournamentRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
+import com.android3.siegertpclient.utils.Constants.Companion.SINGLE
+import com.android3.siegertpclient.utils.Constants.Companion.TEAM
 import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.OnlineChecker
 import kotlinx.coroutines.Dispatchers
@@ -91,22 +93,52 @@ class TournamentPresenter(private val context: Context) : BasePresenter<Tourname
         view?.navigateToHomepageActivity()
     }
 
+    override fun initParticipantAdapter() {
+        val participantForm = tournamentRepo.getCurrentTournament().tournamentDetail.participantForm
+        view?.initParticipantAdapter(participantForm)
+    }
+
     override fun onParticipantRefresh() {
-        val tournament = tournamentRepo.getCurrentTournament()
-        val participantForm = tournament.tournamentDetail.participantForm
+        val participantForm = tournamentRepo.getCurrentTournament().tournamentDetail.participantForm
 
         when {
-            participantForm == "SINGLE" -> {
-                handleSigleRefresh()
+            participantForm == SINGLE -> {
+                handleSingleRefresh()
             }
-            participantForm == "TEAM" -> {
+            participantForm == TEAM -> {
                 handleTeamRefresh()
             }
         }
     }
 
-    private fun handleSigleRefresh() {
-        TODO("Not yet implemented")
+    private fun handleSingleRefresh() {
+        if (!onlineChecker.isOnline()) {
+            view?.showNoInternetConnection()
+            view?.hideProgress()
+        } else {
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
+                    val participants = tournamentRepo.getTournamentParticipantsUser()
+                    if (participants != null) {
+                        withContext(Dispatchers.Main) {
+                            view?.showSingleParticipants(participants)
+                            view?.hideProgress()
+                        }
+                    }
+                    if (participants == null) {
+                        withContext(Dispatchers.Main) {
+                            view?.showError("It seems there's no participant yet.")
+                            view?.hideProgress()
+                        }
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        view?.showError("Oops... It seems there's unexpected error. Please try again.")
+                        view?.hideProgress()
+                    }
+                }
+            }
+        }
     }
 
     private fun handleTeamRefresh() {

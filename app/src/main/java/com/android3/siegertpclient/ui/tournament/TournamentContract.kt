@@ -23,6 +23,8 @@ interface TournamentContract {
 
         fun showIncompleteInput()
 
+        fun initParticipantAdapter(participantForm: String)
+
         fun showSingleParticipants(participants: List<User>?)
 
         fun showTeamParticipants(participants: List<Team>?)
@@ -48,6 +50,8 @@ interface TournamentContract {
         )
 
         fun onHomeBtnClicked()
+
+        fun initParticipantAdapter()
 
         fun onParticipantRefresh()
 

@@ -26,11 +26,6 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
 
     private var tournamentPresenter: TournamentPresenter? = null
 
-    private val noSchedule by lazy {
-        val noResult = Result("", "","")
-        listOf(Game("There is", "", noResult, "no schedule", ""))
-    }
-
     private val scheduleAdapter by lazy { ScheduleAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -55,17 +50,6 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
         tournamentPresenter?.onDetach()
         _binding = null
     }
-    fun showScheduleList(games: List<Game>) {
-        TODO("Not yet implemented")
-    }
-
-    fun showDeleteScheduleBtn() {
-        TODO("Not yet implemented")
-    }
-
-    fun showAddScheduleBtn() {
-        TODO("Not yet implemented")
-    }
 
     override fun showCurrentTournamentDetails(
         tournamentName: String,
@@ -79,23 +63,27 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
         location: String,
         maxPlayer: Int
     ) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun disableEdits() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showIncompleteInput() {
+        //Not implemented here
+    }
+
+    override fun initParticipantAdapter() {
         TODO("Not yet implemented")
     }
 
     override fun showSingleParticipants(participants: List<User>?) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showTeamParticipants(participants: List<Team>?) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showSchedules(schedules: List<Game>?) {
@@ -103,11 +91,11 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
     }
 
     override fun showGames(games: List<Game>?) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToHomepageActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showProgress() {

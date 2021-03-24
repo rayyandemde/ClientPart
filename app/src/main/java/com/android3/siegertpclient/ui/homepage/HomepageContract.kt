@@ -18,8 +18,7 @@ interface HomepageContract {
 
         fun navigateToTournamentActivity()
 
-        //Open tournament feature will not be implemented
-        fun showSearchResult(tournaments: List<Tournament>)
+        fun navigateToTeamActivity()
     }
 
     interface IHomepagePresenter {

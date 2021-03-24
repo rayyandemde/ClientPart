@@ -26,11 +26,6 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
 
     private var tournamentPresenter: TournamentPresenter? = null
 
-    private val noSchedule by lazy {
-        val noResult = Result("", "","")
-        listOf(Game("There is", "", noResult, "no schedule", ""))
-    }
-
     private val gameAdapter by lazy { GameAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -73,27 +68,31 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
         location: String,
         maxPlayer: Int
     ) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun disableEdits() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showIncompleteInput() {
+        //Not implemented here
+    }
+
+    override fun initParticipantAdapter() {
         TODO("Not yet implemented")
     }
 
     override fun showSingleParticipants(participants: List<User>?) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showTeamParticipants(participants: List<Team>?) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showSchedules(schedules: List<Game>?) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showGames(games: List<Game>?) {

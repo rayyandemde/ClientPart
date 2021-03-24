@@ -16,9 +16,12 @@ import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
 import com.android3.siegertpclient.ui.team.TeamPresenter
+import com.android3.siegertpclient.utils.Constants.Companion.SINGLE
+import com.android3.siegertpclient.utils.Constants.Companion.TEAM
+import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
 import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
 
-class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamentView, UserAdapter.OnUserItemClickListener {
+class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamentView, UserAdapter.OnUserItemClickListener, TeamAdapter.OnTeamItemClickListener {
     private var _binding: FragmentTournamentparticipantsBinding? = null
     private val binding get() = _binding!!
 
@@ -26,11 +29,13 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
 
     private val userAdapter by lazy { UserAdapter(this) }
 
+    private val teamAdapter by lazy { TeamAdapter(this) }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTournamentparticipantsBinding.inflate(inflater, container, false)
         tournamentPresenter = TournamentPresenter(requireContext())
 
-        binding.rvTournamentParticipants.adapter = userAdapter
+        tournamentPresenter?.initParticipantAdapter()
 
         tournamentPresenter?.onParticipantRefresh()
 
@@ -80,6 +85,13 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
         //Not implemented here
     }
 
+    override fun initParticipantAdapter(participantType: String) {
+        when {
+            participantType == SINGLE -> binding.rvTournamentParticipants.adapter = userAdapter
+            participantType == TEAM -> binding.rvTournamentParticipants.adapter = teamAdapter
+        }
+    }
+
     override fun showSingleParticipants(participants: List<User>?) {
         TODO("Not yet implemented")
     }
@@ -118,7 +130,11 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
     }
 
     override fun onUserItemClick(position: Int) {
-        TODO("Not yet implemented")
+        //Do Nothing
+    }
+
+    override fun onTeamItemClick(position: Int) {
+        //Do Nothing
     }
 
     private fun doToast(message: String) {

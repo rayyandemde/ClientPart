@@ -22,7 +22,7 @@
         android:title="@string/matches_info" />
 
     <item
-        android:id="@+id/navigation_changelogs"
+        android:id="@+id/navigation_delete_tournament"
         android:icon="@drawable/warning_icon"
         android:title="@string/delete_tournament" />
 </menu>

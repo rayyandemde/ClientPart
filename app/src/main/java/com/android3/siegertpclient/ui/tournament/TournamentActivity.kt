@@ -68,7 +68,7 @@ class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView 
                     R.id.container_tournament_fragments,
                     tournamentMatchesFragment
                 ).addToBackStack(null)
-                R.id.navigation_changelogs -> transaction.replace(
+                R.id.navigation_delete_tournament -> transaction.replace(
                     R.id.container_tournament_fragments,
                     deleteTournamentFragment
                 ).addToBackStack(null)
@@ -125,6 +125,10 @@ class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView 
 
     override fun showIncompleteInput() {
         //Not implemented here
+    }
+
+    override fun initParticipantAdapter() {
+        TODO("Not yet implemented")
     }
 
     override fun showSingleParticipants(participants: List<User>?) {

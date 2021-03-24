@@ -84,8 +84,8 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
         TODO("Not yet implemented")
     }
 
-    override fun showSearchResult(tournaments: List<Tournament>) {
-        TODO("Not yet implemented")
+    override fun navigateToTeamActivity() {
+        //Not implemented here
     }
 
     override fun showProgress() {

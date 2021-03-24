@@ -70,6 +70,10 @@ class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView 
         //Not implemented here
     }
 
+    override fun initParticipantAdapter() {
+        TODO("Not yet implemented")
+    }
+
     override fun showSingleParticipants(participants: List<User>?) {
         //Not implemented here
     }

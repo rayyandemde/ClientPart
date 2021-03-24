@@ -76,7 +76,7 @@ class UserRepo(private val context: Context) {
     suspend fun getUserTeams(): List<Team>? {
         val response = userRemoteDataSource.getUsersTeams(localData.getString(KEY_USERNAME)!!, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
-            localData.putCurrentUserTeams(response.body()!!)
+            localData.putCurrentTeamList(response.body()!!)
             return response.body()!!
         }
         return null
@@ -121,6 +121,6 @@ class UserRepo(private val context: Context) {
     }
 
     fun getCurrentUserTeams() : List<Team> {
-        return localData.getCurrentUserTeams()
+        return localData.getCurrentTeamList()
     }
 }

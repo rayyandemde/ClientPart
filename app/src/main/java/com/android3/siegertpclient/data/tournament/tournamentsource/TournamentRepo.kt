@@ -50,21 +50,23 @@ class TournamentRepo(private val context: Context) {
         return null
     }
 
-    suspend fun getTournamentParticipantsUser(tournamentName : String) : List<User>? {
+    suspend fun getTournamentParticipantsUser() : List<User>? {
         val response =
-            tournamentRemoteDataSource2.getTournamentParticipantsUser(tournamentName,
+            tournamentRemoteDataSource2.getTournamentParticipantsUser(LocalCache.getCurrentTournamentName(context)!!,
                 LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
+            localData.putCurrentUserList(response.body()!!)
             return response.body()!!
         }
         return null
     }
 
-    suspend fun getTournamentParticipantsTeam(tournamentName : String) : List<Team>? {
+    suspend fun getTournamentParticipantsTeam() : List<Team>? {
         val response =
-            tournamentRemoteDataSource2.getTournamentParticipantsTeam(tournamentName,
+            tournamentRemoteDataSource2.getTournamentParticipantsTeam(LocalCache.getCurrentTournamentName(context)!!,
                 LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
+            localData.putCurrentTeamList(response.body()!!)
             return response.body()!!
         }
         return null

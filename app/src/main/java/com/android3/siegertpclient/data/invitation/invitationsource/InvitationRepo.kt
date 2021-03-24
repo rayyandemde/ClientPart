@@ -4,19 +4,24 @@ import android.content.Context
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationRemoteDataSource
 import com.android3.siegertpclient.data.payload.ApiResponse
 import com.android3.siegertpclient.utils.LocalCache
+import com.android3.siegertpclient.utils.PreferencesProvider
+import java.time.LocalDate
 
 /**
  * Invitation repository that calls the remote and local data source.
  */
 class InvitationRepo(private val context: Context) {
     private val invitationRemoteDataSource = InvitationRemoteDataSource()
+    private var localData = PreferencesProvider(context)
 
     suspend fun createInvitation(recipientId: String): ApiResponse? {
+        var currentTournament = localData.getCurrentTournament()!!
+
         val response = invitationRemoteDataSource.createInvitation(
             LocalCache.getCurrentUserId(context)!!,
             recipientId,
-            LocalCache.getCurrentTournamentId(context)!!,
-            LocalCache.getCurrentTournamentParticipantForm(context)!!,
+            currentTournament.tournamentId,
+            currentTournament.tournamentDetail.participantForm,
             LocalCache.getBearerToken(context)!!
         )
         if (response.isSuccessful) {
