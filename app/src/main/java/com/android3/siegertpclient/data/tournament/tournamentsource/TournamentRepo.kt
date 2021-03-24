@@ -122,9 +122,9 @@ class TournamentRepo(private val context: Context) {
         return null
     }
 
-    suspend fun deleteTournament(tournamentName : String) : ApiResponse? {
+    suspend fun deleteTournament() : ApiResponse? {
         val response =
-            tournamentRemoteDataSource2.deleteTournament(tournamentName,
+            tournamentRemoteDataSource2.deleteTournament(localData.getCurrentTournament()!!.tournamentName,
                 LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
             return response.body()!!
@@ -155,5 +155,9 @@ class TournamentRepo(private val context: Context) {
 
     fun getCurrentTournament() : Tournament {
         return localData.getCurrentTournament()!!
+    }
+
+    fun getCurrentTournamentList() : List<Tournament> {
+        return localData.getCurrentTournamentList()
     }
 }

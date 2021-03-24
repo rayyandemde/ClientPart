@@ -41,4 +41,15 @@ class InvitationRepo(private val context: Context) {
         }
         return null
     }
+
+    suspend fun getRecipientIdByUsername(username: String): String? {
+        val response = invitationRemoteDataSource.getRecipientIdByUsername(
+            username,
+            LocalCache.getBearerToken(context)!!
+        )
+        if (response.isSuccessful) {
+            return response.body()!!["userId"]
+        }
+        return null
+    }
 }

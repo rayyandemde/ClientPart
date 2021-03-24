@@ -90,6 +90,6 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
     }
 
     override fun onTeamItemClick(position: Int) {
-        val clickedTeam = userProfilePresenter?.userTeamClicked(position)
+        userProfilePresenter?.userTeamClicked(position)
     }
 }

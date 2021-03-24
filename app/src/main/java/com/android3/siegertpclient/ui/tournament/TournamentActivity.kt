@@ -127,6 +127,10 @@ class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView 
         //Not implemented here
     }
 
+    override fun showSuccess(message: String) {
+        TODO("Not yet implemented")
+    }
+
     override fun initParticipantAdapter(participantForm: String) {
         TODO("Not yet implemented")
     }

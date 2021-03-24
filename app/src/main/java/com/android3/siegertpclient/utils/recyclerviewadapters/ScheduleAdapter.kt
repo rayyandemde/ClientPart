@@ -34,6 +34,7 @@ class ScheduleAdapter(private val listener: OnScheduleItemClickListener) : Recyc
 
     inner class ScheduleHolder(val binding: CardScheduleOverviewBinding) : RecyclerView.ViewHolder(binding.root),
         View.OnClickListener {
+        val scheduleOverviewTv = binding.tvScheduleOverview
 
         init {
             binding.root.setOnClickListener(this)
