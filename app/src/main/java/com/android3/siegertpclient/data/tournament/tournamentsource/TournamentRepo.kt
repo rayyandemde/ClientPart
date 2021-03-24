@@ -145,6 +145,7 @@ class TournamentRepo(private val context: Context) {
             tournamentRemoteDataSource2.updateTournamentDetail(tournamentName, tournamentDetail,
                 LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
+            localData.putCurrentTournament(response.body()!!)
             return response.body()!!
         }
         return null

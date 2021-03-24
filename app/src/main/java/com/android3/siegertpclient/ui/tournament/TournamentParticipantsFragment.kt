@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
@@ -21,10 +24,6 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
 
     private var tournamentPresenter: TournamentPresenter? = null
 
-    private val noUser by lazy {
-        listOf(User("There's no participant at the moment", emptyList(), "...", emptyList(), emptyList(), "","..."))
-    }
-
     private val userAdapter by lazy { UserAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -33,7 +32,10 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
 
         binding.rvTournamentParticipants.adapter = userAdapter
 
+        tournamentPresenter?.onParticipantRefresh()
+
         binding.srlRvTournamentParticipants.setOnRefreshListener {
+            tournamentPresenter?.onParticipantRefresh()
         }
 
         binding.btnAddParticipants.setOnClickListener {
@@ -53,17 +55,7 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
         tournamentPresenter?.onDetach()
         _binding = null
     }
-//    fun showParticipantList(participants: List<Participant>) {
-//        TODO("Not yet implemented")
-//    }
 
-    fun showKickParticipantBtn() {
-        TODO("Not yet implemented")
-    }
-
-    fun showAddParticipantBtn() {
-        TODO("Not yet implemented")
-    }
 
     override fun showCurrentTournamentDetails(
         tournamentName: String,
@@ -77,11 +69,35 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
         location: String,
         maxPlayer: Int
     ) {
+        //Not implemented here
+    }
+
+    override fun disableEdits() {
+        //Not implemented here
+    }
+
+    override fun showIncompleteInput() {
+        //Not implemented here
+    }
+
+    override fun showSingleParticipants(participants: List<User>?) {
         TODO("Not yet implemented")
     }
 
-    override fun navigateToHomepageActivity() {
+    override fun showTeamParticipants(participants: List<Team>?) {
         TODO("Not yet implemented")
+    }
+
+    override fun showSchedules(schedules: List<Game>?) {
+        //Not implemented here
+    }
+
+    override fun showGames(games: List<Game>?) {
+        //Not implemented here
+    }
+
+    override fun navigateToHomepageActivity() {
+        //Not implemented here
     }
 
     override fun showProgress() {
@@ -89,18 +105,23 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        //TO DO FOR ADD PARTICIPANT
+        binding.srlRvTournamentParticipants.isRefreshing = false
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
     }
 
     override fun onUserItemClick(position: Int) {
         TODO("Not yet implemented")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }

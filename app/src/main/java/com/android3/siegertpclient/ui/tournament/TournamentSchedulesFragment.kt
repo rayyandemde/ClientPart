@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.tournament.Result
 import com.android3.siegertpclient.data.user.User
@@ -78,6 +79,30 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
         location: String,
         maxPlayer: Int
     ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun disableEdits() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showIncompleteInput() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showSingleParticipants(participants: List<User>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showTeamParticipants(participants: List<Team>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showSchedules(schedules: List<Game>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showGames(games: List<Game>?) {
         TODO("Not yet implemented")
     }
 

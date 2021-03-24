@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.tournament.Result
+import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTournamentmatchesBinding
 import com.android3.siegertpclient.databinding.FragmentTournamentschedulesBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.GameAdapter
@@ -58,17 +60,6 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
         _binding = null
     }
 
-    fun showGames(games: List<Game>) {
-        TODO("Not yet implemented")
-    }
-
-    fun showEditGamesBtn() {
-        TODO("Not yet implemented")
-    }
-
-    fun showAddGameBtn() {
-        TODO("Not yet implemented")
-    }
 
     override fun showCurrentTournamentDetails(
         tournamentName: String,
@@ -85,8 +76,32 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
         TODO("Not yet implemented")
     }
 
-    override fun navigateToHomepageActivity() {
+    override fun disableEdits() {
         TODO("Not yet implemented")
+    }
+
+    override fun showIncompleteInput() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showSingleParticipants(participants: List<User>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showTeamParticipants(participants: List<Team>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showSchedules(schedules: List<Game>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showGames(games: List<Game>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToHomepageActivity() {
+        //Not implemented here
     }
 
     override fun showProgress() {
@@ -108,8 +123,4 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
     override fun onGameItemClick(position: Int) {
         TODO("Not yet implemented")
     }
-
-//    fun showListOfParticipant(participants: Participant[]) {
-//        TODO("Not yet implemented")
-//    }
 }

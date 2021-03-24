@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.tournament.Result
+import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentDeleteTournamentBinding
 import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
 import com.android3.siegertpclient.databinding.FragmentTournamentschedulesBinding
@@ -56,12 +59,37 @@ class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView 
         location: String,
         maxPlayer: Int
     ) {
-        TODO("Not yet implemented")
+        //Not implemented here
+    }
+
+    override fun disableEdits() {
+        //Not implemented here
+    }
+
+    override fun showIncompleteInput() {
+        //Not implemented here
+    }
+
+    override fun showSingleParticipants(participants: List<User>?) {
+        //Not implemented here
+    }
+
+    override fun showTeamParticipants(participants: List<Team>?) {
+        //Not implemented here
+    }
+
+    override fun showSchedules(schedules: List<Game>?) {
+        //Not implemented here
+    }
+
+    override fun showGames(games: List<Game>?) {
+        //Not implemented here
     }
 
     override fun navigateToHomepageActivity() {
-        val hIntent = Intent(activity, HomepageActivity::class.java)
-        startActivity(hIntent)
+        doToast("Tournament have been cancelled")
+        val intent = Intent(activity, HomepageActivity::class.java)
+        startActivity(intent)
     }
 
     override fun showProgress() {
@@ -73,10 +101,14 @@ class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView 
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }
