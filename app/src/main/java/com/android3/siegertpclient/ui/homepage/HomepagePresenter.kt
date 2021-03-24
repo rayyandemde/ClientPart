@@ -1,6 +1,7 @@
 package com.android3.siegertpclient.ui.homepage
 
 import android.content.Context
+import android.text.TextUtils
 import com.android3.siegertpclient.data.team.teamsource.TeamRepo
 import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
@@ -36,24 +37,33 @@ class HomepagePresenter(private val context: Context) :
     }
 
     override fun onJoinTeamBtnClicked(teamName: String, password: String) {
-        if (!onlineChecker.isOnline()) {
-            view?.showNoInternetConnection()
-            view?.hideProgress()
-        } else {
-            GlobalScope.launch(Dispatchers.IO) {
-                try {
-                    val joinTeam = teamRepo.joinTeam(teamName, password)
-                    if (joinTeam != null) {
-                        withContext(Dispatchers.Main) {
-                            view?.showSuccess(joinTeam.message)
-                            view?.hideProgress()
-                            view?.navigateToTeamActivity()
+        view?.showProgress()
+
+        when {
+            TextUtils.isEmpty(teamName) or TextUtils.isEmpty(password) -> {
+                view?.showIncompleteInput()
+                view?.hideProgress()
+            }
+            !onlineChecker.isOnline() -> {
+                view?.showNoInternetConnection()
+                view?.hideProgress()
+            }
+            else -> {
+                GlobalScope.launch(Dispatchers.IO) {
+                    try {
+                        val joinTeam = teamRepo.joinTeam(teamName, password)
+                        if (joinTeam != null) {
+                            withContext(Dispatchers.Main) {
+                                view?.showSuccess(joinTeam.message)
+                                view?.hideProgress()
+                                view?.navigateToTeamActivity()
+                            }
                         }
-                    }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        view?.showError("Oops... It seems there's unexpected error. Please try again.")
-                        view?.hideProgress()
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            view?.showError("Oops... It seems there's unexpected error. Please try again.")
+                            view?.hideProgress()
+                        }
                     }
                 }
             }

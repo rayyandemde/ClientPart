@@ -83,6 +83,10 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         TODO("Not yet implemented")
     }
 
+    override fun showIncompleteInput() {
+        TODO("Not yet implemented")
+    }
+
     override fun navigateToInvitationActivity() {
         val intent = Intent(this, InvitationActivity::class.java)
         startActivity(intent)

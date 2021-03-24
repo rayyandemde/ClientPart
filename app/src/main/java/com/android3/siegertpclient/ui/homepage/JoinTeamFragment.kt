@@ -31,7 +31,9 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
         val teamPasswordEt = binding.etTeamPassword
 
         binding.btnJoinTeam.setOnClickListener {
-
+            homepagePresenter?.onJoinTeamBtnClicked(
+                teamNameEt.text.toString().trim { it <= ' ' },
+                teamPasswordEt.text.toString().trim { it <= ' ' })
         }
 
         return binding.root
@@ -54,6 +56,10 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
 
     override fun showSuccess(message: String) {
         doToast(message)
+    }
+
+    override fun showIncompleteInput() {
+        doToast("Please fill in all of the field")
     }
 
     override fun navigateToInvitationActivity() {

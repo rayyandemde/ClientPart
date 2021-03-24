@@ -10,6 +10,8 @@ interface HomepageContract {
 
         fun showSuccess(message: String)
 
+        fun showIncompleteInput()
+
         fun navigateToInvitationActivity()
 
         fun navigateToUserActivity()
