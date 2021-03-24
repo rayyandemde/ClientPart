@@ -61,6 +61,10 @@ class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAd
         TODO("Not yet implemented")
     }
 
+    override fun showDeleteAlert() {
+        TODO("Not yet implemented")
+    }
+
     override fun showMembers(teamMembers: List<User>?) {
         TODO("Not yet implemented")
     }

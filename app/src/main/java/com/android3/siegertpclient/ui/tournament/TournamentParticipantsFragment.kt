@@ -20,6 +20,7 @@ import com.android3.siegertpclient.utils.Constants.Companion.SINGLE
 import com.android3.siegertpclient.utils.Constants.Companion.TEAM
 import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
 import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamentView, UserAdapter.OnUserItemClickListener, TeamAdapter.OnTeamItemClickListener {
     private var _binding: FragmentTournamentparticipantsBinding? = null
@@ -44,7 +45,9 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
         }
 
         binding.btnAddParticipants.setOnClickListener {
-
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Add Participant")
+                .setMessage("Please input")
         }
 
         return binding.root
@@ -93,11 +96,15 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
     }
 
     override fun showSingleParticipants(participants: List<User>?) {
-        TODO("Not yet implemented")
+        if (participants != null) {
+            userAdapter.setData(participants)
+        }
     }
 
     override fun showTeamParticipants(participants: List<Team>?) {
-        TODO("Not yet implemented")
+        if (participants != null) {
+            teamAdapter.setData(participants)
+        }
     }
 
     override fun showSchedules(schedules: List<Game>?) {

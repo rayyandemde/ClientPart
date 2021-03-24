@@ -158,6 +158,10 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
         doToast("Please input all of the field")
     }
 
+    override fun initParticipantAdapter(participantForm: String) {
+        TODO("Not yet implemented")
+    }
+
     override fun showSingleParticipants(participants: List<User>?) {
         //Not implemented here
     }

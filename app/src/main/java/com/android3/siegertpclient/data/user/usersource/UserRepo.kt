@@ -69,12 +69,17 @@ class UserRepo(private val context: Context) {
         return null
     }
 
-    suspend fun getUsersTournaments(username: String, token: String): Response<List<Tournament>> {
-        return userRemoteDataSource.getUsersTournaments(username, token)
+    suspend fun getUsersTournaments(): List<Tournament>? {
+        val response = userRemoteDataSource.getUsersTournaments(LocalCache.getCurrentUsername(context)!!, LocalCache.getBearerToken(context)!!)
+        if (response.isSuccessful) {
+            localData.putCurrentTournamentList(response.body()!!)
+            return response.body()!!
+        }
+        return null
     }
 
     suspend fun getUserTeams(): List<Team>? {
-        val response = userRemoteDataSource.getUsersTeams(localData.getString(KEY_USERNAME)!!, LocalCache.getBearerToken(context)!!)
+        val response = userRemoteDataSource.getUsersTeams(LocalCache.getBearerToken(context)!!, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
             localData.putCurrentTeamList(response.body()!!)
             return response.body()!!
@@ -82,8 +87,13 @@ class UserRepo(private val context: Context) {
         return null
     }
 
-    suspend fun getUsersInvitations(username: String, token: String): Response<List<Invitation>> {
-        return userRemoteDataSource.getUsersInvitations(username, token)
+    suspend fun getUsersInvitations(): List<Invitation>? {
+        val response = userRemoteDataSource.getUsersInvitations(LocalCache.getCurrentUsername(context)!!, LocalCache.getBearerToken(context)!!)
+        if (response.isSuccessful) {
+            localData.putCurrentInvitationList(response.body()!!)
+            return response.body()!!
+        }
+        return null
     }
 
     suspend fun updateUserDetail(

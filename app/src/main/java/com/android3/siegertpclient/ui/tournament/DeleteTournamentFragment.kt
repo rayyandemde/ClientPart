@@ -70,7 +70,7 @@ class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView 
         //Not implemented here
     }
 
-    override fun initParticipantAdapter() {
+    override fun initParticipantAdapter(participantForm: String) {
         TODO("Not yet implemented")
     }
 

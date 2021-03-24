@@ -74,7 +74,7 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
         //Not implemented here
     }
 
-    override fun initParticipantAdapter() {
+    override fun initParticipantAdapter(participantForm: String) {
         TODO("Not yet implemented")
     }
 
