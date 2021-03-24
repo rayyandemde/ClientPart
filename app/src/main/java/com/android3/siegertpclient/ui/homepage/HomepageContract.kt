@@ -38,5 +38,7 @@ interface HomepageContract {
         fun onFeedRefresh()
 
         fun onJoinTeamBtnClicked(teamName: String, password: String)
+
+        fun onTournamentOverviewClicked(position : Int)
     }
 }

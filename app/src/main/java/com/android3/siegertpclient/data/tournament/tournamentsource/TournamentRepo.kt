@@ -156,4 +156,8 @@ class TournamentRepo(private val context: Context) {
     fun getCurrentTournament() : Tournament {
         return localData.getCurrentTournament()!!
     }
+
+    fun getCurrentUserTournaments() : List<Tournament> {
+        return localData.getCurrentTournamentList()
+    }
 }

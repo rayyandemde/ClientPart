@@ -113,6 +113,6 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
     }
 
     override fun onTournamentItemClick(position: Int) {
-        TODO("Not yet implemented")
+        homepagePresenter?.onTournamentOverviewClicked(position)
     }
 }
