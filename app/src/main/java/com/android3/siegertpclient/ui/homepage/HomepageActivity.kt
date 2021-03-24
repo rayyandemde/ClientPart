@@ -79,6 +79,10 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         //Not implemented here
     }
 
+    override fun showSuccess(message: String) {
+        TODO("Not yet implemented")
+    }
+
     override fun navigateToInvitationActivity() {
         val intent = Intent(this, InvitationActivity::class.java)
         startActivity(intent)
@@ -104,7 +108,7 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
     }
 
     override fun navigateToTeamActivity() {
-        //Not implemented here
+        TODO("Not yet implemented")
     }
 
     override fun showProgress() {

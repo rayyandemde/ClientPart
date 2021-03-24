@@ -8,6 +8,8 @@ interface HomepageContract {
 
         fun showFeed(feed: List<Tournament>?)
 
+        fun showSuccess(message: String)
+
         fun navigateToInvitationActivity()
 
         fun navigateToUserActivity()
@@ -33,6 +35,6 @@ interface HomepageContract {
 
         fun onFeedRefresh()
 
-        fun onJoinTeamBtnClicked()
+        fun onJoinTeamBtnClicked(teamName: String, password: String)
     }
 }
