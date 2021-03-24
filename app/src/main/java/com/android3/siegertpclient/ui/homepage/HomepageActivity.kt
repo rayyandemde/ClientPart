@@ -35,11 +35,11 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
 
         when(item.itemId){
-            R.id.navigation_feed -> transaction.replace(R.id.container_homepage_fragments, feedFragment).addToBackStack(null)
+            R.id.navigation_feed -> transaction.replace(R.id.container_homepage_fragments, feedFragment)
             R.id.navigation_createtournament -> homepagePresenter.onCreateTournamentBtnClicked()
 
             R.id.navigation_createteam -> homepagePresenter.onCreateTeamBtnClicked()
-            R.id.navigation_jointeam -> transaction.replace(R.id.container_homepage_fragments, joinTeamFragment).addToBackStack(null)
+            R.id.navigation_jointeam -> transaction.replace(R.id.container_homepage_fragments, joinTeamFragment)
             R.id.navigation_userprofile -> homepagePresenter.onUserBtnClicked()
 
         }

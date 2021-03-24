@@ -33,15 +33,15 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
                 R.id.navigation_team_member -> transaction.replace(
                     R.id.container_team_fragments,
                     teamMemberFragment
-                ).addToBackStack(null)
+                )
                 R.id.navigation_team_tournaments -> transaction.replace(
                     R.id.container_team_fragments,
                     teamTournamentsFragment
-                ).addToBackStack(null)
+                )
                 R.id.navigation_team_invitation -> transaction.replace(
                     R.id.container_team_fragments,
                     teamInvitationFragment
-                ).addToBackStack(null)
+                )
             }
 
             transaction.commit()

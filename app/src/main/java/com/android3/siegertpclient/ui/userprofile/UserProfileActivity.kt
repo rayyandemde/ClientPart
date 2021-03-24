@@ -28,8 +28,8 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
         transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
 
         when(item.itemId){
-            R.id.navigation_my_tournament -> transaction.replace(R.id.container_userprofile_fragments, myTournamentsFragment).addToBackStack(null)
-            R.id.navigation_my_team -> transaction.replace(R.id.container_userprofile_fragments, myTeamsFragment).addToBackStack(null)
+            R.id.navigation_my_tournament -> transaction.replace(R.id.container_userprofile_fragments, myTournamentsFragment)
+            R.id.navigation_my_team -> transaction.replace(R.id.container_userprofile_fragments, myTeamsFragment)
         }
 
         transaction.commit()
