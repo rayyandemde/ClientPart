@@ -2,12 +2,8 @@ package com.android3.siegertpclient.data.user
 
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import kotlinx.coroutines.runBlocking
-import okhttp3.Protocol
-import okhttp3.Request
-import okhttp3.ResponseBody
 import org.junit.Assert
 import org.junit.Test
-import retrofit2.Response
 
 class UserRemoteDataSourceTest {
 
