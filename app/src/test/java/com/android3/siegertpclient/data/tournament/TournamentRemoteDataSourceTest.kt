@@ -12,7 +12,7 @@ class TournamentRemoteDataSourceTest {
     private var tourneyDetail = TournamentDetail("", "", "", "",
         "", "", "", "")
 
-    @Ignore
+    @Ignore//add  @JvmSuppressWildcards to Interface necessary
     @Test
     fun responseSuccessfulCreateNewTournament() = runBlocking {
         var answer = tournamentRemote.createNewTournament("", 32, "name", tourneyDetail, "123")
