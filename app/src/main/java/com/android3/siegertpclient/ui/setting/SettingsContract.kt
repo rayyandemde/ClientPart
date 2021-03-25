@@ -3,7 +3,9 @@ import com.android3.siegertpclient.ui.base.BaseView
 interface SettingsContract {
 
     interface ISettingView : BaseView {
-        fun setCurrentUserEt(username: String, forename: String, surname: String)
+        fun setCurrentUserEt()
+
+        fun showSuccessful()
 
         fun navigateToUserProfileActivity()
 
@@ -11,8 +13,6 @@ interface SettingsContract {
     }
 
     interface ISettingPresenter {
-        fun initCurrentUserEt()
-
         fun onBackBtnClicked()
 
         fun onChangeLanguageSpinnerSelected()

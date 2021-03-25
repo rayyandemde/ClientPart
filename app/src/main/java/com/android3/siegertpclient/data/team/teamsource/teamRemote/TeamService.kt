@@ -42,7 +42,7 @@ interface TeamService {
 
     @POST("teams")
     suspend fun createNewTeam(
-        @Body team : Map<String, Any>,
+        @Body team : Map<String, String>,
         @Header("Authorization") token: String
     ): Response<Team>
 
@@ -65,11 +65,4 @@ interface TeamService {
         @Body membership : Map<String, String>,
         @Header("Authorization") token: String
     ) : Response<ApiResponse>
-    //TODO toggle password only on join activity
-
-//    @POST("teams/{teamName}")
-//    suspend fun quitTeam(
-//        @Path("teamName") teamName: String, @Body activity: String,
-//        @Header("Authorization") token: String
-//    ) : Response<ApiResponse>
 }
