@@ -11,6 +11,7 @@ import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.databinding.FragmentFeedBinding
 import com.android3.siegertpclient.ui.invitation.InvitationActivity
 import com.android3.siegertpclient.ui.tournament.TournamentActivity
+import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
 
 class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapter.OnTournamentItemClickListener {
@@ -24,6 +25,8 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
         homepagePresenter = HomepagePresenter(requireContext())
+
+        binding.tvWelcomeUsername.text = "Welcome " + LocalCache.getCurrentUsername(requireContext())
 
         binding.rvFeed.adapter = tournamentAdapter
 
