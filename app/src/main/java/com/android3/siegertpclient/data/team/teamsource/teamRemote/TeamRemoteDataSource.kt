@@ -16,7 +16,7 @@ class TeamRemoteDataSource {
         password: String,
         token: String
     ): Response<Team> {
-        val team = hashMapOf<String, Any>()
+        val team = hashMapOf<String, String>()
         team["adminId"] = adminId
         team["name"] = name
         team["password"] = password
