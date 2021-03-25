@@ -135,7 +135,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         }
 
         val locationEt = binding.etLocation
-        val maxPlayersEt = binding.etMaxPlayer
+        binding.etMaxPlayer.setText("0")
 
         binding.btnCreate.setOnClickListener {
             val name = editTextTrimmer(nameEt)
@@ -144,7 +144,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
             val startTime = binding.btnStartDate.text.toString()
             val endTime = binding.btnEndDate.text.toString()
             val location = editTextTrimmer(locationEt)
-            val maxParticipantNumber = editTextTrimmer(maxPlayersEt).toInt()
+            val maxParticipantNumber = binding.etMaxPlayer.text.toString().toInt()
 
             createTournamentPresenter.onCreateBtnClicked(
                 name,
@@ -158,6 +158,11 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
                 location,
                 maxParticipantNumber
             )
+        }
+
+        //Only for test
+        binding.tvCreateATournament.setOnClickListener {
+            navigateToTournamentActivity()
         }
     }
 
