@@ -2,6 +2,9 @@ package com.android3.siegertpclient.data.user
 
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import kotlinx.coroutines.runBlocking
+import okhttp3.Protocol
+import okhttp3.Request
+import okhttp3.ResponseBody
 import org.junit.Assert
 import org.junit.Test
 import retrofit2.Response
@@ -56,6 +59,7 @@ class UserRemoteDataSourceTest {
     @Test
     fun emptyToken() = runBlocking {
         var newUser = userRemote.createNewUser("username", "forename", "surname", "userId", "")
-        //Assert.assertEquals(Response{protocol=http/1.1, code=500, message=, url=https://sieger-teamthree.herokuapp.com/users}, newUser)//TODO implement actual error code
+        //Assert.assertEquals(Response.error(500, ResponseBody.create("message=")), newUser)TODO implement body
+        //retrofit2.Response<Response{protocol=http/1.1, code=500, message=, url=https://sieger-teamthree.herokuapp.com/users}>
     }
 }
