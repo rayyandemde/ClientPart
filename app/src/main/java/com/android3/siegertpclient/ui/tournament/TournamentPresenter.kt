@@ -2,7 +2,9 @@ package com.android3.siegertpclient.ui.tournament
 
 import android.content.Context
 import android.text.TextUtils
+import android.util.Log
 import com.android3.siegertpclient.data.invitation.invitationsource.InvitationRepo
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.tournament.tournamentsource.TournamentRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
@@ -21,36 +23,11 @@ class TournamentPresenter(private val context: Context) :
     private var tournamentRepo = TournamentRepo(context)
     private var invitationRepo = InvitationRepo(context)
 
-    override fun initTournamentDetails() {
-        val tournament = tournamentRepo.getCurrentTournament()
-        val tournamentDetail = tournament.tournamentDetail
-
-        val tournamentName = tournament.tournamentName
-        val typeOfGame = tournamentDetail.typeOfGame
-        val matchType = tournament.type
-        val tournamentType = tournamentDetail.tournamentTypes
-        val participantForm = tournamentDetail.participantForm
-        val registrationDeadline = tournamentDetail.registrationDeadline
-        val startDate = tournamentDetail.startTime
-        val endDate = tournamentDetail.endTime
-        val location = tournamentDetail.location
-        val maxPlayer = tournament.maxParticipantNumber
-
-        view?.showCurrentTournamentDetails(
-            tournamentName,
-            typeOfGame,
-            matchType,
-            tournamentType,
-            participantForm,
-            registrationDeadline,
-            startDate,
-            endDate,
-            location,
-            maxPlayer
-        )
+    override fun getCurrentTournament() : Tournament {
+        return tournamentRepo.getCurrentTournament()
     }
 
-    override fun checkEditRights() {
+    override fun allowEdits() {
         if (!isAdmin()) {
             view?.disableEdits()
         }
@@ -100,7 +77,7 @@ class TournamentPresenter(private val context: Context) :
                         )
                         if (tournament != null) {
                             withContext(Dispatchers.Main) {
-                                initTournamentDetails()
+                                view?.showCurrentTournamentDetails()
                                 view?.hideProgress()
                             }
                         }
@@ -117,11 +94,6 @@ class TournamentPresenter(private val context: Context) :
 
     override fun onHomeBtnClicked() {
         view?.navigateToHomepageActivity()
-    }
-
-    override fun initParticipantAdapter() {
-        val participantForm = tournamentRepo.getCurrentTournament().tournamentDetail.participantForm
-        view?.initParticipantAdapter(participantForm)
     }
 
     override fun onParticipantRefresh() {
@@ -210,7 +182,7 @@ class TournamentPresenter(private val context: Context) :
         }
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val inviteParticipant = tournamentRepo.getTournamentParticipantsTeam()
+                val inviteParticipant = invitationRepo.invite(participant)
                 if (inviteParticipant != null) {
                     withContext(Dispatchers.Main) {
                         view?.showSuccess("$inviteParticipant has been invited!")

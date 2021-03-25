@@ -47,20 +47,12 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
         _binding = null
     }
 
+    override fun showCurrentTournamentDetails() {
+        TODO("Not yet implemented")
+    }
 
-    override fun showCurrentTournamentDetails(
-        tournamentName: String,
-        typeOfGame: String,
-        matchType: String,
-        tournamentType: String,
-        participantForm: String,
-        registrationDeadline: String,
-        startDate: String,
-        endDate: String,
-        location: String,
-        maxPlayer: Int
-    ) {
-        //Not implemented here
+    override fun setEditRights() {
+        TODO("Not yet implemented")
     }
 
     override fun disableEdits() {
@@ -75,8 +67,8 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
         TODO("Not yet implemented")
     }
 
-    override fun initParticipantAdapter(participantForm: String) {
-        //Not implemented here
+    override fun initParticipantAdapter() {
+        TODO("Not yet implemented")
     }
 
     override fun showSingleParticipants(participants: List<User>?) {

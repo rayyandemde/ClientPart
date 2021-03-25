@@ -30,8 +30,8 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
         _binding = FragmentTournamentdetailsBinding.inflate(inflater, container, false)
         tournamentPresenter = TournamentPresenter(requireContext())
 
-        tournamentPresenter?.initTournamentDetails()
-        tournamentPresenter?.checkEditRights()
+        showCurrentTournamentDetails()
+        setEditRights()
 
         day = 0
         month = 0
@@ -123,26 +123,26 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
         _binding = null
     }
 
-    override fun showCurrentTournamentDetails(
-        tournamentName: String,
-        typeOfGame: String,
-        matchType: String,
-        tournamentType: String,
-        participantForm: String,
-        registrationDeadline: String,
-        startDate: String,
-        endDate: String,
-        location: String,
-        maxPlayer: Int
-    ) {
-        binding.etTournamentName.setText(tournamentName)
-        binding.tvTypeOfGame.text = typeOfGame
-        binding.tvMatchType.text = matchType
-        binding.tvTournamentType.text = tournamentType
-        binding.tvParticipantForm.text = participantForm
-        binding.btnRegistrationDeadline.text = registrationDeadline
-        binding.etLocation.setText(location)
-        binding.tvMaxPlayer.text = maxPlayer.toString()
+    override fun showCurrentTournamentDetails() {
+        val tournament = tournamentPresenter?.getCurrentTournament()
+        val details = tournament!!.tournamentDetail
+
+        binding.etTournamentName.setText(tournament!!.tournamentName)
+        binding.tvTypeOfGame.text = details.typeOfGame
+        binding.tvMatchType.text = tournament!!.type
+        binding.tvTournamentType.text = details.tournamentTypes
+        binding.tvParticipantForm.text = details.participantForm
+        binding.btnRegistrationDeadline.text = details.registrationDeadline
+        binding.btnStartDate.text = details.startTime
+        binding.btnEndDate.text = details.endTime
+        binding.etLocation.setText(details.location)
+        binding.tvMaxPlayer.text = tournament!!.maxParticipantNumber.toString()
+    }
+
+    override fun setEditRights() {
+        if (!tournamentPresenter!!.isAdmin()) {
+            disableEdits()
+        }
     }
 
     override fun disableEdits() {
@@ -162,8 +162,8 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
         TODO("Not yet implemented")
     }
 
-    override fun initParticipantAdapter(participantForm: String) {
-        //Not implemented here
+    override fun initParticipantAdapter() {
+        TODO("Not yet implemented")
     }
 
     override fun showSingleParticipants(participants: List<User>?) {
