@@ -57,10 +57,10 @@ class CreateTournamentPresenter(private val context: Context) : BasePresenter<Cr
                 view?.showError("Please select a participant form")
                 view?.hideProgress()
             }
-            /*!validDateDifference(startTime, endTime) -> {
+            !validDateDifference(startTime, endTime) -> {
                 view?.showError("End date must ends after start date")
                 view?.hideProgress()
-            }*/
+            }
             !onlineChecker.isOnline() -> {
                 view?.showNoInternetConnection()
                 view?.hideProgress()
@@ -73,14 +73,16 @@ class CreateTournamentPresenter(private val context: Context) : BasePresenter<Cr
                         val tournament = tournamentRepo.createNewTournament(matchType, maxParticipantNumber, name, tournamentDetail)
                         if (tournament != null) {
                             withContext(Dispatchers.Main) {
-                                view?.navigateToTournamentActivity()
+                                view?.showSuccess()
                                 view?.hideProgress()
+                                view?.navigateToTournamentActivity()
                             }
                         }
                     } catch (e: Exception) {
                         withContext(Dispatchers.Main) {
+                            view?.showError(e.message.toString())
+                            //view?.showError("Oops... It seems there's unexpected error. Please try again.")
                             view?.hideProgress()
-                            view?.showError("Oops... It seems there's unexpected error. Please try again.")
                         }
                     }
                 }
@@ -88,7 +90,6 @@ class CreateTournamentPresenter(private val context: Context) : BasePresenter<Cr
         }
     }
 
-    //Have error with month not 2 digits
     private fun validDateDifference(start: String, end: String): Boolean {
         val startYear = start.substring(0,3).toInt()
         val startMonth = start.substring(5,6).toInt()
