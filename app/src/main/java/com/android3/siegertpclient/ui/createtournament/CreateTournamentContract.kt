@@ -5,6 +5,8 @@ interface CreateTournamentContract {
     interface ICreateTournamentView : BaseView {
         fun showIncompleteInput()
 
+        fun showSuccess()
+
         fun navigateToHomepageActivity()
 
         fun navigateToTournamentActivity()

@@ -44,10 +44,10 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
             DatePickerDialog(
                 requireContext(),
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-
-                    val monthCalibrate = monthOfYear + 1
-                    binding.btnRegistrationDeadline.text = "$year-$monthCalibrate-$dayOfMonth"
-
+                    var monthCalibrate = monthOfYear + 1
+                    val monthFix = if (monthCalibrate <= 10) "0$monthCalibrate" else monthCalibrate.toString()
+                    val dayFix = if (dayOfMonth <= 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    binding.btnRegistrationDeadline.text = "$year-$monthFix-$dayFix"
                 },
                 year!!,
                 month!!,
@@ -60,8 +60,10 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
             DatePickerDialog(
                 requireContext(),
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    val monthCalibrate = monthOfYear + 1
-                    binding.btnStartDate.text = "$year-$monthCalibrate-$dayOfMonth"
+                    var monthCalibrate = monthOfYear + 1
+                    val monthFix = if (monthCalibrate <= 10) "0$monthCalibrate" else monthCalibrate.toString()
+                    val dayFix = if (dayOfMonth <= 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    binding.btnStartDate.text = "$year-$monthFix-$dayFix"
                 },
                 year!!,
                 month!!,
@@ -74,8 +76,10 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
             DatePickerDialog(
                 requireContext(),
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    val monthCalibrate = monthOfYear + 1
-                    binding.btnEndDate.text = "$year-$monthCalibrate-$dayOfMonth"
+                    var monthCalibrate = monthOfYear + 1
+                    val monthFix = if (monthCalibrate <= 10) "0$monthCalibrate" else monthCalibrate.toString()
+                    val dayFix = if (dayOfMonth <= 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    binding.btnEndDate.text = "$year-$monthFix-$dayFix"
                 },
                 year!!,
                 month!!,

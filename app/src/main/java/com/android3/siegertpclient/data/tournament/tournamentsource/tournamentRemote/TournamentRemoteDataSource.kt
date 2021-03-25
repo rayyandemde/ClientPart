@@ -2,6 +2,7 @@ package com.android3.siegertpclient.data.tournament.tournamentsource.tournamentR
 
 import com.android3.siegertpclient.data.payload.ApiResponse
 import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.CreateTournament
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.tournament.TournamentDetail
@@ -12,17 +13,9 @@ import retrofit2.Response
 class TournamentRemoteDataSource {
 
     suspend fun createNewTournament(
-        type : String,
-        participantSize : Int,
-        name : String,
-        tournamentDetail : TournamentDetail,
+        createTournament: CreateTournament,
         token : String) : Response<Tournament> {
-        val tournament = hashMapOf<String, Any>()
-        tournament["type"] = type
-        tournament["maxParticipantNumber"] = participantSize
-        tournament["tournamentName"] = name
-        tournament["tournamentDetail"] = tournamentDetail
-        return RestClient.tournamentService.createNewTournament(tournament, token)
+        return RestClient.tournamentService.createNewTournament(createTournament, token)
     }
 
     suspend fun getTournamentById(tourneyId : String, token: String) : Response<Tournament> {
