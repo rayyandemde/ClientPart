@@ -4,7 +4,6 @@ import android.content.Context
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationRemoteDataSource
 import com.android3.siegertpclient.data.payload.ApiResponse
-import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.PreferencesProvider
 import java.time.LocalDate
@@ -44,7 +43,18 @@ class InvitationRepo(private val context: Context) {
         return null
     }
 
-    fun getCurrentUserInvitations() : List<Invitation> {
+    suspend fun getRecipientIdByUsername(username: String): String? {
+        val response = invitationRemoteDataSource.getRecipientIdByUsername(
+            username,
+            LocalCache.getBearerToken(context)!!
+        )
+        if (response.isSuccessful) {
+            return response.body()!!["userId"]
+        }
+        return null
+    }
+
+    fun getCurrentInvitationList() : List<Invitation> {
         return localData.getCurrentInvitationList()
     }
 }

@@ -4,21 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
-import com.android3.siegertpclient.data.tournament.Result
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTournamentmatchesBinding
-import com.android3.siegertpclient.databinding.FragmentTournamentschedulesBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.GameAdapter
-import com.android3.siegertpclient.utils.recyclerviewadapters.ScheduleAdapter
-import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
 
 class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentView, GameAdapter.OnGameItemClickListener{
     private var _binding: FragmentTournamentmatchesBinding? = null
@@ -79,8 +71,12 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
         //Not implemented here
     }
 
-    override fun initParticipantAdapter(participantForm: String) {
+    override fun showSuccess(message: String) {
         TODO("Not yet implemented")
+    }
+
+    override fun initParticipantAdapter(participantForm: String) {
+        //Not implemented here
     }
 
     override fun showSingleParticipants(participants: List<User>?) {
@@ -112,14 +108,18 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
     }
 
     override fun onGameItemClick(position: Int) {
         TODO("Not yet implemented")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }

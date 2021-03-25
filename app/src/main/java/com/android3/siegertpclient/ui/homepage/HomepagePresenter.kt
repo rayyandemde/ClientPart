@@ -102,7 +102,7 @@ class HomepagePresenter(private val context: Context) :
     }
 
     override fun onTournamentOverviewClicked(position: Int) {
-        val savedTournaments = tournamentRepo.getCurrentUserTournaments()!!
+        val savedTournaments = tournamentRepo.getCurrentTournamentList()!!
 
         val chosenTeamName = savedTournaments[position].tournamentName
         localData.putString(Constants.KEY_TOURNAMENT_NAME, chosenTeamName)

@@ -20,10 +20,12 @@ class UserProfilePresenter(private val context: Context) :
 
     private var userRepo = UserRepo(context)
 
+    private var teamRepo = TeamRepo(context)
+
     private var localData = PreferencesProvider(context)
 
     override fun userTeamClicked(position: Int) {
-        val savedTeam = userRepo.getCurrentUserTeams()!!
+        val savedTeam = teamRepo.getCurrentTeamsList()!!
 
         val chosenTeamName = savedTeam[position].teamName
         localData.putString(KEY_TEAM_NAME, chosenTeamName)

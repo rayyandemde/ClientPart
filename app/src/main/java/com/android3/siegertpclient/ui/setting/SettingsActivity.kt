@@ -84,8 +84,8 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
     }
 
     override fun navigateToUserProfileActivity() {
-        val upIntent = Intent(this, UserProfileActivity::class.java)
-        startActivity(upIntent)
+        val intent = Intent(this, UserProfileActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToLoginActivity() {

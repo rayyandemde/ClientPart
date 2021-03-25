@@ -23,6 +23,8 @@ interface TournamentContract {
 
         fun showIncompleteInput()
 
+        fun showSuccess(message: String)
+
         fun initParticipantAdapter(participantForm: String)
 
         fun showSingleParticipants(participants: List<User>?)
@@ -55,7 +57,7 @@ interface TournamentContract {
 
         fun onParticipantRefresh()
 
-        fun onAddParticipantBtnClicked()
+        fun onAddParticipantBtnClicked(participant: String)
 
         fun onScheduleRefresh()
 

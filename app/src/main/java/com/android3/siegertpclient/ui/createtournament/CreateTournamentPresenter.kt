@@ -5,6 +5,9 @@ import android.text.TextUtils
 import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.tournament.tournamentsource.TournamentRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
+import com.android3.siegertpclient.utils.Constants.Companion.MATCH_TYPE
+import com.android3.siegertpclient.utils.Constants.Companion.PARTICIPANT_FORM
+import com.android3.siegertpclient.utils.Constants.Companion.TOURNAMENT_TYPE
 import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.OnlineChecker
 import kotlinx.coroutines.Dispatchers
@@ -42,22 +45,22 @@ class CreateTournamentPresenter(private val context: Context) : BasePresenter<Cr
                 view?.showIncompleteInput()
                 view?.hideProgress()
             }
-            matchType == "Match Type" -> {
+            matchType == MATCH_TYPE -> {
                 view?.showError("Please select a match type")
                 view?.hideProgress()
             }
-            tournamentType == "Tournament Type" -> {
+            tournamentType == TOURNAMENT_TYPE -> {
                 view?.showError("Please select a tournament type")
                 view?.hideProgress()
             }
-            participantForm == "Participant Form" -> {
+            participantForm == PARTICIPANT_FORM -> {
                 view?.showError("Please select a participant form")
                 view?.hideProgress()
             }
-            !validDateDifference(startTime, endTime) -> {
+            /*!validDateDifference(startTime, endTime) -> {
                 view?.showError("End date must ends after start date")
                 view?.hideProgress()
-            }
+            }*/
             !onlineChecker.isOnline() -> {
                 view?.showNoInternetConnection()
                 view?.hideProgress()
@@ -85,6 +88,7 @@ class CreateTournamentPresenter(private val context: Context) : BasePresenter<Cr
         }
     }
 
+    //Have error with month not 2 digits
     private fun validDateDifference(start: String, end: String): Boolean {
         val startYear = start.substring(0,3).toInt()
         val startMonth = start.substring(5,6).toInt()

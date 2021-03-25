@@ -23,6 +23,10 @@ class TournamentAdapter(private val listener: OnTournamentItemClickListener) : R
     }
 
     override fun onBindViewHolder(holder: TournamentHolder, position: Int) {
+        val current = tournamentList[position]
+        val detail = current.tournamentDetail
+        holder.tournamentOverviewTv.text =
+            current.tournamentName + " | " + detail.typeOfGame + " | " + detail.startTime + " ~ " + detail.endTime
     }
 
     override fun getItemCount() = tournamentList.size
@@ -34,6 +38,7 @@ class TournamentAdapter(private val listener: OnTournamentItemClickListener) : R
 
     inner class TournamentHolder(val binding: CardTournamentOverviewBinding) : RecyclerView.ViewHolder(binding.root),
         View.OnClickListener {
+        val tournamentOverviewTv = binding.tvTournamentOverview
 
         init {
             binding.root.setOnClickListener(this)

@@ -7,12 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.databinding.FragmentMyteamsBinding
-import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.team.TeamActivity
-import com.android3.siegertpclient.utils.Constants.Companion.KEY_TEAM_NAME
 import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
 
 class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
@@ -62,15 +59,15 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
     }
 
     override fun navigateToHomepageActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToSettingActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not needed for plain swipe refresh layout
     }
 
     override fun hideProgress() {
@@ -85,11 +82,11 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
         doToast("There's no internet connection to make the request.")
     }
 
-    private fun doToast(message: String) {
-        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    override fun onTeamItemClick(position: Int) {
+        userProfilePresenter?.userTeamClicked(position)
     }
 
-    override fun onTeamItemClick(position: Int) {
-        val clickedTeam = userProfilePresenter?.userTeamClicked(position)
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }

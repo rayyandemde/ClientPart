@@ -1,22 +1,12 @@
 package com.android3.siegertpclient.ui.tournament
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.*
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.ActivityTournamentBinding
-import com.android3.siegertpclient.databinding.ActivityUserprofileBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
-import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
-import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
-import com.android3.siegertpclient.ui.homepage.FeedFragment
-import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.homepage.JoinTeamFragment
-import com.android3.siegertpclient.ui.register.RegisterActivity
-import com.android3.siegertpclient.ui.userprofile.UserProfilePresenter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
@@ -127,8 +117,12 @@ class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView 
         //Not implemented here
     }
 
+    override fun showSuccess(message: String) {
+        //Not implemented here
+    }
+
     override fun initParticipantAdapter(participantForm: String) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showSingleParticipants(participants: List<User>?) {

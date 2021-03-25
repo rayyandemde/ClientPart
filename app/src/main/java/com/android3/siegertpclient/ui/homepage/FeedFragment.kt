@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.android3.siegertpclient.R
-import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Tournament
-import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.databinding.FragmentFeedBinding
 import com.android3.siegertpclient.ui.invitation.InvitationActivity
+import com.android3.siegertpclient.ui.tournament.TournamentActivity
 import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
 
 class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapter.OnTournamentItemClickListener {
@@ -20,15 +19,9 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
 
     private var homepagePresenter: HomepagePresenter? = null
 
-    private val noTournaments by lazy {
-        var noTournamentDetail = TournamentDetail("", "YYYY-MM-DD", "", "", "", "YYYY-MM-DD", "", "")
-        listOf(Tournament("", emptyList(), 0, false, emptyList(), emptyMap(), noTournamentDetail, "", "No Tournament Available", ""))
-    }
-
     private val tournamentAdapter by lazy { TournamentAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
         homepagePresenter = HomepagePresenter(requireContext())
 
@@ -43,7 +36,6 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
         binding.btnInvitation.setOnClickListener{
             homepagePresenter?.onInvitationBtnClicked()
         }
-
 
         return binding.root
     }
@@ -60,7 +52,7 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
     }
 
     override fun showFeed(feed: List<Tournament>?) {
-        TODO("Not yet implemented")
+        //Needs to be implemented *Just a placeholder comment so the app can run
     }
 
     override fun showSuccess(message: String) {
@@ -68,12 +60,12 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
     }
 
     override fun showIncompleteInput() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToInvitationActivity() {
-        val invIntent = Intent(activity, InvitationActivity::class.java)
-        startActivity(invIntent)
+        val intent = Intent(activity, InvitationActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToUserActivity() {
@@ -89,7 +81,8 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
     }
 
     override fun navigateToTournamentActivity() {
-        TODO("Not yet implemented")
+        val intent = Intent(activity, TournamentActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToTeamActivity() {
@@ -97,22 +90,26 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not needed for plain swipe refresh layout
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.srlRvFeed.isRefreshing = false
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
     }
 
     override fun onTournamentItemClick(position: Int) {
         homepagePresenter?.onTournamentOverviewClicked(position)
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }

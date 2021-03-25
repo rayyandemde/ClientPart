@@ -16,4 +16,10 @@ interface InvitationService {
         @Path("id") invitationId: String, @Body accept: Map<String, Boolean>,
         @Header("Authorization") token: String
     ): Response<ApiResponse>
+
+    @GET("invitations/recipients/{username}")
+    suspend fun getRecipientIdByUsername(
+        @Path("username") recipientUsername: String,
+        @Header("Authorization") token: String
+    ): Response<Map<String, String>>
 }

@@ -4,18 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
-import com.android3.siegertpclient.ui.team.TeamPresenter
 import com.android3.siegertpclient.utils.Constants.Companion.SINGLE
 import com.android3.siegertpclient.utils.Constants.Companion.TEAM
 import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
@@ -45,9 +41,21 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
         }
 
         binding.btnAddParticipants.setOnClickListener {
+            val inflater = layoutInflater
+            val dialogLayout = inflater.inflate(R.layout.edit_text_layout, null)
+            val etParticipant = dialogLayout.findViewById<EditText>(R.id.et_for_dialog)
+
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Add Participant")
-                .setMessage("Please input")
+                .setMessage("Please input username or team name")
+                .setNegativeButton("Cancel") {dialog, which ->
+                    //Do Nothing
+                }
+                .setPositiveButton("Add") {dialog, which ->
+                    tournamentPresenter?.onAddParticipantBtnClicked(etParticipant.text.toString().trim { it <= ' ' })
+                }
+                .setView(dialogLayout)
+                .show()
         }
 
         return binding.root
@@ -85,7 +93,11 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
     }
 
     override fun showIncompleteInput() {
-        //Not implemented here
+        doToast("Please input a username or team name")
+    }
+
+    override fun showSuccess(message: String) {
+        doToast(message)
     }
 
     override fun initParticipantAdapter(participantType: String) {

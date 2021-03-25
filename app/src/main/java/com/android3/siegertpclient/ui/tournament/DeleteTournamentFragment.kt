@@ -5,19 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
-import com.android3.siegertpclient.data.tournament.Result
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentDeleteTournamentBinding
-import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
-import com.android3.siegertpclient.databinding.FragmentTournamentschedulesBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.utils.recyclerviewadapters.ScheduleAdapter
 
 class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView {
     private var _binding: FragmentDeleteTournamentBinding? = null
@@ -30,7 +24,7 @@ class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView 
         tournamentPresenter = TournamentPresenter(requireContext())
 
         binding.btnDeleteTournament.setOnClickListener {
-
+            tournamentPresenter?.onCancelTournamentBtnClicked()
         }
 
         return binding.root
@@ -70,8 +64,12 @@ class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView 
         //Not implemented here
     }
 
+    override fun showSuccess(message: String) {
+        doToast(message)
+    }
+
     override fun initParticipantAdapter(participantForm: String) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showSingleParticipants(participants: List<User>?) {
@@ -97,11 +95,13 @@ class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView 
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        binding.pbRequest.visibility = View.VISIBLE
+        binding.btnDeleteTournament.isEnabled = false
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.pbRequest.visibility = View.VISIBLE
+        binding.btnDeleteTournament.isEnabled = false
     }
 
     override fun showError(errorMessage: String) {

@@ -27,4 +27,11 @@ class InvitationRemoteDataSource() {
         accept["accept"] = acceptB
         return RestClient.invitationService.handleInvitationAcceptation(invitationId, accept, token)
     }
+
+    suspend fun getRecipientIdByUsername(
+        recipientUsername: String,
+        token: String
+    ): Response<Map<String, String>> {
+        return RestClient.invitationService.getRecipientIdByUsername(recipientUsername, token)
+    }
 }

@@ -63,7 +63,7 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
     }
 
     override fun showMyTeams(myTeams: List<Team>?) {
-
+        //Not implemented here
     }
 
     override fun navigateToHomepageActivity() {
@@ -76,22 +76,22 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
     }
 
     override fun navigateToTeamActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 }
