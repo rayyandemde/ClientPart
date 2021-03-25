@@ -88,10 +88,6 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
         startActivity(intent)
     }
 
-    override fun navigateToTeamActivity() {
-        //Not implemented here
-    }
-
     override fun showProgress() {
         //Not needed for plain swipe refresh layout
     }

@@ -77,7 +77,7 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
     }
 
     override fun showDeleteAlert() {
-        TODO("Not yet implemented")
+        //Needs to be implemented *Just a placeholder comment so the app can run
     }
 
     override fun showMembers(teamMembers: List<User>?) {

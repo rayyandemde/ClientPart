@@ -20,8 +20,6 @@ interface HomepageContract {
         fun navigateToCreateTeamActivity()
 
         fun navigateToTournamentActivity()
-
-        fun navigateToTeamActivity()
     }
 
     interface IHomepagePresenter {

@@ -34,10 +34,6 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView, UserAdapter.OnUse
             teamPresenter?.onMembersRefresh()
         }
 
-        binding.btnAdd.setOnClickListener {
-
-        }
-
         return binding.root
     }
 

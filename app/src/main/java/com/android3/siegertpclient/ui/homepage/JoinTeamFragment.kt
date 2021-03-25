@@ -76,11 +76,6 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
         //Not implemented here
     }
 
-    override fun navigateToTeamActivity() {
-        val intent = Intent(activity, TeamActivity::class.java)
-        startActivity(intent)
-    }
-
     override fun showProgress() {
         //Needs to be implemented *Just a placeholder comment so the app can run
     }

@@ -107,10 +107,6 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
         //Not implemented here
     }
 
-    override fun navigateToTeamActivity() {
-        //Not implemented here
-    }
-
     override fun showProgress() {
         //Not implemented here
     }

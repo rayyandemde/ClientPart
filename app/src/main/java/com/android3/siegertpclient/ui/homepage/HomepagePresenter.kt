@@ -85,9 +85,8 @@ class HomepagePresenter(private val context: Context) :
                         val joinTeam = teamRepo.joinTeam(teamName, password)
                         if (joinTeam != null) {
                             withContext(Dispatchers.Main) {
-                                view?.showSuccess(joinTeam.message)
+                                view?.showSuccess("You have successfully joined $teamName. You can check your teams in your profile.")
                                 view?.hideProgress()
-                                view?.navigateToTeamActivity()
                             }
                         }
                     } catch (e: Exception) {
@@ -106,7 +105,7 @@ class HomepagePresenter(private val context: Context) :
 
         val chosenTeamName = savedTournaments[position].tournamentName
         localData.putString(Constants.KEY_TOURNAMENT_NAME, chosenTeamName)
-        view?.navigateToTeamActivity()
+        view?.navigateToTournamentActivity()
     }
 
     override fun onInvitationBtnClicked() {
