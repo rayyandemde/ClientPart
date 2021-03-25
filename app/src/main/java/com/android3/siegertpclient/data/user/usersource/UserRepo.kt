@@ -7,6 +7,8 @@ import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.data.user.usersource.userRemote.UserRemoteDataSource
 import com.android3.siegertpclient.utils.Constants.Companion.IS_LOGGED_IN
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_FORENAME
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_SURNAME
 import com.android3.siegertpclient.utils.Constants.Companion.KEY_TOKEN
 import com.android3.siegertpclient.utils.Constants.Companion.KEY_USERNAME
 import com.android3.siegertpclient.utils.Constants.Companion.KEY_USER_ID
@@ -35,6 +37,8 @@ class UserRepo(private val context: Context) {
             localData.putCurrentUser(response.body()!!)
             localData.putString(KEY_USERNAME, response.body()!!.username)
             localData.putString(KEY_USER_ID, userId)
+            localData.putString(KEY_FORENAME, forename)
+            localData.putString(KEY_SURNAME, surname)
             localData.putString(KEY_TOKEN, token)
             localData.putBoolean(IS_LOGGED_IN, true)
             return response.body()!!
@@ -48,6 +52,8 @@ class UserRepo(private val context: Context) {
             localData.putCurrentUser(response.body()!!)
             localData.putString(KEY_USERNAME, response.body()!!.username)
             localData.putString(KEY_USER_ID, userId)
+            localData.putString(KEY_FORENAME, response.body()!!.forename)
+            localData.putString(KEY_SURNAME, response.body()!!.surname)
             localData.putString(KEY_TOKEN, token)
             localData.putBoolean(IS_LOGGED_IN, true)
             return response.body()!!
@@ -79,7 +85,7 @@ class UserRepo(private val context: Context) {
     }
 
     suspend fun getUserTeams(): List<Team>? {
-        val response = userRemoteDataSource.getUsersTeams(LocalCache.getBearerToken(context)!!, LocalCache.getBearerToken(context)!!)
+        val response = userRemoteDataSource.getUsersTeams(LocalCache.getCurrentUsername(context)!!, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
             localData.putCurrentTeamList(response.body()!!)
             return response.body()!!
@@ -97,37 +103,26 @@ class UserRepo(private val context: Context) {
     }
 
     suspend fun updateUserDetail(
-        oldUsername: String, newUsername: String, surname: String,
-        forename: String, token: String
+        newUsername: String, surname: String,
+        forename: String
     ): User? {
-        val response = userRemoteDataSource.updateUserDetail(oldUsername, newUsername, surname, forename, token)
+        val response = userRemoteDataSource.updateUserDetail(LocalCache.getCurrentUsername(context)!!, newUsername, surname, forename, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
             localData.putCurrentUser(response.body()!!)
             localData.putString(KEY_USERNAME, newUsername)
-            localData.putString(KEY_TOKEN, token)
+            localData.putString(KEY_FORENAME, forename)
+            localData.putString(KEY_SURNAME, surname)
             return response.body()!!
         }
         return null
-    }
-
-    fun getFirebaseUser(): FirebaseUser {
-        return FirebaseAuth.getInstance().currentUser!!
-    }
-
-    fun getUserLocal(): User? {
-        return localData.getCurrentUser()
     }
 
     fun checkUserLoggedIn() : Boolean {
         return localData.getBoolean(IS_LOGGED_IN)
     }
 
-    fun getToken() : String? {
-        return localData.getString(KEY_TOKEN)
-    }
-
-    fun getCurrentUserId() : String? {
-        return localData.getString(KEY_USER_ID)
+    fun getCurrentUser() : User? {
+        return localData.getCurrentUser()
     }
 
     fun getCurrentUserList() : List<User> {

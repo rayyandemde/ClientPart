@@ -20,11 +20,6 @@ class SettingsPresenter(private val context: Context) :
 
     private var userRepo = UserRepo(context)
 
-    override fun initCurrentUserEt() {
-        val user = userRepo.getUserLocal()
-        view?.setCurrentUserEt(user!!.username, user!!.forename, user!!.surname)
-    }
-
     override fun onBackBtnClicked() {
         view?.navigateToUserProfileActivity()
     }
@@ -44,26 +39,23 @@ class SettingsPresenter(private val context: Context) :
             view?.showNoInternetConnection()
             view?.hideProgress()
         } else {
-            val currentUser = userRepo.getUserLocal()
+            val currentUser = userRepo.getCurrentUser()
             var newUsername =
                 if (TextUtils.isEmpty(changedUsername)) currentUser!!.username else changedUsername
             var newForename =
                 if (TextUtils.isEmpty(changedForename)) currentUser!!.forename else changedForename
             var newSurname =
                 if (TextUtils.isEmpty(changedSurname)) currentUser!!.surname else changedSurname
-            val token = userRepo.getToken()
 
             GlobalScope.launch(Dispatchers.IO) {
                 try {
                     val user = userRepo.updateUserDetail(
-                        currentUser!!.username,
                         newUsername,
                         newSurname,
-                        newForename,
-                        token!!
-                    )
+                        newForename)
                     if (user != null) {
                         withContext(Dispatchers.Main) {
+                            view?.showSuccessful()
                             view?.hideProgress()
                         }
                     }

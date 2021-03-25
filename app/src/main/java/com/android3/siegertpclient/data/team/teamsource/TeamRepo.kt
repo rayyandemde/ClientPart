@@ -112,6 +112,10 @@ class TeamRepo(private val context: Context) {
         return null
     }
 
+    fun getCurrentTeams() : Team? {
+        return localData.getCurrentTeam()
+    }
+
     fun getCurrentTeamsList() : List<Team> {
         return localData.getCurrentTeamList()
     }
