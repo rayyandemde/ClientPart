@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTeamtournamentsBinding
+import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
 
 class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAdapter.OnTournamentItemClickListener {
@@ -25,6 +26,8 @@ class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAd
     ): View {
         _binding = FragmentTeamtournamentsBinding.inflate(inflater, container, false)
         teamPresenter = TeamPresenter(requireContext())
+
+        binding.tvTeamName.text = "Team : " + LocalCache.getCurrentTeamName(requireContext())
 
         binding.rvTeamTournaments.adapter = tournamentAdapter
 

@@ -97,7 +97,6 @@ class TeamRepo(private val context: Context) {
         val response =
             teamRemoteDataSource.joinTeam(teamName, password, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
-            localData.putString(KEY_TEAM_NAME, teamName)
             return response.body()!!
         }
         return null

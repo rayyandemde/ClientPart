@@ -11,7 +11,9 @@ import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.databinding.FragmentMytournamentsBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.setting.SettingsActivity
+import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
+import java.time.LocalDate
 
 class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView, TournamentAdapter.OnTournamentItemClickListener {
     private var _binding: FragmentMytournamentsBinding? = null
@@ -24,6 +26,10 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView, 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMytournamentsBinding.inflate(inflater, container, false)
         userProfilePresenter = UserProfilePresenter(requireContext())
+
+        binding.tvUserData.text = "@" + LocalCache.getCurrentUsername(requireContext()) +
+                " : " + LocalCache.getCurrentLastName(requireContext()) + ". " +
+                LocalCache.getCurrentFirstName(requireContext())
 
         binding.rvMyTournaments.adapter = tournamentAdapter
 
