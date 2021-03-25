@@ -130,7 +130,7 @@ class UserRepo(private val context: Context) {
         return localData.getString(KEY_USER_ID)
     }
 
-    fun getCurrentUserTeams() : List<Team> {
-        return localData.getCurrentTeamList()
+    fun getCurrentUserList() : List<User> {
+        return localData.getCurrentUserList()
     }
 }

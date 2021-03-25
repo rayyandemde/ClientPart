@@ -9,15 +9,11 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.databinding.FragmentTournamentdetailsBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.team.TeamPresenter
-import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
 import java.util.*
 
 class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentView{
@@ -163,7 +159,7 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
     }
 
     override fun initParticipantAdapter(participantForm: String) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showSingleParticipants(participants: List<User>?) {

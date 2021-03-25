@@ -157,6 +157,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         }
 
         //This is only for test
+
         binding.tvCreateATournament.setOnClickListener {
             navigateToTournamentActivity()
         }

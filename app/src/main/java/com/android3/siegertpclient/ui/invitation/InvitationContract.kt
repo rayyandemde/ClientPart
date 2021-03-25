@@ -6,7 +6,7 @@ interface InvitationContract {
 
     interface IInvitationView : BaseView {
 
-        fun showTournamentInvitation(tournaments: List<Invitation>)
+        fun showTournamentInvitation(invitations: List<Invitation>)
 
         fun navigateToHomepageActivity()
 

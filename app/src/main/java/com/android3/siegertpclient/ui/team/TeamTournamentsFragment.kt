@@ -4,29 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
-import com.android3.siegertpclient.data.tournament.Tournament
-import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.databinding.FragmentTeamtournamentsBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
-import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
 
 class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAdapter.OnTournamentItemClickListener {
     private var _binding: FragmentTeamtournamentsBinding? = null
     private val binding get() = _binding!!
 
     private var teamPresenter: TeamPresenter? = null
-
-    private val noTournaments by lazy {
-        var noTournamentDetail = TournamentDetail("", "YYYY-MM-DD", "", "", "", "YYYY-MM-DD", "", "")
-        listOf(Tournament("", emptyList(), 0, false, emptyList(), emptyMap(), noTournamentDetail, "", "No Tournament Available", ""))
-    }
 
     private val tournamentAdapter by lazy { TournamentAdapter(this) }
 
@@ -41,6 +29,10 @@ class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAd
         binding.rvTeamTournaments.adapter = tournamentAdapter
 
         binding.srlRvTeamTournaments.setOnRefreshListener {
+        }
+
+        binding.btnHome.setOnClickListener {
+            teamPresenter?.onHomeBtnClicked()
         }
 
         return binding.root
@@ -62,30 +54,34 @@ class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAd
     }
 
     override fun showDeleteAlert() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showMembers(teamMembers: List<User>?) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not needed for plain swipe refresh layout
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.srlRvTeamTournaments.isRefreshing = false
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
     }
 
     override fun onTournamentItemClick(position: Int) {
         TODO("Not yet implemented")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }

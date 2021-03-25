@@ -8,7 +8,8 @@ import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.databinding.CardGameOverviewBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.GameAdapter.GameHolder
 
-class GameAdapter(private val listener: OnGameItemClickListener) : RecyclerView.Adapter<GameHolder>() {
+class GameAdapter(private val listener: OnGameItemClickListener) :
+    RecyclerView.Adapter<GameHolder>() {
 
     private var gameList = emptyList<Game>()
 
@@ -23,6 +24,12 @@ class GameAdapter(private val listener: OnGameItemClickListener) : RecyclerView.
     }
 
     override fun onBindViewHolder(holder: GameHolder, position: Int) {
+        val current = gameList[position]
+        val currentResult = current.result
+        holder.gameOverviewTv.text =
+            current.firstParticipantId + " vs " + current.secondParticipantId +
+                    "\n Status :: " + currentResult.firstParticipantResult.toString() +
+                    " vs " + currentResult.secondParticipantResult.toString()
     }
 
     override fun getItemCount() = gameList.size
@@ -32,8 +39,10 @@ class GameAdapter(private val listener: OnGameItemClickListener) : RecyclerView.
         notifyDataSetChanged()
     }
 
-    inner class GameHolder(val binding: CardGameOverviewBinding) : RecyclerView.ViewHolder(binding.root),
+    inner class GameHolder(val binding: CardGameOverviewBinding) :
+        RecyclerView.ViewHolder(binding.root),
         View.OnClickListener {
+        val gameOverviewTv = binding.tvGameOverview
 
         init {
             binding.root.setOnClickListener(this)

@@ -23,6 +23,8 @@ class ScheduleAdapter(private val listener: OnScheduleItemClickListener) : Recyc
     }
 
     override fun onBindViewHolder(holder: ScheduleHolder, position: Int) {
+        val current = scheduleList[position]
+        holder.scheduleOverviewTv.text = current.firstParticipantId + " vs " + current.secondParticipantId + "\n" + current.time
     }
 
     override fun getItemCount() = scheduleList.size

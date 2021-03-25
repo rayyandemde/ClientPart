@@ -198,6 +198,11 @@ class TournamentPresenter(private val context: Context) :
     }
 
     override fun onAddParticipantBtnClicked(participant: String) {
+        if (TextUtils.isEmpty(participant)) {
+            view?.showIncompleteInput()
+            view?.hideProgress()
+            return
+        }
         if (!onlineChecker.isOnline()) {
             view?.showNoInternetConnection()
             view?.hideProgress()

@@ -9,13 +9,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
-import com.android3.siegertpclient.data.tournament.Result
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentDeleteTournamentBinding
-import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
-import com.android3.siegertpclient.databinding.FragmentTournamentschedulesBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.utils.recyclerviewadapters.ScheduleAdapter
 
 class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView {
     private var _binding: FragmentDeleteTournamentBinding? = null

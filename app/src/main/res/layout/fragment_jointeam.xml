@@ -52,6 +52,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/edittext_white"
+        android:inputType="textPassword"
         android:hint="@string/team_password"
         android:paddingLeft="20dp"
         android:selectAllOnFocus="true"

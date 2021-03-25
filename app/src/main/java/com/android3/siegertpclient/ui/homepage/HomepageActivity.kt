@@ -2,18 +2,14 @@ package com.android3.siegertpclient.ui.homepage
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.databinding.ActivityHomepageBinding
-import com.android3.siegertpclient.databinding.ActivityUserprofileBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
 import com.android3.siegertpclient.ui.createtournament.CreateTournamentActivity
 import com.android3.siegertpclient.ui.invitation.InvitationActivity
-import com.android3.siegertpclient.ui.tournament.TournamentActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
-import com.android3.siegertpclient.ui.userprofile.UserProfilePresenter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
@@ -80,11 +76,11 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
     }
 
     override fun showSuccess(message: String) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showIncompleteInput() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToInvitationActivity() {
@@ -112,7 +108,7 @@ class HomepageActivity : BaseActivity(), HomepageContract.IHomepageView {
     }
 
     override fun navigateToTeamActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showProgress() {

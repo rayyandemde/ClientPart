@@ -23,6 +23,8 @@ class InvitationAdapter(private val listener: OnInvitationItemClickListener) : R
     }
 
     override fun onBindViewHolder(holder: InvitationHolder, position: Int) {
+        val current = invitationList[position]
+        holder.invitationOverviewTv.text = "You've been invited too : " + current.tournamentName + "\n" + "By " + current.senderUsername
     }
 
     override fun getItemCount() = invitationList.size
@@ -34,6 +36,7 @@ class InvitationAdapter(private val listener: OnInvitationItemClickListener) : R
 
     inner class InvitationHolder(val binding: CardInvitationOverviewBinding) : RecyclerView.ViewHolder(binding.root),
         View.OnClickListener {
+        val invitationOverviewTv = binding.tvInvitationOverview
 
         init {
             binding.root.setOnClickListener(this)

@@ -1,23 +1,17 @@
 package com.android3.siegertpclient.ui.tournament
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
-import com.android3.siegertpclient.ui.team.TeamPresenter
 import com.android3.siegertpclient.utils.Constants.Companion.SINGLE
 import com.android3.siegertpclient.utils.Constants.Companion.TEAM
 import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
@@ -47,7 +41,6 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
         }
 
         binding.btnAddParticipants.setOnClickListener {
-            val builder = MaterialAlertDialogBuilder(requireContext())
             val inflater = layoutInflater
             val dialogLayout = inflater.inflate(R.layout.edit_text_layout, null)
             val etParticipant = dialogLayout.findViewById<EditText>(R.id.et_for_dialog)
@@ -100,7 +93,7 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
     }
 
     override fun showIncompleteInput() {
-        //Not implemented here
+        doToast("Please input a username or team name")
     }
 
     override fun showSuccess(message: String) {

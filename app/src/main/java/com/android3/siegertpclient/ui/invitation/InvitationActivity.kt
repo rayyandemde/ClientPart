@@ -2,29 +2,19 @@ package com.android3.siegertpclient.ui.invitation
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
+import android.widget.Toast
 import com.android3.siegertpclient.data.invitation.Invitation
-import com.android3.siegertpclient.data.team.Team
-import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.databinding.ActivityInvitationBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.tournament.TournamentActivity
 import com.android3.siegertpclient.utils.recyclerviewadapters.InvitationAdapter
-import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
-
 
 class InvitationActivity : BaseActivity(), InvitationContract.IInvitationView,
     InvitationAdapter.OnInvitationItemClickListener {
 
     private lateinit var binding: ActivityInvitationBinding
     private lateinit var invitationPresenter: InvitationPresenter
-
-    private val noInvitation by lazy {
-        listOf(Team("", emptyList(), emptyList(), "", getString(R.string.user_no_team), "", emptyList()))
-    }
 
     private val invitationAdapter by lazy { InvitationAdapter(this) }
 
@@ -60,17 +50,17 @@ class InvitationActivity : BaseActivity(), InvitationContract.IInvitationView,
     }
 
     override fun showTournamentInvitation(tournaments: List<Invitation>) {
-        TODO("Not yet implemented")
+        //Needs to be implemented *Just a placeholder comment so the app can run
     }
 
     override fun navigateToHomepageActivity() {
-        val hIntent = Intent(this, HomepageActivity::class.java)
-        startActivity(hIntent)
+        val intent = Intent(this, HomepageActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToTournamentActivity() {
-        val hIntent = Intent(this, TournamentActivity::class.java)
-        startActivity(hIntent)
+        val intent = Intent(this, TournamentActivity::class.java)
+        startActivity(intent)
     }
 
     override fun showProgress() {
@@ -78,18 +68,22 @@ class InvitationActivity : BaseActivity(), InvitationContract.IInvitationView,
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.srlRvInvitation.isRefreshing = false
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
     }
 
     override fun onInvitationItemClick(position: Int) {
         invitationPresenter?.onInvitationItemClicked(position)
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(this@InvitationActivity, message, Toast.LENGTH_LONG).show()
     }
 }

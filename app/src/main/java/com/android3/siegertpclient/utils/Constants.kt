@@ -1,7 +1,5 @@
 package com.android3.siegertpclient.utils
 
-import java.security.KeyStore
-
 class Constants {
     companion object {
         //App REST API base URL

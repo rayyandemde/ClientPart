@@ -64,7 +64,7 @@ class InvitationPresenter(private val context: Context) : BasePresenter<Invitati
     }
 
     override fun onInvitationItemClicked(position: Int) {
-        val savedInvitations = invitationRepo.getCurrentUserInvitations()!!
+        val savedInvitations = invitationRepo.getCurrentInvitationList()!!
 
         val tournamentName = savedInvitations[position].tournamentName
         localData.putString(Constants.KEY_TOURNAMENT_NAME, tournamentName)
