@@ -41,19 +41,12 @@ class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView 
         _binding = null
     }
 
-    override fun showCurrentTournamentDetails(
-        tournamentName: String,
-        typeOfGame: String,
-        matchType: String,
-        tournamentType: String,
-        participantForm: String,
-        registrationDeadline: String,
-        startDate: String,
-        endDate: String,
-        location: String,
-        maxPlayer: Int
-    ) {
-        //Not implemented here
+    override fun showCurrentTournamentDetails() {
+        TODO("Not yet implemented")
+    }
+
+    override fun setEditRights() {
+        TODO("Not yet implemented")
     }
 
     override fun disableEdits() {
@@ -68,7 +61,7 @@ class DeleteTournamentFragment : Fragment(), TournamentContract.ITournamentView 
         doToast(message)
     }
 
-    override fun initParticipantAdapter(participantForm: String) {
+    override fun initParticipantAdapter() {
         //Not implemented here
     }
 

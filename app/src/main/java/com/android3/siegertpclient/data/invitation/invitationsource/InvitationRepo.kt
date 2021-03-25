@@ -1,6 +1,7 @@
 package com.android3.siegertpclient.data.invitation.invitationsource
 
 import android.content.Context
+import android.util.Log
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationRemoteDataSource
 import com.android3.siegertpclient.data.payload.ApiResponse
@@ -15,18 +16,26 @@ class InvitationRepo(private val context: Context) {
     private val invitationRemoteDataSource = InvitationRemoteDataSource()
     private var localData = PreferencesProvider(context)
 
-    suspend fun createInvitation(recipientId: String): ApiResponse? {
-        var currentTournament = localData.getCurrentTournament()!!
+    suspend fun invite(recipientUsername: String): ApiResponse? {
+        val currentTournament = localData.getCurrentTournament()!!
 
-        val response = invitationRemoteDataSource.createInvitation(
-            LocalCache.getCurrentUserId(context)!!,
-            recipientId,
-            currentTournament.tournamentId,
-            currentTournament.tournamentDetail.participantForm,
+        val recipientIdResponse = invitationRemoteDataSource.getRecipientIdByUsername(
+            recipientUsername,
             LocalCache.getBearerToken(context)!!
         )
-        if (response.isSuccessful) {
-            return response.body()!!
+
+        if (recipientIdResponse.isSuccessful) {
+            val recipientId = recipientIdResponse.body()?.get("userId")
+
+            val sendInvitation = invitationRemoteDataSource.createInvitation(LocalCache.getCurrentUserId(context)!!,
+                recipientId!!,
+                currentTournament.tournamentId,
+                currentTournament.tournamentDetail.participantForm,
+                LocalCache.getBearerToken(context)!!
+            )
+            if(sendInvitation.isSuccessful) {
+                return sendInvitation.body()!!
+            }
         }
         return null
     }
@@ -39,17 +48,6 @@ class InvitationRepo(private val context: Context) {
         )
         if (response.isSuccessful) {
             return response.body()!!
-        }
-        return null
-    }
-
-    suspend fun getRecipientIdByUsername(username: String): String? {
-        val response = invitationRemoteDataSource.getRecipientIdByUsername(
-            username,
-            LocalCache.getBearerToken(context)!!
-        )
-        if (response.isSuccessful) {
-            return response.body()!!["userId"]
         }
         return null
     }

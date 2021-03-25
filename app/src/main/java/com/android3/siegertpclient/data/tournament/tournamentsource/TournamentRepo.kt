@@ -153,6 +153,8 @@ class TournamentRepo(private val context: Context) {
                 LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
             localData.putCurrentTournament(response.body()!!)
+            localData.putString(KEY_TOURNAMENT_ID, response.body()!!.tournamentId)
+            localData.putString(KEY_TOURNAMENT_NAME, tournamentName)
             return response.body()!!
         }
         return null

@@ -94,18 +94,11 @@ class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView 
         tournamentPresenter.onDetach()
     }
 
-    override fun showCurrentTournamentDetails(
-        tournamentName: String,
-        typeOfGame: String,
-        matchType: String,
-        tournamentType: String,
-        participantForm: String,
-        registrationDeadline: String,
-        startDate: String,
-        endDate: String,
-        location: String,
-        maxPlayer: Int
-    ) {
+    override fun showCurrentTournamentDetails() {
+        //Not implemented here
+    }
+
+    override fun setEditRights() {
         //Not implemented here
     }
 
@@ -121,7 +114,7 @@ class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView 
         //Not implemented here
     }
 
-    override fun initParticipantAdapter(participantForm: String) {
+    override fun initParticipantAdapter() {
         //Not implemented here
     }
 
