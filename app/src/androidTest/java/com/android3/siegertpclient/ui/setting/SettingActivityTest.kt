@@ -22,7 +22,7 @@ import com.android3.siegertpclient.ui.homepage.HomepageActivity
 class SettingActivityTest {
     /**
      * To test if the go back button works.
-     */
+
     @Test
     fun test_NavToUserprofile() {
         //set up
@@ -34,7 +34,7 @@ class SettingActivityTest {
 
 
     }
-
+*/
     /**
      * To test if the homepage button can work.
      */
