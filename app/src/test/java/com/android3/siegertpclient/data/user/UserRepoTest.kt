@@ -15,7 +15,7 @@ class UserRepoTest {
     @Before
     fun setupRepo() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        val repo = UserRepo(context)
+        repo = UserRepo(context)
     }
 
     @Test
