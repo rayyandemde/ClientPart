@@ -46,6 +46,6 @@ class UserProfileActivityTest{
         onView(withId(R.id.mytournaments_container)).check((matches(isDisplayed())))
     }
 
-   
+
 
 }

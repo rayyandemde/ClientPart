@@ -12,14 +12,12 @@ import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTournamentmatchesBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.GameAdapter
 
-<<<<<<< HEAD
 
-class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentView{
-=======
+
 class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentView, GameAdapter.OnGameItemClickListener{
     private var _binding: FragmentTournamentmatchesBinding? = null
     private val binding get() = _binding!!
->>>>>>> origin
+
 
     private var tournamentPresenter: TournamentPresenter? = null
 

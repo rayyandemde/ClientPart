@@ -8,7 +8,7 @@ class InvitationRemoteDataSourceTest {
 
     private var inviRemote = InvitationRemoteDataSource()
 
-    @Test//TODO update when function is implemented
+ /**   @Test//TODO update when function is implemented
     fun createInviTest(){
         var test = inviRemote.createInvitation("", "", "","", "")
         Assert.assertEquals(null, test)
@@ -17,5 +17,5 @@ class InvitationRemoteDataSourceTest {
     @Test//TODO update when function is implemented
     fun handleInvitationTest() {
         inviRemote.handleInvitationAcceptation("", "", true, "")
-    }
+    }*/
 }

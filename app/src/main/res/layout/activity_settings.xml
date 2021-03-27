@@ -17,10 +17,8 @@
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-<<<<<<< HEAD:app/src/main/res/layout/activity_setting.xml
         android:id="@+id/setting_container"
-=======
->>>>>>> origin:app/src/main/res/layout/activity_settings.xml
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
