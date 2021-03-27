@@ -40,6 +40,7 @@ interface TeamService {
         @Header("Authorization") token: String
     ): Response<List<Invitation>>
 
+    @JvmSuppressWildcards
     @POST("teams")
     suspend fun createNewTeam(
         @Body team : Map<String, String>,

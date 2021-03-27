@@ -16,7 +16,6 @@ class TeamRemoteDataSourceTest {
         Assert.assertNotEquals(null, answer)
     }
 
-    @Ignore//add  @JvmSuppressWildcards to Interface necessary
     @Test
     fun responseSuccessfulCreateNewTeam() = runBlocking{
         var answer = teamRemote.createNewTeam("", "name", "123", "123")
