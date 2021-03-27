@@ -1,40 +1,63 @@
+import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.Game
+import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.ui.base.BaseView
 
 interface TournamentContract {
 
     interface ITournamentView : BaseView {
+        fun showCurrentTournamentDetails()
 
-        fun showTournamentDetailsFragment()
+        fun setEditRights()
 
-        fun showTournamentParticipantsFragment()
+        fun disableEdits()
 
-        fun showTournamentScheduleFragment()
+        fun showIncompleteInput()
 
-        fun showResultFragment()
+        fun showSuccess(message: String)
 
-        fun showTournamentUpdatesFragment()
+        fun initParticipantAdapter()
+
+        fun showSingleParticipants(participants: List<User>?)
+
+        fun showTeamParticipants(participants: List<Team>?)
+
+        fun showSchedules(schedules: List<Game>?)
+
+        fun showGames(games: List<Game>?)
 
         fun navigateToHomepageActivity()
     }
 
     interface ITeamPresenter {
+        fun allowEdits()
 
-        fun checkIfAdmin(userId: String)
+        fun onUpdateBtnClicked(
+            tournamentName: String,
+            registrationDeadline: String,
+            startTime: String,
+            endTime: String,
+            location: String,
+        )
+        fun getCurrentTournament() : Tournament
 
-        fun checkAlreadyJoined(uerId: String)
+        fun onHomeBtnClicked()
 
-        fun onBackBtnClicked()
+        fun onParticipantRefresh()
 
-        fun onTournamentDetailsTabClicked()
+        fun onAddParticipantBtnClicked(participant: String)
 
-        fun onParticipantListTabClicked()
+        fun onScheduleRefresh()
 
-        fun onScheduleTabClicked()
+        fun onGameRefresh()
 
-        fun onStageSliderClicked()
+        fun checkCreateGameRights()
 
-        fun onMatchesSliderClicked()
+        fun onCreateGameBtnClicked()
 
-        fun onTournamentUpdatesTabClicked()
+        fun onCancelTournamentBtnClicked()
+
+        fun isAdmin() : Boolean
     }
 }

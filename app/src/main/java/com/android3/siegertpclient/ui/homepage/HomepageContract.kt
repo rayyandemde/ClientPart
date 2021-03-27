@@ -5,6 +5,12 @@ interface HomepageContract {
 
     interface IHomepageView : BaseView {
 
+        fun showFeed(feed: List<Tournament>?)
+
+        fun showSuccess(message: String)
+
+        fun showIncompleteInput()
+
         fun navigateToInvitationActivity()
 
         fun navigateToUserActivity()
@@ -13,40 +19,23 @@ interface HomepageContract {
 
         fun navigateToCreateTeamActivity()
 
-        //Will not be Implemented
-        fun showFeedFragment()
-
-        //Will not be implemenetd
-        fun showJoinTeamFragment()
-
-        //Open tournament feature will not be implemented
-        fun showSearchResult(tournaments: List<Tournament>)
-        fun goToTournamentScreen() {
-            TODO("Not yet implemented")
-        }
-
+        fun navigateToTournamentActivity()
     }
 
     interface IHomepagePresenter {
 
-        fun onMailBtnClicked()
-
-        //Will not be implemented
-        fun onHomeBtnClicked()
+        fun onInvitationBtnClicked()
 
         fun onCreateTournamentBtnClicked()
 
         fun onCreateTeamBtnClicked()
 
-        //Will not be implemented
-        fun onJoinTeamBtnClicked()
-
         fun onUserBtnClicked()
 
-        fun onTournamentOverviewClicked()
+        fun onFeedRefresh()
 
-        fun loadTournamentOverviews()
+        fun onJoinTeamBtnClicked(teamName: String, password: String)
 
-        fun onInvitationBtnClicked()
+        fun onTournamentOverviewClicked(position : Int)
     }
 }

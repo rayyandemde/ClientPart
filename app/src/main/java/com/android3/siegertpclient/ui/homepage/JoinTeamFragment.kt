@@ -1,90 +1,98 @@
 package com.android3.siegertpclient.ui.homepage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.databinding.FragmentJointeamBinding
+import com.android3.siegertpclient.ui.team.TeamActivity
 
 class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
+    private var _binding: FragmentJointeamBinding? = null
+    private val binding get() = _binding!!
 
-    private val homepagePresenter: HomepagePresenter = HomepagePresenter()
-
-    var teamNameEt: EditText? = null
-    var teamPassword: EditText? = null
-    var joinTeamBtn: Button? = null
+    private var homepagePresenter: HomepagePresenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentJointeamBinding.inflate(inflater, container, false)
+        homepagePresenter = HomepagePresenter(requireContext())
 
-        var view = inflater!!.inflate(R.layout.fragment_jointeam, container, false)
+        val teamNameEt = binding.etTeamName
+        val teamPasswordEt = binding.etTeamPassword
 
-        teamNameEt = view.findViewById<EditText>(R.id.teamName)
-        teamPassword = view.findViewById<EditText>(R.id.teamPassword)
-        joinTeamBtn = view.findViewById<Button>(R.id.joinTeamBtn)
+        binding.btnJoinTeam.setOnClickListener {
+            homepagePresenter?.onJoinTeamBtnClicked(
+                teamNameEt.text.toString().trim { it <= ' ' },
+                teamPasswordEt.text.toString().trim { it <= ' ' })
+        }
 
-        return view
+        return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        homepagePresenter.onAttach(this)
+        homepagePresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        homepagePresenter.onDetach()
+        homepagePresenter?.onDetach()
+        _binding = null
     }
 
-    fun navigateToTeamActivity() {
-        TODO("Not yet implemented")
+    override fun showFeed(feed: List<Tournament>?) {
+        //Not implemented here
+    }
+
+    override fun showSuccess(message: String) {
+        doToast(message)
+    }
+
+    override fun showIncompleteInput() {
+        doToast("Please fill in all of the field")
     }
 
     override fun navigateToInvitationActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToUserActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToCreateTournamentActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToCreateTeamActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
-    override fun showFeedFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showJoinTeamFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showSearchResult(tournaments: List<Tournament>) {
-        TODO("Not yet implemented")
+    override fun navigateToTournamentActivity() {
+        //Not implemented here
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Needs to be implemented *Just a placeholder comment so the app can run
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        //Needs to be implemented *Just a placeholder comment so the app can run
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }

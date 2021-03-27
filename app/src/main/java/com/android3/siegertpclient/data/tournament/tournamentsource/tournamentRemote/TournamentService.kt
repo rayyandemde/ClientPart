@@ -1,54 +1,97 @@
 package com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote
 
-import com.android3.siegertpclient.data.game.Game
+import com.android3.siegertpclient.data.payload.ApiResponse
+import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.CreateTournament
+import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.tournament.Tournament
+import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.utils.ParticipantFormUtil
-import com.android3.siegertpclient.utils.TournamentTypesUtil
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
-import java.util.*
 
 interface TournamentService {
 
     @POST("tournaments")
-    fun createNewTournament(@Body tournamentForm : String, tournamentSize : String, tournamentName: String,
-                            tournamentDetail: TournamentDetail,
-                            @Header("currentUserId") ownUserId: String) : Call<TournamentResponse>
+    suspend fun createNewTournament(
+        @Body createTournament : CreateTournament,
+        @Header("Authorization") token: String
+    ): Response<Tournament>
 
     @GET("tournaments")
-    fun getTournamentById(@Query("id") tourneyId : String,
-                          @Header("currentUserId") ownUserId: String) : Call<TournamentResponse>
+    suspend fun getTournamentById(@Query("id") tourneyId : String,
+                                  @Header("Authorization") token: String)
+    : Response<Tournament>
 
     @GET("tournaments/{tournamentName}")
-    fun getTournamentByName(@Path("tournamentName") tournamentName : String,
-                            @Header("currentUserId") ownUserId: String) : Call<TournamentResponse>
+    suspend fun getTournamentByName(
+        @Path("tournamentName") tournamentName : String,
+        @Header("Authorization") token : String
+    ) : Response<Tournament>
 
     @GET("tournaments/{tournamentName}/participants")
-    fun getTournamentParticipants(@Path("tournamentName") tournamentName : String,
-                                  @Header("currentUserId") ownUserId: String) : Call<Array<User>>
+    suspend fun getTournamentParticipantsUser(
+        @Path("tournamentName") tournamentName : String,
+        @Header("Authorization") token : String
+    ) : Response<List<User>>
 
-    @PUT("tournaments/{tournamentName}")
-    fun updateTournamentDetailById(@Path("tournamentName") tournamentName : String,
-                                   @Body participantForm: ParticipantFormUtil, adminId : String,
-                                   tournamentTypes: TournamentTypesUtil, typeOfGame : String, location : String,
-                                   registrationDeadline : Date, startTime : Date, endTime : Date,
-                                   @Header("currentUserId") ownUserId: String) : Call<TournamentResponse>
-
-    @DELETE("tournaments/{tournamentName}")
-    fun deleteTournament(@Path("tournamentName") tournamentName : String,
-                         @Header("currentUserId") ownUserId: String) : Call<Boolean>
-
-    @POST("tournaments/{tournamentName}")
-    fun handleParticipation(@Path("tournamentName") tournamentName : String, @Body participate : Map<String, Boolean>,
-                            @Header("currentUserId") ownUserId: String) : Call<Boolean>
+    @GET("tournaments/{tournamentName}/participants")
+    suspend fun getTournamentParticipantsTeam(
+        @Path("tournamentName") tournamentName : String,
+        @Header("Authorization") token : String
+    ) : Response<List<Team>>
 
     @GET("tournaments/{tournamentName}/games")
-    fun getTournamentsGames(@Path("tournamentName") tournamentName : String,
-                            @Header("currentUserId") ownUserId: String) : Call<Array<Game>>
+    suspend fun getTournamentGames(
+        @Path("tournamentName") tournamentName : String,
+        @Header("Authorization") token : String
+    ) : Response<List<Game>>
+
+    @GET("tournaments/{tournamentName}/games/{id}")
+    suspend fun getGameById(
+        @Path("tournamentName") tournamentName : String,
+        @Path("id") gameId : String,
+        @Header("Authorization") token : String
+    ) : Response<Game>
+
+    @POST("tournaments/{tournamentName}")
+    suspend fun handleParticipation(
+        @Path("tournamentName") tournamentName : String,
+        @Body participation : Map<String, String>,
+        @Header("Authorization") token : String
+    ) : Response<ApiResponse>
 
     @POST("tournaments/{tournamentName}/games")
-    fun createGames(@Path("tournamentName") tournamentName : String,
-                    @Header("currentUserId") ownUserId: String) : Call<Array<Game>>
+    suspend fun createGames(
+        @Path("tournamentName") tournamentName : String,
+        @Header("Authorization") token : String
+    ) : Response<List<Game>>
+
+    @POST("tournaments/{tournamentName}")
+    suspend fun updateTournamentDetail(
+        @Path("tournamentName") tournamentName: String,
+        @Body tournamentDetail: TournamentDetail,
+        @Header("Authorization") token: String
+    ) : Response<Tournament>
+
+    @PUT("tournaments/{tournamentName}/games/{id}")
+    suspend fun updateGameById(
+        @Path("tournamentName") tournamentName : String,
+        @Path("id") gameId : String,
+        @Body game : Game,
+        @Header("Authorization") token : String
+    ) : Response<Game>
+
+    @DELETE("tournaments/{tournamentName}")
+    suspend fun deleteTournament(
+        @Path("tournamentName") tournamentName : String,
+        @Header("Authorization") token : String
+    ) : Response<ApiResponse>
+
+    @DELETE("tournaments/{tournamentName}/games/{id}")
+    suspend fun deleteGameById(
+        @Path("tournamentName") tournamentName : String,
+        @Path("id") gameId : String,
+        @Header("Authorization") token : String
+    ) : Response<ApiResponse>
 }

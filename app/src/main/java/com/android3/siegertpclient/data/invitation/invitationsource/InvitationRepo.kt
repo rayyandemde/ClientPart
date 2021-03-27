@@ -1,26 +1,58 @@
 package com.android3.siegertpclient.data.invitation.invitationsource
 
+import android.content.Context
+import android.util.Log
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote.InvitationRemoteDataSource
-import com.android3.siegertpclient.utils.RestClient
+import com.android3.siegertpclient.data.payload.ApiResponse
+import com.android3.siegertpclient.utils.LocalCache
+import com.android3.siegertpclient.utils.PreferencesProvider
+import java.time.LocalDate
 
 /**
  * Invitation repository that calls the remote and local data source.
  */
-class InvitationRepo () {
+class InvitationRepo(private val context: Context) {
+    private val invitationRemoteDataSource = InvitationRemoteDataSource()
+    private var localData = PreferencesProvider(context)
 
-    private val restClient = RestClient()
-    private val invitationService = restClient.getInvitationService()
+    suspend fun invite(recipientUsername: String): ApiResponse? {
+        val currentTournament = localData.getCurrentTournament()!!
 
-    var invitationRemote = InvitationRemoteDataSource(invitationService)
+        val recipientIdResponse = invitationRemoteDataSource.getRecipientIdByUsername(
+            recipientUsername,
+            LocalCache.getBearerToken(context)!!
+        )
 
-    fun createInvitation(senderId : String, recipientId : String, tournamentId : String,
-                         participantForm : String, token : String) : Invitation? {
-        val newInvitation = invitationRemote.createInvitation(senderId, recipientId, tournamentId, participantForm, token)
-        return newInvitation
+        if (recipientIdResponse.isSuccessful) {
+            val recipientId = recipientIdResponse.body()?.get("userId")
+
+            val sendInvitation = invitationRemoteDataSource.createInvitation(LocalCache.getCurrentUserId(context)!!,
+                recipientId!!,
+                currentTournament.tournamentId,
+                currentTournament.tournamentDetail.participantForm,
+                LocalCache.getBearerToken(context)!!
+            )
+            if(sendInvitation.isSuccessful) {
+                return sendInvitation.body()!!
+            }
+        }
+        return null
     }
 
-    fun handleInvitationAcceptation(username: String, invitationID : String, accept : Boolean, token : String) {
-        invitationRemote.handleInvitationAcceptation(username, invitationID, accept, token)
+    suspend fun handleInvitationAcceptation(invitationID: String, accept: Boolean): ApiResponse? {
+        val response = invitationRemoteDataSource.handleInvitationAcceptation(
+            invitationID,
+            accept,
+            LocalCache.getBearerToken(context)!!
+        )
+        if (response.isSuccessful) {
+            return response.body()!!
+        }
+        return null
+    }
+
+    fun getCurrentInvitationList() : List<Invitation> {
+        return localData.getCurrentInvitationList()
     }
 }

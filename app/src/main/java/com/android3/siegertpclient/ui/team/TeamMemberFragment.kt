@@ -4,65 +4,62 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
+import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
+import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
 
-class TeamMemberFragment : Fragment() , TeamContract.ITeamView {
+class TeamMemberFragment : Fragment(), TeamContract.ITeamView, UserAdapter.OnUserItemClickListener {
+    private var _binding: FragmentTeamMemberBinding? = null
+    private val binding get() = _binding!!
 
-    private val teamPresenter: TeamPresenter = TeamPresenter()
+    private var teamPresenter: TeamPresenter? = null
 
-    var teamMemberRecycler: RecyclerView? = null
+    private val userAdapter by lazy { UserAdapter(this) }
 
-    var addBt : Button?=null
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentTeamMemberBinding.inflate(inflater, container, false)
+        teamPresenter = TeamPresenter(requireContext())
 
-        var view = inflater!!.inflate(R.layout.fragment_team_member, container, false)
+        binding.rvTeamMember.adapter = userAdapter
 
-        teamMemberRecycler = view.findViewById<RecyclerView>(R.id.team_member_recycler)
+        teamPresenter?.onMembersRefresh()
 
-        teamMemberRecycler!!.layoutManager = LinearLayoutManager(context)
-        teamMemberRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
+        binding.srlRvTeamMember.setOnRefreshListener {
+            teamPresenter?.onMembersRefresh()
+        }
 
-        addBt = view.findViewById(R.id.addBt)
-        /**
-        addBt.setOnClickListener(
-            teamPresenter.
-        )
-        **/
-        return view
+        return binding.root
     }
 
-    fun showMember(users: List<User>) {
-        TODO("Not yet implemented")
-    }
     override fun onResume() {
         super.onResume()
-        teamPresenter.onAttach(this)
+        teamPresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        teamPresenter.onDetach()
+        teamPresenter?.onDetach()
+        _binding = null
     }
-    override fun showAdminFragment() {
+
+    override fun navigateToTournamentActivity() {
         TODO("Not yet implemented")
     }
 
-    override fun showMemberFragment() {
+    override fun showDeleteAlert() {
         TODO("Not yet implemented")
     }
 
-    override fun showTeamTournamentsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun navigateToHomepageActivity() {
-        TODO("Not yet implemented")
+    override fun showMembers(teamMembers: List<User>?) {
+        if (teamMembers != null) {
+            userAdapter.setData(teamMembers)
+        }
     }
 
     override fun showProgress() {
@@ -70,14 +67,22 @@ class TeamMemberFragment : Fragment() , TeamContract.ITeamView {
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.srlRvTeamMember.isRefreshing = false
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
+        doToast("There's no internet connection to make the request.")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onUserItemClick(position: Int) {
         TODO("Not yet implemented")
     }
 }

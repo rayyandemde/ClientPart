@@ -1,82 +1,93 @@
 package com.android3.siegertpclient.ui.userprofile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
+import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.databinding.FragmentMyteamsBinding
+import com.android3.siegertpclient.ui.team.TeamActivity
+import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
 
-class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView{
+class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
+    TeamAdapter.OnTeamItemClickListener {
 
-    private val userProfilePresenter: UserProfilePresenter = UserProfilePresenter()
+    private var _binding: FragmentMyteamsBinding? = null
+    private val binding get() = _binding!!
 
-    var myTeamsRecycler: RecyclerView? = null
+    private var userProfilePresenter: UserProfilePresenter? = null
 
+    private val teamAdapter by lazy { TeamAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentMyteamsBinding.inflate(inflater, container, false)
+        userProfilePresenter = UserProfilePresenter(requireContext())
 
-        var view = inflater!!.inflate(R.layout.fragment_myteams, container, false)
+        binding.rvMyTeams.adapter = teamAdapter
 
-        myTeamsRecycler = view.findViewById<RecyclerView>(R.id.my_teams_recycler)
+        userProfilePresenter?.onTeamsRefresh()
 
-        myTeamsRecycler!!.layoutManager = LinearLayoutManager(context)
-        myTeamsRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
+        binding.srlRvMyTeams.setOnRefreshListener {
+            userProfilePresenter?.onTeamsRefresh()
+        }
 
-
-        return view
+        return binding.root
     }
     override fun onResume() {
         super.onResume()
-        userProfilePresenter.onAttach(this)
+        userProfilePresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        userProfilePresenter.onDetach()
-    }
-    fun showTeams() {
-        TODO("Not yet implemented")
+        userProfilePresenter?.onDetach()
+        _binding = null
     }
 
-    fun navigateToTeamActivity()  {
-        TODO("Not yet implemented")
+    override fun navigateToTeamActivity()  {
+        val intent = Intent(activity, TeamActivity::class.java)
+        startActivity(intent)
     }
 
-    override fun showMyTournamentsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showMyTeamsFragment() {
-        TODO("Not yet implemented")
+    override fun showMyTeams(myTeams: List<Team>?) {
+        if (myTeams != null) {
+            teamAdapter.setData(myTeams)
+        }
     }
 
     override fun navigateToHomepageActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToSettingActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not needed for plain swipe refresh layout
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.srlRvMyTeams.isRefreshing = false
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
+    }
+
+    override fun onTeamItemClick(position: Int) {
+        userProfilePresenter?.userTeamClicked(position)
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
 

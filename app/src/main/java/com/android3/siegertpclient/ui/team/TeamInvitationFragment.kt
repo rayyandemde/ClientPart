@@ -1,57 +1,64 @@
 package com.android3.siegertpclient.ui.team
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
+import com.android3.siegertpclient.databinding.FragmentTeamInvitationBinding
+import com.android3.siegertpclient.ui.tournament.TournamentActivity
+import com.android3.siegertpclient.utils.recyclerviewadapters.InvitationAdapter
 
-class TeamInvitationFragment : Fragment(), TeamContract.ITeamView  {
+class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAdapter.OnInvitationItemClickListener {
+    private var _binding: FragmentTeamInvitationBinding? = null
+    private val binding get() = _binding!!
 
-    private val teamPresenter: TeamPresenter = TeamPresenter()
+    private var teamPresenter: TeamPresenter? = null
 
-    var teamInvitationRecycler: RecyclerView? = null
+    private val invitationAdapter by lazy { InvitationAdapter(this) }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
-        var view = inflater!!.inflate(R.layout.fragment_team_invitation, container, false)
+        _binding = FragmentTeamInvitationBinding.inflate(inflater, container, false)
+        teamPresenter = TeamPresenter(requireContext())
 
-        teamInvitationRecycler = view.findViewById<RecyclerView>(R.id.team_invitation_recycler)
+        binding.rvTeamInvitation.adapter = invitationAdapter
 
-        teamInvitationRecycler!!.layoutManager = LinearLayoutManager(context)
-        teamInvitationRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
+        binding.srlRvTeamInvitations.setOnRefreshListener {
+        }
 
-        return view
+        return binding.root
     }
+
     override fun onResume() {
         super.onResume()
-        teamPresenter.onAttach(this)
+        teamPresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        teamPresenter.onDetach()
+        teamPresenter?.onDetach()
+        _binding = null
     }
 
-    override fun showAdminFragment() {
-        TODO("Not yet implemented")
+    override fun navigateToTournamentActivity() {
+        val intent = Intent(activity, TournamentActivity::class.java)
+        startActivity(intent)
     }
 
-    override fun showMemberFragment() {
-        TODO("Not yet implemented")
+    override fun showDeleteAlert() {
+        //Not implemented here
     }
 
-    override fun showTeamTournamentsFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun navigateToHomepageActivity() {
-        TODO("Not yet implemented")
+    override fun showMembers(teamMembers: List<User>?) {
+        //Not implemented here
     }
 
     override fun showProgress() {
@@ -63,11 +70,18 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView  {
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
+        doToast("There's no internet connection to make the request.")
+    }
+
+    override fun onInvitationItemClick(position: Int) {
         TODO("Not yet implemented")
     }
 
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
 }

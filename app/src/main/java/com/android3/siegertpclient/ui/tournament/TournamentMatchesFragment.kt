@@ -4,83 +4,96 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
-import com.android3.siegertpclient.data.game.Game
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
+import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.Game
+import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.databinding.FragmentTournamentmatchesBinding
+import com.android3.siegertpclient.utils.recyclerviewadapters.GameAdapter
 
+<<<<<<< HEAD
 
 class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentView{
+=======
+class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentView, GameAdapter.OnGameItemClickListener{
+    private var _binding: FragmentTournamentmatchesBinding? = null
+    private val binding get() = _binding!!
+>>>>>>> origin
 
-    private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
-    var centerBt : Button? =null
-    var linkEt : EditText? =null
-    var openBt : Button?=null
+    private var tournamentPresenter: TournamentPresenter? = null
 
-    var tournamentMatchesRecycler: RecyclerView? = null
+    private val gameAdapter by lazy { GameAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentTournamentmatchesBinding.inflate(inflater, container, false)
+        tournamentPresenter = TournamentPresenter(requireContext())
 
-        var view = inflater.inflate(R.layout.fragment_tournamentmatches, container, false)
+        binding.rvTournamentMatches.adapter = gameAdapter
 
-        tournamentMatchesRecycler = view.findViewById<RecyclerView>(R.id.tournament_matches_recycler)
+        binding.srlRvTournamentMatches.setOnRefreshListener {
+        }
 
-        tournamentMatchesRecycler!!.layoutManager = LinearLayoutManager(context)
-        tournamentMatchesRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
+        binding.btnAddMatches.setOnClickListener {
 
-        centerBt = view.findViewById(R.id.buttonCenter)
-        linkEt = view.findViewById(R.id.stagesImagesLink)
-        openBt = view.findViewById(R.id.openLinkBtn)
+        }
 
-        return view
+        return binding.root
     }
+
     override fun onResume() {
         super.onResume()
-        tournamentPresenter.onAttach(this)
+        tournamentPresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        tournamentPresenter.onDetach()
+        tournamentPresenter?.onDetach()
+        _binding = null
     }
-    fun showGames(games: List<Game>) {
+
+    override fun showCurrentTournamentDetails() {
         TODO("Not yet implemented")
     }
 
-    fun showEditGamesBtn() {
+    override fun setEditRights() {
         TODO("Not yet implemented")
     }
 
-    fun showAddGameBtn() {
+    override fun disableEdits() {
+        //Not implemented here
+    }
+
+    override fun showIncompleteInput() {
+        //Not implemented here
+    }
+
+    override fun showSuccess(message: String) {
         TODO("Not yet implemented")
     }
 
-    override fun showTournamentDetailsFragment() {
+    override fun initParticipantAdapter() {
         TODO("Not yet implemented")
     }
 
-    override fun showTournamentParticipantsFragment() {
-        TODO("Not yet implemented")
+    override fun showSingleParticipants(participants: List<User>?) {
+        //Not implemented here
     }
 
-    override fun showTournamentScheduleFragment() {
-        TODO("Not yet implemented")
+    override fun showTeamParticipants(participants: List<Team>?) {
+        //Not implemented here
     }
 
-    override fun showResultFragment() {
-        TODO("Not yet implemented")
+    override fun showSchedules(schedules: List<Game>?) {
+        //Not implemented here
     }
 
-    override fun showTournamentUpdatesFragment() {
+    override fun showGames(games: List<Game>?) {
         TODO("Not yet implemented")
     }
 
     override fun navigateToHomepageActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showProgress() {
@@ -92,14 +105,18 @@ class TournamentMatchesFragment : Fragment() , TournamentContract.ITournamentVie
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
+        doToast("There's no internet connection to make the request.")
+    }
+
+    override fun onGameItemClick(position: Int) {
         TODO("Not yet implemented")
     }
 
-//    fun showListOfParticipant(participants: Participant[]) {
-//        TODO("Not yet implemented")
-//    }
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
 }

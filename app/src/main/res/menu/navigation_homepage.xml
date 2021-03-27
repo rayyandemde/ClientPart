@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_feed"
+        android:icon="@drawable/home_icon"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/navigation_createtournament"
+        android:icon="@drawable/create_tournament_icon"
+        android:title="@string/create_tournament" />
+
+    <item
+        android:id="@+id/navigation_createteam"
+        android:icon="@drawable/create_team_icon"
+        android:title="@string/create_team" />
+
+    <item
+        android:id="@+id/navigation_jointeam"
+        android:icon="@drawable/join_team_icon"
+        android:title="@string/join_a_team" />
+
+    <item
+        android:id="@+id/navigation_userprofile"
+        android:icon="@drawable/user_icon"
+        android:title="@string/user_profile" />
+</menu>

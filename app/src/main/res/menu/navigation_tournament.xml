@@ -4,28 +4,25 @@
     <item
         android:id="@+id/navigation_tournament_info"
         android:icon="@drawable/create_tournament_icon"
-        android:title="Info" />
+        android:title="@string/info" />
 
     <item
         android:id="@+id/navigation_participants"
         android:icon="@drawable/create_team_icon"
-        android:title="Participants" />
+        android:title="@string/participants" />
 
     <item
         android:id="@+id/navigation_schedule"
         android:icon="@drawable/schedule_icon"
-        android:title="Schedule" />
+        android:title="@string/schedules" />
 
     <item
         android:id="@+id/navigation_match_info"
         android:icon="@drawable/match_info_icon"
-        android:title="Match Info" />
+        android:title="@string/matches_info" />
 
     <item
-        android:id="@+id/navigation_changelogs"
+        android:id="@+id/navigation_delete_tournament"
         android:icon="@drawable/warning_icon"
-        android:title="Delete" />
-
-
-
+        android:title="@string/delete_tournament" />
 </menu>

@@ -1,90 +1,90 @@
 package com.android3.siegertpclient.ui.team
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
-import com.android3.siegertpclient.data.tournament.Tournament
-import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.homepage.TournamentOverviewCardRecyclerAdapter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.databinding.FragmentTeamtournamentsBinding
+import com.android3.siegertpclient.utils.LocalCache
+import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
 
-class TeamTournamentsFragment : Fragment() , TeamContract.ITeamView {
+class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAdapter.OnTournamentItemClickListener {
+    private var _binding: FragmentTeamtournamentsBinding? = null
+    private val binding get() = _binding!!
 
+    private var teamPresenter: TeamPresenter? = null
 
-    private val teamPresenter: TeamPresenter = TeamPresenter()
+    private val tournamentAdapter by lazy { TournamentAdapter(this) }
 
-    var teamTournamentsRecycler : RecyclerView? = null
-    var homeBtn: ImageView? = null
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentTeamtournamentsBinding.inflate(inflater, container, false)
+        teamPresenter = TeamPresenter(requireContext())
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding.tvTeamName.text = "Team : " + LocalCache.getCurrentTeamName(requireContext())
 
-        var view = inflater!!.inflate(R.layout.fragment_teamtournaments, container, false)
+        binding.rvTeamTournaments.adapter = tournamentAdapter
 
-        teamTournamentsRecycler = view.findViewById<RecyclerView>(R.id.team_tournaments_recycler)
-
-        teamTournamentsRecycler!!.layoutManager = LinearLayoutManager(context)
-        teamTournamentsRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
-
-        homeBtn = view.findViewById<ImageView>(R.id.homeBtnTeam)
-        homeBtn?.setOnClickListener{
-            teamPresenter.onHomeBtnClicked()
+        binding.srlRvTeamTournaments.setOnRefreshListener {
         }
 
-        return view
+        binding.btnHome.setOnClickListener {
+            teamPresenter?.onHomeBtnClicked()
+        }
+
+        return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        teamPresenter.onAttach(this)
+        teamPresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        teamPresenter.onDetach()
+        teamPresenter?.onDetach()
+        _binding = null
     }
 
-    fun showTournaments(tournaments: List<Tournament>) {
+    override fun navigateToTournamentActivity() {
         TODO("Not yet implemented")
     }
 
-    override fun navigateToHomepageActivity() {
-        val hIntent = Intent(activity, HomepageActivity::class.java)
-        startActivity(hIntent)
+    override fun showDeleteAlert() {
+        //Not implemented here
     }
 
-    override fun showAdminFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showMemberFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showTeamTournamentsFragment() {
-        TODO("Not yet implemented")
+    override fun showMembers(teamMembers: List<User>?) {
+        //Not implemented here
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not needed for plain swipe refresh layout
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.srlRvTeamTournaments.isRefreshing = false
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
+        doToast("There's no internet connection to make the request.")
+    }
+
+    override fun onTournamentItemClick(position: Int) {
         TODO("Not yet implemented")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }

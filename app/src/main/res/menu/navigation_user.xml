@@ -4,11 +4,10 @@
     <item
         android:id="@+id/navigation_my_tournament"
         android:icon="@drawable/create_tournament_icon"
-        android:title="My Tournament" />
+        android:title="@string/my_tournaments" />
 
     <item
         android:id="@+id/navigation_my_team"
         android:icon="@drawable/create_team_icon"
-        android:title="My Team" />
-
+        android:title="@string/my_teams" />
 </menu>

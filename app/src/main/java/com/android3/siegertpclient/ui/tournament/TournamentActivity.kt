@@ -1,74 +1,87 @@
 package com.android3.siegertpclient.ui.tournament
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.*
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.Game
+import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.databinding.ActivityTournamentBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
-import com.android3.siegertpclient.ui.createteam.CreateTeamActivity
-import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
-import com.android3.siegertpclient.ui.homepage.FeedFragment
-import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.homepage.JoinTeamFragment
-import com.android3.siegertpclient.ui.register.RegisterActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
  * This tournament
  */
-class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
+class TournamentActivity() : BaseActivity(), TournamentContract.ITournamentView {
+    private lateinit var binding: ActivityTournamentBinding
+    private lateinit var tournamentPresenter: TournamentPresenter
 
-    private val tournamentPresenter: TournamentPresenter = TournamentPresenter()
+    private val tournamentMatchesFragment: TournamentMatchesFragment
 
-    private val tournamentMatchesFragment:TournamentMatchesFragment
+    private val tournamentParticipantsFragment: TournamentParticipantsFragment
 
-    private  val tournamentParticipantsFragment : TournamentParticipantsFragment
+    private val tournamentSchedulesFragment: TournamentSchedulesFragment
 
-    private val tournamentSchedulesFragment : TournamentSchedulesFragment
-
-    private val tournamentUpdatesFragment:TournamentUpdatesFragment
+    private val deleteTournamentFragment: DeleteTournamentFragment
 
     private val tournamentDetailsFragment: TournamentDetailsFragment
+
     init {
-        tournamentMatchesFragment=TournamentMatchesFragment()
+        tournamentMatchesFragment = TournamentMatchesFragment()
         tournamentSchedulesFragment = TournamentSchedulesFragment()
-       tournamentParticipantsFragment = TournamentParticipantsFragment()
-        tournamentUpdatesFragment=TournamentUpdatesFragment()
-        tournamentDetailsFragment=TournamentDetailsFragment()
+        tournamentParticipantsFragment = TournamentParticipantsFragment()
+        deleteTournamentFragment = DeleteTournamentFragment()
+        tournamentDetailsFragment = TournamentDetailsFragment()
     }
 
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val mOnNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
 
-        when(item.itemId){
-            R.id.navigation_tournament_info -> transaction.replace(R.id.fragment_container, tournamentDetailsFragment)
-            R.id.navigation_participants -> transaction.replace(R.id.fragment_container, tournamentParticipantsFragment)
-            R.id.navigation_schedule -> transaction.replace(R.id.fragment_container, tournamentSchedulesFragment)
-            R.id.navigation_match_info -> transaction.replace(R.id.fragment_container, tournamentMatchesFragment)
-            R.id.navigation_changelogs -> transaction.replace(R.id.fragment_container, tournamentUpdatesFragment)
+            when (item.itemId) {
+                R.id.navigation_tournament_info -> transaction.replace(
+                    R.id.container_tournament_fragments,
+                    tournamentDetailsFragment
+                ).addToBackStack(null)
+                R.id.navigation_participants -> transaction.replace(
+                    R.id.container_tournament_fragments,
+                    tournamentParticipantsFragment
+                ).addToBackStack(null)
+                R.id.navigation_schedule -> transaction.replace(
+                    R.id.container_tournament_fragments,
+                    tournamentSchedulesFragment
+                ).addToBackStack(null)
+                R.id.navigation_match_info -> transaction.replace(
+                    R.id.container_tournament_fragments,
+                    tournamentMatchesFragment
+                ).addToBackStack(null)
+                R.id.navigation_delete_tournament -> transaction.replace(
+                    R.id.container_tournament_fragments,
+                    deleteTournamentFragment
+                ).addToBackStack(null)
+            }
+
+            transaction.commit()
+
+            true
         }
-
-        transaction.commit()
-
-        true
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tournament)
 
-        val navigationBar: BottomNavigationView = findViewById(R.id.navigation) as BottomNavigationView
+        binding = ActivityTournamentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        navigationBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        tournamentPresenter = TournamentPresenter(this)
+
+        binding.bnvTournament.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragment_container,tournamentDetailsFragment)
+        transaction.add(R.id.container_tournament_fragments, tournamentDetailsFragment)
         transaction.commit()
-
-
     }
 
     override fun onResume() {
@@ -81,56 +94,63 @@ class TournamentActivity() : BaseActivity(),TournamentContract.ITournamentView{
         tournamentPresenter.onDetach()
     }
 
-    private fun openRegisterActivity() {
-        val rIntent = Intent(this, RegisterActivity::class.java)
-        startActivity(rIntent)
+    override fun showCurrentTournamentDetails() {
+        //Not implemented here
     }
 
-    private fun openForgotPasswordActivity() {
-        val fpIntent = Intent(this, ForgotPasswordActivity::class.java)
-        startActivity(fpIntent)
+    override fun setEditRights() {
+        //Not implemented here
     }
 
-
-    override fun showTournamentDetailsFragment() {
-
+    override fun disableEdits() {
+        //Not implemented here
     }
 
-    override fun showTournamentParticipantsFragment() {
-        TODO("Not yet implemented")
+    override fun showIncompleteInput() {
+        //Not implemented here
     }
 
-    override fun showTournamentScheduleFragment() {
-        TODO("Not yet implemented")
+    override fun showSuccess(message: String) {
+        //Not implemented here
     }
 
-    override fun showResultFragment() {
-        TODO("Not yet implemented")
+    override fun initParticipantAdapter() {
+        //Not implemented here
     }
 
-    override fun showTournamentUpdatesFragment() {
-        TODO("Not yet implemented")
+    override fun showSingleParticipants(participants: List<User>?) {
+        //Not implemented here
+    }
+
+    override fun showTeamParticipants(participants: List<Team>?) {
+        //Not implemented here
+    }
+
+    override fun showSchedules(schedules: List<Game>?) {
+        //Not implemented here
+    }
+
+    override fun showGames(games: List<Game>?) {
+        //Not implemented here
     }
 
     override fun navigateToHomepageActivity() {
-        val cTeamIntent = Intent(this, HomepageActivity::class.java)
-        startActivity(cTeamIntent)
+        //Not implemented here
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showError(errorMessage: String) {
-        Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
+        //Not implemented here
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
-
 }

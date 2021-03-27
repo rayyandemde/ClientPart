@@ -1,120 +1,72 @@
 package com.android3.siegertpclient.data.tournament.tournamentsource.tournamentRemote
 
-import com.android3.siegertpclient.data.game.Game
-import com.android3.siegertpclient.data.tournament.ParticipantConverter
+import com.android3.siegertpclient.data.payload.ApiResponse
+import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.CreateTournament
+import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.tournament.Tournament
-import com.android3.siegertpclient.data.tournament.TournamentData
-import com.android3.siegertpclient.data.tournament.tournamentsource.ITournamentDataSource
+import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.utils.ParticipantFormUtil
-import com.android3.siegertpclient.utils.TournamentTypesUtil
-import java.util.*
+import com.android3.siegertpclient.utils.RestClient
+import retrofit2.Response
 
-class TournamentRemoteDataSource (private val tournamentService: TournamentService) : ITournamentDataSource {
+class TournamentRemoteDataSource {
 
-    private fun convertTRespToTournament(tResp : TournamentResponse) : TournamentData {
-        val participantConverter = ParticipantConverter()
-        val pList = participantConverter.toParticipantList(tResp.participantList)
-        val gList = participantConverter.toGameList(tResp.gameList)
-        return TournamentData(tResp.tournamentId, tResp.tournamentDetail.participantForm, tResp.tournamentDetail.adminId,
-        tResp.tournamentDetail.tournamentTypes, tResp.tournamentDetail.typeOfGame, tResp.tournamentDetail.location,
-        tResp.tournamentDetail.registrationDeadline, tResp.tournamentDetail.startTime, tResp.tournamentDetail.endTime,
-        tResp.tournamentName, tResp.maxParticipantNumber, tResp.type, tResp.currentState, pList, gList)
+    suspend fun createNewTournament(
+        createTournament: CreateTournament,
+        token : String) : Response<Tournament> {
+        return RestClient.tournamentService.createNewTournament(createTournament, token)
     }
 
-    fun createNewTournament(tournamentForm : String, tournamentSize : String, tournamentName: String,
-                            tournamentDetail: TournamentDetail, ownUserId: String) : TournamentData? {
-        val userCall = tournamentService.createNewTournament(tournamentForm, tournamentSize,
-            tournamentName, tournamentDetail, ownUserId)
-        val response = userCall.execute()
-        if (!response.isSuccessful) {
-
-            //TOdo implement error code
-        }
-        return convertTRespToTournament(response.body()!!)
+    suspend fun getTournamentById(tourneyId : String, token: String) : Response<Tournament> {
+        return RestClient.tournamentService.getTournamentById(tourneyId, token)
     }
 
-    fun getTournamentById(tourneyId : String, ownUserId: String) : TournamentData? {
-        val userCall = tournamentService.getTournamentById(tourneyId, ownUserId)
-        val response = userCall.execute()
-        if (!response.isSuccessful) {
-
-            //TOdo implement error code
-        }
-        return convertTRespToTournament(response.body()!!)
+    suspend fun getTournamentByName(tournamentName : String, token: String) : Response<Tournament> {
+        return RestClient.tournamentService.getTournamentByName(tournamentName, token)
     }
 
-    fun getTournamentByName(tournamentName : String, ownUserId: String) : TournamentData? {
-        val userCall = tournamentService.getTournamentByName(tournamentName, ownUserId)
-        val response = userCall.execute()
-        if (!response.isSuccessful) {
-
-            //TOdo implement error code
-        }
-        return convertTRespToTournament(response.body()!!)
+    suspend fun getTournamentParticipantsUser(tournamentName : String, token: String) : Response<List<User>> {
+        return RestClient.tournamentService.getTournamentParticipantsUser(tournamentName, token)
     }
 
-    fun getTournamentParticipants(tournamentName : String, ownUserId: String) : Array<User>? {
-        val userCall = tournamentService.getTournamentParticipants(tournamentName, ownUserId)
-        val response = userCall.execute()
-        if (!response.isSuccessful) {
-
-            //TOdo implement error code
-        }
-        return response.body()
+    suspend fun getTournamentParticipantsTeam(tournamentName : String, token: String) : Response<List<Team>> {
+        return RestClient.tournamentService.getTournamentParticipantsTeam(tournamentName, token)
     }
 
-    fun updateTournamentDetailById(tournamentName : String, participantForm: ParticipantFormUtil, adminId : String,
-                                   tournamentTypes: TournamentTypesUtil, typeOfGame : String, location : String,
-                                   registrationDeadline : Date, startTime : Date, endTime : Date,
-                                   ownUserId: String) : TournamentData? {
-        val userCall = tournamentService.updateTournamentDetailById(tournamentName, participantForm, adminId,
-            tournamentTypes, typeOfGame, location, registrationDeadline, startTime, endTime, ownUserId)
-        val response = userCall.execute()
-        if (!response.isSuccessful) {
-
-            //TOdo implement error code
-        }
-        return convertTRespToTournament(response.body()!!)
+    suspend fun getTournamentGames(tournamentName : String, token: String) : Response<List<Game>> {
+        return RestClient.tournamentService.getTournamentGames(tournamentName, token)
     }
 
-    fun deleteTournament(tournamentName : String, ownUserId: String) : Boolean? {
-        val userCall = tournamentService.deleteTournament(tournamentName, ownUserId)
-        val response = userCall.execute()
-        if (!response.isSuccessful) {
-
-            //TOdo implement error code
-        }
-        return response.body()
+    suspend fun getGameById(tournamentName : String, gameId : String,  token: String) : Response<Game> {
+        return RestClient.tournamentService.getGameById(tournamentName, gameId, token)
     }
 
-    fun handleParticipation(tournamentName : String, participate : Map<String, Boolean>, ownUserId: String) : Boolean? {
-        val userCall = tournamentService.handleParticipation(tournamentName, participate, ownUserId)
-        val response = userCall.execute()
-        if (!response.isSuccessful) {
-
-            //TOdo implement error code
-        }
-        return response.body()
+    suspend fun handleParticipation(tournamentName: String, participation : String, token: String) : Response<ApiResponse> {
+        val participationBody = hashMapOf<String, String>()
+        participationBody["participation"] = participation
+        return RestClient.tournamentService.handleParticipation(tournamentName, participationBody, token)
     }
 
-    fun getTournamentsGames(tournamentName : String, ownUserId: String) : Array<Game>? {
-        val userCall = tournamentService.getTournamentsGames(tournamentName, ownUserId)
-        val response = userCall.execute()
-        if (!response.isSuccessful) {
-
-            //TOdo implement error code
-        }
-        return response.body()
+    suspend fun createGames(tournamentName : String, token: String) : Response<List<Game>> {
+        return RestClient.tournamentService.createGames(tournamentName, token)
     }
 
-    fun createGames(tournamentName : String, ownUserId: String) : Array<Game>? {
-        val userCall = tournamentService.createGames(tournamentName, ownUserId)
-        val response = userCall.execute()
-        if (!response.isSuccessful) {
-
-            //TOdo implement error code
-        }
-        return response.body()
+    suspend fun updateGameById(tournamentName : String, game : Game, token: String) : Response<Game> {
+        return RestClient.tournamentService.updateGameById(tournamentName, game.gameId, game, token)
     }
+
+    suspend fun deleteTournament(tournamentName : String, token: String) : Response<ApiResponse> {
+        return RestClient.tournamentService.deleteTournament(tournamentName, token)
+    }
+
+    suspend fun deleteGameById(tournamentName : String, gameId : String, token: String) : Response<ApiResponse> {
+        return RestClient.tournamentService.deleteGameById(tournamentName, gameId, token)
+    }
+
+    suspend fun updateTournamentDetail(tournamentName: String, tournamentDetail: TournamentDetail, token: String) : Response<Tournament> {
+        return RestClient.tournamentService.updateTournamentDetail(tournamentName, tournamentDetail, token)
+    }
+
+
 }

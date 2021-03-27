@@ -5,139 +5,177 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#dda700"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#dda700"
     tools:context=".ui.tournament.TournamentDetailsFragment">
 
-    <Button
-        android:id="@+id/backBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="68dp"
-        android:background="@drawable/back_btn_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/homeBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="52dp"
-        android:background="@drawable/home_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
-        android:id="@+id/tournamentName"
+        android:id="@+id/et_tournament_name"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edittext_white"
-        android:text="    Tournament Name"
+        android:paddingStart="20dp"
+        android:text="@string/tournament_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/typeOfGame"
+        android:id="@+id/tv_type_of_game"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edittext_white"
         android:gravity="center_vertical"
-        android:text="    Type of Game"
+        android:paddingStart="20dp"
+        android:text="@string/type_of_game"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tournamentName" />
+        app:layout_constraintTop_toBottomOf="@+id/et_tournament_name" />
 
     <TextView
-        android:id="@+id/participantForm"
+        android:id="@+id/tv_match_type"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edittext_white"
         android:gravity="center_vertical"
-        android:text="    Participant Form"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/typeOfGame" />
-
-    <EditText
-        android:id="@+id/location"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edittext_white"
-        android:text="    Location"
+        android:paddingStart="20dp"
+        android:text="@string/match_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/participantForm" />
-
-    <EditText
-        android:id="@+id/time"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edittext_white"
-        android:text="    Time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_type_of_game" />
 
     <TextView
-        android:id="@+id/maxPlayer"
+        android:id="@+id/tv_tournament_type"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittext_white"
         android:gravity="center_vertical"
-        android:background="@drawable/edittext_white"
-        android:text="    Max Player"
+        android:paddingStart="20dp"
+        android:text="@string/tournament_type"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_match_type" />
 
-    <EditText
-        android:id="@+id/registrationDeadline"
+    <TextView
+        android:id="@+id/tv_participant_form"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edittext_white"
-        android:text="    Register Time"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:text="@string/participant_form"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maxPlayer" />
-
-    <EditText
-        android:id="@+id/prize"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edittext_white"
-        android:text="    Prize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registrationDeadline" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_tournament_type" />
 
     <Button
-        android:id="@+id/updateDetailsBtn"
+        android:id="@+id/btn_registration_deadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="16dp"
-        android:text="Update Info"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:text="@string/registration_deadline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_participant_form" />
+
+    <LinearLayout
+        android:id="@+id/ll_tournament_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_registration_deadline">
+
+        <Button
+            android:id="@+id/btn_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:ems="10"
+            android:text="@string/start_date" />
+
+        <Button
+            android:id="@+id/btn_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="@string/end_date" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_location"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittext_white"
+        android:paddingStart="20dp"
+        android:text="@string/location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_tournament_time" />
+
+    <TextView
+        android:id="@+id/tv_max_player"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittext_white"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:text="@string/max_player"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_location" />
+
+    <LinearLayout
+        android:id="@+id/ll_update__details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.344"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_max_player">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/pb_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            tools:visibility="visible" />
+
+        <Button
+            android:id="@+id/btn_update_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="@string/update_info" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prize"
-        app:layout_constraintVertical_bias="0.28" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_update__details" />
 </androidx.constraintlayout.widget.ConstraintLayout>

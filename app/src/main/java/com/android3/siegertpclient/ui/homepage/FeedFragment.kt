@@ -5,71 +5,70 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.databinding.FragmentFeedBinding
 import com.android3.siegertpclient.ui.invitation.InvitationActivity
+import com.android3.siegertpclient.ui.tournament.TournamentActivity
+import com.android3.siegertpclient.utils.LocalCache
+import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
 
-class FeedFragment : Fragment(), HomepageContract.IHomepageView {
-/*
+class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapter.OnTournamentItemClickListener {
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
-    */
 
-    var feedRecycler: RecyclerView? = null
-    var invitationBtn: Button? = null
+    private var homepagePresenter: HomepagePresenter? = null
 
-    private val homepagePresenter: HomepagePresenter = HomepagePresenter()
+    private val tournamentAdapter by lazy { TournamentAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentFeedBinding.inflate(inflater, container, false)
+        homepagePresenter = HomepagePresenter(requireContext())
 
-        var view = inflater.inflate(R.layout.fragment_feed, container, false)
+        binding.tvWelcomeUsername.text = "Welcome " + LocalCache.getCurrentUsername(requireContext())
 
-        feedRecycler = view.findViewById<RecyclerView>(R.id.feed_recycler)
+        binding.rvFeed.adapter = tournamentAdapter
 
-        feedRecycler!!.layoutManager = LinearLayoutManager(context)
-        feedRecycler!!.adapter = TournamentOverviewCardRecyclerAdapter()
+        homepagePresenter?.onFeedRefresh()
 
-        invitationBtn = view.findViewById(R.id.invitationBtn)
-        invitationBtn?.setOnClickListener{
-            //loginPresenter.onLoginBtnClicked(emailTxt.text.toString(), passwordTxt.text.toString())
-            homepagePresenter.onInvitationBtnClicked()
+        binding.srlRvFeed.setOnRefreshListener {
+            homepagePresenter?.onFeedRefresh()
         }
 
-    /*
-        _binding = FragmentFeedBinding.inflate(inflater, container, false)
-       binding.feedRecycler.layoutManager = LinearLayoutManager(context)
-       binding.feedRecycler.adapter = TournamentOverviewListRecyclerAdapter()
-        return binding.root
-        */
+        binding.btnInvitation.setOnClickListener{
+            homepagePresenter?.onInvitationBtnClicked()
+        }
 
-        return view
+        return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        homepagePresenter.onAttach(this)
+        homepagePresenter?.onAttach(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        homepagePresenter.onDetach()
-//        _binding = null
+        homepagePresenter?.onDetach()
+       _binding = null
     }
 
-    fun navigateToTournamentActivity() {
+    override fun showFeed(feed: List<Tournament>?) {
+        //Needs to be implemented *Just a placeholder comment so the app can run
+    }
+
+    override fun showSuccess(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showIncompleteInput() {
         //Not implemented here
     }
 
     override fun navigateToInvitationActivity() {
-        val invIntent = Intent(activity, InvitationActivity::class.java)
-        startActivity(invIntent)
+        val intent = Intent(activity, InvitationActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToUserActivity() {
@@ -84,31 +83,32 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView {
         //Not implemented here
     }
 
-    override fun showFeedFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showJoinTeamFragment() {
-        //Not implemented here
-    }
-
-    override fun showSearchResult(tournaments: List<Tournament>) {
-        TODO("Not yet implemented")
+    override fun navigateToTournamentActivity() {
+        val intent = Intent(activity, TournamentActivity::class.java)
+        startActivity(intent)
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not needed for plain swipe refresh layout
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.srlRvFeed.isRefreshing = false
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
+    }
+
+    override fun onTournamentItemClick(position: Int) {
+        homepagePresenter?.onTournamentOverviewClicked(position)
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }
