@@ -12,7 +12,7 @@ class InvitationRemoteDataSourceTest {
     @Test//TODO update when function is implemented
     fun createInviTest() = runBlocking{
         var test = inviRemote.createInvitation("", "", "","", "")
-        Assert.assertEquals(null, test)
+        Assert.assertNotEquals(null, test)
     }
 
     @Test//TODO update when function is implemented

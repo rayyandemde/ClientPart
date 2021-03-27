@@ -11,11 +11,12 @@ class TournamentRemoteDataSourceTest {
     private var tournamentRemote = TournamentRemoteDataSource()
     private var tourneyDetail = TournamentDetail("", "", "", "",
         "", "", "", "")
+    private var createTournament = CreateTournament(32, tourneyDetail, "name", "SINGLE")
 
     @Ignore//add  @JvmSuppressWildcards to Interface necessary
     @Test
     fun responseSuccessfulCreateNewTournament() = runBlocking {
-        var answer = tournamentRemote.createNewTournament("", 32, "name", tourneyDetail, "123")
+        var answer = tournamentRemote.createNewTournament(createTournament, "123")
         Assert.assertNotEquals(null, answer)
     }
 
