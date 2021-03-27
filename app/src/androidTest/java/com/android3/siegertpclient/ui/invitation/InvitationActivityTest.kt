@@ -28,7 +28,7 @@ class InvitationActivityTest {
         //set up
         val activityScenario = ActivityScenario.launch(InvitationActivity::class.java)
         //Nav fragment to createteam page
-        onView(withId(R.id.backBtnInvitation)).perform(click())
+        onView(withId(R.id.fab_back)).perform(click())
         onView(withId(R.id.homepage_container)).check(matches(isDisplayed()))
 
     }

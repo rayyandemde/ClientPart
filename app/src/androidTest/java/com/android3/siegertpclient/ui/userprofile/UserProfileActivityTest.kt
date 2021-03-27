@@ -46,17 +46,6 @@ class UserProfileActivityTest{
         onView(withId(R.id.mytournaments_container)).check((matches(isDisplayed())))
     }
 
-    /**
-     * To see if the toast can be show when we don't input email.
-     */
-    @Test
-    fun test_Nav_setting_fragment() {
-        //Given
-        val activityScenario = ActivityScenario.launch(UserProfileActivity::class.java)
-
-        //to see if toast is displayed to show incomplete information
-        onView(ViewMatchers.withId(R.id.button_settings)).perform(ViewActions.click())
-        onView(withId(R.id.setting_container)).check((matches(isDisplayed())))
-    }
+   
 
 }

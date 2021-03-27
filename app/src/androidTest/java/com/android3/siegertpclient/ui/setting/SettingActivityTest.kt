@@ -20,13 +20,12 @@ import com.android3.siegertpclient.ui.homepage.HomepageActivity
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class SettingActivityTest {
-    /**
-     * To test if the go back button works.
+
 
     @Test
     fun test_NavToUserprofile() {
         //set up
-        val activityScenario = ActivityScenario.launch(SettingActivity::class.java)
+        val activityScenario = ActivityScenario.launch(SettingsActivity::class.java)
 
         onView(withId(R.id.fab_back)).perform(click())
 
@@ -34,14 +33,14 @@ class SettingActivityTest {
 
 
     }
-*/
+
     /**
      * To test if the homepage button can work.
      */
     @Test
     fun test_NavToHomepage() {
         //set up
-        val activityScenario = ActivityScenario.launch(SettingActivity::class.java)
+        val activityScenario = ActivityScenario.launch(SettingsActivity::class.java)
 
         onView(withId(R.id.tv_logout)).perform(click())
         onView(withId(R.id.login_container)).check(matches(isDisplayed()))
