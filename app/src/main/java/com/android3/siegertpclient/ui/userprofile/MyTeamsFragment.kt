@@ -89,4 +89,6 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
     private fun doToast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
+
+
 }
