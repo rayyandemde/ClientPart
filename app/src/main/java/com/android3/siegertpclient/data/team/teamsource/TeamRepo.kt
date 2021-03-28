@@ -49,18 +49,18 @@ class TeamRepo(private val context: Context) {
         return null
     }
 
-    suspend fun getTeamTournaments(teamName: String) : List<Tournament>? {
+    suspend fun getTeamTournaments() : List<Tournament>? {
         val response =
-            teamRemoteDataSource.getTeamTournaments(teamName, LocalCache.getBearerToken(context)!!)
+            teamRemoteDataSource.getTeamTournaments(LocalCache.getBearerToken(context)!!, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
             return response.body()!!
         }
         return null
     }
 
-    suspend fun getTeamInvitations(teamName: String) : List<Invitation>? {
+    suspend fun getTeamInvitations() : List<Invitation>? {
         val response =
-            teamRemoteDataSource.getTeamInvitations(teamName, LocalCache.getBearerToken(context)!!)
+            teamRemoteDataSource.getTeamInvitations(LocalCache.getBearerToken(context)!!, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
             return response.body()!!
         }
@@ -69,7 +69,7 @@ class TeamRepo(private val context: Context) {
 
     suspend fun deleteTeam(teamName: String) : ApiResponse? {
         val response =
-            teamRemoteDataSource.deleteTeam(teamName, LocalCache.getBearerToken(context)!!)
+            teamRemoteDataSource.deleteTeam(LocalCache.getBearerToken(context)!!, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
             return response.body()!!
         }

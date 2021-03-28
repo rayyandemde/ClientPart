@@ -1,4 +1,5 @@
 import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.ui.base.BaseView
 
 interface UserProfileContract {
@@ -12,6 +13,8 @@ interface UserProfileContract {
         fun navigateToSettingActivity()
 
         fun navigateToTeamActivity()
+
+        fun shotMyTournaments(myTournaments : List<Tournament>?)
     }
 
     interface IUserProfilePresenter {
@@ -25,5 +28,7 @@ interface UserProfileContract {
         fun onTeamsRefresh()
 
         fun userTeamClicked(position: Int)
+
+        fun userTournamentClicked(position : Int)
     }
 }

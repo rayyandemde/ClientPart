@@ -12,6 +12,7 @@ import retrofit2.http.*
 
 interface TournamentService {
 
+    @JvmSuppressWildcards
     @POST("tournaments")
     suspend fun createNewTournament(
         @Body createTournament : CreateTournament,

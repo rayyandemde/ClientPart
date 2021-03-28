@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
@@ -62,6 +64,14 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView, UserAdapter.OnUse
         }
     }
 
+    override fun showTournaments(tournaments: List<Tournament>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showInvitations(invitations: List<Invitation>?) {
+        TODO("Not yet implemented")
+    }
+
     override fun showProgress() {
         TODO("Not yet implemented")
     }
@@ -83,6 +93,6 @@ class TeamMemberFragment : Fragment(), TeamContract.ITeamView, UserAdapter.OnUse
     }
 
     override fun onUserItemClick(position: Int) {
-        TODO("Not yet implemented")
+        teamPresenter?.onMemberItemClicked(position)
     }
 }

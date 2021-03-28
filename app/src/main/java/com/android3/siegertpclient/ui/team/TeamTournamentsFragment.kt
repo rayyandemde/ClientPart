@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTeamtournamentsBinding
 import com.android3.siegertpclient.utils.LocalCache
@@ -64,6 +66,14 @@ class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAd
         //Not implemented here
     }
 
+    override fun showTournaments(tournaments: List<Tournament>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showInvitations(invitations: List<Invitation>?) {
+        TODO("Not yet implemented")
+    }
+
     override fun showProgress() {
         //Not needed for plain swipe refresh layout
     }
@@ -81,7 +91,7 @@ class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAd
     }
 
     override fun onTournamentItemClick(position: Int) {
-        TODO("Not yet implemented")
+        teamPresenter?.onTournamentItemClicked(position)
     }
 
     private fun doToast(message: String) {
