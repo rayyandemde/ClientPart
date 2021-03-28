@@ -67,7 +67,12 @@ class InvitationPresenter(private val context: Context) : BasePresenter<Invitati
         val savedInvitations = invitationRepo.getCurrentUserInvitations()!!
 
         val tournamentName = savedInvitations[position].tournamentName
-        localData.putString(Constants.KEY_TOURNAMENT_NAME, tournamentName)
-        view?.navigateToTournamentActivity()
+        GlobalScope.launch(Dispatchers.IO) {
+            val tournament = tournamentRepo.getTournamentByName(tournamentName)
+            localData.putString(Constants.KEY_TOURNAMENT_NAME, tournament?.tournamentName!!)
+            withContext(Dispatchers.Main) {
+                view?.navigateToTournamentActivity()
+            }
+        }
     }
 }
