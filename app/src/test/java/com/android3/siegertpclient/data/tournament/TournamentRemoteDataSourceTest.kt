@@ -13,7 +13,7 @@ class TournamentRemoteDataSourceTest {
         "", "", "", "")
     private var createTournament = CreateTournament(32, tourneyDetail, "name", "SINGLE")
 
-    
+
     @Test
     fun responseSuccessfulCreateNewTournament() = runBlocking {
         var answer = tournamentRemote.createNewTournament(createTournament, "123")
