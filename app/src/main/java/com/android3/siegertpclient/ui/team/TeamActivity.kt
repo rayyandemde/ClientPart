@@ -1,13 +1,19 @@
 package com.android3.siegertpclient.ui.team
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.Toast
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.ActivityTeamBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
+import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
+import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class TeamActivity : BaseActivity(), TeamContract.ITeamView {
     private lateinit var binding: ActivityTeamBinding
@@ -78,8 +84,31 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
         //Not implemented here
     }
 
+    override fun navigateToHomepageActivity() {
+        val intent = Intent(this@TeamActivity, HomepageActivity::class.java)
+        startActivity(intent)
+    }
+
     override fun showDeleteAlert() {
-        //Needs to be implemented *Just a placeholder comment so the app can run
+        val inflater = layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.edit_text_layout, null)
+        val etParticipant = dialogLayout.findViewById<EditText>(R.id.et_for_dialog)
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Delete Team")
+            .setMessage("Warning! This action cannot be undone")
+            .setNegativeButton("Cancel") {dialog, which ->
+                //Do Nothing
+            }
+            .setPositiveButton("Add") {dialog, which ->
+                teamPresenter?.onDeleteBtnClicked()
+            }
+            .setView(dialogLayout)
+            .show()
+    }
+
+    override fun showSuccess() {
+        doToast("Your team has been successfully deleted")
     }
 
     override fun showMembers(teamMembers: List<User>?) {
@@ -103,10 +132,14 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
     }
 
     override fun showError(errorMessage: String) {
-        //Not implemented here
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        //Not implemented here
+        doToast("There's no internet connection to make the request.")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(this@TeamActivity, message, Toast.LENGTH_LONG).show()
     }
 }

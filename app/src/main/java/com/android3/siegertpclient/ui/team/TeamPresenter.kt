@@ -106,7 +106,7 @@ class TeamPresenter(private val context: Context) : BasePresenter<TeamContract.I
     }
 
     override fun onHomeBtnClicked() {
-        TODO("Not yet implemented")
+        view?.navigateToHomepageActivity()
     }
 
     override fun onTournamentItemClicked(position: Int) {
@@ -134,6 +134,31 @@ class TeamPresenter(private val context: Context) : BasePresenter<TeamContract.I
             localData.putString(Constants.KEY_TOURNAMENT_NAME, tournament?.tournamentName!!)
             withContext(Dispatchers.Main) {
                 view?.navigateToTournamentActivity()
+            }
+        }
+    }
+
+    override fun onDeleteBtnClicked() {
+        if (!onlineChecker.isOnline()) {
+            view?.showNoInternetConnection()
+            view?.hideProgress()
+        } else {
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
+                    val teamMembers = teamRepo.deleteTeam()
+                    if (teamMembers != null) {
+                        withContext(Dispatchers.Main) {
+                            view?.showSuccess()
+                            view?.hideProgress()
+                            view?.navigateToHomepageActivity()
+                        }
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        view?.showError("Oops... It seems there's unexpected error. Please try again.")
+                        view?.hideProgress()
+                    }
+                }
             }
         }
     }
