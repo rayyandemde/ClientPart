@@ -28,7 +28,7 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView, 
         userProfilePresenter = UserProfilePresenter(requireContext())
 
         binding.tvUserData.text = "@" + LocalCache.getCurrentUsername(requireContext()) +
-                " : " + LocalCache.getCurrentLastName(requireContext()) + ". " +
+                " : " + LocalCache.getCurrentLastName(requireContext()) + ", " +
                 LocalCache.getCurrentFirstName(requireContext())
 
         binding.rvMyTournaments.adapter = tournamentAdapter
