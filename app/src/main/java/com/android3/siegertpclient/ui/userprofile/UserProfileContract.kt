@@ -14,7 +14,7 @@ interface UserProfileContract {
 
         fun navigateToTeamActivity()
 
-        fun shotMyTournaments(myTournaments : List<Tournament>?)
+        fun showMyTournaments(myTournaments : List<Tournament>?)
     }
 
     interface IUserProfilePresenter {

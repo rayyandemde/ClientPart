@@ -80,7 +80,7 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
         //Not implemented here
     }
 
-    override fun shotMyTournaments(myTournaments: List<Tournament>?) {
+    override fun showMyTournaments(myTournaments: List<Tournament>?) {
         TODO("Not yet implemented")
     }
 

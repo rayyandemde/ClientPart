@@ -2,6 +2,7 @@ package com.android3.siegertpclient.ui.createtournament
 
 import android.content.Context
 import android.text.TextUtils
+import android.util.Log
 import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.tournament.tournamentsource.TournamentRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
@@ -91,13 +92,13 @@ class CreateTournamentPresenter(private val context: Context) : BasePresenter<Cr
     }
 
     private fun validDateDifference(start: String, end: String): Boolean {
-        val startYear = start.substring(0,3).toInt()
-        val startMonth = start.substring(5,6).toInt()
-        val startDate = start.substring(8,9).toInt()
+        val startYear = start.substring(0,4).toInt()
+        val startMonth = start.substring(5,7).toInt()
+        val startDate = start.substring(8,10).toInt()
 
-        val endYear = end.substring(0,3).toInt()
-        val endMonth = end.substring(5,6).toInt()
-        val endDate = end.substring(8,9).toInt()
+        val endYear = end.substring(0,4).toInt()
+        val endMonth = end.substring(5,7).toInt()
+        val endDate = end.substring(8,10).toInt()
 
         if ((endYear - startYear) < 0) {
             return false

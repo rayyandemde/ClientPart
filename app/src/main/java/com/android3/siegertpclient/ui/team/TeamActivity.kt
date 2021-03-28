@@ -2,6 +2,8 @@ package com.android3.siegertpclient.ui.team
 
 import android.os.Bundle
 import com.android3.siegertpclient.R
+import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.ActivityTeamBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
@@ -82,6 +84,14 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
 
     override fun showMembers(teamMembers: List<User>?) {
         //Not implemented here
+    }
+
+    override fun showTournaments(tournaments: List<Tournament>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showInvitations(invitations: List<Invitation>?) {
+        TODO("Not yet implemented")
     }
 
     override fun showProgress() {

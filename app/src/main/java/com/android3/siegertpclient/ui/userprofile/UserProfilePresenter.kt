@@ -1,6 +1,7 @@
 package com.android3.siegertpclient.ui.userprofile
 
 import android.content.Context
+import android.util.Log
 import com.android3.siegertpclient.data.team.teamsource.TeamRepo
 import com.android3.siegertpclient.data.tournament.tournamentsource.TournamentRepo
 import com.android3.siegertpclient.data.user.usersource.UserRepo
@@ -29,7 +30,7 @@ class UserProfilePresenter(private val context: Context) :
     private var localData = PreferencesProvider(context)
 
     override fun userTeamClicked(position: Int) {
-        val savedTeam = teamRepo.getCurrentTeamsList()!!
+        val savedTeam = teamRepo.getCurrentTeamsList()
         val chosenTeam = savedTeam[position]
         localData.putCurrentTeam(chosenTeam)
         localData.putString(KEY_TEAM_NAME, chosenTeam.teamName)
@@ -38,7 +39,7 @@ class UserProfilePresenter(private val context: Context) :
     }
 
     override fun userTournamentClicked(position: Int) {
-        val savedTournaments = tournamentRepo.getCurrentTournamentList()!!
+        val savedTournaments = tournamentRepo.getCurrentTournamentList()
         val chosenTournament = savedTournaments[position]
         localData.putCurrentTournament(chosenTournament)
         localData.putString(KEY_TOURNAMENT_NAME, chosenTournament.tournamentName)
@@ -71,7 +72,7 @@ class UserProfilePresenter(private val context: Context) :
                     }
                 } else {
                     withContext(Dispatchers.Main) {
-                        view?.shotMyTournaments(tournaments)
+                        view?.showMyTournaments(tournaments)
                         view?.hideProgress()
                     }
                 }
