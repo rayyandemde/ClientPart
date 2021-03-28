@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.databinding.FragmentMyteamsBinding
 import com.android3.siegertpclient.ui.team.TeamActivity
 import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
@@ -50,6 +51,10 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
     override fun navigateToTeamActivity()  {
         val intent = Intent(activity, TeamActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun shotMyTournaments(myTournaments: List<Tournament>?) {
+        TODO("Not yet implemented")
     }
 
     override fun showMyTeams(myTeams: List<Team>?) {

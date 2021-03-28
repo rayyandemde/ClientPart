@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.databinding.ActivityUserprofileBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
@@ -77,6 +78,10 @@ class UserProfileActivity : BaseActivity(), UserProfileContract.IUserProfileView
 
     override fun navigateToTeamActivity() {
         //Not implemented here
+    }
+
+    override fun shotMyTournaments(myTournaments: List<Tournament>?) {
+        TODO("Not yet implemented")
     }
 
     override fun showProgress() {

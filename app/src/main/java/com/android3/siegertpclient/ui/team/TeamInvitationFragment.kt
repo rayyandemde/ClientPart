@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.android3.siegertpclient.data.invitation.Invitation
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTeamInvitationBinding
 import com.android3.siegertpclient.ui.tournament.TournamentActivity
@@ -61,6 +63,14 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAda
         //Not implemented here
     }
 
+    override fun showTournaments(tournaments: List<Tournament>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showInvitations(invitations: List<Invitation>?) {
+        TODO("Not yet implemented")
+    }
+
     override fun showProgress() {
         TODO("Not yet implemented")
     }
@@ -78,7 +88,7 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAda
     }
 
     override fun onInvitationItemClick(position: Int) {
-        TODO("Not yet implemented")
+        teamPresenter?.onInvitationItemClicked(position)
     }
 
     private fun doToast(message: String) {
