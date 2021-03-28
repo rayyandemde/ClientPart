@@ -49,8 +49,10 @@ class InvitationActivity : BaseActivity(), InvitationContract.IInvitationView,
         invitationPresenter.onDetach()
     }
 
-    override fun showTournamentInvitation(tournaments: List<Invitation>) {
-        //Needs to be implemented *Just a placeholder comment so the app can run
+    override fun showTournamentInvitation(invitations: List<Invitation>) {
+        if (invitations != null) {
+            invitationAdapter.setData(invitations)
+        }
     }
 
     override fun navigateToHomepageActivity() {

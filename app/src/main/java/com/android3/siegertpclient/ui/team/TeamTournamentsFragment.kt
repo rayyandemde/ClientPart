@@ -35,7 +35,10 @@ class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAd
 
         binding.rvTeamTournaments.adapter = tournamentAdapter
 
+        teamPresenter?.onTournamentsRefresh()
+
         binding.srlRvTeamTournaments.setOnRefreshListener {
+            teamPresenter?.onTournamentsRefresh()
         }
 
         binding.btnHome.setOnClickListener {
@@ -78,7 +81,9 @@ class TeamTournamentsFragment : Fragment(), TeamContract.ITeamView, TournamentAd
     }
 
     override fun showTournaments(tournaments: List<Tournament>?) {
-        TODO("Not yet implemented")
+        if (tournaments != null) {
+            tournamentAdapter.setData(tournaments)
+        }
     }
 
     override fun showInvitations(invitations: List<Invitation>?) {

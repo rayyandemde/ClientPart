@@ -55,7 +55,9 @@ class FeedFragment : Fragment(), HomepageContract.IHomepageView, TournamentAdapt
     }
 
     override fun showFeed(feed: List<Tournament>?) {
-        //Needs to be implemented *Just a placeholder comment so the app can run
+        if (feed != null) {
+            tournamentAdapter.setData(feed)
+        }
     }
 
     override fun showSuccess(message: String) {

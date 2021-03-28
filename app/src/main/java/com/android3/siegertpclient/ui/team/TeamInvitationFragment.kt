@@ -33,7 +33,10 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAda
 
         binding.rvTeamInvitation.adapter = invitationAdapter
 
+        teamPresenter?.onInvitationRefresh()
+
         binding.srlRvTeamInvitations.setOnRefreshListener {
+            teamPresenter?.onInvitationRefresh()
         }
 
         return binding.root
@@ -76,7 +79,9 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAda
     }
 
     override fun showInvitations(invitations: List<Invitation>?) {
-        TODO("Not yet implemented")
+        if (invitations != null) {
+            invitationAdapter.setData(invitations)
+        }
     }
 
     override fun showProgress() {
