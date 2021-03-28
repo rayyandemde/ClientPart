@@ -91,10 +91,10 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
             DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-
-                    val monthCalibrate = monthOfYear + 1
-                    binding.btnRegistrationDeadline.text = "$year-$monthCalibrate-$dayOfMonth"
-
+                    var monthCalibrate = monthOfYear + 1
+                    val monthFix = if (monthCalibrate <= 10) "0$monthCalibrate" else monthCalibrate.toString()
+                    val dayFix = if (dayOfMonth <= 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    binding.btnRegistrationDeadline.text = "$year-$monthFix-$dayFix"
                 },
                 year,
                 month,
@@ -107,8 +107,10 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
             DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    val monthCalibrate = monthOfYear + 1
-                    binding.btnStartDate.text = "$year-$monthCalibrate-$dayOfMonth"
+                    var monthCalibrate = monthOfYear + 1
+                    val monthFix = if (monthCalibrate <= 10) "0$monthCalibrate" else monthCalibrate.toString()
+                    val dayFix = if (dayOfMonth <= 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    binding.btnStartDate.text = "$year-$monthFix-$dayFix"
                 },
                 year,
                 month,
@@ -121,8 +123,10 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
             DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    val monthCalibrate = monthOfYear + 1
-                    binding.btnEndDate.text = "$year-$monthCalibrate-$dayOfMonth"
+                    var monthCalibrate = monthOfYear + 1
+                    val monthFix = if (monthCalibrate <= 10) "0$monthCalibrate" else monthCalibrate.toString()
+                    val dayFix = if (dayOfMonth <= 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    binding.btnEndDate.text = "$year-$monthFix-$dayFix"
                 },
                 year,
                 month,
@@ -131,7 +135,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
         }
 
         val locationEt = binding.etLocation
-        val maxPlayersEt = binding.etMaxPlayer
+        binding.etMaxPlayer.setText("0")
 
         binding.btnCreate.setOnClickListener {
             val name = editTextTrimmer(nameEt)
@@ -140,7 +144,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
             val startTime = binding.btnStartDate.text.toString()
             val endTime = binding.btnEndDate.text.toString()
             val location = editTextTrimmer(locationEt)
-            val maxParticipantNumber = editTextTrimmer(maxPlayersEt).toInt()
+            val maxParticipantNumber = binding.etMaxPlayer.text.toString().toInt()
 
             createTournamentPresenter.onCreateBtnClicked(
                 name,
@@ -156,7 +160,7 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
             )
         }
 
-        //This is only for test
+        //Only for test
         binding.tvCreateATournament.setOnClickListener {
             navigateToTournamentActivity()
         }
@@ -176,6 +180,10 @@ class CreateTournamentActivity : BaseActivity(), CreateTournamentContract.ICreat
 
     override fun showIncompleteInput() {
         doToast("Please input all of the field")
+    }
+
+    override fun showSuccess() {
+        doToast("Your tournament has been successfully created")
     }
 
     override fun navigateToHomepageActivity() {

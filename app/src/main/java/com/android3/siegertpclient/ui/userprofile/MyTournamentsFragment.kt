@@ -5,20 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
-import com.android3.siegertpclient.data.tournament.Tournament
-import com.android3.siegertpclient.data.tournament.TournamentDetail
-import com.android3.siegertpclient.databinding.FragmentMyteamsBinding
 import com.android3.siegertpclient.databinding.FragmentMytournamentsBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
 import com.android3.siegertpclient.ui.setting.SettingsActivity
-import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
+import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
+import java.time.LocalDate
 
 class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView, TournamentAdapter.OnTournamentItemClickListener {
     private var _binding: FragmentMytournamentsBinding? = null
@@ -26,16 +21,15 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView, 
 
     private var userProfilePresenter: UserProfilePresenter? = null
 
-    private val noTournaments by lazy {
-        var noTournamentDetail = TournamentDetail("", "YYYY-MM-DD", "", "", "", "YYYY-MM-DD", "", "")
-        listOf(Tournament("", emptyList(), 0, false, emptyList(), emptyMap(), noTournamentDetail, "", "No Tournament Available", ""))
-    }
-
     private val tournamentAdapter by lazy { TournamentAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMytournamentsBinding.inflate(inflater, container, false)
         userProfilePresenter = UserProfilePresenter(requireContext())
+
+        binding.tvUserData.text = "@" + LocalCache.getCurrentUsername(requireContext()) +
+                " : " + LocalCache.getCurrentLastName(requireContext()) + ". " +
+                LocalCache.getCurrentFirstName(requireContext())
 
         binding.rvMyTournaments.adapter = tournamentAdapter
 
@@ -70,49 +64,45 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView, 
         userProfilePresenter?.onDetach()
     }
 
-    fun showTournaments() {
-        TODO("Not yet implemented")
-    }
-
-    fun navigateToTournamentActivity()  {
-        TODO("Not yet implemented")
-    }
-
     override fun showMyTeams(myTeams: List<Team>?) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun navigateToHomepageActivity() {
-        val hIntent = Intent(activity, HomepageActivity::class.java)
-        startActivity(hIntent)
+        val intent = Intent(activity, HomepageActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToSettingActivity() {
-        val sIntent = Intent(activity, SettingsActivity::class.java)
-        startActivity(sIntent)
+        val intent = Intent(activity, SettingsActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToTeamActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not needed for plain swipe refresh layout
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        binding.srlRvMyTournaments.isRefreshing = false
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
     }
 
     override fun onTournamentItemClick(position: Int) {
         TODO("Not yet implemented")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }

@@ -1,8 +1,6 @@
 package com.android3.siegertpclient.ui.team
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.ActivityTeamBinding
@@ -75,30 +73,30 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
     }
 
     override fun navigateToTournamentActivity() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showDeleteAlert() {
-        TODO("Not yet implemented")
+        //Needs to be implemented *Just a placeholder comment so the app can run
     }
 
     override fun showMembers(teamMembers: List<User>?) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 }

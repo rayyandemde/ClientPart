@@ -1,29 +1,23 @@
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
+import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.ui.base.BaseView
 
 interface TournamentContract {
 
     interface ITournamentView : BaseView {
-        fun showCurrentTournamentDetails(
-            tournamentName: String,
-            typeOfGame: String,
-            matchType: String,
-            tournamentType: String,
-            participantForm: String,
-            registrationDeadline: String,
-            startDate: String,
-            endDate: String,
-            location: String,
-            maxPlayer: Int
-        )
+        fun showCurrentTournamentDetails()
+
+        fun setEditRights()
 
         fun disableEdits()
 
         fun showIncompleteInput()
 
-        fun initParticipantAdapter(participantForm: String)
+        fun showSuccess(message: String)
+
+        fun initParticipantAdapter()
 
         fun showSingleParticipants(participants: List<User>?)
 
@@ -37,9 +31,7 @@ interface TournamentContract {
     }
 
     interface ITeamPresenter {
-        fun initTournamentDetails()
-
-        fun checkEditRights()
+        fun allowEdits()
 
         fun onUpdateBtnClicked(
             tournamentName: String,
@@ -48,14 +40,13 @@ interface TournamentContract {
             endTime: String,
             location: String,
         )
+        fun getCurrentTournament() : Tournament
 
         fun onHomeBtnClicked()
 
-        fun initParticipantAdapter()
-
         fun onParticipantRefresh()
 
-        fun onAddParticipantBtnClicked()
+        fun onAddParticipantBtnClicked(participant: String)
 
         fun onScheduleRefresh()
 

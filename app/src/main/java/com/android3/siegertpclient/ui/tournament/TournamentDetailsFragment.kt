@@ -9,15 +9,11 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.databinding.FragmentTournamentdetailsBinding
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
-import com.android3.siegertpclient.ui.team.TeamPresenter
-import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
 import java.util.*
 
 class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentView{
@@ -34,8 +30,8 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
         _binding = FragmentTournamentdetailsBinding.inflate(inflater, container, false)
         tournamentPresenter = TournamentPresenter(requireContext())
 
-        tournamentPresenter?.initTournamentDetails()
-        tournamentPresenter?.checkEditRights()
+        showCurrentTournamentDetails()
+        setEditRights()
 
         day = 0
         month = 0
@@ -48,10 +44,10 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
             DatePickerDialog(
                 requireContext(),
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-
-                    val monthCalibrate = monthOfYear + 1
-                    binding.btnRegistrationDeadline.text = "$year-$monthCalibrate-$dayOfMonth"
-
+                    var monthCalibrate = monthOfYear + 1
+                    val monthFix = if (monthCalibrate <= 10) "0$monthCalibrate" else monthCalibrate.toString()
+                    val dayFix = if (dayOfMonth <= 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    binding.btnRegistrationDeadline.text = "$year-$monthFix-$dayFix"
                 },
                 year!!,
                 month!!,
@@ -64,8 +60,10 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
             DatePickerDialog(
                 requireContext(),
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    val monthCalibrate = monthOfYear + 1
-                    binding.btnStartDate.text = "$year-$monthCalibrate-$dayOfMonth"
+                    var monthCalibrate = monthOfYear + 1
+                    val monthFix = if (monthCalibrate <= 10) "0$monthCalibrate" else monthCalibrate.toString()
+                    val dayFix = if (dayOfMonth <= 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    binding.btnStartDate.text = "$year-$monthFix-$dayFix"
                 },
                 year!!,
                 month!!,
@@ -78,8 +76,10 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
             DatePickerDialog(
                 requireContext(),
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    val monthCalibrate = monthOfYear + 1
-                    binding.btnEndDate.text = "$year-$monthCalibrate-$dayOfMonth"
+                    var monthCalibrate = monthOfYear + 1
+                    val monthFix = if (monthCalibrate <= 10) "0$monthCalibrate" else monthCalibrate.toString()
+                    val dayFix = if (dayOfMonth <= 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    binding.btnEndDate.text = "$year-$monthFix-$dayFix"
                 },
                 year!!,
                 month!!,
@@ -123,26 +123,26 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
         _binding = null
     }
 
-    override fun showCurrentTournamentDetails(
-        tournamentName: String,
-        typeOfGame: String,
-        matchType: String,
-        tournamentType: String,
-        participantForm: String,
-        registrationDeadline: String,
-        startDate: String,
-        endDate: String,
-        location: String,
-        maxPlayer: Int
-    ) {
-        binding.etTournamentName.setText(tournamentName)
-        binding.tvTypeOfGame.text = typeOfGame
-        binding.tvMatchType.text = matchType
-        binding.tvTournamentType.text = tournamentType
-        binding.tvParticipantForm.text = participantForm
-        binding.btnRegistrationDeadline.text = registrationDeadline
-        binding.etLocation.setText(location)
-        binding.tvMaxPlayer.text = maxPlayer.toString()
+    override fun showCurrentTournamentDetails() {
+        val tournament = tournamentPresenter?.getCurrentTournament()
+        val details = tournament!!.tournamentDetail
+
+        binding.etTournamentName.setText(tournament!!.tournamentName)
+        binding.tvTypeOfGame.text = details.typeOfGame
+        binding.tvMatchType.text = tournament!!.type
+        binding.tvTournamentType.text = details.tournamentTypes
+        binding.tvParticipantForm.text = details.participantForm
+        binding.btnRegistrationDeadline.text = details.registrationDeadline
+        binding.btnStartDate.text = details.startTime
+        binding.btnEndDate.text = details.endTime
+        binding.etLocation.setText(details.location)
+        binding.tvMaxPlayer.text = tournament!!.maxParticipantNumber.toString()
+    }
+
+    override fun setEditRights() {
+        if (!tournamentPresenter!!.isAdmin()) {
+            disableEdits()
+        }
     }
 
     override fun disableEdits() {
@@ -158,7 +158,11 @@ class TournamentDetailsFragment : Fragment() , TournamentContract.ITournamentVie
         doToast("Please input all of the field")
     }
 
-    override fun initParticipantAdapter(participantForm: String) {
+    override fun showSuccess(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun initParticipantAdapter() {
         TODO("Not yet implemented")
     }
 

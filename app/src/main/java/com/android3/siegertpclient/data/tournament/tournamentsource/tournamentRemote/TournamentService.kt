@@ -2,19 +2,20 @@ package com.android3.siegertpclient.data.tournament.tournamentsource.tournamentR
 
 import com.android3.siegertpclient.data.payload.ApiResponse
 import com.android3.siegertpclient.data.team.Team
+import com.android3.siegertpclient.data.tournament.CreateTournament
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.user.User
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
 interface TournamentService {
 
+    @JvmSuppressWildcards
     @POST("tournaments")
     suspend fun createNewTournament(
-        @Body tournament : Map<String, Any>,
+        @Body createTournament : CreateTournament,
         @Header("Authorization") token: String
     ): Response<Tournament>
 

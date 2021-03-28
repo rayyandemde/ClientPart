@@ -4,7 +4,6 @@ import android.content.Context
 import android.text.TextUtils
 import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
-import com.android3.siegertpclient.utils.Constants.Companion.KEY_USERNAME
 import com.android3.siegertpclient.utils.OnlineChecker
 import com.android3.siegertpclient.utils.PreferencesProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -20,19 +19,6 @@ class SettingsPresenter(private val context: Context) :
     private var preferencesProvider = PreferencesProvider(context)
 
     private var userRepo = UserRepo(context)
-
-    fun getUser(): String {
-        val username = preferencesProvider.getString(KEY_USERNAME)!!
-        val user = preferencesProvider.getCurrentUser()
-        val forename = user!!.forename
-        val surname = user!!.surname
-        return "Username :: $username \nFirst Name :: $forename \nLast Name :: $surname"
-    }
-
-    override fun initCurrentUserEt() {
-        val user = userRepo.getUserLocal()
-        view?.setCurrentUserEt(user!!.username, user!!.forename, user!!.surname)
-    }
 
     override fun onBackBtnClicked() {
         view?.navigateToUserProfileActivity()
@@ -53,26 +39,23 @@ class SettingsPresenter(private val context: Context) :
             view?.showNoInternetConnection()
             view?.hideProgress()
         } else {
-            val currentUser = userRepo.getUserLocal()
+            val currentUser = userRepo.getCurrentUser()
             var newUsername =
                 if (TextUtils.isEmpty(changedUsername)) currentUser!!.username else changedUsername
             var newForename =
                 if (TextUtils.isEmpty(changedForename)) currentUser!!.forename else changedForename
             var newSurname =
                 if (TextUtils.isEmpty(changedSurname)) currentUser!!.surname else changedSurname
-            val token = userRepo.getToken()
 
             GlobalScope.launch(Dispatchers.IO) {
                 try {
                     val user = userRepo.updateUserDetail(
-                        currentUser!!.username,
                         newUsername,
                         newSurname,
-                        newForename,
-                        token!!
-                    )
+                        newForename)
                     if (user != null) {
                         withContext(Dispatchers.Main) {
+                            view?.showSuccessful()
                             view?.hideProgress()
                         }
                     }

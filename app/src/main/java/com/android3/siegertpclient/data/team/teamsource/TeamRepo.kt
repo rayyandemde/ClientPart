@@ -7,6 +7,7 @@ import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.team.teamsource.teamRemote.TeamRemoteDataSource
 import com.android3.siegertpclient.data.tournament.Tournament
 import com.android3.siegertpclient.data.user.User
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_TEAM_ID
 import com.android3.siegertpclient.utils.Constants.Companion.KEY_TEAM_NAME
 import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.PreferencesProvider
@@ -21,6 +22,8 @@ class TeamRepo(private val context: Context) {
             teamRemoteDataSource.createNewTeam(LocalCache.getCurrentUserId(context)!!, name, password, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
             localData.putCurrentTeam(response.body()!!)
+            localData.putString(KEY_TEAM_NAME, response.body()!!.teamName)
+            localData.putString(KEY_TEAM_ID, response.body()!!.teamId)
             return response.body()!!
         }
         return null
@@ -94,7 +97,6 @@ class TeamRepo(private val context: Context) {
         val response =
             teamRemoteDataSource.joinTeam(teamName, password, LocalCache.getBearerToken(context)!!)
         if (response.isSuccessful) {
-            localData.putString(KEY_TEAM_NAME, teamName)
             return response.body()!!
         }
         return null
@@ -107,5 +109,13 @@ class TeamRepo(private val context: Context) {
             return response.body()!!
         }
         return null
+    }
+
+    fun getCurrentTeams() : Team? {
+        return localData.getCurrentTeam()
+    }
+
+    fun getCurrentTeamsList() : List<Team> {
+        return localData.getCurrentTeamList()
     }
 }

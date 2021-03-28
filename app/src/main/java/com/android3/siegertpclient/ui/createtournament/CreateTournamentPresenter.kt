@@ -5,6 +5,9 @@ import android.text.TextUtils
 import com.android3.siegertpclient.data.tournament.TournamentDetail
 import com.android3.siegertpclient.data.tournament.tournamentsource.TournamentRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
+import com.android3.siegertpclient.utils.Constants.Companion.MATCH_TYPE
+import com.android3.siegertpclient.utils.Constants.Companion.PARTICIPANT_FORM
+import com.android3.siegertpclient.utils.Constants.Companion.TOURNAMENT_TYPE
 import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.OnlineChecker
 import kotlinx.coroutines.Dispatchers
@@ -42,15 +45,15 @@ class CreateTournamentPresenter(private val context: Context) : BasePresenter<Cr
                 view?.showIncompleteInput()
                 view?.hideProgress()
             }
-            matchType == "Match Type" -> {
+            matchType == MATCH_TYPE -> {
                 view?.showError("Please select a match type")
                 view?.hideProgress()
             }
-            tournamentType == "Tournament Type" -> {
+            tournamentType == TOURNAMENT_TYPE -> {
                 view?.showError("Please select a tournament type")
                 view?.hideProgress()
             }
-            participantForm == "Participant Form" -> {
+            participantForm == PARTICIPANT_FORM -> {
                 view?.showError("Please select a participant form")
                 view?.hideProgress()
             }
@@ -70,14 +73,16 @@ class CreateTournamentPresenter(private val context: Context) : BasePresenter<Cr
                         val tournament = tournamentRepo.createNewTournament(matchType, maxParticipantNumber, name, tournamentDetail)
                         if (tournament != null) {
                             withContext(Dispatchers.Main) {
-                                view?.navigateToTournamentActivity()
+                                view?.showSuccess()
                                 view?.hideProgress()
+                                view?.navigateToTournamentActivity()
                             }
                         }
                     } catch (e: Exception) {
                         withContext(Dispatchers.Main) {
+                            view?.showError(e.message.toString())
+                            //view?.showError("Oops... It seems there's unexpected error. Please try again.")
                             view?.hideProgress()
-                            view?.showError("Oops... It seems there's unexpected error. Please try again.")
                         }
                     }
                 }

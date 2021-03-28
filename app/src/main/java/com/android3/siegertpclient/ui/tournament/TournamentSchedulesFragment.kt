@@ -4,21 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
-import com.android3.siegertpclient.data.tournament.Result
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
-import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
 import com.android3.siegertpclient.databinding.FragmentTournamentschedulesBinding
-import com.android3.siegertpclient.ui.team.TeamPresenter
 import com.android3.siegertpclient.utils.recyclerviewadapters.ScheduleAdapter
-import com.android3.siegertpclient.utils.recyclerviewadapters.UserAdapter
 
 class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentView, ScheduleAdapter.OnScheduleItemClickListener {
     private var _binding: FragmentTournamentschedulesBinding? = null
@@ -51,19 +43,12 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
         _binding = null
     }
 
-    override fun showCurrentTournamentDetails(
-        tournamentName: String,
-        typeOfGame: String,
-        matchType: String,
-        tournamentType: String,
-        participantForm: String,
-        registrationDeadline: String,
-        startDate: String,
-        endDate: String,
-        location: String,
-        maxPlayer: Int
-    ) {
-        //Not implemented here
+    override fun showCurrentTournamentDetails() {
+        TODO("Not yet implemented")
+    }
+
+    override fun setEditRights() {
+        TODO("Not yet implemented")
     }
 
     override fun disableEdits() {
@@ -74,7 +59,11 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
         //Not implemented here
     }
 
-    override fun initParticipantAdapter(participantForm: String) {
+    override fun showSuccess(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun initParticipantAdapter() {
         TODO("Not yet implemented")
     }
 
@@ -107,14 +96,18 @@ class TournamentSchedulesFragment : Fragment() , TournamentContract.ITournamentV
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
     }
 
     override fun onScheduleItemClick(position: Int) {
         TODO("Not yet implemented")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }

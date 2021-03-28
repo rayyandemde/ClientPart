@@ -4,6 +4,7 @@ import android.content.Context
 import com.android3.siegertpclient.data.team.teamsource.TeamRepo
 import com.android3.siegertpclient.data.user.usersource.UserRepo
 import com.android3.siegertpclient.ui.base.BasePresenter
+import com.android3.siegertpclient.utils.Constants.Companion.KEY_TEAM_ID
 import com.android3.siegertpclient.utils.Constants.Companion.KEY_TEAM_NAME
 import com.android3.siegertpclient.utils.OnlineChecker
 import com.android3.siegertpclient.utils.PreferencesProvider
@@ -19,14 +20,16 @@ class UserProfilePresenter(private val context: Context) :
     private var onlineChecker = OnlineChecker(context)
 
     private var userRepo = UserRepo(context)
+    private var teamRepo = TeamRepo(context)
 
     private var localData = PreferencesProvider(context)
 
     override fun userTeamClicked(position: Int) {
-        val savedTeam = userRepo.getCurrentUserTeams()!!
-
-        val chosenTeamName = savedTeam[position].teamName
-        localData.putString(KEY_TEAM_NAME, chosenTeamName)
+        val savedTeam = teamRepo.getCurrentTeamsList()!!
+        val chosenTeam = savedTeam[position]
+        localData.putCurrentTeam(chosenTeam)
+        localData.putString(KEY_TEAM_NAME, chosenTeam.teamName)
+        localData.putString(KEY_TEAM_ID, chosenTeam.teamId)
         view?.navigateToTeamActivity()
     }
 

@@ -1,13 +1,15 @@
 package com.android3.siegertpclient.ui.team
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.android3.siegertpclient.data.invitation.Invitation
 import com.android3.siegertpclient.data.user.User
 import com.android3.siegertpclient.databinding.FragmentTeamInvitationBinding
+import com.android3.siegertpclient.ui.tournament.TournamentActivity
 import com.android3.siegertpclient.utils.recyclerviewadapters.InvitationAdapter
 
 class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAdapter.OnInvitationItemClickListener {
@@ -15,10 +17,6 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAda
     private val binding get() = _binding!!
 
     private var teamPresenter: TeamPresenter? = null
-
-    private val noInvitation by lazy {
-        listOf(Invitation("", "", "", "", "There are no", "", "invitation for now"))
-    }
 
     private val invitationAdapter by lazy { InvitationAdapter(this) }
 
@@ -51,15 +49,16 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAda
     }
 
     override fun navigateToTournamentActivity() {
-        TODO("Not yet implemented")
+        val intent = Intent(activity, TournamentActivity::class.java)
+        startActivity(intent)
     }
 
     override fun showDeleteAlert() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showMembers(teamMembers: List<User>?) {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun showProgress() {
@@ -71,14 +70,18 @@ class TeamInvitationFragment : Fragment(), TeamContract.ITeamView, InvitationAda
     }
 
     override fun showError(errorMessage: String) {
-        TODO("Not yet implemented")
+        doToast(errorMessage)
     }
 
     override fun showNoInternetConnection() {
-        TODO("Not yet implemented")
+        doToast("There's no internet connection to make the request.")
     }
 
     override fun onInvitationItemClick(position: Int) {
         TODO("Not yet implemented")
+    }
+
+    private fun doToast(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 }

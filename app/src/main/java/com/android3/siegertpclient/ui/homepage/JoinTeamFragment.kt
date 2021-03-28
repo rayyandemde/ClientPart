@@ -5,16 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.tournament.Tournament
-import com.android3.siegertpclient.databinding.FragmentFeedBinding
 import com.android3.siegertpclient.databinding.FragmentJointeamBinding
-import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.team.TeamActivity
 
 class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
@@ -82,17 +76,12 @@ class JoinTeamFragment : Fragment() , HomepageContract.IHomepageView {
         //Not implemented here
     }
 
-    override fun navigateToTeamActivity() {
-        val intent = Intent(activity, TeamActivity::class.java)
-        startActivity(intent)
-    }
-
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Needs to be implemented *Just a placeholder comment so the app can run
     }
 
     override fun hideProgress() {
-        TODO("Not yet implemented")
+        //Needs to be implemented *Just a placeholder comment so the app can run
     }
 
     override fun showError(errorMessage: String) {

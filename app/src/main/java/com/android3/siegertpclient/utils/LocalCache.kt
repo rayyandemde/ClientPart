@@ -19,6 +19,16 @@ class LocalCache {
             return localData.getString(Constants.KEY_USERNAME)
         }
 
+        fun getCurrentFirstName(context: Context) : String? {
+            val localData = PreferencesProvider(context)
+            return localData.getString(Constants.KEY_FORENAME)
+        }
+
+        fun getCurrentLastName(context: Context) : String? {
+            val localData = PreferencesProvider(context)
+            return localData.getString(Constants.KEY_SURNAME)
+        }
+
         fun getCurrentTournamentId(context: Context) : String? {
             val localData = PreferencesProvider(context)
             return localData.getString(Constants.KEY_TOURNAMENT_ID)

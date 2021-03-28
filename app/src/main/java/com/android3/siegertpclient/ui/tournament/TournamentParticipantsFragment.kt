@@ -1,21 +1,18 @@
 package com.android3.siegertpclient.ui.tournament
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.android3.siegertpclient.R
 import com.android3.siegertpclient.data.team.Team
 import com.android3.siegertpclient.data.tournament.Game
 import com.android3.siegertpclient.data.user.User
-import com.android3.siegertpclient.databinding.FragmentTeamMemberBinding
 import com.android3.siegertpclient.databinding.FragmentTournamentparticipantsBinding
-import com.android3.siegertpclient.ui.team.TeamPresenter
 import com.android3.siegertpclient.utils.Constants.Companion.SINGLE
 import com.android3.siegertpclient.utils.Constants.Companion.TEAM
 import com.android3.siegertpclient.utils.recyclerviewadapters.TeamAdapter
@@ -36,7 +33,7 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
         _binding = FragmentTournamentparticipantsBinding.inflate(inflater, container, false)
         tournamentPresenter = TournamentPresenter(requireContext())
 
-        tournamentPresenter?.initParticipantAdapter()
+        initParticipantAdapter()
 
         tournamentPresenter?.onParticipantRefresh()
 
@@ -45,9 +42,21 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
         }
 
         binding.btnAddParticipants.setOnClickListener {
+            val inflater = layoutInflater
+            val dialogLayout = inflater.inflate(R.layout.edit_text_layout, null)
+            val etParticipant = dialogLayout.findViewById<EditText>(R.id.et_for_dialog)
+
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Add Participant")
-                .setMessage("Please input")
+                .setMessage("Please input username or team name")
+                .setNegativeButton("Cancel") {dialog, which ->
+                    //Do Nothing
+                }
+                .setPositiveButton("Add") {dialog, which ->
+                    tournamentPresenter?.onAddParticipantBtnClicked(etParticipant.text.toString().trim { it <= ' ' })
+                }
+                .setView(dialogLayout)
+                .show()
         }
 
         return binding.root
@@ -64,31 +73,30 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
         _binding = null
     }
 
-
-    override fun showCurrentTournamentDetails(
-        tournamentName: String,
-        typeOfGame: String,
-        matchType: String,
-        tournamentType: String,
-        participantForm: String,
-        registrationDeadline: String,
-        startDate: String,
-        endDate: String,
-        location: String,
-        maxPlayer: Int
-    ) {
+    override fun showCurrentTournamentDetails() {
         //Not implemented here
+    }
+
+    override fun setEditRights() {
+        if (!tournamentPresenter!!.isAdmin()) {
+            disableEdits()
+        }
     }
 
     override fun disableEdits() {
-        //Not implemented here
+        binding.btnAddParticipants.isEnabled = false
     }
 
     override fun showIncompleteInput() {
-        //Not implemented here
+        doToast("Please input a username or team name")
     }
 
-    override fun initParticipantAdapter(participantType: String) {
+    override fun showSuccess(message: String) {
+        doToast(message)
+    }
+
+    override fun initParticipantAdapter() {
+        val participantType = tournamentPresenter?.getCurrentTournament()!!.tournamentDetail.participantForm
         when {
             participantType == SINGLE -> binding.rvTournamentParticipants.adapter = userAdapter
             participantType == TEAM -> binding.rvTournamentParticipants.adapter = teamAdapter
@@ -97,13 +105,13 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
 
     override fun showSingleParticipants(participants: List<User>?) {
         if (participants != null) {
-            userAdapter.setData(participants)
+            userAdapter.setData(participants!!)
         }
     }
 
     override fun showTeamParticipants(participants: List<Team>?) {
         if (participants != null) {
-            teamAdapter.setData(participants)
+            teamAdapter.setData(participants!!)
         }
     }
 
@@ -120,7 +128,7 @@ class TournamentParticipantsFragment : Fragment(), TournamentContract.ITournamen
     }
 
     override fun showProgress() {
-        TODO("Not yet implemented")
+        //Not implemented here
     }
 
     override fun hideProgress() {

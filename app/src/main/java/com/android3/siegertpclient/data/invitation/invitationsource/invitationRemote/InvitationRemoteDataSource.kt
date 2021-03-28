@@ -1,5 +1,6 @@
 package com.android3.siegertpclient.data.invitation.invitationsource.invitationRemote
 
+import android.util.Log
 import com.android3.siegertpclient.data.payload.ApiResponse
 import com.android3.siegertpclient.utils.RestClient
 import retrofit2.Response
@@ -26,5 +27,12 @@ class InvitationRemoteDataSource() {
         val accept = hashMapOf<String, Boolean>()
         accept["accept"] = acceptB
         return RestClient.invitationService.handleInvitationAcceptation(invitationId, accept, token)
+    }
+
+    suspend fun getRecipientIdByUsername(
+        recipientUsername: String,
+        token: String
+    ): Response<Map<String, String>> {
+        return RestClient.invitationService.getRecipientIdByUsername(recipientUsername, token)
     }
 }

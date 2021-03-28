@@ -1,3 +1,4 @@
+
 package com.android3.siegertpclient.ui.setting
 
 import android.content.Intent
@@ -10,6 +11,7 @@ import com.android3.siegertpclient.databinding.ActivitySettingsBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.login.LoginActivity
 import com.android3.siegertpclient.ui.userprofile.UserProfileActivity
+import com.android3.siegertpclient.utils.LocalCache
 
 class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
     private lateinit var binding: ActivitySettingsBinding
@@ -26,6 +28,7 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
         binding.fabBack.setOnClickListener {
             settingsPresenter.onBackBtnClicked()
         }
+        binding.etUsername.setText(LocalCache.getCurrentUsername(this))
 
         val changeUsernameEt = binding.etUsername
         val changeForenameEt = binding.etFirstName
@@ -63,7 +66,7 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
             settingsPresenter.onLogoutTextClicked()
         }
 
-        settingsPresenter.initCurrentUserEt()
+        setCurrentUserEt()
     }
 
     override fun onResume() {
@@ -76,16 +79,19 @@ class SettingsActivity : BaseActivity(), SettingsContract.ISettingView {
         settingsPresenter.onDetach()
     }
 
-    override fun setCurrentUserEt(username: String, forename: String, surname: String) {
-        var test = binding.etFirstName.text
-        binding.etUsername.setText(username)
-        binding.etFirstName.setText(forename)
-        binding.etLastName.setText(surname)
+    override fun setCurrentUserEt() {
+        binding.etUsername.setText(LocalCache.getCurrentUsername(this))
+        binding.etFirstName.setText(LocalCache.getCurrentFirstName(this))
+        binding.etLastName.setText(LocalCache.getCurrentLastName(this))
+    }
+
+    override fun showSuccessful() {
+        doToast("Your data has been successfully updated")
     }
 
     override fun navigateToUserProfileActivity() {
-        val upIntent = Intent(this, UserProfileActivity::class.java)
-        startActivity(upIntent)
+        val intent = Intent(this, UserProfileActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateToLoginActivity() {
