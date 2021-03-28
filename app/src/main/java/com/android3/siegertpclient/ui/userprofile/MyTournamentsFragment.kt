@@ -16,7 +16,8 @@ import com.android3.siegertpclient.utils.LocalCache
 import com.android3.siegertpclient.utils.recyclerviewadapters.TournamentAdapter
 import java.time.LocalDate
 
-class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView, TournamentAdapter.OnTournamentItemClickListener {
+class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView,
+    TournamentAdapter.OnTournamentItemClickListener {
     private var _binding: FragmentMytournamentsBinding? = null
     private val binding get() = _binding!!
 
@@ -24,7 +25,11 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView, 
 
     private val tournamentAdapter by lazy { TournamentAdapter(this) }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentMytournamentsBinding.inflate(inflater, container, false)
         userProfilePresenter = UserProfilePresenter(requireContext())
 
@@ -34,15 +39,17 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView, 
 
         binding.rvMyTournaments.adapter = tournamentAdapter
 
-        binding.srlRvMyTournaments.setOnRefreshListener {
+        userProfilePresenter?.onTournamentsRefresh()
 
+        binding.srlRvMyTournaments.setOnRefreshListener {
+            userProfilePresenter?.onTournamentsRefresh()
         }
 
-        binding.btnSetttings.setOnClickListener{
+        binding.btnSetttings.setOnClickListener {
             userProfilePresenter?.onSettingBtnClicked()
         }
 
-        binding.btnHome.setOnClickListener{
+        binding.btnHome.setOnClickListener {
             userProfilePresenter?.onHomeBtnClicked()
         }
 
@@ -83,8 +90,10 @@ class MyTournamentsFragment : Fragment(), UserProfileContract.IUserProfileView, 
         //Not implemented here
     }
 
-    override fun shotMyTournaments(myTournaments: List<Tournament>?) {
-        TODO("Not yet implemented")
+    override fun showMyTournaments(myTournaments: List<Tournament>?) {
+        if (myTournaments != null) {
+            tournamentAdapter.setData(myTournaments)
+        }
     }
 
     override fun showProgress() {

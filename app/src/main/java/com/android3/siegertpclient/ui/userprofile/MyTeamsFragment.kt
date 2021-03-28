@@ -2,6 +2,7 @@ package com.android3.siegertpclient.ui.userprofile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,7 @@ class MyTeamsFragment : Fragment() , UserProfileContract.IUserProfileView,
         startActivity(intent)
     }
 
-    override fun shotMyTournaments(myTournaments: List<Tournament>?) {
+    override fun showMyTournaments(myTournaments: List<Tournament>?) {
         TODO("Not yet implemented")
     }
 
