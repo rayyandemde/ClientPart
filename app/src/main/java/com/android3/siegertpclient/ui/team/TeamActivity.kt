@@ -12,6 +12,7 @@ import com.android3.siegertpclient.databinding.ActivityTeamBinding
 import com.android3.siegertpclient.ui.base.BaseActivity
 import com.android3.siegertpclient.ui.forgotpassword.ForgotPasswordActivity
 import com.android3.siegertpclient.ui.homepage.HomepageActivity
+import com.android3.siegertpclient.utils.LocalCache
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -90,18 +91,20 @@ class TeamActivity : BaseActivity(), TeamContract.ITeamView {
     }
 
     override fun showDeleteAlert() {
+        val teamName = LocalCache.getCurrentTeamName(this)
         val inflater = layoutInflater
         val dialogLayout = inflater.inflate(R.layout.edit_text_layout, null)
-        val etParticipant = dialogLayout.findViewById<EditText>(R.id.et_for_dialog)
+        val etDelete = dialogLayout.findViewById<EditText>(R.id.et_for_dialog)
+        etDelete.hint = "Type DELETE to confirm"
 
         MaterialAlertDialogBuilder(this)
             .setTitle("Delete Team")
-            .setMessage("Warning! This action cannot be undone")
+            .setMessage("Are you sure you want to delete team $teamName? \n(Warning! This action cannot be undone)")
             .setNegativeButton("Cancel") {dialog, which ->
                 //Do Nothing
             }
-            .setPositiveButton("Add") {dialog, which ->
-                teamPresenter?.onDeleteBtnClicked()
+            .setPositiveButton("Confirm") {dialog, which ->
+                teamPresenter?.onDeleteBtnClicked(etDelete.text.toString().trim { it <= ' ' })
             }
             .setView(dialogLayout)
             .show()

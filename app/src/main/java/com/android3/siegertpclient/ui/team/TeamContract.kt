@@ -38,6 +38,6 @@ interface TeamContract {
 
         fun onInvitationItemClicked(position : Int)
 
-        fun onDeleteBtnClicked()
+        fun onDeleteBtnClicked(confirmDelete : String)
     }
 }
